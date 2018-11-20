@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import home from '@/components/home'
+import HelloWorld from '@/components/pages/HelloWorld'
+import home from '@/components/pages/home'
 import {getName} from "@/util/auth";
 import {test} from "@/configs";
 
@@ -12,8 +12,8 @@ const route = new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'home',
+      component: home
     },
     {
       path: '/home',
