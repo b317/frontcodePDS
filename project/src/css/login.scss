@@ -17,3 +17,100 @@
     margin-top: 70px;
     margin-left: 110px;
 }
+.tab{
+    font-size: 16px;
+    font-weight: 700;
+    margin: auto;
+    margin-top: 20px;
+    width: 246px;
+    height: 36px;
+    line-height: 36px;
+    color: #999;
+    text-align: center;
+    display: flex;
+}
+.active{
+    color: #000;
+    border-bottom: 2px solid #f65d29 !important;
+}
+.tab div{
+    cursor: pointer;
+    width: 123px;
+    border-bottom: 2px solid #fff;
+    padding: px;
+}
+.login-table .phoneInput{
+    margin-top: 20px;
+    width: 220px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    padding-left: 8px;
+    margin-left: 29px;
+}
+.login-table .pasInput{
+    margin-top: 8px;
+    width: 220px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    padding-left: 8px;
+    margin-left: 29px;
+}
+
+.login-table .idenCodeInput{
+    width: 105px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    padding-left: 8px;
+    margin-left: 29px;
+    margin-top: 8px;
+}
+.login-table .getIdenInput{
+    background: 0 0;
+    color: #666;
+    margin-top: 8px;
+    width: 110px;
+    border: 1px solid #ccc;
+    height: 31px;
+    outline: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 14px;
+}
+.Rcheckbox{
+    position: relative;
+    top: 35px;
+    right: 240px;
+}
+.RcheckSpan{
+    display: inline-block;
+    margin-left: 45px;
+    margin-top: 8px;
+    font-size: 14px;
+}
+.loginBtn{
+    font-size: 15px;
+    width: 232px;
+    margin-left: 29px;
+    margin-top: 10px;
+    background: #f63;
+    color: #fff;
+    border: none;
+    height: 34px;
+    outline: 0;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.fogotPas{
+    text-decoration: underline;
+    color: #8888FF;
+    font-size: 13px;
+    margin-right: 29px;
+    margin-top: 10px;
+    float: right;
+    cursor: pointer;
+}

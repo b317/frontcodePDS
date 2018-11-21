@@ -96,6 +96,9 @@ export default {
 <style>
 @import './css/header.scss';
 @import "./css/footer.css";
+input{
+    outline: none;
+}
 html,body{
   margin:0px;
   padding:0px;
