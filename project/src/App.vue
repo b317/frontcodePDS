@@ -1,22 +1,30 @@
 <template>
   <div id="app">
     <el-menu id="my-menu"  background-color="#f6f6f6" text-color="#333" active-text-color="#f65d29" :default-active="activeIndex" class="el-menu-demo my-menu" mode="horizontal" @select="handleSelect">
-    <el-menu-item index="5"><router-link to="/news">消息中心</router-link></el-menu-item>
-    <el-submenu index="4" show-timeout="10" hide-timeout="10">
+    <el-menu-item index="5">消息中心</el-menu-item>
+    <el-submenu index="4">
       <template slot="title">个人中心</template>
       <el-menu-item index="4-1">我的团购</el-menu-item>
       <el-menu-item index="4-2">我的红包</el-menu-item>
+      <el-menu-item index="4-3">我的主页</el-menu-item>
     </el-submenu>
-    <el-menu-item index="3" style="color:#f65d29;"><router-link to="/news">免费注册</router-link></el-menu-item>
-    <el-menu-item index="2"><router-link to="/news">你好,{{showName}}</router-link></el-menu-item>
-    <el-menu-item index="1" id="menu-home-btn"><router-link to="/home">拼多少首页</router-link></el-menu-item>
+    <el-menu-item index="3" style="color:#f65d29;">免费注册</el-menu-item>
+    <el-menu-item index="2">你好,{{showName}}</el-menu-item>
+    <el-menu-item index="1" id="menu-home-btn">拼多少首页</el-menu-item>
     <i class="el-icon-edit" id="icon-home"></i>
     </el-menu>
     <div class="line"></div>
     <div class="container">
     <div class="body-head">
       <img src="./assets/pds_logo.png"/>
-      <div class="body-head-title"v-if="titleShowOrNot"><span class="title-line-y">|</span><span id="title-span">{{title}}</span></div>
+      <div class="body-head-title" v-if="titleShowOrNot"><span class="title-line-y">|</span><span id="title-span">{{title}}</span></div>
+      <div v-else class="body-head-title">
+        <div class="top-input-class">
+          <div><i class="el-icon-search"></i></div>
+          <input placeholder="搜索商品，商家，优惠卷等等">
+          <button>搜索</button>
+        </div>
+      </div>
     </div>
       <router-view/>
     </div>
@@ -29,7 +37,8 @@ export default {
   name: 'App',
   data(){
     return{
-      activeIndex: '1'
+      activeIndex: '1',
+      inputInfo:"请输入",
     }
   },
   computed: {
@@ -57,7 +66,21 @@ export default {
   methods: {
       handleSelect(key, keyPath) {
         this.activeIndex = key;
-        console.log(key, keyPath);
+        if(key == 1){
+          this.$router.push("/home")
+        }else if(key == 2){
+          this.$router.push("/login")
+        }else if(key == 3){
+          this.$router.push("/register")
+        }else if(key == "4-1"){
+          this.$router.push("/Order")
+        }else if(key == "4-2"){
+          this.$router.push("/coupon")
+        }else if(key == 5){
+          this.$router.push("/news")
+        }else if(key == "4-3"){
+          this.$router.push("/users")
+        }
       }
   }
 }

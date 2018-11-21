@@ -3,6 +3,7 @@ body{
     padding: 0px !important;
 }
 //////导航栏
+
 #menu-home-btn{
     position: absolute;
     left: 11px;
@@ -59,7 +60,6 @@ a{
     min-width: 80px !important;
     width: 110px !important;
 }
-
 .el-menu--horizontal .el-menu li{
     height: 36.8px !important;
     line-height: 36.8px !important;
@@ -67,6 +67,9 @@ a{
     text-align: center !important;
     width: 100% !important;
     margin: 0px !important;
+}
+.body-head{
+    height: 95px;
 }
 .body-head img{
     padding: 20px 0px;
@@ -87,4 +90,55 @@ a{
     position: relative;
     top:2px;
 }
+.top-input-class{
+    height: 36px;
+    margin-left: 200px;
+    position: relative;
+    top: -5px;
+}
+.top-input-class input{
+    margin-left: 30px;
+    outline: none;
+    -webkit-appearance: none;
+    height: 30px !important;
+    width: 370px !important;
+    line-height: 24px !important;
+    border: 2px #f65d29 solid;
+    border-left: 0px;
+}
+.top-input-class input::-webkit-input-placeholder{
+    color:#ddd;
+}
+.top-input-class div{
+    margin-left: 30px;
+    height: 32px !important;
+    width: 30px !important;
+    line-height: 24px !important;
+    border: 2px #f65d29 solid;
+    border-left: 0px;
+    border-right: 0px;
+    position: relative;
+    left: 90px;
+    top:36px;
+}
+.top-input-class div i{
+    font-size: 20px;
+    color: #ddd;
+    margin: 5px;
+    position: relative;
+}
+.top-input-class button{
+    height: 36px;
+    outline: none;
+    -webkit-appearance: none;
+    width: 120px;
+    font-size: 17px;
+    font-weight: 200;
+    background-color:  #f65d29;
+    color: #ffffff;
+    float: left;
+    border: 2px #f65d29 solid;
+    cursor: pointer;
+}
+
 
