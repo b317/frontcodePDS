@@ -17,7 +17,7 @@
         <span class="record-img"></span> <span class="record-num">沪公网安备 31010502000392号 </span>
       </a>
       <span>&nbsp;&nbsp;&nbsp;&nbsp;（沪）网械平台备字[2018]第00003号</span>
-      <a class="record-link" target="_blank" href="/assets/img/bg1136.jpg">
+      <a class="record-link"  href="javascript:void(0)">
         <span class="record-num">&nbsp;|&nbsp;&nbsp;营业执照</span>
       </a>
     </div>
