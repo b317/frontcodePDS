@@ -30,11 +30,13 @@
     </div>
       <router-view/>
     </div>
+    <nav-footer></nav-footer>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import NavFooter from '@/components/module/NavFooter'
 export default {
   name: 'App',
   data(){
@@ -42,6 +44,9 @@ export default {
       activeIndex: '1',
       inputInfo:"请输入",
     }
+  },
+  components:{
+    NavFooter
   },
   computed: {
     ...mapState({
@@ -90,13 +95,17 @@ export default {
 
 <style>
 @import './css/header.scss';
+@import "./css/footer.css";
 html,body{
   margin:0px;
   padding:0px;
+  width: 100%;
+  height: 100%;
 }
-@media (min-width: 970px) { 
+
+@media (min-width: 970px) {
   .container{
-    padding:0px 120px;  
-  } 
+    padding:0px 120px;
+  }
 }
 </style>
