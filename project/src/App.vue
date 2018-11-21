@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState,mapGetters } from 'vuex'
 import NavFooter from '@/components/module/NavFooter'
 import LoginFooter from '@/components/module/LoginFooter'
 export default {
@@ -52,11 +52,11 @@ export default {
     NavFooter,LoginFooter
   },
   computed: {
-    ...mapState({
-      name: state => state.user.userName
+    ...mapGetters({
+      username:'user/username'
     }),
     showName(){
-      return this.name === "" ? "请登录":this.name
+      return this.username === "" ? "请登录":this.username
     },
     title(){
       if(this.activeIndex == 2){
@@ -79,6 +79,7 @@ export default {
   methods: {
       handleSelect(key, keyPath) {
         this.activeIndex = key;
+        console.log(this.username)
         if(key == 1){
           this.$router.push("/home")
         }else if(key == 2){

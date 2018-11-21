@@ -11,10 +11,10 @@
 }
 .login-table{
     width: 290px;
-    height: 364px;
+    height: 260px;
     background-color: #fff;
     border: 1px #f7f7f7 solid;
-    margin-top: 70px;
+    margin-top: 120px;
     margin-left: 110px;
 }
 .tab{
@@ -37,10 +37,19 @@
     cursor: pointer;
     width: 123px;
     border-bottom: 2px solid #fff;
-    padding: px;
+}
+.tab-register .tab-login-text{
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.res-tab{
+    margin-top: 110px;
+    height: 290px;
 }
 .login-table .phoneInput{
-    margin-top: 20px;
+    margin-top: 10px;
     width: 220px;
     height: 24px;
     line-height: 24px;
@@ -113,4 +122,11 @@
     margin-top: 10px;
     float: right;
     cursor: pointer;
+}
+.warn{
+    margin-top: 5px;
+    font-size: 13px;
+    color: red;
+    height: 17px;
+    text-align: center;
 }

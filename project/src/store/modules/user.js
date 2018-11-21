@@ -9,28 +9,18 @@ const state = {
   
 // getters
 const getters = {
-    name:state=>state.userName,
+    username:state=>state.userName,
 }
 // mutations
 const mutations = {
     setUserName: (state,{userName}) => {
         state.userName = userName
+        console.log(state)
     },
 }
 // actions
 const actions = {
-    // 登录
-    Login({ commit }, userInfo) {
-        login(userInfo).then(function (response) {
-            const data = response.data;
-            console.log(response.data.params.username)
-            commit('setUserName', data.params.username);
-            setName(data.params.username)
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    }
+
 }
 
 
