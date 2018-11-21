@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6b8d852-4dd7-4981-9374-71fceb722d4f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/assets/footer_logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/css/footer.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/components/module/LoginFooter.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/App.vue" afterPath="$PROJECT_DIR$/project/src/App.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/components/module/NavFooter.vue" afterPath="$PROJECT_DIR$/project/src/components/module/NavFooter.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/css/footer.css" afterPath="$PROJECT_DIR$/project/src/css/footer.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,32 +32,50 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/src/App.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1058">
-              <caret line="46" column="13" lean-forward="false" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+            <state relative-caret-position="307">
+              <caret line="93" column="31" lean-forward="true" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
               <folding>
                 <element signature="n#style#0;n#el-menu-item#1;n#el-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#1388#1419#0" expanded="true" />
+                <element signature="e#1466#1497#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NavFooter.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NavFooter.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/src/components/module/NavFooter.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="9" column="63" lean-forward="false" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="63" />
+            <state relative-caret-position="46">
+              <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="29" />
               <folding>
                 <element signature="e#1031#1037#0" expanded="true" />
                 <element signature="e#1037#1043#0" expanded="true" />
                 <element signature="e#1043#1049#0" expanded="true" />
                 <element signature="e#1049#1055#0" expanded="true" />
-                <element signature="e#1194#1200#0" expanded="true" />
-                <element signature="e#1201#1207#0" expanded="true" />
-                <element signature="e#1207#1213#0" expanded="true" />
+                <element signature="e#1175#1181#0" expanded="true" />
+                <element signature="e#1182#1188#0" expanded="true" />
+                <element signature="e#1188#1194#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginFooter.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/src/components/module/LoginFooter.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="23">
+              <caret line="1" column="32" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="32" />
+              <folding>
+                <element signature="e#420#426#0" expanded="true" />
+                <element signature="e#426#432#0" expanded="true" />
+                <element signature="e#432#438#0" expanded="true" />
+                <element signature="e#438#444#0" expanded="true" />
+                <element signature="e#547#553#0" expanded="true" />
+                <element signature="e#554#560#0" expanded="true" />
+                <element signature="e#560#566#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,17 +84,10 @@
       <file leaf-file-name="footer.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/src/css/footer.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="37" lean-forward="false" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
+            <state relative-caret-position="115">
+              <caret line="23" column="22" lean-forward="false" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="footer_logo.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/src/assets/footer_logo.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
@@ -95,8 +106,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Vue File" />
         <option value="CSS File" />
+        <option value="Vue File" />
       </list>
     </option>
   </component>
@@ -108,9 +119,10 @@
       <list>
         <option value="$PROJECT_DIR$/project/package-lock.json" />
         <option value="$PROJECT_DIR$/project/src/css/header.scss" />
-        <option value="$PROJECT_DIR$/project/src/App.vue" />
-        <option value="$PROJECT_DIR$/project/src/css/footer.css" />
         <option value="$PROJECT_DIR$/project/src/components/module/NavFooter.vue" />
+        <option value="$PROJECT_DIR$/project/src/components/module/LoginFooter.vue" />
+        <option value="$PROJECT_DIR$/project/src/css/footer.css" />
+        <option value="$PROJECT_DIR$/project/src/App.vue" />
       </list>
     </option>
   </component>
@@ -174,14 +186,23 @@
               <item name="frontcodePDS" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="frontcodePDS" type="b2602c69:ProjectViewProjectNode" />
               <item name="frontcodePDS" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="module" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="frontcodePDS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="frontcodePDS" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="frontcodePDS" type="b2602c69:ProjectViewProjectNode" />
@@ -189,20 +210,6 @@
               <item name="project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="frontcodePDS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="frontcodePDS" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="router" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="frontcodePDS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="frontcodePDS" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -264,12 +271,12 @@
       <option name="presentableId" value="Default" />
       <updated>1542720285920</updated>
       <workItem from="1542720287851" duration="4976000" />
-      <workItem from="1542759598588" duration="10943000" />
+      <workItem from="1542759598588" duration="14027000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15919000" />
+    <option name="totallyTimeSpent" value="19003000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -364,9 +371,9 @@
             <element signature="e#1037#1043#0" expanded="true" />
             <element signature="e#1043#1049#0" expanded="true" />
             <element signature="e#1049#1055#0" expanded="true" />
-            <element signature="e#1194#1200#0" expanded="true" />
-            <element signature="e#1201#1207#0" expanded="true" />
-            <element signature="e#1207#1213#0" expanded="true" />
+            <element signature="e#1175#1181#0" expanded="true" />
+            <element signature="e#1182#1188#0" expanded="true" />
+            <element signature="e#1188#1194#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -388,7 +395,7 @@
           <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
           <folding>
             <element signature="n#style#0;n#el-menu-item#1;n#el-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#1388#1419#0" expanded="true" />
+            <element signature="e#1466#1497#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -469,7 +476,7 @@
         <state relative-caret-position="184">
           <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -488,17 +495,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1058">
-          <caret line="46" column="13" lean-forward="false" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#el-menu-item#1;n#el-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#1388#1419#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -524,26 +520,53 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/css/footer.css">
+    <entry file="file://$PROJECT_DIR$/project/src/components/module/LoginFooter.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
-          <caret line="1" column="37" lean-forward="false" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
+          <caret line="1" column="32" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="32" />
+          <folding>
+            <element signature="e#420#426#0" expanded="true" />
+            <element signature="e#426#432#0" expanded="true" />
+            <element signature="e#432#438#0" expanded="true" />
+            <element signature="e#438#444#0" expanded="true" />
+            <element signature="e#547#553#0" expanded="true" />
+            <element signature="e#554#560#0" expanded="true" />
+            <element signature="e#560#566#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/css/footer.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="23" column="22" lean-forward="false" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/src/components/module/NavFooter.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="9" column="63" lean-forward="false" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="63" />
+        <state relative-caret-position="46">
+          <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="29" />
           <folding>
             <element signature="e#1031#1037#0" expanded="true" />
             <element signature="e#1037#1043#0" expanded="true" />
             <element signature="e#1043#1049#0" expanded="true" />
             <element signature="e#1049#1055#0" expanded="true" />
-            <element signature="e#1194#1200#0" expanded="true" />
-            <element signature="e#1201#1207#0" expanded="true" />
-            <element signature="e#1207#1213#0" expanded="true" />
+            <element signature="e#1175#1181#0" expanded="true" />
+            <element signature="e#1182#1188#0" expanded="true" />
+            <element signature="e#1188#1194#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="93" column="31" lean-forward="true" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#el-menu-item#1;n#el-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1466#1497#0" expanded="true" />
           </folding>
         </state>
       </provider>

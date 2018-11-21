@@ -30,23 +30,26 @@
     </div>
       <router-view/>
     </div>
-    <nav-footer></nav-footer>
+    <nav-footer v-if="isShow"></nav-footer>
+    <login-footer v-if="!isShow"></login-footer>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import NavFooter from '@/components/module/NavFooter'
+import LoginFooter from '@/components/module/LoginFooter'
 export default {
   name: 'App',
   data(){
     return{
       activeIndex: '1',
       inputInfo:"请输入",
+      isShow:false
     }
   },
   components:{
-    NavFooter
+    NavFooter,LoginFooter
   },
   computed: {
     ...mapState({
@@ -70,6 +73,9 @@ export default {
       }
     }
   },
+  mounted(){
+    this.checkShowFooter();
+  },
   methods: {
       handleSelect(key, keyPath) {
         this.activeIndex = key;
@@ -88,7 +94,18 @@ export default {
         }else if(key == "4-3"){
           this.$router.push("/users")
         }
-      }
+        this.checkShowFooter(); //检查不同的页面显示不同的页脚
+      },
+    checkShowFooter(){
+        this.$route.matched.forEach((item,index)=>{
+          console.log(item.name+" "+item.path)
+          if(item.name=="login" || item.name=="register"){
+            this.isShow=false
+          }else{
+            this.isShow=true
+          }
+      })
+    }
   }
 }
 </script>
