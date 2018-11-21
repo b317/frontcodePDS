@@ -17,7 +17,9 @@
     <div class="container">
     <div class="body-head">
       <img src="./assets/pds_logo.png"/>
-      <div class="body-head-title" v-if="titleShowOrNot"><span class="title-line-y">|</span><span id="title-span">{{title}}</span></div>
+      <div class="body-head-title2" v-if="titleShowOrNot">
+      <span class="title-line-y">|</span><span id="title-span">{{title}}</span>
+      </div>
       <div v-else class="body-head-title">
         <div class="top-input-class">
           <div><i class="el-icon-search"></i></div>

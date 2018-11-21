@@ -1,4 +1,5 @@
-body{
+body,html{
+    min-width: 1000px !important;
     margin: 0px !important;
     padding: 0px !important;
 }
@@ -51,7 +52,7 @@ a{
 }
 #icon-home{
     position: absolute;
-    left: 10px;
+    left: -200px;
     line-height: 36.8px !important;
     color: #f65d29;
     z-index: 9999;
@@ -77,8 +78,15 @@ a{
 }
 .body-head-title{
     display:inline-block;
-    position: relative;
-    top:-38px;
+    position: absolute;
+    top:30px;
+}
+.body-head-title2{
+    display:inline-block;
+    position: absolute;
+    top:65px;
+    left:15%;
+    margin-left: 100px;
 }
 .title-line-y{
     color: rgb(233, 233, 233) !important;
@@ -92,8 +100,9 @@ a{
 }
 .top-input-class{
     height: 36px;
-    margin-left: 200px;
+    width: 523px;
     position: relative;
+    left: 200px;
     top: -5px;
 }
 .top-input-class input{
@@ -110,7 +119,6 @@ a{
     color:#ddd;
 }
 .top-input-class div{
-    margin-left: 30px;
     height: 32px !important;
     width: 30px !important;
     line-height: 24px !important;
@@ -118,7 +126,7 @@ a{
     border-left: 0px;
     border-right: 0px;
     position: relative;
-    left: 90px;
+    left: 120px;
     top:36px;
 }
 .top-input-class div i{
@@ -139,6 +147,9 @@ a{
     float: left;
     border: 2px #f65d29 solid;
     cursor: pointer;
+}
+.top-input-class button:hover{
+    background-color:  #f65c29d2;
 }
 
 
