@@ -13,7 +13,13 @@
     <i class="el-icon-edit" id="icon-home"></i>
     </el-menu>
     <div class="line"></div>
-    <router-view/>
+    <div class="container">
+    <div class="body-head">
+      <img src="./assets/pds_logo.png"/>
+      <div class="body-head-title"v-if="titleShowOrNot"><span class="title-line-y">|</span><span id="title-span">{{title}}</span></div>
+    </div>
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -32,10 +38,25 @@ export default {
     }),
     showName(){
       return this.name === "" ? "请登录":this.name
+    },
+    title(){
+      if(this.activeIndex == 2){
+        return "登录"
+      }else if(this.activeIndex == 3){
+        return "注册"
+      }
+    },
+    titleShowOrNot(){
+      if(this.activeIndex == 2||this.activeIndex == 3){
+        return true
+      }else if(this.activeIndex == 3){
+        return false
+      }
     }
   },
   methods: {
       handleSelect(key, keyPath) {
+        this.activeIndex = key;
         console.log(key, keyPath);
       }
   }
@@ -48,11 +69,9 @@ html,body{
   margin:0px;
   padding:0px;
 }
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@media (min-width: 970px) { 
+  .container{
+    padding:0px 120px;  
+  } 
 }
 </style>
