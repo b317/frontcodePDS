@@ -2,26 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6b8d852-4dd7-4981-9374-71fceb722d4f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/components/pages/NewsOne.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/components/pages/NewsThree.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/components/pages/NewsTwo.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/static/loading-svg/loading-balls.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/static/loading-svg/loading-bars.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/static/loading-svg/loading-bubbles.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/static/loading-svg/loading-cubes.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/static/loading-svg/loading-cylon-red.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/static/loading-svg/loading-cylon.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/static/loading-svg/loading-spin.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/static/loading-svg/loading-spinning-bubbles.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/static/loading-svg/loading-spokes.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/package-lock.json" afterPath="$PROJECT_DIR$/project/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/package.json" afterPath="$PROJECT_DIR$/project/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/App.vue" afterPath="$PROJECT_DIR$/project/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/components/pages/news.vue" afterPath="$PROJECT_DIR$/project/src/components/pages/news.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/css/footer.css" afterPath="$PROJECT_DIR$/project/src/css/footer.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/main.js" afterPath="$PROJECT_DIR$/project/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/router/index.js" afterPath="$PROJECT_DIR$/project/src/router/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/api/http.js" afterPath="$PROJECT_DIR$/project/src/api/http.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/components/pages/home.vue" afterPath="$PROJECT_DIR$/project/src/components/pages/home.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/components/pages/login.vue" afterPath="$PROJECT_DIR$/project/src/components/pages/login.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/components/pages/register.vue" afterPath="$PROJECT_DIR$/project/src/components/pages/register.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/css/login.scss" afterPath="$PROJECT_DIR$/project/src/css/login.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/store/modules/user.js" afterPath="$PROJECT_DIR$/project/src/store/modules/user.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -88,11 +76,11 @@
       <file leaf-file-name="App.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/src/App.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="142" column="8" lean-forward="false" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
+            <state relative-caret-position="310">
+              <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#el-menu-item#1;n#el-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#1614#1656#0" expanded="true" />
+                <element signature="e#1575#1606#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -170,7 +158,7 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
     <handled-path value="$PROJECT_DIR$/project/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-13" />
     <option name="y" value="105" />
     <option name="width" value="1346" />
@@ -284,12 +272,12 @@
       <updated>1542720285920</updated>
       <workItem from="1542720287851" duration="4976000" />
       <workItem from="1542759598588" duration="31560000" />
-      <workItem from="1542845946000" duration="6263000" />
+      <workItem from="1542845946000" duration="7020000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42799000" />
+    <option name="totallyTimeSpent" value="43556000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -301,10 +289,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24330357" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24330357" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -677,11 +664,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="142" column="8" lean-forward="false" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="8" />
+        <state relative-caret-position="310">
+          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#el-menu-item#1;n#el-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#1614#1656#0" expanded="true" />
+            <element signature="e#1575#1606#0" expanded="true" />
           </folding>
         </state>
       </provider>

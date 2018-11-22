@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-menu id="my-menu"  background-color="#f6f6f6" text-color="#333" active-text-color="#f65d29" :default-active="activeIndex" class="el-menu-demo my-menu" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="5">消息中心</el-menu-item>
+      <el-menu-item index="5"><el-badge is-dot class="item" v-if="haveMes"></el-badge> 消息中心</el-menu-item>
       <el-submenu index="4">
         <template slot="title">个人中心</template>
         <el-menu-item index="4-1">我的团购</el-menu-item>
@@ -28,7 +28,6 @@
           </div>
         </div>
       </div>
-      <div class="gloabLodaing" v-show="isLoading">loading<i class="el-icon-loading"></i></div>
       <router-view/>
     </div>
     <nav-footer v-if="isShow"></nav-footer>
@@ -37,28 +36,28 @@
 </template>
 
 <script>
-  import { mapState,mapGetters } from 'vuex'
+  import { mapState } from 'vuex'
   import NavFooter from '@/components/module/NavFooter'
   import LoginFooter from '@/components/module/LoginFooter'
   export default {
     name: 'App',
     data(){
       return{
-        isLoading:false,
         activeIndex: '1',
         inputInfo:"请输入",
-        isShow:false
+        isShow:false,
+        haveMes:true
       }
     },
     components:{
       NavFooter,LoginFooter
     },
     computed: {
-      ...mapGetters({
-        username:'user/username'
+      ...mapState({
+        name: state => state.user.userName
       }),
       showName(){
-        return this.username === "" ? "请登录":this.username
+        return this.name === "" ? "请登录":this.name
       },
       title(){
         if(this.activeIndex == 2){
@@ -76,15 +75,11 @@
       }
     },
     mounted(){
-      this.$bus.$on("loading",(a) => {
-        this.isLoading = a
-      })
       this.checkShowFooter();
     },
     methods: {
       handleSelect(key, keyPath) {
         this.activeIndex = key;
-        console.log(this.username)
         if(key == 1){
           this.$router.push("/home")
         }else if(key == 2){
@@ -104,7 +99,7 @@
       },
       checkShowFooter(){
         this.$route.matched.forEach((item,index)=>{
-          console.log(item.name+" "+item.path)
+//          console.log(item.name+" "+item.path)
           if(item.name=="login" || item.name=="register"){
             this.isShow=false
           }else{
@@ -119,22 +114,13 @@
 <style>
   @import './css/header.scss';
   @import "./css/footer.css";
-  .gloabLodaing{
-    float: left;
-    position:fixed;
-    left:48%;
-    top:50%;
-    color: #dddddd;
-  }
-  input{
-    outline: none;
-  }
   html,body{
     margin:0px;
     padding:0px;
     width: 100%;
     height: 100%;
   }
+  .item{position: absolute;right:5px}
   @media (min-width: 970px) {
     .container{
       padding:0px 120px;
