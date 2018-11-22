@@ -47,7 +47,8 @@ export default {
       activeIndex: '1',
       inputInfo:"请输入",
       isShow:false,
-      LoadingTime:3
+      LoadingTime:3,
+      haveMes:true
     }
   },
   watch:{
