@@ -46,14 +46,20 @@ export default {
       totalTime: 61
     }
   },
-  beforeMount() {
-
+  computed:{
+    checkPhone(){ 
+        return (/^1[34578]\d{9}$/.test(this.phone)); 
+    }
   },
   methods:{
     ...mapMutations({
       setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
     }),
     idenCodeclick(){
+      if(!this.checkPhone){
+        this.warntext = "手机号码格式错误"
+        return
+      }
       if(this.totalTime < 61){
         console.log("已发送")
         return
@@ -80,7 +86,6 @@ export default {
       this.isLogin = a
     },
     loginclick(){
-      this.$bus.$emit("loading",true)
       if(this.isLogin){//如果是验证码登录
         login({
           username:this.phone

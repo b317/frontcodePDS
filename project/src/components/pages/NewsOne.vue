@@ -6,17 +6,29 @@
         <span class="time">{{item.time}}</span>
       </div>
       <div style="padding-left: 5px;font-size:13px ">
-        <span>{{item.content}}</span>
+        <span class="newsContent">{{item.content}}</span>
       </div>
+      <a href="javascript:void(0)" class="details">查看详情</a>
       <small-tag class="small_tag"></small-tag>
     </div>
     <div class="load-more" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="30">
       <img src="./../../../static/loading-svg/loading-bars.svg" v-show="loading">
     </div>
+
+    <!--全局模态框-->
+    <!--<modal >-->
+      <!--<p slot="message">-->
+
+      <!--</p>-->
+      <!--<div slot="btnGroup">-->
+
+      <!--</div>-->
+    <!--</modal>-->
   </div>
 </template>
 <script>
   import SmallTag from '@/components/module/SmallTag'
+  import Modal from '@/components/module/Modal'
   export default {
     data() {
       return {
@@ -91,13 +103,14 @@
             title:"#前方高萌征稿大赛#",
             time:"2018年10月1日 15:37",
             content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
+            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22。" +
             "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
           }
         ]
       }
     },
     components:{
-      SmallTag
+      SmallTag,Modal
     },
     mounted(){
       if(this.SystemMesList.length<=5){
@@ -146,7 +159,8 @@
     background: white;font-size: 15px;padding:30px 20px;margin:20px 0;
     line-height: 25px;font-family: Microsoft YaHei;
     color:#333;border-radius: 6px;position: relative;
-    /*overflow: hidden;*/
+    height: 105px;
+    overflow:hidden;text-overflow:ellipsis;
   }
   .newsOne div:first-child{margin-bottom: 5px}
   .newsOne .time{color:#999;font-size: 12px;}
@@ -164,4 +178,15 @@
     line-height: 30px;font-weight: bold;color:white;
     font-family: "FZShuTi";
   }
+  .newsOne .details{
+    color:#409EFF;font-size: 14px;font-weight: 100;
+    margin-top:10px;display: inline-block
+  }
+  .newsOne .newsContent{
+    display: inline-block;height:50px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;}
+  .newsOne .details:hover{color:rgba(0, 63, 252, 1)}
 </style>

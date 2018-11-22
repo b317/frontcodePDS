@@ -1,6 +1,6 @@
 <template>
     <div>
-        <span><img src="../"/></span>
+        <!--<span><img src="../"/></span>-->
     </div>
 </template>
 <style>
