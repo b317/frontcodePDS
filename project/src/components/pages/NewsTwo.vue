@@ -1,6 +1,6 @@
 <template>
     <div>
-        hello word
+        <span><img src="../"/></span>
     </div>
 </template>
 <style>
