@@ -47,9 +47,23 @@ export default {
       isLoading:false,
       activeIndex: '1',
       inputInfo:"请输入",
-      isShow:false
+      isShow:false,
+      LoadingTime:3
     }
   },
+  watch:{
+    isLoading(curVal,oldVal){
+        let sss = window.setInterval(() => {
+        this.LoadingTime--
+        this.getIdenBtnText = this.LoadingTime + 's后重新发送'
+        if(this.LoadingTime == 0){
+          clearInterval(sss)
+          this.getIdenBtnText = "获得验证码"
+          this.LoadingTime = 3
+        }
+      },1000)
+    }
+　},
   components:{
     NavFooter,LoginFooter
   },

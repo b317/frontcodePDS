@@ -80,12 +80,10 @@ export default {
       this.isLogin = a
     },
     loginclick(){
-      this.$bus.$emit("loading",true)
       if(this.isLogin){//如果是验证码登录
         login({
           username:this.phone
         }).then((response) => {
-          this.$bus.$emit("loading",false)
           const data = response.data;
           console.log(data.username)
           this.setuserName({userName:data.username})//vuex
