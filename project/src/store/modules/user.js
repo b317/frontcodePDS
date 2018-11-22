@@ -1,6 +1,3 @@
-import {setName} from "@/util/auth";
-import {login} from "@/api/http";
-
 // initial state
 // shape: [{ id, quantity }]
 const state = {

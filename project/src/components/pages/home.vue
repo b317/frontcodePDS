@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <h1 @click="clicked">{{ msg }}</h1>
     <el-row>
         <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
@@ -58,6 +58,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .home{
+    height: 2000px;
+  }
   .el-row {
     margin-bottom: 20px;
     &:last-child {

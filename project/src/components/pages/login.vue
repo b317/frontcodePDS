@@ -51,7 +51,7 @@ export default {
   },
   methods:{
     ...mapMutations({
-      setName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+      setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
     }),
     idenCodeclick(){
       if(this.totalTime < 61){
@@ -80,13 +80,16 @@ export default {
       this.isLogin = a
     },
     loginclick(){
+      this.$bus.$emit("loading",true)
       if(this.isLogin){//如果是验证码登录
         login({
-          //参数
-        }).then(function (response){
-            const data = response.data;
-            this.setName({userName:data.params.username})//vuex
-            setName(data.params.username)//cookie
+          username:this.phone
+        }).then((response) => {
+          this.$bus.$emit("loading",false)
+          const data = response.data;
+          console.log(data.username)
+          this.setuserName({userName:data.username})//vuex
+          setName(data.username)//cookie
         })
         .catch(function (error) {//出错
             console.log(error);

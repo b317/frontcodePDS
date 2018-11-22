@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+    <div class="gloabLodaing" v-show="isLoading">loading<i class="el-icon-loading"></i></div>
       <router-view/>
     </div>
     <nav-footer v-if="isShow"></nav-footer>
@@ -43,6 +44,7 @@ export default {
   name: 'App',
   data(){
     return{
+      isLoading:false,
       activeIndex: '1',
       inputInfo:"请输入",
       isShow:false
@@ -74,6 +76,9 @@ export default {
     }
   },
   mounted(){
+    this.$bus.$on("loading",(a) => {
+      this.isLoading = a
+    })
     this.checkShowFooter();
   },
   methods: {
@@ -114,6 +119,13 @@ export default {
 <style>
 @import './css/header.scss';
 @import "./css/footer.css";
+.gloabLodaing{
+  float: left;
+  position:fixed;
+  left:48%;
+  top:50%;
+  color: #dddddd;
+}
 input{
     outline: none;
 }
