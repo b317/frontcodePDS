@@ -8,7 +8,7 @@
 export default {
   data () {
     return {
-        msg:"order"
+        msg:"个人中心"
     }
   }
 }

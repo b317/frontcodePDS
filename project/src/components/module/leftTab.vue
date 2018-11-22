@@ -27,6 +27,7 @@
         },
         methods:{
             click(a){
+                this.$router.push(a)
                 console.log(a)
             }
         }

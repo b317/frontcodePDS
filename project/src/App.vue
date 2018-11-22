@@ -4,9 +4,10 @@
       <el-menu-item index="5"><el-badge is-dot class="item" v-if="haveMes"></el-badge> 消息中心</el-menu-item>
       <el-submenu index="4">
         <template slot="title">个人中心</template>
-        <el-menu-item index="4-1">我的团购</el-menu-item>
-        <el-menu-item index="4-2">我的红包</el-menu-item>
         <el-menu-item index="4-3">我的主页</el-menu-item>
+        <el-menu-item index="4-1">我的团购</el-menu-item>
+        <el-menu-item index="4-4">我的订单</el-menu-item>
+        <el-menu-item index="4-2">我的红包</el-menu-item>
       </el-submenu>
       <el-menu-item index="3" style="color:#f65d29;">免费注册</el-menu-item>
       <el-menu-item index="2" class="app-username">你好,{{showName}}</el-menu-item>
@@ -113,7 +114,9 @@ export default {
         }else if(key == 5){
           this.$router.push("/news")
         }else if(key == "4-3"){
-          this.$router.push("/users")
+          this.$router.push("/userInfo")
+        }else if(key == "4-4"){
+          this.$router.push("/goods")
         }
         this.checkShowFooter(); //检查不同的页面显示不同的页脚
       },

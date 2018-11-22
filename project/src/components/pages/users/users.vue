@@ -31,7 +31,7 @@ export default {
   data () {
     return {
         routeArr:{
-          users:"我的主页",
+          userInfo:"我的主页",
           coupon:"我的红包",
           order:"我的团购",
           goods:"我的订单",
@@ -41,36 +41,19 @@ export default {
   computed:{
     ...mapGetters({
       username:'user/username'
-    }),
-    getMonth(){
-      return this.date.getMonth()+1;
-    },
-    getDate(){
-      return this.date.getDate()+1;
-    },
-    getDay(){
-      let str;
-      if(this.date.getDay()==1){
-        str = "星期一"
-      }else if(this.date.getDay()==2){
-        str = "星期二"
-      }else if(this.date.getDay()==3){
-        str = "星期三"
-      }else if(this.date.getDay()==4){
-        str = "星期四"
-      }else if(this.date.getDay()==5){
-        str = "星期五"
-      }else if(this.date.getDay()==6){
-        str = "星期六"
-      }else if(this.date.getDay()==0){
-        str = "星期日"
-      }
-      return str;
-    }
+    })
   },
   methods:{
     setClick(index){
-      console.log(index)
+      if(index == 1){
+        this.$router.push("userInfo")
+      }else if(index == 2){
+        this.$router.push("setAddress")
+      }else if(index == 3){
+        this.$router.push("setUserInfo")
+      }else if(index == 4){
+        this.$router.push("setPass")
+      }
     }
   }
 }
