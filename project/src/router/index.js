@@ -8,6 +8,9 @@ import register from '@/components/pages/register'
 import Order from '@/components/pages/Order'
 import Coupon from '@/components/pages/Coupon'
 import users from '@/components/pages/users'
+import NewsOne from '@/components/pages/NewsOne'
+import NewsTwo from '@/components/pages/NewsTwo'
+import NewsThree from '@/components/pages/NewsThree'
 
 import {getName} from "@/util/auth";
 import {test} from "@/configs";
@@ -30,7 +33,29 @@ const route = new Router({
     {
       path: '/news',
       name: 'news',
-      component: news
+      component:news,
+      children:[
+        {
+          path:'/',
+          name:'newsOne',
+          component:NewsOne
+        },
+        {
+          path:'/newsOne',
+          name:'newsOne',
+          component:NewsOne
+        },
+        {
+          path:'/newsTwo',
+          name:'newsTwo',
+          component:NewsTwo
+        },
+        {
+          path:'/newsThree',
+          name:'newsThree',
+          component:NewsThree
+        },
+      ]
     },
     {
       path: '/login',
