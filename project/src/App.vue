@@ -28,6 +28,7 @@
           </div>
         </div>
       </div>
+      <div class="gloab-loading" v-if="isLoading"><i class="el-icon-loading"/></div>
       <router-view/>
     </div>
     <nav-footer v-if="isShow"></nav-footer>
@@ -51,19 +52,6 @@ export default {
       haveMes:true
     }
   },
-  watch:{
-    isLoading(curVal,oldVal){
-        let sss = window.setInterval(() => {
-        this.LoadingTime--
-        this.getIdenBtnText = this.LoadingTime + 's后重新发送'
-        if(this.LoadingTime == 0){
-          clearInterval(sss)
-          this.getIdenBtnText = "获得验证码"
-          this.LoadingTime = 3
-        }
-      },1000)
-    }
-　},
   components:{
     NavFooter,LoginFooter
   },
@@ -81,29 +69,24 @@ export default {
         return "注册"
       }
     },
-    components:{
-      NavFooter,LoginFooter
+    ...mapState({
+      name: state => state.user.userName
+    }),
+    showName(){
+      return this.name === "" ? "请登录":this.name
     },
-    computed: {
-      ...mapState({
-        name: state => state.user.userName
-      }),
-      showName(){
-        return this.name === "" ? "请登录":this.name
-      },
-      title(){
-        if(this.activeIndex == 2){
-          return "登录"
-        }else if(this.activeIndex == 3){
-          return "注册"
-        }
-      },
-      titleShowOrNot(){
-        if(this.activeIndex == 2||this.activeIndex == 3){
-          return true
-        }else if(this.activeIndex == 3){
-          return false
-        }
+    title(){
+      if(this.activeIndex == 2){
+        return "登录"
+      }else if(this.activeIndex == 3){
+        return "注册"
+      }
+    },
+    titleShowOrNot(){
+      if(this.activeIndex == 2||this.activeIndex == 3){
+        return true
+      }else if(this.activeIndex == 3){
+        return false
       }
     }
   },
@@ -112,6 +95,7 @@ export default {
     this.$bus.$on("loading",(a) => {
       this.isLoading = a
     })
+    this.$bus.$emit("loading",true)
     this.checkShowFooter();
   },
   methods: {
@@ -150,6 +134,11 @@ export default {
 <style>
   @import './css/header.scss';
   @import "./css/footer.css";
+  .gloab-loading{
+    position:fixed;
+    left: 48%;
+    top:50%;
+  }
   html,body{
     margin:0px;
     padding:0px;
