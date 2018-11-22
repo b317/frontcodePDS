@@ -8,7 +8,7 @@
 export default {
   data () {
     return {
-        msg:"coupon"
+        msg:"设置密码"
     }
   }
 }

@@ -5,9 +5,15 @@ import home from '@/components/pages/home'
 import news from '@/components/pages/news'
 import login from '@/components/pages/login'
 import register from '@/components/pages/register'
-import Order from '@/components/pages/Order'
-import Coupon from '@/components/pages/Coupon'
+import Order from '@/components/pages/order/Order'
+import Coupon from '@/components/pages/coupon/Coupon'
+import goods from '@/components/pages/goods/goods'
 import users from '@/components/pages/users/users'
+import setAddress from '@/components/pages/users/setAddress'
+import setPass from '@/components/pages/users/setPass'
+import setUserInfo from '@/components/pages/users/setUserInfo'
+import userInfo from '@/components/pages/users/userInfo'
+
 import NewsOne from '@/components/pages/NewsOne'
 import NewsTwo from '@/components/pages/NewsTwo'
 import NewsThree from '@/components/pages/NewsThree'
@@ -24,6 +30,11 @@ const route = new Router({
       path: '/',
       name: 'home',
       component: home
+    },
+    {
+      path: '/goods',
+      name: 'goods',
+      component: goods
     },
     {
       path: '/home',
@@ -80,7 +91,29 @@ const route = new Router({
     {
       path: '/users',
       name: 'users',
-      component: users
+      component: users,
+      children:[
+        {
+          path:'/userInfo',
+          name:'userInfo',
+          component:userInfo
+        },
+        {
+          path:'/setUserInfo',
+          name:'setUserInfo',
+          component:setUserInfo
+        },
+        {
+          path:'/setPass',
+          name:'setPass',
+          component:setPass
+        },
+        {
+          path:'/setAddress',
+          name:'setAddress',
+          component:setAddress
+        }
+      ]
     }
   ]
 })
