@@ -36,7 +36,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import { mapState,mapGetters } from 'vuex'
 import NavFooter from '@/components/module/NavFooter'
 import LoginFooter from '@/components/module/LoginFooter'
@@ -79,19 +78,6 @@ export default {
         return "登录"
       }else if(this.activeIndex == 3){
         return "注册"
-=======
-  import { mapState } from 'vuex'
-  import NavFooter from '@/components/module/NavFooter'
-  import LoginFooter from '@/components/module/LoginFooter'
-  export default {
-    name: 'App',
-    data(){
-      return{
-        activeIndex: '1',
-        inputInfo:"请输入",
-        isShow:false,
-        haveMes:true
->>>>>>> 91e5eb651e94716af42ce127d0c3171ecc29698d
       }
     },
     components:{
@@ -154,6 +140,7 @@ export default {
       }
     }
   }
+}
 </script>
 
 <style>
