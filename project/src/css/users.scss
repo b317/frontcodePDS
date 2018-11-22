@@ -1,0 +1,60 @@
+.user{
+    display: flex;
+    flex-direction:row-reverse;
+    font-weight: 400;
+  }
+.userInfo{
+    width: 800px;
+    height: 120px;
+    background: #f7f7f7;
+    margin-right: 60px;
+    border: 1px solid #f7f7f7;
+    display: flex;
+}
+.touxiang{
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: #faa370;
+}
+.touxiang img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 3px;
+}
+.username{
+    margin-top: 40px;
+    margin-left: 10px;
+    width: 100px !important;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.set{
+    margin-top: 36px;
+    width: 600px;
+    display: flex;
+}
+.set div{
+    font-size: 14px;
+    width: 200px;
+    margin: 0px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+.set div:hover{
+    color: #f65d29;
+}
+.setinfo{
+    border: 1px #f65d29 solid;
+    border-top: 0px;
+    border-bottom: 0px;
+}
+.address{
+    border-left: 1px #f65c29 solid;
+}

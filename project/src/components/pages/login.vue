@@ -86,7 +86,6 @@ export default {
       this.isLogin = a
     },
     loginclick(){
-      this.$bus.$emit("loading",true)
       if(this.isLogin){//如果是验证码登录
         login({
           username:this.phone
