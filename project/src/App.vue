@@ -95,7 +95,6 @@ export default {
     this.$bus.$on("loading",(a) => {
       this.isLoading = a
     })
-    this.$bus.$emit("loading",true)
     this.checkShowFooter();
   },
   methods: {

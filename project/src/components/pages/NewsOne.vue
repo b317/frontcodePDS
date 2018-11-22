@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="newsOne" v-for="(item,index) of SystemMesList">
+    <div class="newsOne" v-for="(item,index) of SystemMesList" :key ="index">
       <div>
         <span><strong>{{item.title}}</strong></span>
         <span class="time">{{item.time}}</span>

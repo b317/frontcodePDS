@@ -41,8 +41,17 @@ export default {
   beforeMount() {
 
   },
+  computed:{
+    checkPhone(){ 
+        return (/^1[34578]\d{9}$/.test(this.phone)); 
+    }
+  },
   methods:{
     idenCodeclick(){
+      if(!this.checkPhone){
+        this.warntext = "手机号码格式错误"
+        return
+      }
       if(this.totalTime < 61){
         console.log("已发送")
         return
@@ -59,6 +68,7 @@ export default {
       },1000)
     },
     register(){
+      alert(this.checkPhone)
       register({
           //参数
         }).then(function (response){
