@@ -76,6 +76,7 @@ export default {
     }
   },
   mounted(){
+    ///asdasdasd
     this.$bus.$on("loading",(a) => {
       this.isLoading = a
     })
