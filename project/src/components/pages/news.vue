@@ -7,17 +7,17 @@
           <ul>
             <li v-bind:class="[mesTag==0 ? active : '']" @click="mesTag=0">
               <router-link to="/newsOne" href="javascript:void(0)" class="msgCheck">
-                <i class="el-icon-setting"></i>&nbsp;系统通知
+                <i class="el-icon-setting"></i>&nbsp;<span ref="tagOne">系统通知</span>
               </router-link>
             </li>
             <li v-bind:class="[mesTag==1 ? active : '']" @click="mesTag=1">
               <router-link to="/newsTwo" href="javascript:void(0)" class="msgCheck">
-                <i class="el-icon-goods"></i>&nbsp;活动消息
+                <i class="el-icon-goods"></i>&nbsp;<span ref="tagTwo">活动消息</span>
               </router-link>
             </li>
             <li v-bind:class="[mesTag==2 ? active : '']" @click="mesTag=2">
               <router-link to="/newsThree" href="javascript:void(0)" class="msgCheck msgCheckLast">
-                <i class="el-icon-document"></i>&nbsp;优惠券消息
+                <i class="el-icon-document"></i>&nbsp;<span ref="tagThree">优惠券消息</span>
               </router-link>
             </li>
           </ul>
@@ -37,7 +37,15 @@
       return {
         msg:"消息中心",
         mesTag:0,
-        active:'active'
+        active:'active',
+        tagArray:[]
+      }
+    },
+    mounted(){
+      this.init();
+    },
+    methods:{
+      init(){
       }
     }
   }

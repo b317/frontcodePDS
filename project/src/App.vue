@@ -136,6 +136,7 @@ export default {
 <style>
   @import './css/header.scss';
   @import "./css/footer.css";
+  @import "./css/newsCenter.css";
   .app-username{
     max-width: 120px !important;
     overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
