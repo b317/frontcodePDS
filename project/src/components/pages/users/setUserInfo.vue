@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <div class="fontwarn" v-if="showWarn">注:真实姓名即收货人姓名，请谨慎填写<i class="el-icon-close warn-icon" @click="wIconClick"></i></div>
+      <div class="fontwarn" :class="{ 'Invisible': showWarn }" >注:真实姓名即收货人姓名，请谨慎填写<i class="el-icon-close warn-icon"  @click="wIconClick"></i></div>
       <div class="form-group">
         <div class="pic-group">
           <div class="input-font picfont">用户头像</div>
@@ -44,12 +44,12 @@ export default {
         phone:"10086",
         msg1:"",
         canS:false,
-        showWarn:true
+        showWarn:false
     }
   },
   methods:{
      wIconClick(){
-      this.showWarn = false
+      this.showWarn = true
     },
     handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
@@ -84,6 +84,9 @@ export default {
 
 <style scoped lang="scss">
 @import '../../../css/set.scss';
+.Invisible{
+  visibility: hidden;
+}
 .container{
   height: 300px;
   position: relative;

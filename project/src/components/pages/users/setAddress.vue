@@ -33,7 +33,7 @@ export default {
   },
   methods:{
      wIconClick(){
-      this.showWarn = false
+       this.showWarn = false
     },
     selected(e){
       this.address = `${e.province.value}/${e.city.value}/${e.area.value}`
