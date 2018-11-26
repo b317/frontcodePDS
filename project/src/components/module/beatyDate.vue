@@ -96,7 +96,7 @@ export default {
     }
 }
 .wave-font{
-    z-index: 99999;
+    z-index: 999;
     position: relative;
     top: -180px;
     color: #f65c2996;

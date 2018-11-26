@@ -1,0 +1,85 @@
+.container{
+  margin-left: 218px;
+  margin-top: -50px;
+  height: 270px;
+  padding: 0px;
+  width: 760px;
+  padding: 1px 20px;
+  min-height: 420px;
+  background: #f7f7f7;
+    .fontwarn{
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: center;
+      height: 20px;
+      line-height: 20px;
+      background: #fcedec;
+      color: #ff4b33;
+      position: relative;
+      .warn-icon{
+        position: absolute !important;
+        right: 5px !important;
+        top:4px;
+        cursor: pointer;
+      }
+    }
+    .input-group{
+      margin-left: 120px;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      .warn{
+        font-size: 13px;
+        color: red;
+        height: 26px;
+        line-height: 26px;
+        margin-left: 5px;
+      }
+      .blue{
+        font-size: 13px;
+        color: rgba(36, 36, 216, 0.747);
+        height: 26px;
+        cursor: pointer;
+        text-decoration: underline;
+        line-height: 26px;
+        margin-left: 5px;
+      }
+      .input-font{
+        font-size: 13px;
+        font-weight: 400;
+        margin-top: 5px;
+        margin-right: 5px;
+      }
+      input{
+        outline: none;
+        border-radius: 5px;
+        height: 26px;
+        border: 1px solid rgb(196, 196, 196);
+        width: 378px;
+        padding-left: 10px;
+      }
+      .readonly{
+        color: rgb(145, 145, 145);
+      }
+    }
+
+  button{
+    color: #fff;
+    background-color: #f65c29f1;
+    border-color: transparent;
+    text-decoration: none;
+    border-radius: 3px;
+    padding: 0 12px;
+    height: 28px;
+    line-height: 26px;
+    font-size: 12px;
+    border-width: 1px;
+    outline: none;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 515px;
+  }
+  button:hover{
+    background-color: #f65c2996;
+  }
+}
