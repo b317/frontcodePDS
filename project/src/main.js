@@ -8,6 +8,8 @@ import infiniteScroll from 'vue-infinite-scroll'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
+import VDistpicker from 'v-distpicker'
+
 Vue.config.productionTip = false;
 
 let bus = new Vue();
@@ -15,6 +17,8 @@ Vue.prototype.$bus= bus;
 Vue.prototype.$http = axios;
 Vue.use(ElementUI);
 Vue.use(infiniteScroll);
+
+Vue.component('v-distpicker', VDistpicker);
 
 new Vue({
   store,

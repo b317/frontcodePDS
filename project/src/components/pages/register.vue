@@ -12,6 +12,7 @@
           <input v-model="idencode" class="idenCodeInput" placeholder="输入验证码">
           <button @click="idenCodeclick" class="getIdenInput">{{getIdenBtnText}}</button>
           <input v-model="password" class="pasInput" placeholder="输入密码">
+          <input v-model="password2" class="pasInput" placeholder="重复密码">
           <input type="checkbox" value="yes" v-model="isRemberPhone" class="Rcheckbox"><div class="RcheckSpan">记住手机号</div>
         </div>
         <button @click="register" class="loginBtn">登录</button>
@@ -35,7 +36,8 @@ export default {
       isRemberPhone:false,
       warntext:"",
       getIdenBtnText:"获得验证码",
-      totalTime: 61
+      totalTime: 61,
+      password2:""
     }
   },
   beforeMount() {
