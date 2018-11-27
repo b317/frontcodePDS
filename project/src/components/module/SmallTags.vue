@@ -1,19 +1,19 @@
 <template>
-    <div class="small_tag">
-      <span style="padding-left: 14px;" class="span0" ></span>
-      <span class="span1"></span>
-      <span class="span2"></span>
-    </div>
+  <div class="small_tag">
+    <span style="padding-left: 14px;" class="span0" ></span>
+    <span class="span1"></span>
+    <span class="span2"></span>
+  </div>
 </template>
 <script>
-    export default {
-      props:['readStatus'],
-        data() {
-            return {
+  export default {
+    props:['readStatus'],
+    data() {
+      return {
 //                msg: '已读'
-            }
-        }
+      }
     }
+  }
 </script>
 <style>
   .span1{

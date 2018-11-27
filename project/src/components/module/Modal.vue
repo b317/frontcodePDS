@@ -1,13 +1,15 @@
 <template>
   <div>
-    <div class="md-modal modal-msg md-modal-transition">
+    <div class="md-modal modal-msg md-modal-transition" v-bind:class="{'md-show':mdShow}">
       <div class="md-modal-inner">
         <div class="md-top">
-          <button class="md-close">Close</button>
+          <slot name="title"></slot>
+          <i class="el-icon-close" @click="closeModal"></i>
         </div>
         <div class="md-content">
-          <div class="confirm-tips">
-            <slot name="message"></slot>
+          <slot name="content_from"></slot>&nbsp;&nbsp;<slot name="time"></slot>
+          <div>
+            <slot name="content_detail"></slot>
           </div>
           <div class="btn-wrap">
             <slot name="btnGroup"></slot>
@@ -29,10 +31,10 @@
         msg:'hello vue'
       }
     },
-//    methods:{
-//      closeModal(){
-//        this.$emit("close");
-//      }
-//    }
+    methods:{
+      closeModal(){
+        this.$emit("close");
+      }
+    }
   }
 </script>

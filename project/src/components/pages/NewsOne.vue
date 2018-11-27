@@ -2,37 +2,48 @@
   <div>
     <div class="newsOne" v-for="(item,index) of MesListShow" :key="index">
       <div>
-        <span><strong>{{item.title}}</strong></span>
+        <span><strong>拼多少网提醒您：{{item.title}}</strong></span>
         <span class="time">{{item.time}}</span>
       </div>
       <div style="padding-left: 5px;font-size:13px ">
         <span class="newsContent">{{item.content}}</span>
       </div>
-      <a href="javascript:void(0)" class="details">查看详情</a>
-      <small-tag class="small_tag"></small-tag>
+      <a href="javascript:void(0)" class="details" @click="showDetail(item,index)">查看详情</a>
+      <small-tag v-bind:id="index=index" class="small_tag" v-show="!(list_index==index) || !(statusSave[index]==index)"></small-tag>
+      <small-tags v-bind:id="index=index" class="small_tags" v-show="list_index==index || statusSave[index]==index"></small-tags>
     </div>
     <div class="load-more" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="30">
       <img src="./../../../static/loading-svg/loading-bars.svg" v-show="loading">
     </div>
 
     <!--全局模态框-->
-    <!--<modal >-->
-      <!--<p slot="message">-->
-
-      <!--</p>-->
-      <!--<div slot="btnGroup">-->
-
-      <!--</div>-->
-    <!--</modal>-->
+    <modal v-bind:mdShow="mdShow" @close="closeModal" >
+      <span slot="title" class="modal_title">
+        <i class="el-icon-message"></i>&nbsp;系统通知
+      </span>
+      <span slot="content_from" class="modal_topic">{{detail.title}}</span>
+      <span slot="time" class="modal_time">{{detail.time}}</span>
+      <p slot="content_detail" class="content_detail">{{detail.content}}</p>
+      <div slot="btnGroup">
+        <button class="modal_close" @click="closeModal">close</button>
+      </div>
+    </modal>
   </div>
 </template>
 <script>
   import SmallTag from '@/components/module/SmallTag'
+  import SmallTags from '@/components/module/SmallTags'
   import Modal from '@/components/module/Modal'
   export default {
+    props:["tagList"],
     data() {
       return {
         msg: 'hello world',
+        read_status:true,
+        mdShow:false,
+        index:'',
+        list_index:null,
+        statusSave:[],
         busy : false,
         loading: false,
         MesNum:5,
@@ -40,77 +51,109 @@
         MesListShow:[],
         SystemMesList:[
           {
-            title:"说好的未来 在这里等你《穿越时空的少女》独家正版上线！",
+            title:"评价已经生效,请查看",
             time:"2018年11月15日 17:22",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的小瞎子745316已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=122846698439257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1521792613616 查看您最新的信用评价。" +
+            " 退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"英雄联盟S8助威活动全面开启！",
+            title:"评价已经生效,请查看",
             time:"2018年11月15日 17:22",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"#前方高萌征稿大赛#",
+            title:"评价已经生效,请查看",
             time:"2018年10月1日 15:37",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"#前方高萌征稿大赛#",
+            title:"评价已经生效,请查看",
             time:"2018年10月1日 15:37",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"#前方高萌征稿大赛#",
+            title:"评价已经生效,请查看",
             time:"2018年10月1日 15:37",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"#前方高萌征稿大赛#",
+            title:"评价已经生效,请查看",
             time:"2018年10月1日 15:37",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"#前方高萌征稿大赛#",
+            title:"评价已经生效,请查看",
             time:"2018年10月1日 15:37",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"#前方高萌征稿大赛#",
+            title:"评价已经生效,请查看",
             time:"2018年10月1日 15:37",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"#前方高萌征稿大赛#",
+            title:"评价已经生效,请查看",
             time:"2018年10月1日 15:37",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"#前方高萌征稿大赛#",
+            title:"评价已经生效,请查看",
             time:"2018年10月1日 15:37",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
           },
           {
-            title:"#前方高萌征稿大赛#",
+            title:"评价已经生效,请查看",
             time:"2018年10月1日 15:37",
-            content:"一年一度的哔哩哔哩萌节到啦，十大赛区，网罗生活高萌的每一个瞬间，一起来决战萌节之巅吧！点击参与活动" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22。" +
-            "手机拍摄-竹鼠贴纸新鲜上架，海量奖品等你来拿！叮咚~你的十一假期攻略手册已到货！2018年11月15日 17:22"
-          }
-        ]
+            content:"亲爱的富富华华364104129： 您好，我们很高兴地通知您，和您进行交易的vwe旗舰店已经给您作出了评价。" +
+            "该评价现已生效。 查看评价所针对的宝贝，请到这里：" +
+            "https://trade.taobao.com/trade/detail/trade_snap.htm?trade_id=168315729558257250 查看。 " +
+            "请到 https://rate.taobao.com/myRate.htm?nekot=1531235405434 查看您最新的信用评价。 " +
+            "退订此消息：http://member1.taobao.com/member/fresh/subscription.htm#msg:3021"
+          },
+        ],
+        detail:''
       }
     },
     components:{
-      SmallTag,Modal
+      SmallTag,SmallTags,Modal
     },
     mounted(){
       if(this.SystemMesList.length<=5){
@@ -150,43 +193,18 @@
           this.MesListShow=this.MesListShow.concat(this.SystemMesList.slice(this.count,this.count+5));
           this.busy = false;
         }
+      },
+      closeModal(){
+        this.mdShow = false;
+        this.list_index=this.index;
+        this.read_status=false;
+        this.statusSave.push(this.index);
+      },
+      showDetail(item,index){
+        this.mdShow = true;
+        this.detail = item;
+        this.index=index;
       }
     }
   }
 </script>
-<style scoped>
-  .newsOne{
-    background: white;font-size: 15px;padding:30px 20px;margin:20px 0;
-    line-height: 25px;font-family: Microsoft YaHei;
-    color:#333;border-radius: 6px;position: relative;
-    height: 105px;
-    overflow:hidden;text-overflow:ellipsis;
-  }
-  .newsOne div:first-child{margin-bottom: 5px}
-  .newsOne .time{color:#999;font-size: 12px;}
-  .load-more{text-align: center}
-  .small_tag{
-    position: absolute;right:-18px;top:0;
-    /*box-shadow:0 0 4px #f65d29;*/
-    width:100px;height:30px;
-    background:#f65d29;
-    border-radius: 25px 25px 0 0;
-    transform: rotate(35deg);
-    text-align: center;font-size: 20px;
-    /*padding-left:10px;*/
-    border-bottom:4px outset rgba(255, 69, 0, 1);
-    line-height: 30px;font-weight: bold;color:white;
-    font-family: "FZShuTi";
-  }
-  .newsOne .details{
-    color:#409EFF;font-size: 14px;font-weight: 100;
-    margin-top:10px;display: inline-block
-  }
-  .newsOne .newsContent{
-    display: inline-block;height:50px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;}
-  .newsOne .details:hover{color:rgba(0, 63, 252, 1)}
-</style>
