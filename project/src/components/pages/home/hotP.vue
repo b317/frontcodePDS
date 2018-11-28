@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="header"><img src="@/assets/hotP.png">热门商家</div>
+    <div class="header"><img :src=src>{{msg}}</div>
     <div class="center">
         <div class="font" v-for="(item,key) in data" :key  = key>
             {{item}}
@@ -10,14 +10,21 @@
 </template>
 
 <script>
-import ddd from "./hot.js"
 export default {
+    props:["data","type"],
     mounted() {
-        this.data = ddd.data
+        if(this.type == 1){
+            this.msg = "热门分类"
+            this.src = "../../../static/hot.png"
+        }else{
+            this.msg = "热门商家"
+            this.src = "../../../static/hotP.png" 
+        }
     },
     data () {
         return {
-            data:[]
+            msg:"",
+            src:""
         }
     }
 }

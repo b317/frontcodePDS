@@ -6,8 +6,8 @@
       <div class="header-center">
         <carousel></carousel>
         <div style="display:flex;">
-          <hot></hot>
-          <hotp style="margin-left:6px;"></hotp>
+          <hotp :data=data :type=type[1]></hotp>
+          <hotp :data=data :type=type[0] style="margin-left:6px;"></hotp>
         </div>
       </div>
     </div>
@@ -15,22 +15,25 @@
 </template>
 
 <script>
+import ddd from "./hot.js"
 import {setName,getName} from "@/util/auth";
 import headmenu from "@/components/pages/home/headerMenu"
-import hot from "@/components/pages/home/hot"
 import hotp from "@/components/pages/home/hotp"
 import carousel from "@/components/pages/home/carousel"
 import leftmenu from "@/components/module/menuLeft"
 export default {
   components:{
-    leftmenu,headmenu,carousel,hot,hotp
+    leftmenu,headmenu,carousel,hotp
   },
   data () {
     return {
-      msg: 'home'
+      msg: 'home',
+      data:[],
+      type:[1,2]
     }
   },
   mounted() {
+    this.data = ddd.data
     this.$bus.$on("test",(a) => {
       console.log(a)
     })
