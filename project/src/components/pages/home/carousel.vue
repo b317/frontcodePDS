@@ -2,7 +2,7 @@
   <div class="block">
     <el-carousel>
       <el-carousel-item v-for="(item,key) in data" :key="key">
-        <img :src=item>
+        <img :src=item class="img">
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -26,5 +26,8 @@ export default {
 .block{
     height: 300px;
     width: 50.1vw;
+    .img{
+      width: 100%;
+    }
 }
 </style>
