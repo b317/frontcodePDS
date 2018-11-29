@@ -44,8 +44,8 @@ export default {
 
 <style scoped lang="scss">
 .content{
-    width: 394px;
-    height: 280px;
+    width: 96%;
+    height: 93%;
     box-shadow: 0px 2px 12px rgb(146, 146, 146);
     .wrap{
         width: 100%;

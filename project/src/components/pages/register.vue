@@ -13,7 +13,9 @@
           <button @click="idenCodeclick" class="getIdenInput">{{getIdenBtnText}}</button>
           <input v-model="password" class="pasInput" type="password" placeholder="输入密码">
           <input v-model="password2" class="pasInput" type="password" placeholder="重复密码">
+          <div class="checkbox-group">
           <input type="checkbox" value="yes" v-model="isRemberPhone" class="Rcheckbox"><div class="RcheckSpan">记住手机号</div>
+          </div>
         </div>
         <button @click="register" class="loginBtn">注册</button>
       </div>

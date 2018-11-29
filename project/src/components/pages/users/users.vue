@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container">
   <div class="user">
     <beaty-date></beaty-date>
     <div class="userInfo">

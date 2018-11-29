@@ -1,8 +1,6 @@
 <template>
   <div class="content">
-    <div v-for="(item,key) in arr" :key = key>
-        <bigcard :dataArr=item.data :title = item.title></bigcard>
-    </div>
+    <bigcard v-for="(item,key) in arr" :key = key :dataArr=item.data :title = item.title></bigcard>
   </div>
 </template>
 
@@ -24,5 +22,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.content{
+    width: 100%;
+}
 </style>
