@@ -8,12 +8,12 @@
       </div>
       <div style="padding-left: 5px;font-size:13px ">
         <span class="newsTitle"><span class="Title_shopname">{{item.shopName}}</span>{{item.title}}</span>
-        <span class="newsContent">{{item.content}}</span>
-        <discount-coupon>
-          <span slot="coupon_type">商家优惠券</span>
-          <span slot="discount">￥10</span>
-          <span slot="decrease">满99元使用</span>
-        </discount-coupon>
+        <!--<span class="newsContent">{{item.content}}</span>-->
+        <!--<discount-coupon>-->
+          <!--<span slot="coupon_type">商家优惠券</span>-->
+          <!--<span slot="discount">￥10</span>-->
+          <!--<span slot="decrease">满99元使用</span>-->
+        <!--</discount-coupon>-->
       </div>
       <a href="javascript:void(0)" class="details" @click="showDetail(item,index)">查看详情</a>
       <small-tag v-bind:id="index=index" class="small_tag" v-show="!(list_index==index) || !(statusSave[index]==index)"></small-tag>
@@ -26,7 +26,7 @@
     <!--全局模态框-->
     <modal v-bind:mdShow="mdShow" @close="closeModal" >
       <span slot="title" class="modal_title">
-        <i class="el-icon-message"></i>&nbsp;活动消息
+        <i class="el-icon-message"></i>&nbsp;优惠券消息
       </span>
       <span slot="content_from" class="modal_topic">{{detail.title}}</span>
       <span slot="time" class="modal_time">{{detail.time}}</span>

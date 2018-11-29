@@ -19,7 +19,8 @@
                 @click="mesTag=2;isfade=!isfade;ishidden=false" style="position: relative">
               <router-link to="/newsThree" href="javascript:void(0)" class="msgCheck msgCheckLast">
                 <i class="el-icon-document"></i>&nbsp;<span ref="tagThree">优惠券消息</span>&nbsp;
-                <i v-bind:class="[isfade==true ? 'el-icon-more':'el-icon-more-outline']" style="float: right"></i>
+                <i v-bind:class="[isfade==true ? 'el-icon-more':'el-icon-more-outline']"
+                   style="float: right;padding:0;margin:0"></i>
               </router-link>
             </li>
           </ul>
