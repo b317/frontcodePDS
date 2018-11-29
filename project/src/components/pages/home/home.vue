@@ -50,11 +50,6 @@ export default {
       console.log("ASd")
     },
     clicked(){
-      this.$bus.$emit("test","aaaaa")
-      this.$store.dispatch('user/Login',{
-        "name":"a",
-        "password":"asd"
-      })
       console.log(getName())
     }
   }

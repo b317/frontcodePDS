@@ -116,7 +116,7 @@ const route = new Router({
     }
   ]
 })
-let test = false;
+let test = true;
 const whiteList = ['/login', '/regist'];
 route.beforeEach((to, from, next) => {
   if (whiteList.indexOf(to.path) !== -1) {

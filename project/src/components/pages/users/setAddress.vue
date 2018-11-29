@@ -14,8 +14,23 @@
 
 <script>
 import VDistpicker from 'v-distpicker'
+import {updateUser,getUserInfo} from "@/api/http";
+import { mapState,mapGetters } from 'vuex'
+
 export default {
   components: { VDistpicker },
+  mounted() {
+    getUserInfo({id:this.id}).then((res)=>{
+      let data = res.data
+      this.phone = data.username
+      this.realname = data.name
+    })
+  },
+  computed:{
+    ...mapGetters({
+      id:'user/id'
+    }),
+  },
   data () {
     return {
         msg:"设置收货地址",
@@ -58,6 +73,16 @@ export default {
       }else{
         this.msg3 = ""
       }
+      updateUser({
+        id:this.id,
+        data:{
+          address:this.address+this.detailInfo
+        }
+      }).then(res => {
+        if(res.code == 0){
+          console.log("设置地址成功")
+        }
+      })
     }
   }
 }

@@ -24,3 +24,38 @@ export function getvCode(info){//获取短信验证码
         phone_num: info.phone
     })
 }
+export function updateUser(info){//更新用户信息
+    return axios.put("/v1/user/update/"+info.id,
+        info.data,
+        {
+            headers:{
+                "content-type":"x-www-form-urlencoded"
+            }
+        }
+    )
+}
+export function getUserInfo(info){//获取用户信息
+    return axios.get("/v1/user/"+info.id)
+}
+export function resetPass(info){//重置密码
+    return axios.put("/v1/user/resetpwd/"+info.id,{
+            password:info.password
+        },
+        {
+            headers:{
+                "content-type":"x-www-form-urlencoded"
+            }
+        }
+    )
+}
+export function upload(info){//重置密码
+    return axios.put("/v1/user/upload/"+info.id,{
+            file:info.file
+        },
+        {
+            headers:{
+                "content-type":"multipart/form-data"
+            }
+        }
+    )
+}
