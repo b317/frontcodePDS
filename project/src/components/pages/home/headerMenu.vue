@@ -35,7 +35,7 @@ export default {
         font-size: 14px;
         font-weight: 500;
         color: #fff;
-        min-width: 210px;
+        width: 13.2%;
         text-align: center;
         cursor: pointer;
         background: #ff5000;

@@ -7,7 +7,7 @@ export function login(userInfo){
     })
 }
 export function loginByvCode(userInfo){
-    return axios.post(env+"/v1/user/loginbysms",{
+    return axios.post("/v1/user/loginbysms",{
             username: userInfo.username,
             vcode: userInfo.vcode
     })
