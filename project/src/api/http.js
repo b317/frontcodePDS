@@ -1,21 +1,26 @@
 import axios from 'axios'
-import {env} from "@/configs";
 
 export function login(userInfo){
-    return axios.post(env+"/login",{
+    return axios.post("/v1/user/login",{
             username: userInfo.username,
             password: userInfo.password
     })
 }
-export function register(userInfo){
-    return axios.post(env+"/register",{
-            username: userInfo.name,
-            password: userInfo.password,
-            idenCode: userInfo.idenCode
+export function loginByvCode(userInfo){
+    return axios.post(env+"/v1/user/loginbysms",{
+            username: userInfo.username,
+            vcode: userInfo.vcode
     })
 }
-export function getBigpic(info){
-    return axios.post(env+"/getBigpic",{
-            pic: info.pic
+export function register(userInfo){
+    return axios.post("/v1/user/",{
+        username: userInfo.name,
+        password: userInfo.password,
+        vcode: userInfo.vcode
+    })
+}
+export function getvCode(info){//获取短信验证码
+    return axios.post("/v1/user/vcode/",{
+        phone_num: info.phone
     })
 }

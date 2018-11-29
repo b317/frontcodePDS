@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/pages/HelloWorld'
-import home from '@/components/pages/home'
+import home from '@/components/pages/home/home'
 import news from '@/components/pages/news'
 import login from '@/components/pages/login'
 import register from '@/components/pages/register'
@@ -19,12 +19,11 @@ import NewsTwo from '@/components/pages/NewsTwo'
 import NewsThree from '@/components/pages/NewsThree'
 
 import {getName} from "@/util/auth";
-import {test} from "@/configs";
 
 Vue.use(Router)
 
 const route = new Router({
-  mode:"history",
+  // mode:"history",
   routes: [
     {
       path: '/',
@@ -117,7 +116,7 @@ const route = new Router({
     }
   ]
 })
-
+let test = false;
 const whiteList = ['/login', '/regist'];
 route.beforeEach((to, from, next) => {
   if (whiteList.indexOf(to.path) !== -1) {

@@ -70,19 +70,6 @@ export default {
         return "注册"
       }
     },
-    ...mapState({
-      name: state => state.user.userName
-    }),
-    showName(){
-      return this.name === "" ? "请登录":this.name
-    },
-    title(){
-      if(this.activeIndex == 2){
-        return "登录"
-      }else if(this.activeIndex == 3){
-        return "注册"
-      }
-    },
     titleShowOrNot(){
       if(this.activeIndex == 2||this.activeIndex == 3){
         return true

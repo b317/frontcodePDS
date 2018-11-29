@@ -16,7 +16,7 @@
         </div>
         <div v-else>
           <input v-model="phone" class="phoneInput" placeholder="手机号码">
-          <input v-model="password" class="pasInput" placeholder="输入密码">
+          <input v-model="password" class="pasInput" type="password" placeholder="输入密码">
           <input type="checkbox" value="yes" v-model="isLoginAuto" class="Rcheckbox"><div class="RcheckSpan">自动登录</div>
           <div class="fogotPas" @click="tabClick(true)">忘记密码？</div>
         </div>
@@ -28,7 +28,7 @@
 
 <script>
 import {setName,getName} from "@/util/auth";
-import {login} from "@/api/http";
+import {login,loginByvCode,getvCode} from "@/api/http";
 import { mapState,mapGetters,mapMutations } from 'vuex'
 
 export default {
@@ -51,6 +51,8 @@ export default {
         return (/^1[34578]\d{9}$/.test(this.phone)); 
     }
   },
+  mounted() {
+  },
   methods:{
     ...mapMutations({
       setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
@@ -64,7 +66,15 @@ export default {
         console.log("已发送")
         return
       }
-      this.warntext = "已发送验证码，请查看手机"
+      getvCode({
+          phone:this.phone
+        }).then((response) => {
+            this.warntext = "已发送验证码，请查看手机"
+            console.log(response)
+        })
+        .catch(function (error) {//出错
+            console.log(error);
+        });
       let clock = window.setInterval(() => {
         this.totalTime--
         this.getIdenBtnText = this.totalTime + 's后重新发送'
@@ -85,10 +95,25 @@ export default {
       }
       this.isLogin = a
     },
+    cb(obj){
+      if(obj.code == 0){
+        this.$alert('将自动登录并跳转至首页', '登录成功', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push("/home")
+          }
+        });
+      }else{
+        this.$alert('服务器500错误,请重试', '失败', {
+          confirmButtonText: '确定',
+        });
+      }
+    },
     loginclick(){
       if(this.isLogin){//如果是验证码登录
-        login({
-          username:this.phone
+        loginByvCode({
+          username:this.phone,
+          vcode:this.idencode
         }).then((response) => {
           const data = response.data;
           console.log(data.username)
@@ -98,10 +123,12 @@ export default {
         .catch(function (error) {//出错
             console.log(error);
         });
-      }else{
+      }else{//如果是手机密码登录
         login({
-          //参数
-        }).then(function (response){
+          username:this.phone,
+          password:this.password
+        }).then((response) => {
+            console.log(response)
             const data = response.data;
             this.setName({userName:data.params.username})//vuex
             setName(data.params.username)//cookie
