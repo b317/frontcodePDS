@@ -1,13 +1,15 @@
 <template>
   <div class="home">
     <div class="header">
-      <headmenu></headmenu>
-      <leftmenu></leftmenu>
+      <headmenu class="headmenu"></headmenu>
       <div class="header-center">
-        <carousel></carousel>
-        <div style="display:flex;">
-          <hotp :data=data :type=type[1]></hotp>
-          <hotp :data=data :type=type[0] style="margin-left:6px;"></hotp>
+        <leftmenu></leftmenu>
+        <div class="header-center-cen">
+          <carousel></carousel>
+          <div style="display:flex;width:100%;">
+            <hotp :data=data :type=type[1]></hotp>
+            <hotp :data=data :type=type[0] style="margin-left:6px;"></hotp>
+          </div>
         </div>
       </div>
       <userInfo class="info"></userInfo>
@@ -63,15 +65,28 @@ export default {
 <style scoped lang="scss">
   .home{
     background: #f7f7f7;
+    width: 100%;
     .header{
+      width: 100%;
       height: 570px;
       position: relative;
       .header-center{
+        width: 100%;
+        display: flex;
         position: absolute;
-        top: 42px;
-        left: 220px;
+        top: 32px;
+        .header-center-cen{
+          width: 58%;
+          margin-top: 10px;
+          margin-left: -32%;
+        }
+      }
+      .headmenu{
+        position: absolute;
+        left:-12.5%;
       }
       .info{
+        width: 22%;
         position: absolute;
         right: 12px;
         top: 42px;

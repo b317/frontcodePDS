@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <el-menu id="my-menu"  background-color="#f6f6f6" text-color="#333" active-text-color="#f65d29" :default-active="activeIndex" class="el-menu-demo my-menu" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="5"><el-badge is-dot class="item" v-if="haveMes"></el-badge> 消息中心</el-menu-item>
-      <el-submenu index="4">
-        <template slot="title">个人中心</template>
-        <el-menu-item index="4-3">我的主页</el-menu-item>
-        <el-menu-item index="4-1">我的团购</el-menu-item>
-        <el-menu-item index="4-4">我的订单</el-menu-item>
-        <el-menu-item index="4-2">我的红包</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="3" style="color:#f65d29;">免费注册</el-menu-item>
-      <el-menu-item index="2" class="app-username">你好,{{showName}}</el-menu-item>
-      <el-menu-item index="1" id="menu-home-btn">拼多少首页</el-menu-item>
-      <i class="el-icon-edit" id="icon-home"></i>
-    </el-menu>
+      <el-menu id="my-menu"  background-color="#f6f6f6" text-color="#333" active-text-color="#f65d29" :default-active="activeIndex" class="el-menu-demo my-menu" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="5"><el-badge is-dot class="item" v-if="haveMes"></el-badge> 消息中心</el-menu-item>
+        <el-submenu index="4">
+          <template slot="title">个人中心</template>
+          <el-menu-item index="4-3">我的主页</el-menu-item>
+          <el-menu-item index="4-1">我的团购</el-menu-item>
+          <el-menu-item index="4-4">我的订单</el-menu-item>
+          <el-menu-item index="4-2">我的红包</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="3" style="color:#f65d29;">免费注册</el-menu-item>
+        <el-menu-item index="2" class="app-username">你好,{{showName}}</el-menu-item>
+        <el-menu-item index="1" id="menu-home-btn">拼多少首页</el-menu-item>
+        <i class="el-icon-edit" id="icon-home"></i>
+      </el-menu>
     <div class="line"></div>
     <div class="container">
       <div class="body-head">
@@ -29,7 +29,6 @@
           </div>
         </div>
       </div>
-      <div class="gloab-loading" v-if="isLoading"><i class="el-icon-loading"/></div>
       <router-view/>
     </div>
     <nav-footer v-if="isShow"></nav-footer>
@@ -140,9 +139,8 @@ export default {
     height: 100%;
   }
   .item{position: absolute;right:5px}
-  @media (min-width: 970px) {
-    .container{
-      padding:0px 120px;
-    }
+  .container{
+    width: 80%;
+    margin: 0 auto;
   }
 </style>

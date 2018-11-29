@@ -25,9 +25,9 @@ export default {
 <style scoped lang="scss">
 .block{
     height: 300px;
-    width: 50.1vw;
+    width: 100%;
     .img{
-      width: 50.1vw;
+      width: 100%;
       height: 300px;
     }
 }

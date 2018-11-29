@@ -23,8 +23,6 @@ export default {
 
 <style scoped lang="scss">
 .content{
-    position: relative;
-    left: -120px;
     width: 98.9vw;
     height: 32px;
     background-image: linear-gradient(to right,#ff9000 0,#ff5000 100%);
@@ -41,7 +39,7 @@ export default {
         text-align: center;
         cursor: pointer;
         background: #ff5000;
-        margin-left: 120px;
+        margin-left: 10%;
     }
     .home:hover{
         background: #ff5100b4;

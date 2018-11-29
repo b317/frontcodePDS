@@ -30,7 +30,7 @@ export default {
 
 <style scoped lang="scss">
 .content{
-  width: 82.2vw;
+  width: 98%;
   margin: 10px 10px 0px 10px;
   background: #fff;
   border: 1px solid rgb(212, 212, 212);
@@ -40,7 +40,7 @@ export default {
   flex-direction: row;
   flex-wrap:wrap;
   .title{
-    width: 82.2vw;
+    width: 100%;
     height: 50px;
     display: flex;
     padding: 0 10px;
@@ -87,7 +87,7 @@ export default {
     }
   }
   .card{
-    width: 416px;
+    width: 33%;
     height: 300px;
     .el-card{
       width: 260px !important;

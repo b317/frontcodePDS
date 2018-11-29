@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="login-container">
       <img class="login-bigpic" src="@/assets/login-bigpic.jpg">
       <div class="login-table">
@@ -12,18 +11,21 @@
           <input v-model="phone" class="phoneInput" placeholder="手机号码">
           <input v-model="idencode" class="idenCodeInput" placeholder="输入验证码">
           <button @click="idenCodeclick" class="getIdenInput">{{getIdenBtnText}}</button>
-          <input type="checkbox" value="yes" v-model="isRemberPhone" class="Rcheckbox"><div class="RcheckSpan">记住手机号</div>
+          <div class="checkbox-group">
+            <input type="checkbox" value="yes" v-model="isRemberPhone" class="Rcheckbox"><div class="RcheckSpan">记住手机号</div>
+          </div>
         </div>
         <div v-else>
           <input v-model="phone" class="phoneInput" placeholder="手机号码">
           <input v-model="password" class="pasInput" type="password" placeholder="输入密码">
-          <input type="checkbox" value="yes" v-model="isLoginAuto" class="Rcheckbox"><div class="RcheckSpan">自动登录</div>
-          <div class="fogotPas" @click="tabClick(true)">忘记密码？</div>
+          <div class="checkbox-group">
+            <input type="checkbox" value="yes" v-model="isLoginAuto" class="Rcheckbox"><div class="RcheckSpan">自动登录</div>
+            <div class="fogotPas" @click="tabClick(true)">忘记密码？</div>
+          </div>
         </div>
         <button @click="loginclick" class="loginBtn">登录</button>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

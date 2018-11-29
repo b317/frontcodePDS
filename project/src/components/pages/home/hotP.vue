@@ -32,7 +32,7 @@ export default {
 
 <style scoped lang="scss">
 .content{
-    width: 25vw;
+    width: 49%;
     height: 210px;
     margin-top: 8px;
     border: 1px solid rgba(221, 221, 221, 0.719);
@@ -62,7 +62,7 @@ export default {
         .font{
             text-align: left;
             font-size: 13px;
-            width: 72px;
+            width: 25%;
             height: 30px;
             line-height: 30px;
             cursor: pointer;

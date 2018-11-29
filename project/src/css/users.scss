@@ -1,10 +1,13 @@
+.container{
+    width: 100%;
+}
 .user{
     display: flex;
     flex-direction:row-reverse;
     font-weight: 400;
   }
 .userInfo{
-    width: 800px;
+    width: 60%;
     height: 120px;
     background: #f7f7f7;
     margin-right: 60px;
@@ -28,19 +31,19 @@
 .username{
     margin-top: 40px;
     margin-left: 10px;
-    width: 100px !important;
+    width: 16% !important;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 .set{
     margin-top: 36px;
-    width: 600px;
+    width: 100%;
     display: flex;
 }
 .set div{
     font-size: 14px;
-    width: 200px;
+    width: 20%;
     margin: 0px;
     height: 30px;
     line-height: 30px;
@@ -58,3 +61,4 @@
 .address{
     border-left: 1px #f65c29 solid;
 }
+

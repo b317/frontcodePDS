@@ -104,7 +104,7 @@ export default {
   .picfont{
     height: 60px !important;
     line-height: 60px !important;
-    margin-left: 120px;
+    margin-left: 10%;
     margin-right: 5px;
   }
   .picbtn{
@@ -119,7 +119,7 @@ export default {
 }
 
 .avatar-uploader .el-upload {
-  width: 200px !important;
+  width: 20% !important;
   height: 60px !important;
     border: 1px dashed #d9d9d9;
     border-radius: 6px;

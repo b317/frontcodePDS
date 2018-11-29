@@ -10,7 +10,7 @@
             </div>
       </div>
     <el-card :body-style="{ padding: '10px' }">
-    <img @mouseover="show = true" :class={hover:show} @mouseout="show = false" src="@/assets//hamburger.png" class="image">
+    <img @mouseover="show = true" :class={hover:show} class="image" @mouseout="show = false" src="@/assets//hamburger.png">
     <div style="padding: 0px;margin:5px;">
         <span>好吃的汉堡</span>
         <div class="bottom clearfix">
@@ -51,7 +51,7 @@ export default {
 
 <style scoped lang="scss">
 .content{
-    width: 17.2vw;
+    width: 100%;
     height: 518px;
     background: #fff;
     border: 1px solid rgb(199, 199, 199);
@@ -89,6 +89,9 @@ export default {
                 border: #f65d29 1px solid;
             }
         }
+    }
+    .image{
+        margin-left: 8px;
     }
     .time {
         font-size: 13px;
