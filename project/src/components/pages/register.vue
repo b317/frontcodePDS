@@ -11,11 +11,11 @@
           <input v-model="phone" class="phoneInput" placeholder="手机号码">
           <input v-model="idencode" class="idenCodeInput" placeholder="输入验证码">
           <button @click="idenCodeclick" class="getIdenInput">{{getIdenBtnText}}</button>
-          <input v-model="password" class="pasInput" placeholder="输入密码">
-          <input v-model="password2" class="pasInput" placeholder="重复密码">
+          <input v-model="password" class="pasInput" type="password" placeholder="输入密码">
+          <input v-model="password2" class="pasInput" type="password" placeholder="重复密码">
           <input type="checkbox" value="yes" v-model="isRemberPhone" class="Rcheckbox"><div class="RcheckSpan">记住手机号</div>
         </div>
-        <button @click="register" class="loginBtn">登录</button>
+        <button @click="register" class="loginBtn">注册</button>
       </div>
     </div>
   </div>
@@ -23,8 +23,8 @@
 
 <script>
 import {setName,getName} from "@/util/auth";
-import {register} from "@/api/http";
-
+import {register,getvCode} from "@/api/http";
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -36,12 +36,18 @@ export default {
       isRemberPhone:false,
       warntext:"",
       getIdenBtnText:"获得验证码",
-      totalTime: 61,
+      totalTime: 3,
       password2:""
     }
   },
   beforeMount() {
-
+    // axios.post("/v1/user/",{
+    //   username:"13420120750",
+    //   password:"648135",
+    //   vcode:"164835"
+    // }).then(res => {
+    //   console.log(res)
+    // })
   },
   computed:{
     checkPhone(){ 
@@ -54,29 +60,83 @@ export default {
         this.warntext = "手机号码格式错误"
         return
       }
-      if(this.totalTime < 61){
+      if(this.totalTime < 3){
         console.log("已发送")
         return
       }
-      this.warntext = "已发送验证码，请查看手机"
+      getvCode({
+          phone:this.phone
+        }).then((response)=>{
+            console.log("已发送验证码")
+            console.log(response)
+            this.warntext = "已发送验证码，请查看手机"
+        })
+        .catch(function (error) {//出错
+            console.log(error);
+        });
       let ccc = window.setInterval(() => {
         this.totalTime--
         this.getIdenBtnText = this.totalTime + 's后重新发送'
         if(this.totalTime == 0){
           clearInterval(ccc)
           this.getIdenBtnText = "获得验证码"
-          this.totalTime = 61
+          this.totalTime = 3
         }
       },1000)
     },
+    check(){
+      if(this.phone == ""){
+        this.warntext = "请填入手机号码"
+        return 1;
+      }
+      else if(this.idencode == ""){
+        this.warntext = "请填入验证号"
+        return 1;
+      }
+      else if(this.password == ""){
+        this.warntext = "请输入密码"
+        return 1;
+      }
+      else if(this.password2 == ""){
+        this.warntext = "请重复密码"
+        return 1;
+      }
+      if(this.password2 != this.password){
+        this.warntext = "重复密码错误"
+        return 1;
+      }
+    },
+    cb(obj){
+      if(obj.code == 0){
+        this.$alert('将自动登录并跳转至首页', '注册成功', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push("/home")
+          }
+        });
+      }else if(obj.code == 20105){
+        this.$alert('验证码错误', '错误', {
+          confirmButtonText: '确定',
+        });
+      }else if(obj.code == 20106){
+        this.$alert('手机已被注册', '错误', {
+          confirmButtonText: '确定',
+        });
+      }
+    },
     register(){
-      alert(this.checkPhone)
+      if(this.check() == 1){
+        return
+      }
       register({
-          //参数
-        }).then(function (response){
+          username:this.phone,
+          password:this.password,
+          vcode:this.idencode
+        }).then((response) => {
             const data = response.data;
             this.setName({userName:data.params.username})//vuex
             setName(data.params.username)//cookie
+            this.cb(response)
         })
         .catch(function (error) {//出错
             console.log(error);
