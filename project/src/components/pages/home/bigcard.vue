@@ -1,7 +1,11 @@
 <template>
   <div class="content">
-    <div class="title"></div>
-    <div class="card" v-for="(item,key) in arr" :key=key>
+    <div class="title">
+      <div class="big">{{title.title}}</div>
+      <div class="tip" v-for="(item,key) in title.tip" :key=key>{{item}}</div>
+      <div class="right">更多<i class="el-icon-arrow-right"></i></div>
+    </div>
+    <div class="card" v-for="(item,key) in dataArr" :key=key>
         <smallcard :src=item.src :msg=item.title :sellhot=item.sellhot :tipshow=item.tipshow :rate=item.rate :sell=item.sell></smallcard>
     </div>
   </div>
@@ -9,13 +13,10 @@
 
 <script>
 import smallcard from "@/components/pages/home/smallcard"
-import ddd from "./homeContent.js"
 export default {
   components:{smallcard},
-  // props:["arr"],
+  props:["dataArr","title"],
   mounted() {
-    this.arr = ddd.arr
-    console.log(this.arr)
   },
   data () {
     return {
@@ -41,6 +42,49 @@ export default {
   .title{
     width: 1250px;
     height: 50px;
+    display: flex;
+    padding: 0 10px;
+    position: relative;
+    .right{
+      font-size: 16px;
+      border: 1px solid rgb(187, 187, 187);
+      line-height: 26px;
+      padding: 0px 3px 2px 9px;
+      margin: 18px 0px 0px 5px;
+      height: 26px;
+      vertical-align: top;
+      border-radius: 3px;
+      color: rgb(179, 178, 178);
+      position: absolute;
+      right: 14px;
+      top:-4px;
+      cursor: pointer;
+    }
+    .right:hover{
+      color: #f65d29;
+      border: 1px solid #f65d29;
+    }
+    .big{
+      font-size: 19px;
+      height: 50px;
+      line-height: 60px;
+    }
+    .tip{
+      font-size: 13px;
+      border: 1px solid rgb(187, 187, 187);
+      line-height: 20px;
+      padding: 0px 3px 2px 3px;
+      margin: 18px 0px 0px 5px;
+      height: 20px;
+      vertical-align: top;
+      cursor: pointer;
+      border-radius: 3px;
+      color: rgb(179, 178, 178);
+    }
+    .tip:hover{
+      color: #f65d29;
+      border: 1px solid #f65d29;
+    }
   }
   .card{
     width: 416px;

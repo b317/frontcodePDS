@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <img :src=src>
+    <img :src=src @mouseover="show = true" @mouseout="show = false">
     <div class="wrap">
         <el-rate
         v-model="rate"
@@ -13,6 +13,7 @@
         <div class="msg">
             {{msg}}
             <img src="../../../../static/hotSell.jpg" v-show="sellhot">
+            <div class="warn" v-show="show"  @mouseover="show = true">点击前往拼团</div>
         </div>
         <div class="sell">
                 {{sell}}
@@ -35,6 +36,7 @@ export default {
     props:["src","msg","rate","sell","tipshow","sellhot"],
     data () {
         return {
+            show:false
         }
     }
 }
@@ -60,6 +62,14 @@ export default {
                 margin-left: 3px;
                 position: absolute;
                 top: 7px;
+            }
+            .warn{
+                color: #fff;
+                font-size: 19px;
+                position: absolute;
+                cursor: pointer;
+                left: 130px;
+                top:-130px;
             }
         }
         .rate{
@@ -88,7 +98,10 @@ export default {
     img{
         width: 100%;
         height: 200px;
+        cursor: pointer;
     }
-    
+    img:hover{
+        filter: blur(3px);
+    }
 }
 </style>

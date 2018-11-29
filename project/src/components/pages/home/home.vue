@@ -12,7 +12,7 @@
       </div>
       <userInfo class="info"></userInfo>
     </div>
-    <homecontent></homecontent>
+    <contenter></contenter>
   </div>
 </template>
 
@@ -24,17 +24,17 @@ import userInfo from "@/components/pages/home/userInfo"
 import hotp from "@/components/pages/home/hotp"
 import carousel from "@/components/pages/home/carousel"
 import leftmenu from "@/components/module/menuLeft"
-import homecontent from "@/components/pages/home/homeContent"
+import contenter from "@/components/pages/home/content"
 
 export default {
   components:{
-    leftmenu,headmenu,carousel,hotp,userInfo,homecontent
+    leftmenu,headmenu,carousel,hotp,userInfo,contenter
   },
   data () {
     return {
       msg: 'home',
       data:[],
-      type:[1,2]
+      type:[1,2],
     }
   },
   mounted() {
