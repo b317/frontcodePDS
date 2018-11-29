@@ -73,7 +73,7 @@ export default {
       }
       .info{
         position: absolute;
-        left: 1002px;
+        right: 12px;
         top: 42px;
       }
     }

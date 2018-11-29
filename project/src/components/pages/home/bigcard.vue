@@ -30,7 +30,7 @@ export default {
 
 <style scoped lang="scss">
 .content{
-  width: 1250px;
+  width: 82.2vw;
   margin: 10px 10px 0px 10px;
   background: #fff;
   border: 1px solid rgb(212, 212, 212);
@@ -40,7 +40,7 @@ export default {
   flex-direction: row;
   flex-wrap:wrap;
   .title{
-    width: 1250px;
+    width: 82.2vw;
     height: 50px;
     display: flex;
     padding: 0 10px;
