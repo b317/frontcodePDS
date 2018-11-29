@@ -32,7 +32,7 @@ export default {
 
 <style scoped lang="scss">
 .content{
-    width: 380px;
+    width: 25vw;
     height: 210px;
     margin-top: 8px;
     border: 1px solid rgba(221, 221, 221, 0.719);

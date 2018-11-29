@@ -51,7 +51,7 @@ export default {
 
 <style scoped lang="scss">
 .content{
-    width: 260px;
+    width: 17.2vw;
     height: 518px;
     background: #fff;
     border: 1px solid rgb(199, 199, 199);

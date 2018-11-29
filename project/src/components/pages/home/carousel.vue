@@ -25,15 +25,6 @@ export default {
 <style scoped lang="scss">
 .block{
     height: 300px;
-    width: 770px;
+    width: 50.1vw;
 }
-
-
-  .el-carousel__item:nth-child(2n) {
-     background-color: #99a9bf;
-  }
-  
-  .el-carousel__item:nth-child(2n+1) {
-     background-color: #d3dce6;
-  }
 </style>

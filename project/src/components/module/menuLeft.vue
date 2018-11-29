@@ -57,12 +57,12 @@ export default {
 
 <style scoped lang="scss">
 .content{
-    width: 690px;
+    width: 45.3vw;
     min-height:100px;
     display: flex;
     flex-direction: row;
     .con{
-        width: 210px;
+        width: 13.8vw;
         .tiny{
             width: 210px;
             height: 5px;
@@ -99,7 +99,7 @@ export default {
     .tip{
         z-index: 99;
         background: #fff;
-        width: 480px;
+        width: 31.5vw;
         border: 2px solid #f65d29;
         border-left: 1px solid #eee;
         padding: 10px;
