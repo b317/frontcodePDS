@@ -5,12 +5,12 @@
         <div class="grid-content bg-purple">
           <h2>{{ msg }} <i class="el-icon-loading"></i></h2>
           <ul class="ul" style="z-index: 2000;position: relative">
-            <li v-bind:class="[mesTag==0 ? active : '']" @click="mesTag=0">
+            <li v-bind:class="[mesTag==0 ? active : '']" @click="mesTag=0;ishidden=true;isfade=false">
               <router-link to="/newsOne" href="javascript:void(0)" class="msgCheck">
                 <i class="el-icon-setting"></i>&nbsp;<span ref="tagOne">系统通知</span>
               </router-link>
             </li>
-            <li v-bind:class="[mesTag==1 ? active : '']" @click="mesTag=1">
+            <li v-bind:class="[mesTag==1 ? active : '']" @click="mesTag=1;ishidden=true;isfade=false">
               <router-link to="/newsTwo" href="javascript:void(0)" class="msgCheck">
                 <i class="el-icon-goods"></i>&nbsp;<span ref="tagTwo">活动消息</span>
               </router-link>
@@ -144,13 +144,13 @@
 
   @keyframes mymove{
     0% {transform: translateY(-60px);}
-    30% {transform: translateY(-40px)}
+    30% {transform: translateY(-30px)}
     70% {transform: translateY(-10px)}
     100%{transform: translateY(0)}
   }
   @-webkit-keyframes mymove{
     0% {transform: translateY(-60px)}
-    30% {transform: translateY(-40px)}
+    30% {transform: translateY(-30px)}
     70% {transform: translateY(-10px)}
     100%{transform: translateY(0)}
   }
@@ -165,14 +165,14 @@
   }
   @keyframes mymoveIn{
     0% {transform: translateY(0px);opacity: 1}
-    30% {transform: translateY(-10px);opacity: .8}
-    70% {transform: translateY(-40px);opacity: .7}
+    30% {transform: translateY(-30px);opacity: .8}
+    70% {transform: translateY(-50px);opacity: .7}
     100%{transform: translateY(-60px);opacity: 0}
   }
   @-webkit-keyframes mymoveIn{
     0% {transform: translateY(0px);opacity: 1}
-    30% {transform: translateY(-10px);opacity: .8}
-    70% {transform: translateY(-40px);opacity: .7}
+    30% {transform: translateY(-30px);opacity: .8}
+    70% {transform: translateY(-50px);opacity: .7}
     100%{transform: translateY(-60px);opacity: 0}
   }
   .hiddenCouponList{
