@@ -1,6 +1,6 @@
 <template>
   <div style="background-color: rgb(246, 246, 246);padding-right: 20px">
-    <el-row :gutter="20" style="left: 1px">
+    <el-row :gutter="20" style="left: 1px;min-width: 1004px !important;">
       <el-col :span="5">
         <div class="grid-content bg-purple">
           <h2>{{ msg }} <i class="el-icon-loading"></i></h2>
@@ -124,7 +124,7 @@
   }
   .couponTag li a{
     font-weight: bold;color: black;z-index: 10000;
-    padding:10px 100px 10px 10px;
+    padding:10px 99px 10px 10px;
     display: inline-block;margin-bottom: 10px;background: white;
   }
   .showCouponList li a:hover{

@@ -14,7 +14,7 @@ export function loginByvCode(userInfo){
 }
 export function register(userInfo){
     return axios.post("/v1/user/",{
-        username: userInfo.name,
+        username: userInfo.username,
         password: userInfo.password,
         vcode: userInfo.vcode
     })
