@@ -124,7 +124,7 @@
   }
   .couponTag li a{
     font-weight: bold;color: black;z-index: 10000;
-    padding:10px 108px 10px 10px;
+    padding:10px 100px 10px 10px;
     display: inline-block;margin-bottom: 10px;background: white;
   }
   .showCouponList li a:hover{
