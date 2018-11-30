@@ -31,8 +31,28 @@
 </template>
 
 <script>
+import {updateUser,getUserInfo,upload} from "@/api/http";
+import { mapState,mapGetters } from 'vuex'
 export default {
   components:{
+  },
+  computed:{
+    ...mapGetters({
+      username:'user/username',
+      id:"user/id"
+    }),
+  },
+  mounted() {
+    getUserInfo({id:this.id}).then(res => {
+      let data = res.data
+      this.nickname = data.username
+      if(data.nick_name != ""){
+        this.nickname = data.nick_name
+      }
+      this.name = data.name
+      this.phone = data.phone
+      this.imageUrl = data.head_image
+    })
   },
   data () {
     return {
@@ -44,7 +64,8 @@ export default {
         phone:"10086",
         msg1:"",
         canS:false,
-        showWarn:false
+        showWarn:false,
+        headPicSuccess:false
     }
   },
   methods:{
@@ -52,9 +73,19 @@ export default {
       this.showWarn = true
     },
     handleAvatarSuccess(res, file) {
+      if(this.headPicSuccess){
         this.imageUrl = URL.createObjectURL(file.raw);
+      }
     },
     beforeAvatarUpload(file) {
+      upload({
+        id:this.id,
+        file:file
+      }).then(res => {
+        if(res.code == 0){
+          this.headPicSuccess = true
+        }
+      })
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!');
@@ -62,21 +93,23 @@ export default {
       return  isLt2M;
     },
     clickbtn(){
-      if(!this.oldpass){
+      if(!this.name){
         this.msg1 = "必填信息"
+        return
       }else{
         this.msg1 = ""
       }
-      if(!this.newpass){
-        this.msg2 = "必填信息"
-      }else{
-        this.msg2 = ""
-      }
-      if(!this.newpass2){
-        this.msg3 = "必填信息"
-      }else{
-        this.msg3 = ""
-      }
+      updateUser({
+        id:this.id,
+        data:{
+          nick_name:this.nickname,
+          name:this.name
+        }
+      }).then(res => {
+        if(res.code == 0){
+          console.log("更改用户信息成功")
+        }
+      })
     }
   }
 }

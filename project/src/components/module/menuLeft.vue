@@ -64,19 +64,20 @@ export default {
     .con{
         width: 33%;
         .tiny{
-            width: 210px;
+            width: 100%;
             height: 5px;
             background: #383131;
         }
         .header{
-            width: 200px;
+            width: 100%;
             height:40px;
             background: #383131;
             color: #fff;
             line-height: 40px;
-            padding-left: 10px;
             font-size: 15px;
+            overflow: hidden;
             .name{
+                margin-left: 10px;
                 cursor: pointer;
             }
             .name:hover{

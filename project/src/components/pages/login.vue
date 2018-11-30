@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import {setName,getName} from "@/util/auth";
+import {setName,getName,setId,setRoleId} from "@/util/auth";
 import {login,loginByvCode,getvCode} from "@/api/http";
 import { mapState,mapGetters,mapMutations } from 'vuex'
 
@@ -58,6 +58,8 @@ export default {
   methods:{
     ...mapMutations({
       setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+      setId:'user/setId',
+      setRoleId:'user/setRoleId'
     }),
     idenCodeclick(){
       if(!this.checkPhone){
@@ -120,7 +122,11 @@ export default {
           const data = response.data;
           console.log(data.username)
           this.setuserName({userName:data.username})//vuex
+          this.setId({id:data.id})//vuex
+          this.setRoleId({role_id:data.role_id})//vuex
           setName(data.username)//cookie
+          setId(data.id)
+          setRoleId(data.role_id)
         })
         .catch(function (error) {//出错
             console.log(error);
@@ -132,8 +138,12 @@ export default {
         }).then((response) => {
             console.log(response)
             const data = response.data;
-            this.setName({userName:data.params.username})//vuex
-            setName(data.params.username)//cookie
+            this.setuserName({userName:data.username})//vuex
+            this.setId({id:data.id})//vuex
+            this.setRoleId({role_id:data.role_id})//vuex
+            setName(data.username)//cookie
+            setId(data.id)
+            setRoleId(data.role_id)
         })
         .catch(function (error) {//出错
             console.log(error);

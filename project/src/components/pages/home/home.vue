@@ -11,8 +11,8 @@
             <hotp :data=data :type=type[0] style="margin-left:6px;"></hotp>
           </div>
         </div>
+        <userInfo class="info"></userInfo>
       </div>
-      <userInfo class="info"></userInfo>
     </div>
     <contenter></contenter>
   </div>
@@ -50,11 +50,6 @@ export default {
       console.log("ASd")
     },
     clicked(){
-      this.$bus.$emit("test","aaaaa")
-      this.$store.dispatch('user/Login',{
-        "name":"a",
-        "password":"asd"
-      })
       console.log(getName())
     }
   }
@@ -89,7 +84,7 @@ export default {
         width: 22%;
         position: absolute;
         right: 12px;
-        top: 42px;
+        top: 10px;
       }
     }
   }

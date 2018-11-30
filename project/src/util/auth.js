@@ -4,6 +4,18 @@ export function setName(username) {
 export function getName() {
   return getCookie("username");
 }
+export function setId(id) {
+  return setCookie("id", id);
+}
+export function getId() {
+  return getCookie("id");
+}
+export function setRoleId(role_id) {
+  return setCookie("role_id", role_id);
+}
+export function getRoleId() {
+  return getCookie("role_id");
+}
 //获取cookie、
 export function getCookie(name) {
    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");

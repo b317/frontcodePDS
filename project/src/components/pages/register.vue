@@ -136,8 +136,6 @@ export default {
           vcode:this.idencode
         }).then((response) => {
             const data = response.data;
-            this.setName({userName:data.params.username})//vuex
-            setName(data.params.username)//cookie
             this.cb(response)
         })
         .catch(function (error) {//出错

@@ -37,7 +37,9 @@
 </template>
 
 <script>
-import { mapState,mapGetters } from 'vuex'
+import { mapState,mapGetters,mapMutations } from 'vuex'
+import {getId,getName,setName} from "@/util/auth";
+import {getUserInfo} from "@/api/http";
 import NavFooter from '@/components/module/NavFooter'
 import LoginFooter from '@/components/module/LoginFooter'
 export default {
@@ -56,11 +58,8 @@ export default {
     NavFooter,LoginFooter
   },
   computed: {
-    ...mapGetters({
-      username:'user/username'
-    }),
     showName(){
-      return this.username === "" ? "请登录":this.username
+      return getName() === "" ? "请登录":getName()
     },
     title(){
       if(this.activeIndex == 2){
@@ -78,13 +77,39 @@ export default {
     }
   },
   mounted(){
-    ///asdasdasd
+    if(getId()){
+      let id = getId()
+      getUserInfo({
+        id:id
+      }).then((res) => {
+        let data = res.data
+        this.setId({id:data.id})
+        if(data.nick_name != ""){
+          this.setId({username:data.nick_name})
+        }else{
+          this.setId({username:data.username})
+        }
+        this.setRoleId({id:data.role_id})
+        if(getName() == ""){
+          if(data.nick_name==""){
+            setName(data.username)
+          }else{
+            setName(data.nick_name)
+          }
+        }
+      })
+    }
     this.$bus.$on("loading",(a) => {
       this.isLoading = a
     })
     this.checkShowFooter();
   },
   methods: {
+    ...mapMutations({
+      setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+      setId:'user/setId',
+      setRoleId:'user/setRoleId'
+    }),
       handleSelect(key, keyPath) {
         this.activeIndex = key;
         if(key == 1){
