@@ -8,6 +8,7 @@ import register from '@/components/pages/register'
 import Order from '@/components/pages/order/Order'
 import Coupon from '@/components/pages/coupon/Coupon'
 import goods from '@/components/pages/goods/goods'
+import GoodsItem from '@/components/pages/goods/GoodsItem'
 import users from '@/components/pages/users/users'
 import setAddress from '@/components/pages/users/setAddress'
 import setPass from '@/components/pages/users/setPass'
@@ -34,6 +35,11 @@ const route = new Router({
       path: '/goods',
       name: 'goods',
       component: goods
+    },
+    {
+      path: '/GoodsItem',
+      name: 'GoodsItem',
+      component: GoodsItem
     },
     {
       path: '/home',
