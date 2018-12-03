@@ -1,6 +1,6 @@
 <template>
   <div style="background-color: rgb(246, 246, 246);padding-right: 20px">
-    <el-row :gutter="20" style="left: 1px">
+    <el-row :gutter="20" style="left: 1px;min-width: 1004px !important;">
       <el-col :span="5">
         <div class="grid-content bg-purple">
           <h2>{{ msg }} <i class="el-icon-loading"></i></h2>

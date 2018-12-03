@@ -4,6 +4,8 @@
     <list default="true" id="b6b8d852-4dd7-4981-9374-71fceb722d4f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/config/index.js" afterPath="$PROJECT_DIR$/project/config/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/package-lock.json" afterPath="$PROJECT_DIR$/project/package-lock.json" />
 =======
@@ -12,6 +14,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/components/pages/news.vue" afterPath="$PROJECT_DIR$/project/src/components/pages/news.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/src/css/newsCenter.css" afterPath="$PROJECT_DIR$/project/src/css/newsCenter.css" />
 >>>>>>> 760f9544f273227fe3f9e208f278fa7161bf2d20
+>>>>>>> 2746b8f45befeca7f73803f4b5411405aee55c9f
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -88,7 +91,7 @@
       <file leaf-file-name="newsCenter.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/src/css/newsCenter.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3795">
+            <state relative-caret-position="2311">
               <caret line="165" column="33" lean-forward="false" selection-start-line="165" selection-start-column="33" selection-end-line="165" selection-end-column="33" />
 >>>>>>> 760f9544f273227fe3f9e208f278fa7161bf2d20
               <folding />
@@ -96,7 +99,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Coupon.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="news.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/src/components/pages/news.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="128" column="3" lean-forward="true" selection-start-line="128" selection-start-column="3" selection-end-line="128" selection-end-column="3" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#ul#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#2;n#ul#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#1259#1265#1" expanded="true" />
+                <element signature="e#1298#1304#0" expanded="true" />
+                <element signature="n#style#0;n#i#1;n#router-link#0;n#li#2;n#ul#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Coupon.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/src/components/pages/coupon/Coupon.vue">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -329,17 +350,25 @@
       <workItem from="1543538180248" duration="1772000" />
 =======
       <workItem from="1543450625153" duration="26164000" />
+<<<<<<< HEAD
+      <workItem from="1543537783925" duration="1666000" />
+=======
       <workItem from="1543537783925" duration="687000" />
 >>>>>>> 760f9544f273227fe3f9e208f278fa7161bf2d20
+>>>>>>> 2746b8f45befeca7f73803f4b5411405aee55c9f
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
 <<<<<<< HEAD
+    <option name="totallyTimeSpent" value="139020000" />
+=======
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="130844000" />
 =======
     <option name="totallyTimeSpent" value="138041000" />
 >>>>>>> 760f9544f273227fe3f9e208f278fa7161bf2d20
+>>>>>>> 2746b8f45befeca7f73803f4b5411405aee55c9f
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -355,18 +384,27 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
 =======
+<<<<<<< HEAD
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+=======
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
 >>>>>>> 760f9544f273227fe3f9e208f278fa7161bf2d20
+>>>>>>> 2746b8f45befeca7f73803f4b5411405aee55c9f
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2157738" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44481054" sideWeight="0.5089286" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22899505" sideWeight="0.5089286" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22899505" sideWeight="0.49107143" order="2" side_tool="false" content_ui="tabs" />
+=======
 <<<<<<< HEAD
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23887974" sideWeight="0.49702382" order="2" side_tool="false" content_ui="tabs" />
 =======
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44481054" sideWeight="0.49107143" order="2" side_tool="false" content_ui="tabs" />
 >>>>>>> 760f9544f273227fe3f9e208f278fa7161bf2d20
+>>>>>>> 2746b8f45befeca7f73803f4b5411405aee55c9f
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.047775947" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -758,6 +796,13 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/project/src/components/pages/coupon/Coupon.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding />
+=======
     <entry file="file://$PROJECT_DIR$/project/src/css/newsCenter.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="982">
@@ -783,23 +828,38 @@
 =======
         <state relative-caret-position="2167">
           <caret line="126" column="20" lean-forward="false" selection-start-line="126" selection-start-column="20" selection-end-line="126" selection-end-column="20" />
+>>>>>>> 2746b8f45befeca7f73803f4b5411405aee55c9f
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/src/css/newsCenter.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3795">
+        <state relative-caret-position="2311">
           <caret line="165" column="33" lean-forward="false" selection-start-line="165" selection-start-column="33" selection-end-line="165" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/components/pages/coupon/Coupon.vue">
+    <entry file="file://$PROJECT_DIR$/project/src/components/pages/news.vue">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="210">
+          <caret line="128" column="3" lean-forward="true" selection-start-line="128" selection-start-column="3" selection-end-line="128" selection-end-column="3" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ul#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#2;n#ul#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1259#1265#1" expanded="true" />
+            <element signature="e#1298#1304#0" expanded="true" />
+            <element signature="n#style#0;n#i#1;n#router-link#0;n#li#2;n#ul#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+=======
         <state relative-caret-position="57">
           <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
           <folding />
 >>>>>>> 760f9544f273227fe3f9e208f278fa7161bf2d20
+>>>>>>> 2746b8f45befeca7f73803f4b5411405aee55c9f
         </state>
       </provider>
     </entry>

@@ -35,6 +35,7 @@
           <span slot="coupon_type">商家优惠券</span>
           <span slot="discount">￥10</span>
           <span slot="decrease">满99元使用</span>
+          <span slot="getCoupon">未领取</span>
         </discount-coupon>
       </p>
       <div slot="btnGroup">
