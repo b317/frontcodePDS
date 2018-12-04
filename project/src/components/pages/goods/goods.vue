@@ -28,25 +28,25 @@
                 <!--<goods-table-footer></goods-table-footer>-->
               </template>
             </el-tab-pane>
-            <el-tab-pane label="待付款" name="1">
-              <template slot-scope="scope">
-                <goods-table-header></goods-table-header>
-                <div class="goods-item-list">
-                  <goods-item
-                    v-for="(item,index) of goodslist"
-                    :key="index"
-                    :goods="item"
-                    :index="index"
-                    v-if="isdata"
-                    ref="goods"
-                    @delete="handleDelete"
-                  ></goods-item>
-                  <div class="goods-nodate" v-if="!isdata">
-                    <div class="g-nodate">没有数据</div>
-                  </div>
-                </div>
-              </template>
-            </el-tab-pane>
+            <!--<el-tab-pane label="待付款" name="1">-->
+              <!--<template slot-scope="scope">-->
+                <!--<goods-table-header></goods-table-header>-->
+                <!--<div class="goods-item-list">-->
+                  <!--<goods-item-->
+                    <!--v-for="(item,index) of goodslist"-->
+                    <!--:key="index"-->
+                    <!--:goods="item"-->
+                    <!--:index="index"-->
+                    <!--v-if="isdata"-->
+                    <!--ref="goods"-->
+                    <!--@delete="handleDelete"-->
+                  <!--&gt;</goods-item>-->
+                  <!--<div class="goods-nodate" v-if="!isdata">-->
+                    <!--<div class="g-nodate">没有数据</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</template>-->
+            <!--</el-tab-pane>-->
             <el-tab-pane label="已付款" name="2">
               <template slot-scope="scope">
                 <goods-table-header></goods-table-header>

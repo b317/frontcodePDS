@@ -65,7 +65,8 @@
         </td>
         <td rowspan="2" style="width: 94px;">
           <div>
-            <p><span v-if="goods.orderStatus==0">等待付款</span>
+            <p>
+              <!--<span v-if="goods.orderStatus==0">等待付款</span>-->
               <span v-if="goods.orderStatus==1">已经付款</span>
               <span v-if="goods.orderStatus==2">等待发货</span>
               <span v-if="goods.orderStatus==3">已经发货</span>
@@ -80,7 +81,8 @@
         </td>
         <td rowspan="2" style="width: 75px;vertical-align: middle;">
           <div>
-            <el-button size="mini" type="primary" plain @click="YesNoDelete">删除</el-button>
+            <p v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3"><el-button size="mini" type="primary" plain @click="isRefund">退款</el-button></p>
+            <p><el-button size="mini" type="primary" plain @click="isDelete">删除</el-button></p>
           </div>
         </td>
       </tr>
@@ -170,7 +172,7 @@
       }
     },
     methods: {
-      YesNoDelete () {
+      isDelete () {
 //        alert(this.index)
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
@@ -189,6 +191,7 @@
           });
         });
       },
+      isRefund () {}
     }
   }
 </script>
