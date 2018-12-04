@@ -6,18 +6,18 @@
           <h2>{{ msg }} <i class="el-icon-loading"></i></h2>
           <ul class="ul" style="z-index: 2000;position: relative">
             <li v-bind:class="[mesTag==0 ? active : '']" @click="mesTag=0;ishidden=true;isfade=false">
-              <router-link to="/newsOne" href="javascript:void(0)" class="msgCheck">
+              <router-link to="/newsOne?mesTag=0" href="javascript:void(0)" class="msgCheck">
                 <i class="el-icon-setting"></i>&nbsp;<span ref="tagOne">系统通知</span>
               </router-link>
             </li>
             <li v-bind:class="[mesTag==1 ? active : '']" @click="mesTag=1;ishidden=true;isfade=false">
-              <router-link to="/newsTwo" href="javascript:void(0)" class="msgCheck">
+              <router-link to="/newsTwo?mesTag=1" href="javascript:void(0)" class="msgCheck">
                 <i class="el-icon-goods"></i>&nbsp;<span ref="tagTwo">活动消息</span>
               </router-link>
             </li>
             <li v-bind:class="[mesTag==2 ? active : '']"
                 @click="mesTag=2;isfade=!isfade;ishidden=false" style="position: relative">
-              <router-link to="/newsThree" href="javascript:void(0)" class="msgCheck msgCheckLast">
+              <router-link to="/newsThree?mesTag=2" href="javascript:void(0)" class="msgCheck msgCheckLast">
                 <i class="el-icon-document"></i>&nbsp;<span ref="tagThree">优惠券消息</span>&nbsp;
                 <i v-bind:class="[isfade==true ? 'el-icon-more':'el-icon-more-outline']"
                    style="float: right;padding:0;margin:0"></i>
@@ -27,13 +27,13 @@
           <ul class="couponTag"
               :class="[isfade==true ? 'showCouponList':'showCouponListIn',ishidden==true ? 'hiddenCouponList':'']">
             <li @click.prevent="mesTag2=1">
-              <router-link to="/newsThree" href="javascript:void(0)"
+              <router-link to="/newsThree?mesTag=2&mesTag2=1" href="javascript:void(0)"
                            :class="[mesTag2==1 ? 'active1':'']">
                 <span >商家优惠券</span>
               </router-link>
             </li>
             <li @click.prevent="mesTag2=2">
-              <router-link to="/newsThree" href="javascript:void(0)"
+              <router-link to="/newsThree?mesTag=2&mesTag2=2" href="javascript:void(0)"
                            :class="[mesTag2==2 ? 'active1':'']">
                 <span>通用优惠券</span>
               </router-link>
@@ -64,6 +64,12 @@
     },
     mounted(){
       this.init();
+      if(this.$route.query.mesTag){
+        this.mesTag=this.$route.query.mesTag;
+        if(this.$route.query.mesTag2){
+          this.mesTag2=this.$route.query.mesTag2;
+        }
+      }
     },
     methods:{
       init(){
