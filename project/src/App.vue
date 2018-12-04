@@ -83,14 +83,14 @@ export default {
       getUserInfo({
         id:id
       }).then((res) => {
-        let data = res.data
+        let data = res.data.data
         this.setId({id:data.id})
         if(data.nick_name != ""){
-          this.setId({username:data.nick_name})
+          this.setName({username:data.nick_name})
         }else{
-          this.setId({username:data.username})
+          this.setName({username:data.username})
         }
-        this.setRoleId({id:data.role_id})
+        this.setRoleId({role_id:data.role_id})
         if(getName() == ""){
           if(data.nick_name==""){
             setName(data.username)

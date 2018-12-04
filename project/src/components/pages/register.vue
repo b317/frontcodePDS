@@ -135,6 +135,7 @@ export default {
           password:this.password,
           vcode:this.idencode
         }).then((response) => {
+            console.log(response)
             const data = response.data;
             this.cb(response)
         })

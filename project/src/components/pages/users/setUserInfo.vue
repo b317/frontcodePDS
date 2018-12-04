@@ -33,6 +33,8 @@
 <script>
 import {updateUser,getUserInfo,upload} from "@/api/http";
 import { mapState,mapGetters } from 'vuex'
+import {getId,getName,setName} from "@/util/auth";
+
 export default {
   components:{
   },
@@ -43,14 +45,14 @@ export default {
     }),
   },
   mounted() {
-    getUserInfo({id:this.id}).then(res => {
-      let data = res.data
+    getUserInfo({id:getId()}).then(res => {
+      let data = res.data.data
       this.nickname = data.username
       if(data.nick_name != ""){
         this.nickname = data.nick_name
       }
       this.name = data.name
-      this.phone = data.phone
+      this.phone = data.username
       this.imageUrl = data.head_image
     })
   },
@@ -73,6 +75,7 @@ export default {
       this.showWarn = true
     },
     handleAvatarSuccess(res, file) {
+      console.log(file)
       if(this.headPicSuccess){
         this.imageUrl = URL.createObjectURL(file.raw);
       }
@@ -100,12 +103,13 @@ export default {
         this.msg1 = ""
       }
       updateUser({
-        id:this.id,
+        id:getId(),
         data:{
           nick_name:this.nickname,
           name:this.name
         }
       }).then(res => {
+        console.log(res)
         if(res.code == 0){
           console.log("更改用户信息成功")
         }
