@@ -42,6 +42,7 @@ import {getId,getName,setName} from "@/util/auth";
 import {getUserInfo} from "@/api/http";
 import NavFooter from '@/components/module/NavFooter'
 import LoginFooter from '@/components/module/LoginFooter'
+
 export default {
   name: 'App',
   data(){

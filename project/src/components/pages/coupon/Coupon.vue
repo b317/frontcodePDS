@@ -7,7 +7,7 @@
         </div>
       </el-col>
       <el-col :span="20"><div class="grid-content bg-purple">
-        <el-tabs v-model="activeName"  style="">
+        <el-tabs v-model="activeName"  class="Coupon_list">
           <el-tab-pane label="系统优惠券" name="first">
             <el-tabs v-model="activeName1">
               <el-tab-pane label="可用" name="first">
@@ -233,6 +233,14 @@
   }
 </script>
 
-<style scoped>
-
+<style >
+/*.el-table td{*/
+/*text-align: center !important;*/
+/*}*/
+  /*.el-tabs .el-tabs__active-bar.is-top{*/
+    /*!*background-color: red ;*!*/
+  /*}*/
+  .Coupon_list .el-tabs__item{
+    font-family: Microsoft YaHei;font-weight: 700;font-size: 16px;
+  }
 </style>
