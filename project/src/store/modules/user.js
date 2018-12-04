@@ -16,15 +16,15 @@ const getters = {
 const mutations = {
     setUserName: (state,{userName}) => {
         state.userName = userName
-        console.log(state)
+        console.log(userName)
     },
     setRoleId: (state,{role_id}) => {
         state.role_id = role_id
-        console.log(state)
+        console.log(role_id)
     },
     setId: (state,{id}) => {
         state.id = id
-        console.log(state)
+        console.log(id)
     },
 }
 // actions

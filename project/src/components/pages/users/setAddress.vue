@@ -16,14 +16,19 @@
 import VDistpicker from 'v-distpicker'
 import {updateUser,getUserInfo} from "@/api/http";
 import { mapState,mapGetters } from 'vuex'
+import {getId,getName,setName} from "@/util/auth";
 
 export default {
   components: { VDistpicker },
   mounted() {
-    getUserInfo({id:this.id}).then((res)=>{
-      let data = res.data
+    console.log(getId())
+    getUserInfo({id:getId()}).then((res)=>{
+      let data = res.data.data
+      console.log(data)
       this.phone = data.username
       this.realname = data.name
+    }).catch((res)=>{
+      console.log(res)
     })
   },
   computed:{
@@ -73,11 +78,11 @@ export default {
       }else{
         this.msg3 = ""
       }
+      let l = new FormData() 
+      l.append("address",this.address+"/"+this.detailInfo)
       updateUser({
-        id:this.id,
-        data:{
-          address:this.address+this.detailInfo
-        }
+        id:getId(),
+        data:l
       }).then(res => {
         if(res.code == 0){
           console.log("设置地址成功")

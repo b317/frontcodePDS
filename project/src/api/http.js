@@ -1,37 +1,39 @@
 import axios from 'axios'
 
 export function login(userInfo){
-    return axios.post("/v1/user/login",{
+    console.log(userInfo)
+    return axios.post("/v1/global/userlogin",{
             username: userInfo.username,
             password: userInfo.password
     })
 }
 export function loginByvCode(userInfo){
-    return axios.post("/v1/user/loginbysms",{
+    return axios.post("/v1/global/userloginbysms",{
             username: userInfo.username,
             vcode: userInfo.vcode
     })
 }
 export function register(userInfo){
-    return axios.post("/v1/user/",{
+    return axios.post("/v1/global/register",{
         username: userInfo.username,
         password: userInfo.password,
         vcode: userInfo.vcode
     })
 }
 export function getvCode(info){//获取短信验证码
-    return axios.post("/v1/user/vcode/",{
+    return axios.post("/v1/global/vcode",{
         phone_num: info.phone
     })
 }
 export function updateUser(info){//更新用户信息
+    console.log(info)
     return axios.put("/v1/user/update/"+info.id,
         info.data,
-        {
-            headers:{
-                "content-type":"x-www-form-urlencoded"
-            }
-        }
+        // {
+        //     headers: {
+        //         'Content-Type': 'application/x-www-form-urlencoded'
+        //     }
+        // }
     )
 }
 export function getUserInfo(info){//获取用户信息

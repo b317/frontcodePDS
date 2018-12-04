@@ -119,8 +119,8 @@ export default {
           username:this.phone,
           vcode:this.idencode
         }).then((response) => {
-          const data = response.data;
-          console.log(data.username)
+          const data = response.data.data;
+          console.log(data)
           this.setuserName({userName:data.username})//vuex
           this.setId({id:data.id})//vuex
           this.setRoleId({role_id:data.role_id})//vuex
@@ -137,7 +137,7 @@ export default {
           password:this.password
         }).then((response) => {
             console.log(response)
-            const data = response.data;
+            const data = response.data.data;
             this.setuserName({userName:data.username})//vuex
             this.setId({id:data.id})//vuex
             this.setRoleId({role_id:data.role_id})//vuex
