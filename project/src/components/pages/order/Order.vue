@@ -138,7 +138,7 @@
             groupRealityPeople:'5',
             groupStatus:1
           },
-        ],
+        ],  // 数据集
         dataList:[]
       }
     },

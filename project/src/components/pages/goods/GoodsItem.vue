@@ -5,7 +5,8 @@
       <tr style="height: 42px;background-color: #f5f5f5;border: 1px solid #e8e8e8;">
         <td style="width: 330px;">
           <div class="h-order-num">
-            <span><el-checkbox v-model="checked"></el-checkbox><label>{{goods.orderTime}}</label></span>
+            <!--<span><el-checkbox v-model="checked"></el-checkbox><label>{{goods.orderTime}}</label></span>-->
+            <span><label>{{goods.orderTime}}</label></span>
             <span class="order-num">订单号：<span>{{goods.orderNumber}}</span></span>
           </div>
         </td>
@@ -46,14 +47,13 @@
         <td style="width: 44px;border: none;">
           <div>
             <p><span>{{goods.number}}</span></p>
-            <!--<template>-->
-              <!--<el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>-->
-            <!--</template>-->
           </div>
         </td>
         <td style="width: 106px;border-left: none;">
           <div>
-            <p><span><a href="#">申请退款</a></span></p>
+            <p><span v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3"><a href="#">申请退款</a></span>
+              <span v-if="goods.orderStatus==0 || goods.orderStatus==5"><a href="#"></a></span>
+            </p>
             <p><span><a href="#">投诉商家</a></span></p>
           </div>
         </td>
@@ -65,19 +65,29 @@
         </td>
         <td rowspan="2" style="width: 94px;">
           <div>
-            <p>{{goods.orderResult}}</p>
+            <p>
+              <!--<span v-if="goods.orderStatus==0">等待付款</span>-->
+              <span v-if="goods.orderStatus==1">已经付款</span>
+              <span v-if="goods.orderStatus==2">等待发货</span>
+              <span v-if="goods.orderStatus==3">已经发货</span>
+              <span v-if="goods.orderStatus==4">交易完成</span>
+              <span v-if="goods.orderStatus==5">交易失败</span>
+            </p>
             <p><a href="#">订单详情</a></p>
-            <p><a href="#">{{goods.logistics}}</a></p>
+            <p><span v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3 || goods.orderStatus==4">
+              <a href="#">查看物流</a></span>
+            </p>
           </div>
         </td>
         <td rowspan="2" style="width: 75px;vertical-align: middle;">
           <div>
-            <el-button size="mini" type="primary" plain @click="YesNoDelete">删除</el-button>
+            <p v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3"><el-button size="mini" type="primary" plain @click="isRefund">退款</el-button></p>
+            <p><el-button size="mini" type="primary" plain @click="isDelete">删除</el-button></p>
           </div>
         </td>
       </tr>
       <tr class="g-tr-center" style="height: 42px;">
-        <td style="text-align: left;padding-left: 25px;vertical-align: middle;border-right: none;color: blue;">
+        <td style="text-align: left;padding-left: 25px;vertical-align: middle;border-right: none;">
           <div>拼团优惠</div>
         </td>
         <td style="vertical-align: middle;border-left: none;border-right: none;">
@@ -162,7 +172,7 @@
       }
     },
     methods: {
-      YesNoDelete () {
+      isDelete () {
 //        alert(this.index)
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
@@ -181,6 +191,7 @@
           });
         });
       },
+      isRefund () {}
     }
   }
 </script>
