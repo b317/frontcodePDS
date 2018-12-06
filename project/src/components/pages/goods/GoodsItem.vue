@@ -57,7 +57,7 @@
             <p><span><a href="#">投诉商家</a></span></p>
           </div>
         </td>
-        <td rowspan="2"style="width: 104px;">
+        <td rowspan="2" style="width: 104px;">
           <div>
             <p style="font-weight: bolder;"><span>￥</span><span>{{goods.price}}</span></p>
             <p style="color: #6c6c6c;"><span>(</span><span>含运费</span><span>)：</span><span>￥</span><span>{{goods.freight}}</span></p>

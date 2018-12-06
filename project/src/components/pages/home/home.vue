@@ -71,9 +71,9 @@ export default {
         position: absolute;
         top: 32px;
         .header-center-cen{
-          width: 56%;
+          width: 58%;
           margin-top: 10px;
-          margin-left: -30%;
+          margin-left: -32%;
         }
       }
       .headmenu{
