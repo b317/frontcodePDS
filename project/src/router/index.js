@@ -19,6 +19,8 @@ import NewsOne from '@/components/pages/NewsOne'
 import NewsTwo from '@/components/pages/NewsTwo'
 import NewsThree from '@/components/pages/NewsThree'
 
+import ProductDetail from '@/components/pages/ProductDetail'
+
 import {getName} from "@/util/auth";
 
 Vue.use(Router)
@@ -40,6 +42,11 @@ const route = new Router({
       path: '/GoodsItem',
       name: 'GoodsItem',
       component: GoodsItem
+    },
+    {
+      path: '/ProductDetail',
+      name : 'ProductDetail',
+      component: ProductDetail
     },
     {
       path: '/home',

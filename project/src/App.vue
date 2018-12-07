@@ -10,7 +10,8 @@
           <el-menu-item index="4-2">我的红包</el-menu-item>
         </el-submenu>
         <el-menu-item index="3" style="color:#f65d29;">免费注册</el-menu-item>
-        <el-menu-item index="2" class="app-username">你好,{{showName}}</el-menu-item>
+        <el-menu-item index="2" class="app-username">你好,{{showName}}
+        </el-menu-item>
         <el-menu-item index="1" id="menu-home-btn">拼多少首页</el-menu-item>
         <i class="el-icon-edit" id="icon-home"></i>
       </el-menu>

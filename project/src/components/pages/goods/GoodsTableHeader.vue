@@ -11,8 +11,13 @@
         <th style="width: 94px;">
           <span class="field-select-mod">
             <span class="transaction-status">交易状态</span>
-            <span class="rc-select-icon"><i class="el-icon-caret-bottom"></i></span>
+            <span class="rc-select-icon">
+              <i class="el-icon-caret-bottom"></i>
+            </span>
           </span>
+          <!--<select v-model="selected">-->
+            <!--<option v-for="item in optList">{{ item }}</option>-->
+          <!--</select>-->
         </th>
         <th style="width: 75px;">交易操作</th>
       </tr>
@@ -40,7 +45,9 @@
     export default {
         data() {
             return {
-                msg: 'hello world'
+//              selected: '',
+//              optList: ['交易状态','已经付款', '等待发货', '已经发货', '交易完成', '交易失败']，
+              msg: 'hello world'
             }
         }
     }

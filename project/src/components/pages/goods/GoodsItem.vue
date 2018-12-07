@@ -14,7 +14,7 @@
           <div>
             <span style="">
               <img :src="'./static/goods/' + goods.shopIcon" alt=""
-                   style="width: 16px;height: 16px;margin-left: 12px;margin-right: 3px;vertical-align: middle;"/>
+                   style="width: 16px;height: 16px;margin-left: 12px;margin-right: 3px;vertical-align: middle;border-radius: 25px;"/>
               <a class="g-shop-name" href="#" :title="goods.shopName">{{goods.shopName}}</a>
             </span>
           </div>
@@ -33,7 +33,7 @@
                   {{goods.content}}</span></a>
               <a href="#" rel="noopener noreferrer"> [交易快照] </a>
             </p>
-            <p style="color: #9e9e9e"><span><span>颜色分类</span><span>：</span><span>{{goods.color}}</span></span></p>
+            <!--<p style="color: #9e9e9e"><span><span>颜色分类</span><span>：</span><span>{{goods.color}}</span></span></p>-->
           </div>
         </td>
         <td style="width: 87px;border: none;">
@@ -71,7 +71,8 @@
               <span v-if="goods.orderStatus==2">等待发货</span>
               <span v-if="goods.orderStatus==3">已经发货</span>
               <span v-if="goods.orderStatus==4">交易完成</span>
-              <span v-if="goods.orderStatus==5">交易失败</span>
+              <span v-if="goods.orderStatus==5">正退款中</span>
+              <span v-if="goods.orderStatus==6">交易失败</span>
             </p>
             <p><a href="#">订单详情</a></p>
             <p><span v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3 || goods.orderStatus==4">
@@ -187,11 +188,28 @@
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除'
+            message: '已取消删除！'
           });
         });
       },
-      isRefund () {}
+      isRefund () {
+        this.$confirm('此操作将进行退款，是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '退款申请已发出，请等待...',
+          });
+          this.$emit('delete', this.index)
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消退款！'
+          });
+        });
+      }
     }
   }
 </script>

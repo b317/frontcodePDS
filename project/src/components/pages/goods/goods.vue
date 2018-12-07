@@ -123,7 +123,26 @@
                 </div>
               </template>
             </el-tab-pane>
-            <el-tab-pane label="退款" name="6">
+            <el-tab-pane label="正退款" name="6">
+              <template slot-scope="scope">
+                <goods-table-header></goods-table-header>
+                <div class="goods-item-list">
+                  <goods-item
+                    v-for="(item,index) of goodslist"
+                    :key="index"
+                    :goods="item"
+                    :index="index"
+                    v-if="isdata"
+                    ref="goods"
+                    @delete="handleDelete"
+                  ></goods-item>
+                  <div class="goods-nodate" v-if="!isdata">
+                    <div class="g-nodate">没有数据</div>
+                  </div>
+                </div>
+              </template>
+            </el-tab-pane>
+            <el-tab-pane label="已退款" name="7">
               <template slot-scope="scope">
                 <goods-table-header></goods-table-header>
                 <div class="goods-item-list">
@@ -165,7 +184,7 @@
     height: 35px;
     position: absolute;
     top: 5px;
-    right: 5px;
+    right: -37px;
     z-index: 1;
   }
 
@@ -327,6 +346,21 @@
             number: "1",
             freight: "6.00",
             orderStatus: 5,
+          },
+          {
+            orderTime: "2018-12-3",
+            orderNumber: "266477474728649150",
+            shopIcon: "g1s.png",
+            shopName: "好来红东方商店",
+            img: "g1.jpg",
+            content: "Yoobao羽博充电宝女迷你便携小巧10000毫安可爱大容量少女女款" +
+            "通用手机飞机可带上卡通生型1万冲超萌移动电源",
+            color: "【幸运】定制版薄荷绿",
+            originalPrice: "79.00",
+            price: "39.00",
+            number: "1",
+            freight: "6.00",
+            orderStatus: 6,
           },
         ]  // 数据集
       }
