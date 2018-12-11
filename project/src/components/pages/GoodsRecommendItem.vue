@@ -3,8 +3,8 @@
       <div class="goods-div">
         <ul style="margin: 0;padding: 0;">
           <li class="goods-item">
-            <div class="icon">
-              <img :src="'../../../static/' + pickgoods.icon" alt="" width="231" height="205">
+            <div class="icon" @click="showDetail">
+              <img :src="pickgoods.icon" alt="" width="231" height="205">
             </div>
             <div class="content">
               <div class="goods-title">
@@ -13,18 +13,18 @@
               </div>
               <div class="goods-like">
                 <el-rate
-                  v-model="pickgoods.count"
+                  class="rate"
+                  v-model="pickgoods.rate"
                   disabled
                   show-score
                   text-color="#ff9900"
-                  score-template="{value}"
-                  class="count">
-                </el-rate>
+                  score-template="{value}">
+              </el-rate>
               </div>
               <div class="goods-price">
                 <span class="price">￥<span style="color: red;font-size: 18px;font-weight: bolder;">{{pickgoods.price}}</span></span>
+                <span class="price" style="margin-left: 10px;">￥<del><span style="color: #666;font-size: 12px;">{{pickgoods.originalPrice}}</span></del></span>
                 <div class="sell">
-                  {{sell}}
                   <div class="tip" v-show="pickgoods.tipshow[0]">
                     拼团打折
                   </div>
@@ -86,7 +86,7 @@
     color: red;
     text-decoration: underline;
   }
-  .goods-like .count{
+  .goods-like .rate{
     margin: 2px 0px 3px 0px;
   }
   .goods-price{font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";}
@@ -115,7 +115,21 @@
       props: ["pickgoods","index"],
       data() {
         return {
-          msg: 'hello world'
+          msg: 'hello world',
+        }
+      },
+      methods:{
+        showDetail () {
+          this.$router.push("/ProductDetail")
+          console.log("花名："+ this.pickgoods.name)
+//          this.$router.push({
+//            name:'ProductDetail',
+//            params:{
+//              src: this.pickgoods.icon,
+//              title: this.pickgoods.name,
+//              price: this.pickgoods.price
+//            }
+//          })
         }
       }
     }

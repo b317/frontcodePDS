@@ -12,12 +12,9 @@
           <span class="field-select-mod">
             <span class="transaction-status">交易状态</span>
             <span class="rc-select-icon">
-              <i class="el-icon-caret-bottom"></i>
+              <i class="icon-arrow el-icon-caret-bottom"></i>
             </span>
           </span>
-          <!--<select v-model="selected">-->
-            <!--<option v-for="item in optList">{{ item }}</option>-->
-          <!--</select>-->
         </th>
         <th style="width: 75px;">交易操作</th>
       </tr>
@@ -39,6 +36,15 @@
     color: #3c3c3c;
     font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
     /*border: 1px solid red;*/
+  }
+  .rc-select-icon .icon-arrow{
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+  }
+  .field-select-mod:hover .icon-arrow{
+    -webkit-transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
   }
 </style>
 <script>

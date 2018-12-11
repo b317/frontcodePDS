@@ -1,41 +1,43 @@
 <template>
-    <div>
-      <!--<div class="goods-shop-hd">-->
-        <!--<div class="layout grid-m J_TLayout">-->
-          <!--<div class="hd-head rela" style="height:120px;display: inline-block;">-->
-            <!--<div class="hd-name" style="height:80px;text-align:left;padding:20px 16px;">-->
-              <!--<span class="h1" style="line-height:80px;font-size:40px;font-family:宋体;">馨语给您一个温馨的家</span>-->
-              <!--<span class="h2" style="padding-top:16px;line-height:64px;font-size:16px;font-family:宋体;">绿色家居生活</span>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="shopExtra" style="height: 120px;display: inline-block;">-->
-            <!--<div class="slogo" style="">-->
-              <!--<span><strong>馨语富尚专卖店</strong></span>-->
-              <!--<div class="slogo-extraicon"></div>-->
-            <!--</div>-->
-            <!--<div class="other-info" style="margin-top: 15px;">-->
-              <!--<span class="info-item">-->
-                <!--<span class="title">信 誉:</span>-->
-                <!--<a class="r-rank-icon" href="#">-->
-                  <!--<img src="../../../static/icon-16-16.gif">-->
-                <!--</a>-->
-              <!--</span>-->
-              <!--<span class="info-item cs-rank-icon" style="margin-left: 25px;">-->
-                <!--<span class="title">客 服:</span>-->
-                <!--<a class="ww-inline ww-online" href="#"-->
-                   <!--title="点此可以直接和卖家交流选好的宝贝，或相互交流网购体验，还支持语音视频噢。">-->
-                  <!--<span>客服在线</span>-->
-                <!--</a>-->
-              <!--</span>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+    <div class="shop-content">
+      <div class="goods-shop-hd" id="hd">
+        <div class="layout grid-m J_TLayout">
+          <div class="col-main">
+            <div class="hd-head rela" style="height:120px;display: inline-block;">
+              <div class="hd-name" style="height:80px;text-align:left;padding:20px 16px;">
+                <span class="h1" style="line-height:80px;font-size:40px;font-family:宋体;">馨语给您一个温馨的家</span>
+                <span class="h2" style="padding-top:16px;line-height:64px;font-size:16px;font-family:宋体;">绿色家居生活</span>
+              </div>
+            </div>
+            <div class="shopExtra" style="height: 120px;display: inline-block;">
+              <div class="slogo" style="">
+                <span><strong>馨语富尚专卖店</strong></span>
+                <div class="slogo-extraicon"></div>
+              </div>
+              <div class="other-info" style="margin-top: 15px;">
+                <span class="info-item">
+                  <span class="title">信 誉:</span>
+                  <a class="r-rank-icon" href="#">
+                    <img src="../../../static/icon-16-16.gif">
+                  </a>
+                </span>
+                <span class="info-item cs-rank-icon" style="margin-left: 25px;">
+                  <span class="title">客 服:</span>
+                  <a class="ww-inline ww-online" href="#"
+                   title="点此可以直接和卖家交流选好的宝贝，或相互交流网购体验，还支持语音视频噢。">
+                    <span>客服在线</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="goods-detail-panel">
         <div class="leftView">
           <div class="imgView">
             <div class="goods-img">
-              <img class="small" src="../../../static/goods/item_pic.jpg">
+              <img class="small" :src="this.$route.params.src">
             </div>
             <p class="tm-action">
               <span id="J_EditItem" style="float: right;padding-right: 40px;"><a href=""><i class="el-icon-phone-outline"></i>举报</a></span>
@@ -45,13 +47,13 @@
           </div>
           <div class="contentView">
             <div class="tb-detail-hd">
-              <h1>带盆盆栽浓香小型种根铃兰花苗盆栽阳台室内芳香花卉当年开花铃</h1>
+              <h1>{{this.$route.params.title}}</h1>
             </div>
             <div class="tm-fcs-panel">
               <p><span class="tb-metatit">价格</span>
                 <span class="tb-tm-original-price"><em class="tm-yen">¥</em> <del><span class="tm-original-price">18.80-37.80</span></del></span></p>
               <p><span class="tb-metatit">促销价</span>
-                <span class="tb-tm-price"><em class="tm-yen">¥ </em><span class="tm-price">16.42-33.00</span></span></p>
+                <span class="tb-tm-price"><em class="tm-yen">¥ </em><span class="tm-price">{{this.$route.params.price}}-33.00</span></span></p>
             </div>
             <div class="tm-delivery-panel">
               <span class="tb-metatit">配送</span>
@@ -112,6 +114,120 @@
       </div>
     </div>
 </template>
+<script>
+    import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
+    import RecommendItem from "./RecommendItem.vue";
+    import GoodsRecommendItem from "./GoodsRecommendItem.vue";
+
+    export default {
+      components: {ElButton, RecommendItem,GoodsRecommendItem},
+      data() {
+        return {
+          msg: 'hello world',
+          num8: 1,
+          isShow:true,  // 是否有数据
+          datelist: [
+            {
+              icon: "../../../static/goods/430x430q90.jpg",
+              name: "茉莉花盆栽",
+              rate: 1.7,
+              price: "22.00",
+              originalPrice: "27.00",
+              tipshow:[1,0,1]
+            },
+            {
+              icon: "../../../static/goods/400x400q90.jpg",
+              name: "金娃娃萱草",
+              rate: 2.7,
+              price: "21.00",
+              originalPrice: "24.00",
+              tipshow:[1,0,0]
+            },
+            {
+              icon: "../../../static/goods/400x400q91.jpg",
+              name: "转子莲艾丽塔",
+              rate: 3.7,
+              price: "23.00",
+              originalPrice: "29.00",
+              tipshow:[1,1,1]
+            },
+            {
+              icon: "../../../static/goods/400x400q92.jpg",
+              name: "紫丁香花---花语代表初恋",
+              rate: 4.3,
+              price: "25.00",
+              originalPrice: "30.00",
+              tipshow:[0,0,1]
+            },
+            {
+              icon: "../../../static/goods/400x400q93.jpg",
+              name: "古典玫瑰紫袍",
+              rate: 4.7,
+              price: "24.00",
+              originalPrice: "27.00",
+              tipshow:[1,1,0]
+            },
+            {
+              icon: "../../../static/goods/400x400q90.jpg",
+              name: "金娃娃萱草",
+              rate: 4.3,
+              price: "21.00",
+              originalPrice: "25.00",
+              tipshow:[0,1,1]
+            },
+            {
+              icon: "../../../static/goods/400x400q91.jpg",
+              name: "转子莲艾丽塔",
+              rate: 4.3,
+              price: "23.00",
+              originalPrice: "27.00",
+              tipshow:[1,0,1]
+            },
+            {
+              icon: "../../../static/goods/400x400q92.jpg",
+              name: "初恋紫丁香花",
+              rate: 4.3,
+              price: "25.00",
+              originalPrice: "27.00",
+              tipshow:[1,0,1]
+            },
+            {
+              icon: "../../../static/goods/400x400q93.jpg",
+              name: "古典玫瑰紫袍",
+              rate: 4.3,
+              price: "24.00",
+              originalPrice: "27.00",
+              tipshow:[1,0,1]
+            },
+            {
+              icon: "../../../static/goods/400x400q90.jpg",
+              name: "金娃娃萱草",
+              rate: 4.3,
+              price: "21.00",
+              originalPrice: "27.00",
+              tipshow:[1,0,1]
+            },
+            {
+              icon: "../../../static/goods/400x400q91.jpg",
+              name: "转子莲艾丽塔",
+              rate: 4.3,
+              price: "23.00",
+              originalPrice: "27.00",
+              tipshow:[1,0,1]
+            },
+          ], // 数据集
+        }
+      },
+      mounted(){
+        if(this.datelist.length==0){
+          this.isShow=false;
+        }else{
+          this.isShow=true;
+        }
+      }
+    }
+</script>
+
 <style scoped>
   ul li {
     list-style: none;
@@ -171,9 +287,61 @@
     color: #fff;
     cursor: pointer;
   }
+  /*商铺页头*/
+  .shop-content #hd{
+    width: 100%;
+    height: 150px;
+    background-image: url(../../../static/yt_01.jpg);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    margin-bottom: 0;
+    background-color: #FFF;
+    position: absolute;
+    top: 140px;
+    left: 0;
+    z-index: 1;
+    border-top: 1px dotted #f40;
+  }
+  .shop-content .layout{
+    width: 990px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .shop-content .layout .hd-name .h1{
+    font: 40px/80px "微软雅黑";
+    color: #20A77F;
+  }
+  .shop-content .layout .hd-name .h2{
+    padding-left: 5px;
+    font: 18px/34px "微软雅黑",arial;
+    color: #858585;
+  }
+  .shopExtra{
+    margin-top: 35px;
+    float: right;
+  }
+  .shopExtra .other-info .cs-rank-icon .ww-online{
+    background-position: 0 0;
+  }
+  .shopExtra .other-info .cs-rank-icon a{
+    width: 67px;
+    height: 20px;
+    text-decoration: none !important;
+    background-image: url("../../../static/cs-130-60.gif");
+  }
+  .shopExtra .other-info .cs-rank-icon span{
+    line-height: 20px;
+  }
+  .shopExtra .other-info .cs-rank-icon a span{
+    display: none;
+  }
+  .shopExtra .other-info .cs-rank-icon .ww-inline{
+    display: inline-block;
+    vertical-align: text-bottom;
+  }
   /*修饰*/
   .goods-detail-panel{
-    margin-top: 15px;
+    margin-top: 165px;
     width: 1077px;
     height: 474px;
     position: relative;
@@ -286,7 +454,8 @@
   }
   .goods-recommend-panel{
     /*border: 1px solid red;*/
-    min-height: 1044px;
+    min-height: 1054px;
+    width: 1066px;
     margin-top: 15px;
     position: relative;
     margin-bottom: 15px;
@@ -296,33 +465,6 @@
     overflow: hidden;
     margin-left: 13px;
     margin-top: 12px;
-  }
-  /*商铺页头*/
-  .goods-shop-hd{
-    /*border: 1px solid red;*/
-    height: 120px;
-    background-image: url("../../../static/yt_01.jpg");
-    background-repeat: no-repeat;
-    background-position: 0 0;
-  }
-  .shopExtra .other-info .cs-rank-icon .ww-online{
-    background-position: 0 0;
-  }
-  .shopExtra .other-info .cs-rank-icon a{
-    width: 67px;
-    height: 20px;
-    text-decoration: none !important;
-    background-image: url("../../../static/cs-130-60.gif");
-  }
-  .shopExtra .other-info .cs-rank-icon span{
-    line-height: 20px;
-  }
-  .shopExtra .other-info .cs-rank-icon a span{
-    display: none;
-  }
-  .shopExtra .other-info .cs-rank-icon .ww-inline{
-    display: inline-block;
-    vertical-align: text-bottom;
   }
   /*没有数据*/
   .goods-nodate {
@@ -334,105 +476,3 @@
     color: #ff4b33;
   }
 </style>
-<script>
-    import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
-    import RecommendItem from "./RecommendItem.vue";
-    import GoodsRecommendItem from "./GoodsRecommendItem.vue";
-
-    export default {
-      components: {ElButton, RecommendItem,GoodsRecommendItem},
-      data() {
-        return {
-          msg: 'hello world',
-          num8: 1,
-          isShow:true,  // 是否有数据
-          datelist: [
-            {
-              icon: "430x430q90.jpg",
-              name: "茉莉花盆栽",
-              count: "2.3",
-              price: "22.00",
-              tipshow:[1,0,1]
-            },
-            {
-              icon: "400x400q90.jpg",
-              name: "金娃娃萱草",
-              count: "3.7",
-              price: "21.00",
-              tipshow:[1,0,0]
-            },
-            {
-              icon: "400x400q91.jpg",
-              name: "转子莲艾丽塔",
-              count: "4.3",
-              price: "23.00",
-              tipshow:[1,1,1]
-            },
-            {
-              icon: "400x400q92.jpg",
-              name: "紫丁香花---花语代表初恋",
-              count: "4.3",
-              price: "25.00",
-              tipshow:[0,0,1]
-            },
-            {
-              icon: "400x400q93.jpg",
-              name: "古典玫瑰紫袍",
-              count: "4.3",
-              price: "24.00",
-              tipshow:[1,1,0]
-            },
-            {
-              icon: "400x400q90.jpg",
-              name: "金娃娃萱草",
-              count: "4.3",
-              price: "21.00",
-              tipshow:[0,1,1]
-            },
-            {
-              icon: "400x400q91.jpg",
-              name: "转子莲艾丽塔",
-              count: "4.3",
-              price: "23.00",
-              tipshow:[1,0,1]
-            },
-            {
-              icon: "400x400q92.jpg",
-              name: "初恋紫丁香花",
-              count: "4.3",
-              price: "25.00",
-              tipshow:[1,0,1]
-            },
-            {
-              icon: "400x400q93.jpg",
-              name: "古典玫瑰紫袍",
-              count: "4.3",
-              price: "24.00",
-              tipshow:[1,0,1]
-            },
-            {
-              icon: "400x400q90.jpg",
-              name: "金娃娃萱草",
-              count: "4.3",
-              price: "21.00",
-              tipshow:[1,0,1]
-            },
-            {
-              icon: "400x400q91.jpg",
-              name: "转子莲艾丽塔",
-              count: "4.3",
-              price: "23.00",
-              tipshow:[1,0,1]
-            },
-          ], // 数据集
-        }
-      },
-      mounted(){
-        if(this.datelist.length==0){
-          this.isShow=false;
-        }else{
-          this.isShow=true;
-        }
-      }
-    }
-</script>
