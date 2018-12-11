@@ -5,7 +5,7 @@
             <div class="name">{{showname}}</div>
             <div class="wrap">
                 <div class="tip">消息</div>
-                <div class="tip">订单</div>
+                <div class="tip" @click="showGoods">订单</div>
                 <div class="tip">红包</div>
             </div>
       </div>
@@ -38,14 +38,19 @@ export default {
             show:false
         }
     },
-    computed:{
-        ...mapGetters({
-            username:'user/username'
-        }),
-        showname(){
-            return this.username?this.username:"请登录"
-        }
+    computed: {
+      ...mapGetters({
+        username: 'user/username'
+      }),
+      showname() {
+        return this.username ? this.username : "请登录"
+      }
+    },
+  methods: {
+    showGoods() {
+      this.$router.push("/goods")
     }
+  }
 }
 </script>
 

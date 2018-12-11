@@ -11,7 +11,9 @@
         <th style="width: 94px;">
           <span class="field-select-mod">
             <span class="transaction-status">交易状态</span>
-            <span class="rc-select-icon"><i class="el-icon-caret-bottom"></i></span>
+            <span class="rc-select-icon">
+              <i class="icon-arrow el-icon-caret-bottom"></i>
+            </span>
           </span>
         </th>
         <th style="width: 75px;">交易操作</th>
@@ -35,12 +37,23 @@
     font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
     /*border: 1px solid red;*/
   }
+  .rc-select-icon .icon-arrow{
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+  }
+  .field-select-mod:hover .icon-arrow{
+    -webkit-transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
+  }
 </style>
 <script>
     export default {
         data() {
             return {
-                msg: 'hello world'
+//              selected: '',
+//              optList: ['交易状态','已经付款', '等待发货', '已经发货', '交易完成', '交易失败']，
+              msg: 'hello world'
             }
         }
     }

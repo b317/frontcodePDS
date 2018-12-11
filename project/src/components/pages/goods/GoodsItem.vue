@@ -13,8 +13,8 @@
         <td colspan="2" style="width: 131px;">
           <div>
             <span style="">
-              <img :src="'./static/goods/' + goods.shopIcon" alt=""
-                   style="width: 16px;height: 16px;margin-left: 12px;margin-right: 3px;vertical-align: middle;"/>
+              <img :src="goods.shopIcon" alt=""
+                   style="width: 16px;height: 16px;margin-left: 12px;margin-right: 3px;vertical-align: middle;border-radius: 25px;"/>
               <a class="g-shop-name" href="#" :title="goods.shopName">{{goods.shopName}}</a>
             </span>
           </div>
@@ -25,7 +25,7 @@
       <tr class="g-tr-center">
         <td style="width: 330px;border-right: none;">
           <div class="g-img-a">
-            <div><a href="#"><img :src="'./static/goods/' + goods.img" alt=""/></a></div>
+            <div><a href="#"><img :src="goods.img" alt="" style="width: 80px;height: 80px;"/></a></div>
           </div>
           <div class="g-cont-a">
             <p>
@@ -33,7 +33,7 @@
                   {{goods.content}}</span></a>
               <a href="#" rel="noopener noreferrer"> [交易快照] </a>
             </p>
-            <p style="color: #9e9e9e"><span><span>颜色分类</span><span>：</span><span>{{goods.color}}</span></span></p>
+            <!--<p style="color: #9e9e9e"><span><span>颜色分类</span><span>：</span><span>{{goods.color}}</span></span></p>-->
           </div>
         </td>
         <td style="width: 87px;border: none;">
@@ -71,9 +71,10 @@
               <span v-if="goods.orderStatus==2">等待发货</span>
               <span v-if="goods.orderStatus==3">已经发货</span>
               <span v-if="goods.orderStatus==4">交易完成</span>
-              <span v-if="goods.orderStatus==5">交易失败</span>
+              <span v-if="goods.orderStatus==5">正退款中</span>
+              <span v-if="goods.orderStatus==6">交易失败</span>
             </p>
-            <p><a href="#">订单详情</a></p>
+            <p><span @click="showGoodsDetail" style="cursor: pointer;">订单详情</span></p>
             <p><span v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3 || goods.orderStatus==4">
               <a href="#">查看物流</a></span>
             </p>
@@ -172,6 +173,25 @@
       }
     },
     methods: {
+      showGoodsDetail (){
+        console.log("店名："+this.goods.shopName)
+        this.$router.push({
+          name: "GoodsDetail",
+          params: {
+            orderTime: this.goods.orderTime,
+            orderNumber: this.goods.orderNumber,
+            shopIcon: this.goods.shopIcon,
+            shopName: this.goods.shopName,
+            goodsImg: this.goods.img,
+            goodsContent: this.goods.content,
+            originalPrice: this.goods.originalPrice,
+            price: this.goods.price,
+            number: this.goods.number,
+            freight :this.goods.freight,
+            orderStatus: this.goods.orderStatus
+          }
+        })
+      },
       isDelete () {
 //        alert(this.index)
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -187,11 +207,28 @@
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除'
+            message: '已取消删除！'
           });
         });
       },
-      isRefund () {}
+      isRefund () {
+        this.$confirm('此操作将进行退款，是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '退款申请已发出，请等待...',
+          });
+          this.$emit('delete', this.index)
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消退款！'
+          });
+        });
+      }
     }
   }
 </script>

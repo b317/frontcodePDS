@@ -1,25 +1,31 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/pages/HelloWorld'
-import home from '@/components/pages/home/home'
-import news from '@/components/pages/news'
-import login from '@/components/pages/login'
-import register from '@/components/pages/register'
-import Order from '@/components/pages/order/Order'
-import Coupon from '@/components/pages/coupon/Coupon'
-import goods from '@/components/pages/goods/goods'
-import GoodsItem from '@/components/pages/goods/GoodsItem'
-import users from '@/components/pages/users/users'
-import setAddress from '@/components/pages/users/setAddress'
-import setPass from '@/components/pages/users/setPass'
-import setUserInfo from '@/components/pages/users/setUserInfo'
-import userInfo from '@/components/pages/users/userInfo'
+import Vue from 'vue';
+import Router from 'vue-router';
+import HelloWorld from '@/components/pages/HelloWorld';
+import home from '@/components/pages/home/home';
+import news from '@/components/pages/news';
+import login from '@/components/pages/login';
+import register from '@/components/pages/register';
+import Order from '@/components/pages/order/Order';
+import Coupon from '@/components/pages/coupon/Coupon';
+import goods from '@/components/pages/goods/goods';
+import GoodsItem from '@/components/pages/goods/GoodsItem';
+import GoodsRecommendItem from '@/components/pages/GoodsRecommendItem';
+import users from '@/components/pages/users/users';
+import setAddress from '@/components/pages/users/setAddress';
+import setPass from '@/components/pages/users/setPass';
+import setUserInfo from '@/components/pages/users/setUserInfo';
+import userInfo from '@/components/pages/users/userInfo';
 
-import NewsOne from '@/components/pages/NewsOne'
-import NewsTwo from '@/components/pages/NewsTwo'
-import NewsThree from '@/components/pages/NewsThree'
+import NewsOne from '@/components/pages/NewsOne';
+import NewsTwo from '@/components/pages/NewsTwo';
+import NewsThree from '@/components/pages/NewsThree';
+
+import ProductDetail from '@/components/pages/ProductDetail';
+import GoodsDetail from '@/components/pages/GoodsDetail';
 
 import {getName} from "@/util/auth";
+
+import smallcard from "@/components/pages/home/smallcard";
 
 Vue.use(Router)
 
@@ -40,6 +46,21 @@ const route = new Router({
       path: '/GoodsItem',
       name: 'GoodsItem',
       component: GoodsItem
+    },
+    {
+      path: '/GoodsRecommendItem',
+      name: 'GoodsRecommendItem',
+      compontent: GoodsRecommendItem
+    },
+    {
+      path: '/ProductDetail',
+      name : 'ProductDetail',
+      component: ProductDetail
+    },
+    {
+      path: '/GoodsDetail',
+      name : 'GoodsDetail',
+      component: GoodsDetail
     },
     {
       path: '/home',

@@ -52,8 +52,8 @@ export default {
     // })
   },
   computed:{
-    checkPhone(){ 
-        return (/^1[34578]\d{9}$/.test(this.phone)); 
+    checkPhone(){
+        return (/^1[34578]\d{9}$/.test(this.phone));
     }
   },
   methods:{

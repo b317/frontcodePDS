@@ -10,10 +10,11 @@
         score-template="{value}"
         class="rate">
         </el-rate>
-        <div class="msg">
+        <div class="msg" >
             {{msg}}
+            <!--<router-link href="javascript:void(0)" to="/ProductDetail">{{msg}}</router-link>-->
             <img src="../../../../static/hotSell.jpg" v-show="sellhot">
-            <div class="warn" v-show="show"  @mouseover="show = true">点击前往拼团</div>
+            <div class="warn" v-show="show"  @mouseover="show = true" @click="showProductDetail">点击前往拼团</div>
         </div>
         <div class="sell">
                 {{sell}}
@@ -32,14 +33,28 @@
 </template>
 
 <script>
-export default {
-    props:["src","msg","rate","sell","tipshow","sellhot"],
-    data () {
-        return {
-            show:false,
-        }
+  export default {
+    props: ["src", "msg", "rate", "sell", "tipshow", "sellhot"],
+    data() {
+      return {
+        show: false,
+      }
+    },
+    methods: {
+      showProductDetail() {
+//        this.$router.push("/ProductDetail")
+        console.log(this.src)
+        this.$router.push({
+          name:'ProductDetail',
+          params:{
+            src:this.src,
+            title:this.msg,
+            price:this.sell
+          }
+        })
+      }
     }
-}
+  }
 </script>
 
 <style scoped lang="scss">
