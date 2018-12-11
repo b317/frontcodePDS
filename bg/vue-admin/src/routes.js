@@ -1,14 +1,12 @@
 import Login from './views/Login.vue'
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
-import Main from './views/Main.vue'
-import Table from './views/nav1/Table.vue'
-import Form from './views/nav1/Form.vue'
-import user from './views/nav1/user.vue'
-import Page4 from './views/nav2/Page4.vue'
-import Page5 from './views/nav2/Page5.vue'
-import Page6 from './views/nav3/Page6.vue'
-import echarts from './views/charts/echarts.vue'
+
+import goodsTable from './views/goods/goodsTable.vue'
+import userTable from './views/user/userTable.vue'
+import setBanner from './views/banner/setBanner.vue'
+import power from './views/power/power.vue'
+import admin from './views/admin/admin.vue'
 
 let routes = [
     {
@@ -27,42 +25,42 @@ let routes = [
     {
         path: '/',
         component: Home,
-        name: '导航一',
-        iconCls: 'el-icon-message',//图标样式class
+        name: '',
+        leaf: true,//只有一个节点
         children: [
-            { path: '/main', component: Main, name: '主页', hidden: true },
-            { path: '/table', component: Table, name: 'Table' },
-            { path: '/form', component: Form, name: 'Form' },
-            { path: '/user', component: user, name: '列表' },
+            { path: '/goodsTable', component: goodsTable, name: '商品分类' },
         ]
-    },
-    {
-        path: '/',
-        component: Home,
-        name: '导航二',
-        iconCls: 'fa fa-id-card-o',
-        children: [
-            { path: '/page4', component: Page4, name: '页面4' },
-            { path: '/page5', component: Page5, name: '页面5' }
-        ]
-    },
-    {
+    },{
         path: '/',
         component: Home,
         name: '',
-        iconCls: 'fa fa-address-card',
         leaf: true,//只有一个节点
         children: [
-            { path: '/page6', component: Page6, name: '导航三' }
+            { path: '/userTable', component: userTable, name: '用户管理' }
         ]
-    },
-    {
+    },{
         path: '/',
         component: Home,
-        name: 'Charts',
-        iconCls: 'fa fa-bar-chart',
+        name: '',
+        leaf: true,//只有一个节点
         children: [
-            { path: '/echarts', component: echarts, name: 'echarts' }
+            { path: '/power', component: power, name: '权限设置' }
+        ]
+    },{
+        path: '/',
+        component: Home,
+        name: '',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/setBanner', component: setBanner, name: '广告管理' }
+        ]
+    },{
+        path: '/',
+        component: Home,
+        name: '',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/admin', component: admin, name: '管理员管理' }
         ]
     },
     {

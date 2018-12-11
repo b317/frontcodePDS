@@ -10,13 +10,14 @@
     <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
-      <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
+      <!-- <el-button @click.native.prevent="handleReset2">重置</el-button> -->
     </el-form-item>
   </el-form>
 </template>
 
 <script>
-  import { requestLogin } from '../api/api';
+  import { Login,register } from '../api/api';
+  import { setCookie } from '../common/auth';
   //import NProgress from 'nprogress'
   export default {
     data() {
@@ -28,7 +29,7 @@
         },
         rules2: {
           account: [
-            { required: true, message: '请输入账号', trigger: 'blur' },
+            { required: true, message: '请输入账号', trigger: 'fade' },
             //{ validator: validaePass }
           ],
           checkPass: [
@@ -44,27 +45,24 @@
         this.$refs.ruleForm2.resetFields();
       },
       handleSubmit2(ev) {
+       
         var _this = this;
         this.$refs.ruleForm2.validate((valid) => {
           if (valid) {
-            //_this.$router.replace('/table');
             this.logining = true;
-            //NProgress.start();
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            requestLogin(loginParams).then(data => {
-              this.logining = false;
-              //NProgress.done();
-              let { msg, code, user } = data;
-              if (code !== 200) {
+            Login(loginParams).then(res => {
+              if(res.data.code == 0){
+                sessionStorage.setItem('user', JSON.stringify(res.data.data));
+                setCookie("token",res.data.data.token)
+                this.$router.push({ path: '/goodsTable' });
+              }else{
                 this.$message({
-                  message: msg,
+                  message: res.data.message,
                   type: 'error'
                 });
-              } else {
-                sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/table' });
               }
-            });
+            })
           } else {
             console.log('error submit!!');
             return false;

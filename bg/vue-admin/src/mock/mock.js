@@ -1,8 +1,87 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { LoginUsers, Users } from './data/user';
+import { LoginUsers, Users,shop } from './data/user';
 let _Users = Users;
-
+let _shop = shop;
+let data =  {
+  "code": 0,
+  "message": "OK",
+  "data": {
+      "totalCount": 24,
+      "adminList": [
+          {
+              "id": 2,
+              "username": "jianlinker",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:49:48",
+              "updatedAt": "2018-12-07 10:49:48"
+          },
+          {
+              "id": 1,
+              "username": "janet",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:32:37",
+              "updatedAt": "2018-12-07 11:14:24"
+          },
+          {
+              "id": 1,
+              "username": "janet",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:32:37",
+              "updatedAt": "2018-12-07 11:14:24"
+          },
+          {
+              "id": 1,
+              "username": "janet",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:32:37",
+              "updatedAt": "2018-12-07 11:14:24"
+          },
+          {
+              "id": 1,
+              "username": "janet",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:32:37",
+              "updatedAt": "2018-12-07 11:14:24"
+          },
+          {
+              "id": 1,
+              "username": "janet",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:32:37",
+              "updatedAt": "2018-12-07 11:14:24"
+          },
+          {
+              "id": 1,
+              "username": "janet",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:32:37",
+              "updatedAt": "2018-12-07 11:14:24"
+          },
+          {
+              "id": 1,
+              "username": "janet",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:32:37",
+              "updatedAt": "2018-12-07 11:14:24"
+          },
+          {
+              "id": 1,
+              "username": "janet",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:32:37",
+              "updatedAt": "2018-12-07 11:14:24"
+          },
+          {
+              "id": 1,
+              "username": "janet",
+              "role_id": 3,
+              "createdAt": "2018-12-07 10:32:37",
+              "updatedAt": "2018-12-07 11:14:24"
+          }
+      ]
+  }
+};
 export default {
   /**
    * mock bootstrap
@@ -19,7 +98,14 @@ export default {
     mock.onGet('/error').reply(500, {
       msg: 'failure'
     });
-
+    //登录
+  mock.onPost('/v1/global/adminlogin').reply(config => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve([200,{    "code": 0,    "message": "OK",    "data": {        "id": 1,        "username": "janet",        "role_id": 3,        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NDQxNTA2ODksImlkIjoxLCJuYmYiOjE1NDQxNTA2ODksInJvbGVpZCI6MywidXNlcm5hbWUiOiJqYW5ldCJ9.XRWbePq40---ANHdOgWO8NiZNQAgLPeN0ogTO5fsEMk"    }}]);
+      }, 1000);
+    });
+  });
     //登录
     mock.onPost('/login').reply(config => {
       let {username, password} = JSON.parse(config.data);
@@ -42,10 +128,38 @@ export default {
         }, 1000);
       });
     });
-
+    //获取用户列表（分页）
+    mock.onGet('/shop/listpage').reply(config => {
+      console.log(config)
+      let {page, name} = config.params;
+      let mockShop = _shop.filter(user => {
+        if (name && user.name.indexOf(name) == -1) return false;
+        return true;
+      });
+      let total = mockShop.length;
+      mockShop = mockShop.filter((u, index) => index < 20 * page && index >= 20 * (page - 1));
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200, {
+            total: total,
+            shop: mockShop
+          }]);
+        }, 1000);
+      });
+    });
+    //获取用户列表（分页）
+    mock.onGet('/v1/admin/?offset=1&limit=10').reply(config => {
+      console.log(config)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve([200,data]);
+        }, 1000);
+      });
+    });
     //获取用户列表
     mock.onGet('/user/list').reply(config => {
       let {name} = config.params;
+      Console.log(config)
       let mockUsers = _Users.filter(user => {
         if (name && user.name.indexOf(name) == -1) return false;
         return true;

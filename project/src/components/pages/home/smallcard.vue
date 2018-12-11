@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <img :src=src @mouseover="show = true" @mouseout="show = false">
+    <img :src=src @mouseover="show = true" class="img" :class="{hover:show}" @mouseout="show = false">
     <div class="wrap">
         <el-rate
         v-model="rate"
@@ -36,7 +36,7 @@ export default {
     props:["src","msg","rate","sell","tipshow","sellhot"],
     data () {
         return {
-            show:false
+            show:false,
         }
     }
 }
@@ -95,12 +95,12 @@ export default {
             }
         }
     }
-    img{
+    .img{
         width: 100%;
         height: 200px;
         cursor: pointer;
     }
-    img:hover{
+    .hover{
         filter: blur(3px);
     }
 }

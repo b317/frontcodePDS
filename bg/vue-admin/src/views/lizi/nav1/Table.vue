@@ -105,7 +105,7 @@
 </template>
 
 <script>
-	import util from '../../common/js/util'
+	import util from '../../../common/js/util'
 	//import NProgress from 'nprogress'
 	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
 
@@ -204,6 +204,7 @@
 			//显示编辑界面
 			handleEdit: function (index, row) {
 				this.editFormVisible = true;
+				console.log(sessionStorage)
 				this.editForm = Object.assign({}, row);
 			},
 			//显示新增界面

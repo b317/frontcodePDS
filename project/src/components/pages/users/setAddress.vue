@@ -78,11 +78,11 @@ export default {
       }else{
         this.msg3 = ""
       }
-      let l = new FormData() 
-      l.append("address",this.address+"/"+this.detailInfo)
+      let commit = new FormData() 
+      commit.append("address",this.address+"/"+this.detailInfo)
       updateUser({
         id:getId(),
-        data:l
+        data:commit
       }).then(res => {
         if(res.code == 0){
           console.log("设置地址成功")

@@ -81,9 +81,11 @@ export default {
       }
     },
     beforeAvatarUpload(file) {
+      let commit = new FormData() 
+      commit.append("file",file)
       upload({
         id:this.id,
-        file:file
+        file:commit
       }).then(res => {
         if(res.code == 0){
           this.headPicSuccess = true
@@ -102,12 +104,12 @@ export default {
       }else{
         this.msg1 = ""
       }
+      let commit = new FormData() 
+      commit.append("nick_name",this.nickname)
+      commit.append("name",this.name)
       updateUser({
         id:getId(),
-        data:{
-          nick_name:this.nickname,
-          name:this.name
-        }
+        data:commit
       }).then(res => {
         console.log(res)
         if(res.code == 0){

@@ -52,7 +52,7 @@ export function resetPass(info){//重置密码
 }
 export function upload(info){//重置密码
     return axios.put("/v1/user/upload/"+info.id,{
-            file:info.file
+            file:info.file.file
         },
         {
             headers:{
