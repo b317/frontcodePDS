@@ -14,16 +14,16 @@
           </div>
         </el-col>
       </el-row>
-      <nav-footer></nav-footer>
     </div>
+      <nav-footer class="nav_footer"></nav-footer>
   </div>
 </template>
 
 <script>
   import "./assets/css/main.css";
   import NavHeader from '@/components/NavHeader'
-  import NavLeft from '@/components/NavLeft'
   import NavFooter from '@/components/NavFooter'
+  import NavLeft from '@/components/NavLeft'
   export default {
     name: 'App',
     components:{
@@ -58,6 +58,8 @@
     margin-right:0 !important;
   }
   .tag_left{height:549px;background: #2C3E50;}
-  .content{height:529px;overflow-y: auto;background: white;margin-top: 20px}
+  .content{height:519px;overflow-y: auto;background: white;
+    margin-top: 20px;overflow-x: hidden}
   .content::-webkit-scrollbar {display:none}
+  .nav_footer{position: absolute;width: 100%}
 </style>

@@ -134,3 +134,75 @@ i, em {
   background-position: -80px 0;
 }
 /*home结束*/
+
+/*ProductList开始*/
+.product_list{padding-right: 40px;margin-bottom: 50px}
+.bread_crumbs{border-bottom:1px solid #e5e5e5;padding-bottom: 10px}
+.bread_crumbs span{line-height: 18px;display: inline-block;
+  padding-left:20px;border-left:5px solid #28B779; }
+.product_list .el-input .el-button{
+  color: #fff !important;border-radius: 0 3px 3px 0;
+  background-color: #409eff !important;
+  border:1px solid #409eff !important;
+}
+.product_list .lists table{border:1px solid #DDD;width: 100%;border-collapse: collapse;}
+.product_list .lists table thead{
+  /*display: table-header-group;*/border-bottom: 1px solid #ddd;
+  vertical-align: middle;font-size: 13px;line-height: 40px;
+  background: #e5e5e5; font-weight: bold;;opacity: 0.7;
+}
+.product_list .lists table tbody{
+font-size:13px ;color:gray;text-align: center;
+}
+.product_list .lists table tbody tr{border-bottom: 1px solid #ddd}
+.product_list .lists table tbody td{padding: 10px 15px;}
+.product_list .lists table tbody td:nth-of-type(2){text-align: left}
+.product_list .lists table tbody .product_img{
+  display: inline-block;border: 1px solid #ddd;
+  padding: 6px;width: 60px;height: 50px;line-height: 45px;
+}
+.product_list .lists table tbody img{
+  width:100%;height:100%;vertical-align: middle}
+.product_list .lists table tbody td .title{
+  font-size: 10px;display: inline-block;
+  width: 70%;line-height: 20px;vertical-align: middle;
+}
+.product_list .lists table tbody .publish_time{font-size: 13px;opacity: 0.8;padding-bottom: 6px;}
+.product_list .lists table tbody td .title i{
+  width:100%; display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.product_list .lists table tfoot tr td{padding: 10px 0 !important;height: 22px}
+.product_list .lists table tfoot .el-pagination{
+  position: absolute;right: 0;
+  top: 5px;
+}
+/*ProductList结束*/
+
+/*ProductSort开始*/
+.product_sort{padding-right: 40px;margin-bottom: 50px; }
+.product_sort .sort_list>div{
+ display: inline-block;float: right;
+  margin: 20px 0;
+}
+.product_sort .sort_list>div .el-button{
+  border-radius: 5px;border:1px solid #409EFF;color: #409EFF;
+}
+.product_sort .sort_list>div .el-button i{font-weight: bolder;padding-right: 3px;}
+.product_sort .sort_list table{
+  width: 100%;border-collapse: collapse;
+}
+.product_sort .sort_list thead{
+  border-top:2px solid #DDD;border-bottom: 1px solid #ddd;
+  vertical-align: middle;font-size: 13px;line-height: 40px;
+  background: #fafafa; font-weight: bold;;opacity: 0.7;
+}
+.product_sort .sort_list tbody td:first-child{
+  font-weight: bold;opacity: 0.8;font-size: 14px;
+}
+.product_sort .sort_list tbody td{
+  text-align: center;border-bottom: 1px solid #ddd;color: grey;font-size: 13px;padding: 10px 0;
+}
+/*ProductSort结束*/

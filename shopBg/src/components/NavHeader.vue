@@ -73,7 +73,7 @@
           this.$router.push('/');
         }else if(key==2){
           this.$store.dispatch("checkIndexAction",key);
-          this.$router.push('/ProductManage');
+          this.$router.push('/OrderManage');
         }else{
 //          console.log(this.$route.params.index);
           this.$store.dispatch("checkIndexAction",key);

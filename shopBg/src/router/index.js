@@ -6,7 +6,8 @@ import ClientListManage from '@/views/Management/ClientListManage'
 import CouponManage from '@/views/Management/CouponManage'
 import GroupManage from '@/views/Management/GroupManage'
 import OrderManage from '@/views/Management/OrderManage'
-import ProductManage from '@/views/Management/ProductManage'
+import ProductList from '@/views/Management/ProductList'
+import ProductSort from '@/views/Management/ProductSort'
 import GroupSendMes from '@/views/MesCenter/GroupSendMes'
 import SystemMes from '@/views/MesCenter/SystemMes'
 Vue.use(Router);
@@ -39,9 +40,14 @@ export default new Router({
       component: OrderManage
     },
     {
-      path: '/ProductManage',
-      name: 'ProductManage',
-      component: ProductManage
+      path: '/ProductList',
+      name: 'ProductList',
+      component: ProductList
+    },
+    {
+      path: '/ProductSort',
+      name: 'ProductSort',
+      component: ProductSort
     },
     {
       path: '/GroupSendMes',
