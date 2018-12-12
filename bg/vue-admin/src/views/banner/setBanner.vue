@@ -10,23 +10,24 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+		<el-table :data="bannerList" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
 			<el-table-column type="index" width="60">
 			</el-table-column>
 			<el-table-column prop="id" label="系统编号" width="120" sortable>
 			</el-table-column>
-			<el-table-column prop="title" label="标题" width="100" :formatter="formatSex">
+			<el-table-column prop="title" label="标题" width="200">
 			</el-table-column>
-			<el-table-column prop="url" label="连接地址" width="100">
+			<el-table-column prop="url" label="连接地址" width="200">
 			</el-table-column>
 			<el-table-column prop="order" label="顺序" min-width="180" sortable>
 			</el-table-column>
 			<el-table-column prop="cli_num" label="点击次数" min-width="180" sortable>
 			</el-table-column>
-			<el-table-column label="操作" width="150">
+			<el-table-column label="操作" width="300">
 				<template scope="scope">
+					<el-button type="info" size="small" @click="handlecheck(scope.$index, scope.row)">查看图片</el-button>
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 				</template>
@@ -35,31 +36,30 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
-			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
+			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="10" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
-
+		<!--查看界面-->
+		<el-dialog title="图片" v-model="checkVisible" :close-on-click-modal="true">
+			<img  :src="checkimage" style="width:100%;height:100%;">
+		</el-dialog>
 		<!--编辑界面-->
 		<el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="editForm.name" auto-complete="off"></el-input>
+				<el-form-item label="系统编号" prop="id">
+					<el-input v-model="editForm.id" readonly auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="性别">
-					<el-radio-group v-model="editForm.sex">
-						<el-radio class="radio" :label="1">男</el-radio>
-						<el-radio class="radio" :label="0">女</el-radio>
-					</el-radio-group>
+				<el-form-item label="标题">
+					<el-input v-model="editForm.title" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="年龄">
-					<el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
+				<el-form-item label="连接地址">
+					<el-input v-model="editForm.url" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="editForm.birth"></el-date-picker>
+				<el-form-item label="顺序">
+					<el-input v-model="editForm.order" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="地址">
-					<el-input type="textarea" v-model="editForm.addr"></el-input>
+				<el-form-item label="图片">
+					<input type="file" ref="editfile">
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -71,23 +71,17 @@
 		<!--新增界面-->
 		<el-dialog title="新增" v-model="addFormVisible" :close-on-click-modal="false">
 			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="addForm.name" auto-complete="off"></el-input>
+				<el-form-item label="标题">
+					<el-input v-model="addForm.title" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="性别">
-					<el-radio-group v-model="addForm.sex">
-						<el-radio class="radio" :label="1">男</el-radio>
-						<el-radio class="radio" :label="0">女</el-radio>
-					</el-radio-group>
+				<el-form-item label="连接地址">
+					<el-input v-model="addForm.url" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="年龄">
-					<el-input-number v-model="addForm.age" :min="0" :max="200"></el-input-number>
+				<el-form-item label="顺序">
+					<el-input v-model="addForm.order" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="addForm.birth"></el-date-picker>
-				</el-form-item>
-				<el-form-item label="地址">
-					<el-input type="textarea" v-model="addForm.addr"></el-input>
+				<el-form-item label="图片">
+					<input type="file" ref="addfile">
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -101,7 +95,7 @@
 <script>
 	import util from '../../common/js/util'
 	//import NProgress from 'nprogress'
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
+	import { addbanner,bannerList,updatebanner,delbanner,updatebannerpic,checkbanner  } from '../../api/api';
 
 	export default {
 		data() {
@@ -109,12 +103,12 @@
 				filters: {
 					name: ''
 				},
-				users: [],
+				bannerList: [{id:123,title:"asd",}],
 				total: 0,
 				page: 1,
 				listLoading: false,
 				sels: [],//列表选中列
-
+ 				imageUrl: '',
 				editFormVisible: false,//编辑界面是否显示
 				editLoading: false,
 				editFormRules: {
@@ -124,12 +118,6 @@
 				},
 				//编辑界面数据
 				editForm: {
-					id: 0,
-					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
 				},
 
 				addFormVisible: false,//新增界面是否显示
@@ -141,20 +129,15 @@
 				},
 				//新增界面数据
 				addForm: {
-					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
-				}
-
+				},
+				addimage:"",
+				editpicid:"",
+				checkimage:"",
+				url:"http://134.175.113.58/",
+				checkVisible:false
 			}
 		},
 		methods: {
-			//性别显示转换
-			formatSex: function (row, column) {
-				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
-			},
 			handleCurrentChange(val) {
 				this.page = val;
 				this.getUsers();
@@ -162,16 +145,13 @@
 			//获取用户列表
 			getUsers() {
 				let para = {
-					page: this.page,
-					name: this.filters.name
+					offset: this.page,
 				};
 				this.listLoading = true;
-				//NProgress.start();
-				getUserListPage(para).then((res) => {
-					this.total = res.data.total;
-					this.users = res.data.users;
+				bannerList(para).then((res) => {
+					this.total = res.data.data.totalCount;
+					this.bannerList = res.data.data.bannerList;
 					this.listLoading = false;
-					//NProgress.done();
 				});
 			},
 			//删除
@@ -180,11 +160,9 @@
 					type: 'warning'
 				}).then(() => {
 					this.listLoading = true;
-					//NProgress.start();
-					let para = { id: row.id };
-					removeUser(para).then((res) => {
+					delbanner(row.id).then((res) => {
 						this.listLoading = false;
-						//NProgress.done();
+						console.log(res)
 						this.$message({
 							message: '删除成功',
 							type: 'success'
@@ -195,96 +173,84 @@
 
 				});
 			},
+			handlecheck: function(index, row){
+				this.checkVisible = true
+				checkbanner({id:row.id}).then(res => {
+					console.log(res)
+					this.checkimage = this.url+res.data.data.image
+				})
+			},
 			//显示编辑界面
 			handleEdit: function (index, row) {
 				this.editFormVisible = true;
-				console.log(sessionStorage)
+				checkbanner(row.id).then(res => {
+					this.imageUrl = res.data.image 
+				})
+				this.editpicid = row.id
 				this.editForm = Object.assign({}, row);
+			},
+			//编辑
+			editSubmit: function () {
+				this.editLoading = true;
+				let l = new FormData
+				l.append("title",this.editForm.title)
+				l.append("url",this.editForm.url)
+				l.append("order",this.editForm.order)
+				updatebanner(l,this.editForm.id).then((res) => {
+					let a = new FormData()
+					a.append("file",this.$refs.editfile.files[0])
+					return updatebannerpic(a,this.editForm.id)
+				}).then((res) => {
+					console.log(res)
+					this.editLoading = false;
+					this.$message({
+						message: '提交成功',
+						type: 'success'
+					});
+					this.editFormVisible = false;
+					this.getUsers();
+				});
 			},
 			//显示新增界面
 			handleAdd: function () {
 				this.addFormVisible = true;
 				this.addForm = {
-					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
+					title: '',
+					url: '',
+					order: '',
 				};
-			},
-			//编辑
-			editSubmit: function () {
-				this.$refs.editForm.validate((valid) => {
-					if (valid) {
-						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-							this.editLoading = true;
-							//NProgress.start();
-							let para = Object.assign({}, this.editForm);
-							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
-							editUser(para).then((res) => {
-								this.editLoading = false;
-								//NProgress.done();
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['editForm'].resetFields();
-								this.editFormVisible = false;
-								this.getUsers();
-							});
-						});
-					}
-				});
 			},
 			//新增
 			addSubmit: function () {
-				this.$refs.addForm.validate((valid) => {
-					if (valid) {
-						this.$confirm('确认提交吗？', '提示', {}).then(() => {
-							this.addLoading = true;
-							//NProgress.start();
-							let para = Object.assign({}, this.addForm);
-							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
-							addUser(para).then((res) => {
-								this.addLoading = false;
-								//NProgress.done();
-								this.$message({
-									message: '提交成功',
-									type: 'success'
-								});
-								this.$refs['addForm'].resetFields();
-								this.addFormVisible = false;
-								this.getUsers();
-							});
+				let l = new FormData
+				l.append("title",this.addForm.title)
+				l.append("url",this.addForm.url)
+				l.append("order",this.addForm.order)
+				l.append("image",this.$refs.addfile.files[0])
+				addbanner(l).then((res) => {
+					console.log(res)
+					this.addLoading = false;
+					if(res.data.code == 0){
+						this.$message({
+							message: '提交成功',
+							type: 'success'
+						});
+					}else{
+						this.$message({
+							message: '提交失败',
+							type: 'error'
 						});
 					}
+					
+					this.addFormVisible = false;
+					this.getUsers();
 				});
 			},
+			
+			
 			selsChange: function (sels) {
 				this.sels = sels;
 			},
-			//批量删除
-			batchRemove: function () {
-				var ids = this.sels.map(item => item.id).toString();
-				this.$confirm('确认删除选中记录吗？', '提示', {
-					type: 'warning'
-				}).then(() => {
-					this.listLoading = true;
-					//NProgress.start();
-					let para = { ids: ids };
-					batchRemoveUser(para).then((res) => {
-						this.listLoading = false;
-						//NProgress.done();
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
-						this.getUsers();
-					});
-				}).catch(() => {
-
-				});
-			}
 		},
 		mounted() {
 			this.getUsers();
@@ -294,5 +260,25 @@
 </script>
 
 <style scoped>
-
+ .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    display: block;
+  }
 </style>

@@ -99,7 +99,7 @@ export default {
       msg: 'failure'
     });
     //登录
-  mock.onPost('/v1/global/adminlogin').reply(config => {
+  mock.onPost('/api/v1/global/adminlogin').reply(config => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve([200,{    "code": 0,    "message": "OK",    "data": {        "id": 1,        "username": "janet",        "role_id": 3,        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NDQxNTA2ODksImlkIjoxLCJuYmYiOjE1NDQxNTA2ODksInJvbGVpZCI6MywidXNlcm5hbWUiOiJqYW5ldCJ9.XRWbePq40---ANHdOgWO8NiZNQAgLPeN0ogTO5fsEMk"    }}]);
@@ -148,7 +148,7 @@ export default {
       });
     });
     //获取用户列表（分页）
-    mock.onGet('/v1/admin/?offset=1&limit=10').reply(config => {
+    mock.onGet('/api/v1/admin/?offset=1&limit=10').reply(config => {
       console.log(config)
       return new Promise((resolve, reject) => {
         setTimeout(() => {

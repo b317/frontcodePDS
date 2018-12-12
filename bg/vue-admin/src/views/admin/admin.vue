@@ -137,10 +137,6 @@
 			}
 		},
 		methods: {
-			//性别显示转换
-			formatSex: function (row, column) {
-				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
-			},
 			handleCurrentChange(val) {
 				this.page = val;
 				this.getUsers();
@@ -206,26 +202,37 @@
 			//编辑
 			editSubmit: function () {
                 let data = new FormData
-                data.append("id",this.editForm.id)
                 data.append("password",this.editForm.oldpassword)
                 data.append("newpassword",this.editForm.newpassword)
-                updatePass(data).then(res => {
-                    this.$message({
-							message: '修改成功',
-							type: 'success'
-                    });
+                updatePass(data,this.editForm.id).then(res => {
+					console.log(res)
+					if(res.data.code == 0){
+						this.$message({
+								message: '修改成功',
+								type: 'success'
+						});
+					}else{
+						this.$message({
+								message: '修改失败',
+								type: 'error'
+						});
+					}
+                    
                 })
 			},
 			//新增
 			addSubmit: function () {
-                let data = new FormData
-                data.append("username",this.addForm.username)
-                data.append("password",this.addForm.password)
+                let data = {
+					"username":this.addForm.username,
+					"password":this.addForm.password
+				}
                 register(data).then(res => {
                     this.$message({
 							message: '修改成功',
 							type: 'success'
                     });
+					this.addFormVisible = false
+					this.getUsers()
                 })
 				
 			},

@@ -7,7 +7,6 @@ import userTable from './views/user/userTable.vue'
 import setBanner from './views/banner/setBanner.vue'
 import power from './views/power/power.vue'
 import admin from './views/admin/admin.vue'
-
 let routes = [
     {
         path: '/login',

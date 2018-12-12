@@ -14,27 +14,26 @@
 				</el-table-column>
 				<el-table-column type="index" width="60">
 				</el-table-column>
-				<el-table-column prop="name" label="权限名称" sortable>
+				<el-table-column prop="role_name" label="权限名称" sortable>
 				</el-table-column>
 				<el-table-column label="操作">
 					<template scope="scope">
 						<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-						<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
+			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="10" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
 
 		<!--编辑界面-->
 		<el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="权限名称" prop="name">
-					<el-input v-model="editForm.name" auto-complete="off"></el-input>
+				<el-form-item label="权限名称" prop="role_name">
+					<el-input v-model="editForm.role_name" auto-complete="off"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -86,10 +85,6 @@
 				editForm: {
 					id: 0,
 					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
 				},
 
 				addFormVisible: false,//新增界面是否显示
@@ -102,10 +97,6 @@
 				//新增界面数据
 				addForm: {
 					name: '',
-					sex: -1,
-					age: 0,
-					birth: '',
-					addr: ''
 				}
 
 			}
@@ -122,42 +113,20 @@
 			//获取用户列表
 			getUsers() {
 				let para = {
-					page: this.page
+					offset: this.page
 				};
 				this.listLoading = true;
-				//NProgress.start();
 				getRole(para).then((res) => {
-					this.total = res.data.total;
-					this.shop = res.data.shop;
+					console.log(res)
+					this.total = res.data.data.totalCount;
+					this.shop = res.data.data.roleList;
 					this.listLoading = false;
-					//NProgress.done();
-				});
-			},
-			//删除
-			handleDel: function (index, row) {
-				this.$confirm('确认删除该记录吗?', '提示', {
-					type: 'warning'
-				}).then(() => {
-					this.listLoading = true;
-					//NProgress.start();
-					let para = { id: row.id };
-					removeUser(para).then((res) => {
-						this.listLoading = false;
-						//NProgress.done();
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
-						this.getUsers();
-					});
-				}).catch(() => {
-
 				});
 			},
 			//显示编辑界面
 			handleEdit: function (index, row) {
 				this.editFormVisible = true;
-				console.log(sessionStorage)
+				console.log(row)
 				this.editForm = Object.assign({}, row);
 			},
 			//显示新增界面
@@ -171,15 +140,16 @@
 			editSubmit: function () {
 				this.$confirm('确认提交吗？', '提示', {}).then(() => {
 				this.editLoading = true;
-				let para = Object.assign({}, this.editForm);
-					updateRole(para).then((res) => {
+				let data = new FormData()
+				console.log(this.editForm.role_name)
+				data.append("role_name",this.editForm.role_name)
+					updateRole(data,this.editForm.id).then((res) => {
+						console.log(res)
 						this.editLoading = false;
-						//NProgress.done();
 						this.$message({
 							message: '提交成功',
 							type: 'success'
 						});
-						this.$refs['editForm'].resetFields();
 						this.editFormVisible = false;
 						this.getUsers();
 					});
@@ -189,11 +159,9 @@
 			addSubmit: function () {
 				this.$confirm('确认提交吗？', '提示', {}).then(() => {
 					this.addLoading = true;
-					//NProgress.start();
-					let para = Object.assign({}, this.addForm);
-					addRole(para).then((res) => {
+					addRole({role_name:this.addForm.name}).then((res) => {
+						console.log(res)
 						this.addLoading = false;
-						//NProgress.done();
 						this.$message({
 							message: '提交成功',
 							type: 'success'
@@ -231,7 +199,7 @@
 			}
 		},
 		mounted() {
-			// this.getUsers();
+			this.getUsers();
 		}
 	}
 

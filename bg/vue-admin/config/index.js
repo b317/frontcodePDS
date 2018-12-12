@@ -28,12 +28,15 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/':  {
-      //   target:'http://groupweb.free.idcfengye.com', // 接口的域名
-      //   // secure: false,  // 如果是https接口，需要配置这个参数
-      //   changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
-      // }
-
+      '/v1':  {
+        target:'http://134.175.113.58/', // 接口的域名
+        // secure: false,  // 如果是https接口，需要配置这个参数
+        changeOrigin: true, // 如果接口跨域，需要进行这个参数配置,
+//         pathRewrite: {
+//           '^/api': '/' // 这里用‘/api’代替target里面的地址，组件中调用接口时直接用api代替 比如我要调用'http://xxx.com:8080/api/NEWS/getNews.json?page=1&pageSize=10
+// // '，直接写‘/api/NEWS/getNews.json?page=1&pageSize=10’即可
+//         }
+      }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

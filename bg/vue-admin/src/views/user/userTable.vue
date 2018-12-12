@@ -12,13 +12,13 @@
 			</el-table-column>
 			<el-table-column prop="name" label="姓名" width="120" sortable>
 			</el-table-column>
-			<el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable>
+			<el-table-column prop="sex" label="性别" width="100" sortable>
 			</el-table-column>
 			<el-table-column prop="nick_name" label="昵称" width="100" sortable>
 			</el-table-column>
-			<el-table-column prop="phone" label="手机号码" width="120" sortable>
+			<el-table-column prop="username" label="手机号码" width="190" sortable>
 			</el-table-column>
-			<el-table-column prop="addr" label="地址" min-width="180" sortable>
+			<el-table-column prop="address" label="地址" min-width="180" sortable>
 			</el-table-column>
 			<el-table-column label="操作" width="150">
 				<template scope="scope">
@@ -30,7 +30,7 @@
 
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
-			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
+			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="10" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
 
@@ -50,10 +50,10 @@
 					<el-input v-model="editForm.nick_name" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="手机号码">
-					<el-input v-model="editForm.phone" auto-complete="off"></el-input>
+					<el-input v-model="editForm.username" auto-complete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="地址">
-					<el-input type="textarea" v-model="editForm.addr"></el-input>
+					<el-input type="textarea" v-model="editForm.address"></el-input>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -119,9 +119,6 @@
 		},
 		methods: {
 			//性别显示转换
-			formatSex: function (row, column) {
-				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
-			},
 			handleCurrentChange(val) {
 				this.page = val;
 				this.getUsers();
@@ -132,30 +129,34 @@
 					offset: this.page
 				};
 				this.listLoading = true;
-				//NProgress.start();
 				getUserPage(para).then((res) => {
-					this.total = res.data.totalCount;
-					this.users = res.data.userList;	
+					this.total = res.data.data.totalCount;
+					this.users = res.data.data.userList;	
 					this.listLoading = false;
-					//NProgress.done();
 				});
 			},
 			//删除
 			handleDel: function (index, row) {
 				this.$confirm('确认删除该记录吗?', '提示', {
 					type: 'warning'
-				}).then(() => {
+				}).then((res) => {
 					this.listLoading = true;
-					//NProgress.start();
-					let para = { id: row.id };
-					delUser(para).then((res) => {
+					delUser(row.id).then((res) => {
+						console.log(res)
 						this.listLoading = false;
-						//NProgress.done();
-						this.$message({
-							message: '删除成功',
-							type: 'success'
-						});
+						if(res.data.code == 0){
+							this.$message({
+								message: '删除成功',
+								type: 'success'
+							});
 						this.getUsers();
+						}else{
+							this.$message({
+								message: '删除失败',
+								type: 'error'
+							});
+						}
+						
 					});
 				}).catch(() => {
 
@@ -164,7 +165,6 @@
 			//显示编辑界面
 			handleEdit: function (index, row) {
 				this.editFormVisible = true;
-				console.log(sessionStorage)
 				this.editForm = Object.assign({}, row);
 			},
 			//显示新增界面
@@ -180,14 +180,18 @@
 			},
 			//编辑
 			editSubmit: function () {
-				editUser(para).then((res) => {
+				var data = new FormData();
+				data.append("name",this.editForm.name)
+				data.append("nick_name",this.editForm.nick_name)
+				data.append("address",this.editForm.address)
+				updateUser(data,this.editForm.id).then((res) => {
 					this.editLoading = false;
 					//NProgress.done();
+					console.log(res)
 					this.$message({
 						message: '提交成功',
 						type: 'success'
 					});
-					this.$refs['editForm'].resetFields();
 					this.editFormVisible = false;
 					this.getUsers();
 				});
@@ -198,7 +202,7 @@
 			},
 		},
 		mounted() {
-			// this.getUsers();
+			this.getUsers();
 		}
 	}
 
