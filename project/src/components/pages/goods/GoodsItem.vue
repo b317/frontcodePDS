@@ -28,12 +28,12 @@
             <div><a href="#"><img :src="goods.img" alt="" style="width: 80px;height: 80px;"/></a></div>
           </div>
           <div class="g-cont-a">
-            <p>
+            <p style="">
               <a href="#" rel="noopener noreferrer"><span style="line-height:16px;">
                   {{goods.content}}</span></a>
               <a href="#" rel="noopener noreferrer"> [交易快照] </a>
             </p>
-            <!--<p style="color: #9e9e9e"><span><span>颜色分类</span><span>：</span><span>{{goods.color}}</span></span></p>-->
+            <p style="color: #9e9e9e;"><span><span>颜色分类</span><span>：</span><span>{{goods.color}}</span></span></p>
           </div>
         </td>
         <td style="width: 87px;border: none;">

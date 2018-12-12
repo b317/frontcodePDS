@@ -42,7 +42,7 @@
             <p class="tm-action">
               <span id="J_EditItem" style="float: right;padding-right: 40px;"><a href=""><i class="el-icon-phone-outline"></i>举报</a></span>
               <a id="J_IShare" class="iShare tm-event" href="#"><i class="el-icon-share"></i>分享</a>
-              <span style="padding-left: 15px;"><i class="el-icon-loading"></i>月销量<span id="J_CollectCount">3337</span></span>
+              <span style="padding-left: 15px;"><i class="el-icon-loading"></i>已销售<span id="J_CollectCount">3337</span></span>
             </p>
           </div>
           <div class="contentView">
@@ -51,28 +51,50 @@
             </div>
             <div class="tm-fcs-panel">
               <p><span class="tb-metatit">价格</span>
-                <span class="tb-tm-original-price"><em class="tm-yen">¥</em> <del><span class="tm-original-price">18.80-37.80</span></del></span></p>
+                <span class="tb-tm-original-price"><em class="tm-yen">¥</em> <del><span class="tm-original-price">33.80</span></del></span></p>
               <p><span class="tb-metatit">促销价</span>
-                <span class="tb-tm-price"><em class="tm-yen">¥ </em><span class="tm-price">{{this.$route.params.price}}-33.00</span></span></p>
+                <span class="tb-tm-price"><em class="tm-yen">¥ </em><span class="tm-price">{{this.$route.params.price}}</span></span></p>
+              <p><span class="tb-metatit">团购价</span>
+                <span class="tb-tm-price"><em class="tm-yen">¥ </em><span class="tm-price">21.00</span></span></p>
             </div>
             <div class="tm-delivery-panel">
               <span class="tb-metatit">配送</span>
               <div class="tb-postAge" style="display: inline-block;">
                 <span class="tb-deliveryAdd" id="J_deliveryAdd">江苏宿迁</span> 至 <span>
-              <span>广东湛江</span><i class="el-icon-arrow-down"></i></span>
+                <span role="button" class="sel-address" style="cursor: pointer;">广东湛江</span><i class="el-icon-arrow-down"></i></span>
                 <span>快递：<span>0.00</span></span>
               </div>
             </div>
-            <div></div>
+            <div class="tm-type-panel">
+              <span class="tb-metatit" style="vertical-align: top">颜色分类</span>
+              <ul class="tb-type">
+                <li title="白色铃兰10株+盆" class="tb-txt">
+                  <a href="#" role="button" tabindex="0" class="tb-txt-a active"><span>白色铃兰5株+盆</span><i>已选中</i></a>
+                </li>
+                <li title="白色铃兰20株+盆" class="tb-txt">
+                  <a href="#" role="button" tabindex="0" class="tb-txt-a"><span>白色铃兰10株+盆</span><i>已选中</i></a>
+                </li>
+                <li title="白色铃兰20株+盆" class="tb-txt">
+                  <a href="#" role="button" tabindex="0" class="tb-txt-a"><span>白色铃兰15株+盆</span><i>已选中</i></a>
+                </li>
+                <li title="白色铃兰20株+盆" class="tb-txt">
+                  <a href="#" role="button" tabindex="0" class="tb-txt-a"><span>白色铃兰20株+盆</span><i>已选中</i></a>
+                </li>
+                <!--<type-item-li></type-item-li>-->
+                <!--<type-item-li></type-item-li>-->
+                <!--<type-item-li></type-item-li>-->
+                <!--<type-item-li></type-item-li>-->
+              </ul>
+            </div>
             <div></div>
             <div class="tb-amount">
               <span class="tb-metatit">数量</span>
               <div class="mui-amount-btn" style="display: inline-block;">
             <span class="tb-amount-widget mui-amount-wrap">
-              <input type="text" class="tb-text mui-amount-input" value="1" maxlength="8" title="请输入购买量">
+              <input type="text" class="tb-text mui-amount-input" v-model="inputValue" title="请输入购买量">
               <span class="mui-amount-btn">
-                <span class="mui-amount-increase"><i class="el-icon-arrow-up" style="line-height: 5px"></i></span>
-                <span class="mui-amount-decrease"><i class="el-icon-arrow-down" style="line-height: 5px"></i></span>
+                <span class="mui-amount-increase" @click="incr"><i class="el-icon-arrow-up" style="line-height: 5px"></i></span>
+                <span class="mui-amount-decrease" @click="decr"><i class="el-icon-arrow-down" style="line-height: 5px"></i></span>
               </span>
               <span class="mui-amount-unit">件</span>
             </span>
@@ -105,6 +127,7 @@
           </div>
         </div>
       </div>
+      <!-- 没有数据 -->
       <div class="goods-recommend-panel">
         <goods-recommend-item class="g-item" v-for="(item,index) of datelist" :key="index"
         :pickgoods="item" :index="index" v-if="isShow"></goods-recommend-item>
@@ -118,13 +141,15 @@
     import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
     import RecommendItem from "./RecommendItem.vue";
     import GoodsRecommendItem from "./GoodsRecommendItem.vue";
+    import TypeItemLi from "./TypeItemLi.vue";
 
     export default {
-      components: {ElButton, RecommendItem,GoodsRecommendItem},
+      components: {ElButton, RecommendItem,GoodsRecommendItem,TypeItemLi},
       data() {
         return {
           msg: 'hello world',
           num8: 1,
+          inputValue: '1',
           isShow:true,  // 是否有数据
           datelist: [
             {
@@ -217,6 +242,28 @@
             },
           ], // 数据集
         }
+      },
+      methods:{
+        incr(){
+          if(this.inputValue==3){
+            this.$message({
+              message: '警告，数量已达到10件',
+              type: 'warning'
+            });
+          }else{
+            this.inputValue++
+          }
+        },
+        decr(){
+          if(this.inputValue==1){
+            this.$message({
+              message: '提示，数量已低到1件',
+              type: 'warning'
+            });
+          }else{
+            this.inputValue--
+          }
+        },
       },
       mounted(){
         if(this.datelist.length==0){
@@ -361,13 +408,13 @@
   }
   .imgView .goods-img{
     width: 418px;
-    height: 411px;
+    height: 361px;
     border: 1px solid rgba(0,0,0,.05);
     vertical-align: middle;
     text-align: center;
     padding-top: 10px;
   }
-  .imgView .goods-img img{width: 399px;height: 401px;}
+  .imgView .goods-img img{width: 399px;height: 347px;}
   .imgView .tm-action,.imgView .tm-action a{
     font-size: 14px;
     color: #999;
@@ -410,8 +457,77 @@
     font-size: 14px;
     color: #333;
   }
+  .contentView .tm-type-panel{
+    margin-top: 25px;
+  }
+  /* 颜色分类 */
+  .contentView .tm-type-panel .tb-type{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 320px;
+  }
+  .tb-type li.tb-txt a {
+    padding: 0 5px;
+    width: auto!important;
+  }
+  .tb-type li{float: left;margin-bottom: 10px}
+  .tb-type li a {
+    width: 38px!important;
+    height: 38px;
+    padding: 0;
+    line-height: 38px;
+    background-repeat: no-repeat;
+    outline: 0;
+    background-position: center center;
+  }
+  .contentView .tm-type-panel .tb-type li a{
+    float: left;
+    background-color: #fff;
+    border: 1px solid #b8b7bd;
+    color: #000;
+    min-width: 10px;
+    padding: 0 9px;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 6px;
+  }
+  .contentView .tm-type-panel .tb-type li a:hover{
+    border: 2px solid #FF0036;
+    margin: -1px -1px -1px 5px;
+  }
+  .tb-type li .tb-txt-a i {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+    text-indent: -99em;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+  }
+  .tb-type li a.tb-txt-a.active i{
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJUExURUxpcf8AN////7f4NBoAAAABdFJOUwBA5thmAAAAMUlEQVQI103MAQ4AMAQEQev/j66i6YrEXIKIX9jY2NjYyDmhZnlCo5rdyWvebfYDVAcSmABbA7WD+QAAAABJRU5ErkJggg==);
+  }
+  .tb-type li .tb-txt-a {
+    position: relative;
+    border: 2px solid #ddd;
+    padding: 2px 6px;
+    border-radius: 2px;
+    cursor: pointer
+  }
+  .tb-type li a.tb-txt-a.active, .tb-type li .tb-txt-a:hover{
+    border: 2px solid #FF0036;
+    margin: -1px -1px -1px 5px;
+  }
+  .tb-type li .tb-txt-a.active i {
+    display: block
+  }
+
   .contentView .tb-amount{
-    margin-top: 35px;
+    margin-top: 25px;
     color: #333;
   }
   .contentView .tb-action-btn{
