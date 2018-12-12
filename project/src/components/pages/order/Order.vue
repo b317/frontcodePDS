@@ -14,7 +14,9 @@
                 <el-col :span="9">
                   <div class="grid-content bg-purple">
                     <el-input placeholder="请输入拼团团购号" v-model="order_number" size="mini">
-                      <template slot="append"><el-button type="primary" size="mini">团购号查询</el-button></template>
+                      <template slot="append">
+                        <el-button type="primary" size="mini" @click="findByGroupNum">团购号查询</el-button>
+                      </template>
                     </el-input>
                   </div>
                 </el-col>
@@ -186,6 +188,10 @@
 //        console.log(event);
 //        console.log(event.target.id);
 //        console.log(event.target);
+      },
+      findByGroupNum(){
+//        this.$router.push('localhost:8081:/table');
+        window.open('http://localhost:8081/#/table');
       }
     }
   }

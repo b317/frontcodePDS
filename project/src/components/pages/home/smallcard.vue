@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <img :src=src @mouseover="show = true" class="img" :class="{hover:show}" @mouseout="show = false">
+    <img :src=src @mouseover="show = true" class="img" @click="showProductDetail" :class="{hover:show}" @mouseout="show = false">
     <div class="wrap">
         <el-rate
         v-model="rate"
@@ -91,7 +91,7 @@
             height: 23px !important;
         }
         .sell{
-            display: row;
+            display: table-row;
             vertical-align: center;
             height: 24px;
             div{
