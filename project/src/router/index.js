@@ -27,6 +27,8 @@ import {getName} from "@/util/auth";
 
 import smallcard from "@/components/pages/home/smallcard";
 
+import MerchantEntry from  "@/components/pages/MerchantEntry";
+
 Vue.use(Router)
 
 const route = new Router({
@@ -115,6 +117,11 @@ const route = new Router({
       component: Coupon
     },
     {
+      path:'/MerchantEntry',
+      name:'MerchantEntry',
+      component:MerchantEntry
+    },
+    {
       path: '/users',
       name: 'users',
       component: users,
@@ -138,7 +145,7 @@ const route = new Router({
           path:'/setAddress',
           name:'setAddress',
           component:setAddress
-        }
+        },
       ]
     }
   ]

@@ -40,6 +40,9 @@
         show: false,
       }
     },
+    mounted(){
+      console.log(this.sell);
+    },
     methods: {
       showProductDetail() {
 //        this.$router.push("/ProductDetail")

@@ -32,6 +32,9 @@
       </div>
       <router-view/>
     </div>
+    <div class="top-btn" style="position: absolute; z-index: 999;">
+      <top-btn></top-btn>
+    </div>
     <nav-footer v-if="isShow"></nav-footer>
     <login-footer v-if="!isShow"></login-footer>
   </div>
@@ -43,6 +46,7 @@ import {getId,getName,setName} from "@/util/auth";
 import {getUserInfo} from "@/api/http";
 import NavFooter from '@/components/module/NavFooter'
 import LoginFooter from '@/components/module/LoginFooter'
+import TopBtn from '@/components/module/TopBtn'
 
 export default {
   name: 'App',
@@ -57,7 +61,7 @@ export default {
     }
   },
   components:{
-    NavFooter,LoginFooter
+    NavFooter,LoginFooter,TopBtn
   },
   computed: {
     showName(){

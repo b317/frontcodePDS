@@ -3,7 +3,7 @@
     <p class="footer-cr">
       <router-link class="link" href="javascript:void(0)" to="/home">关于我们</router-link>
       <router-link class="link" href="javascript:void(0)" to="/">帮助中心</router-link>
-      <router-link class="link" href="javascript:void(0)" to="/">商家入驻</router-link>
+      <router-link class="link" href="javascript:void(0)" to="/MerchantEntry">商家入驻</router-link>
       <router-link class="link" href="javascript:void(0)" to="/">联系我们</router-link>
       <router-link class="link" href="javascript:void(0)" to="/">法律声明</router-link>
       <router-link class="link" href="javascript:void(0)" to="/">消费者保障</router-link>
