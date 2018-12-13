@@ -220,6 +220,7 @@
 							type: 'success'
 						});
 						this.getUsers();
+						this.subshop = []
 					});
 				}).catch(() => {
 
