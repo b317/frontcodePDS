@@ -60,6 +60,11 @@
   .tag_left{height:549px;background: #2C3E50;}
   .content{height:519px;overflow-y: auto;background: white;
     margin-top: 20px;overflow-x: hidden}
+
+  @media screen and (min-height: 700px){
+    .tag_left{height:649px;}
+    .content{height:619px}
+  }
   .content::-webkit-scrollbar {display:none}
   .nav_footer{position: absolute;width: 100%}
 </style>

@@ -13,70 +13,70 @@
       </el-row>
     </div>
     <div class="lists">
-      <div>
-        <table>
-          <thead>
-          <tr>
-            <th class="">商品ID</th>
-            <th class="">商品信息</th>
-            <th class="">所属标签</th>
-            <th>价格</th>
-            <th>库存</th>
-            <th>优惠券</th>
-            <th>上架</th>
-            <th>拼团时效</th>
-            <th>操作</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="(item,index) of productList" :key="index">
-            <td class="" width="8%">
-              <el-checkbox></el-checkbox>
-              <p>{{item.productId}}</p>
-            </td>
-            <td class=""  width="30%">
-              <div class="publish_time">发布时间：{{item.publishTime}}</div>
-              <span class="product_img"><img :src="'/static/'+ item.productImg"/></span>
-              <span class="title"><i>{{item.productTitle}}</i></span>
-            </td>
-            <td class=""  width="14%">{{item.levelOneLabel}}&nbsp;>&nbsp;{{item.levelTwoLabel}}</td>
-            <td  width="6%">{{item.price}}￥</td>
-            <td  width="6%">{{item.price}}</td>
-            <td  width="8%"><a href="javascript:void(0)">查看</a></td>
-            <td  width="6%">
-              <el-switch v-model="item.isPutaway" :width="value" >
-              </el-switch>
-            </td>
-            <td  width="6%">{{item.groupEffectTime}}小时</td>
-            <td >
-              <div style="margin-bottom: 8px">
-                <el-button type="success" size="mini">修改<i class="el-icon-edit"></i></el-button>
-              </div>
-              <div>
-                <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
-              </div>
-            </td>
-          </tr>
-          </tbody>
-          <tfoot>
-          <tr>
-            <td colspan="3"></td>
-            <td colspan="6" style="position: relative">
-              <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="1000"
-                @current-change="pageChange"
-                @prev-click="preClick"
-                @next-click="nextClick"
-              >
-              </el-pagination>
-            </td>
-          </tr>
-          </tfoot>
-        </table>
-      </div>
+    <div>
+      <table>
+        <thead>
+        <tr>
+          <th class="">商品ID</th>
+          <th class="">商品信息</th>
+          <th class="">所属标签</th>
+          <th>价格</th>
+          <th>库存</th>
+          <th>优惠券</th>
+          <th>上架</th>
+          <th>拼团时效</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item,index) of productList" :key="index">
+          <td class="" width="8%">
+            <el-checkbox></el-checkbox>
+            <p>{{item.productId}}</p>
+          </td>
+          <td class=""  width="30%">
+            <div class="publish_time">发布时间：{{item.publishTime}}</div>
+            <span class="product_img"><img :src="'/static/'+ item.productImg"/></span>
+            <span class="title"><i>{{item.productTitle}}</i></span>
+          </td>
+          <td class=""  width="14%">{{item.levelOneLabel}}&nbsp;>&nbsp;{{item.levelTwoLabel}}</td>
+          <td  width="6%">{{item.price}}￥</td>
+          <td  width="6%">{{item.price}}</td>
+          <td  width="8%"><a href="javascript:void(0)">查看</a></td>
+          <td  width="6%">
+            <el-switch v-model="item.isPutaway" :width="value" >
+            </el-switch>
+          </td>
+          <td  width="6%">{{item.groupEffectTime}}小时</td>
+          <td >
+            <div style="margin-bottom: 8px">
+              <el-button type="success" size="mini">修改<i class="el-icon-edit"></i></el-button>
+            </div>
+            <div>
+              <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="3"></td>
+          <td colspan="6" style="position: relative">
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="1000"
+              @current-change="pageChange"
+              @prev-click="preClick"
+              @next-click="nextClick"
+            >
+            </el-pagination>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
     </div>
+  </div>
   </div>
 </template>
 <style>
