@@ -3,7 +3,10 @@
     <div class="bread_crumbs">
       <span>商品管理&nbsp;--&nbsp;商品列表</span>
     </div>
-    <div style="margin: 30px 0">
+    <div class="add_new">
+      <el-button size="small" @click="addNewProduct"><i class="el-icon-plus"></i>添加新商品</el-button>
+    </div>
+    <div style="margin-bottom: 30px">
       <el-row>
         <el-col :span="6">
           <el-input placeholder="商品ID/商品关键字" class="input-with-select" size="mini">
@@ -42,7 +45,7 @@
             <td class=""  width="14%">{{item.levelOneLabel}}&nbsp;>&nbsp;{{item.levelTwoLabel}}</td>
             <td  width="6%">{{item.price}}￥</td>
             <td  width="6%">{{item.price}}</td>
-            <td  width="8%"><a href="javascript:void(0)">查看</a></td>
+            <td  width="8%"><el-button type="primary" size="mini">查看</el-button></td>
             <td  width="6%">
               <el-switch v-model="item.isPutaway" :width="value" >
               </el-switch>
@@ -175,6 +178,9 @@
       },
       nextClick(val){
 //        console.log(`下一页: ${val}`);
+      },
+      addNewProduct(){
+        this.$router.push('/ProductUpdate')
       }
     }
   }

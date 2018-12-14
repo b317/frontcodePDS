@@ -8,6 +8,7 @@ import GroupManage from '@/views/Management/GroupManage'
 import OrderManage from '@/views/Management/OrderManage'
 import ProductList from '@/views/Management/ProductList'
 import ProductSort from '@/views/Management/ProductSort'
+import ProductUpdate from '@/views/Management/ProductUpdate'
 import GroupSendMes from '@/views/MesCenter/GroupSendMes'
 import SystemMes from '@/views/MesCenter/SystemMes'
 Vue.use(Router);
@@ -48,6 +49,11 @@ export default new Router({
       path: '/ProductSort',
       name: 'ProductSort',
       component: ProductSort
+    },
+    {
+      path: '/ProductUpdate',
+      name: 'ProductUpdate',
+      component: ProductUpdate
     },
     {
       path: '/GroupSendMes',
