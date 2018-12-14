@@ -3,7 +3,10 @@
     <div class="bread_crumbs">
       <span>商品管理&nbsp;--&nbsp;商品列表</span>
     </div>
-    <div style="margin: 30px 0">
+    <div class="add_new">
+      <el-button size="small" @click="addNewProduct"><i class="el-icon-plus"></i>添加新商品</el-button>
+    </div>
+    <div style="margin-bottom: 30px">
       <el-row>
         <el-col :span="6">
           <el-input placeholder="商品ID/商品关键字" class="input-with-select" size="mini">
@@ -13,6 +16,7 @@
       </el-row>
     </div>
     <div class="lists">
+<<<<<<< HEAD
     <div>
       <table>
         <thead>
@@ -75,6 +79,71 @@
         </tr>
         </tfoot>
       </table>
+=======
+      <div>
+        <table>
+          <thead>
+          <tr>
+            <th class="">商品ID</th>
+            <th class="">商品信息</th>
+            <th class="">所属标签</th>
+            <th>价格</th>
+            <th>库存</th>
+            <th>优惠券</th>
+            <th>上架</th>
+            <th>拼团时效</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="(item,index) of productList" :key="index">
+            <td class="" width="8%">
+              <el-checkbox></el-checkbox>
+              <p>{{item.productId}}</p>
+            </td>
+            <td class=""  width="30%">
+              <div class="publish_time">发布时间：{{item.publishTime}}</div>
+              <span class="product_img"><img :src="'/static/'+ item.productImg"/></span>
+              <span class="title"><i>{{item.productTitle}}</i></span>
+            </td>
+            <td class=""  width="14%">{{item.levelOneLabel}}&nbsp;>&nbsp;{{item.levelTwoLabel}}</td>
+            <td  width="6%">{{item.price}}￥</td>
+            <td  width="6%">{{item.price}}</td>
+            <td  width="8%"><el-button type="primary" size="mini">查看</el-button></td>
+            <td  width="6%">
+              <el-switch v-model="item.isPutaway" :width="value" >
+              </el-switch>
+            </td>
+            <td  width="6%">{{item.groupEffectTime}}小时</td>
+            <td >
+              <div style="margin-bottom: 8px">
+                <el-button type="success" size="mini">修改<i class="el-icon-edit"></i></el-button>
+              </div>
+              <div>
+                <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="3"></td>
+            <td colspan="6" style="position: relative">
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="1000"
+                @current-change="pageChange"
+                @prev-click="preClick"
+                @next-click="nextClick"
+              >
+              </el-pagination>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+>>>>>>> 7fc6efda3c8290fcbeef87fba379a4bfa170a95c
     </div>
   </div>
   </div>
@@ -175,6 +244,9 @@
       },
       nextClick(val){
 //        console.log(`下一页: ${val}`);
+      },
+      addNewProduct(){
+        this.$router.push('/ProductUpdate')
       }
     }
   }

@@ -33,11 +33,11 @@
           <i class="el-icon-location"></i>
           <span>商品管理</span>
         </template>
-          <el-menu-item index="2-1">商品列表</el-menu-item>
-          <el-menu-item index="2-2">商品分类</el-menu-item>
-          <el-menu-item index="2-3">商品上新</el-menu-item>
-          <el-menu-item index="2-4">商品删除</el-menu-item>
-          <el-menu-item index="2-5">修改库存</el-menu-item>
+          <el-menu-item index="2-1" style="min-width: 180px; !important;">商品列表</el-menu-item>
+          <el-menu-item index="2-2" style="min-width: 180px; !important;">商品分类</el-menu-item>
+          <el-menu-item index="2-3" style="min-width: 180px; !important;">商品上新</el-menu-item>
+          <el-menu-item index="2-4" style="min-width: 180px; !important;">商品删除</el-menu-item>
+          <el-menu-item index="2-5" style="min-width: 180px; !important;">修改库存</el-menu-item>
       </el-submenu>
       <el-menu-item index="3">
         <i class="el-icon-document"></i>
@@ -94,11 +94,11 @@
           switch (key){
             case '1':this.$router.push('/OrderManage');
               break;
-            case '2-1':this.$router.push('/productList');
+            case '2-1':this.$router.push('/ProductList');
               break;
             case '2-2':this.$router.push('/ProductSort');
               break;
-            case '2-3':this.$router.push('/productList');
+            case '2-3':this.$router.push('/ProductUpdate');
               break;
             case '2-4':this.$router.push('/productList');
               break;
