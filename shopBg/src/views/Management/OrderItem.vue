@@ -41,8 +41,8 @@
               <span v-if="orderList.tradingStatus==3">正退款中</span>
               <span v-if="orderList.tradingStatus==4">交易失败</span>
             </p>
-            <p>订单详情</p>
-            <p v-if="orderList.tradingStatus==1||orderList.tradingStatus==2">物流跟踪</p>
+            <p><a href="#">订单详情</a></p>
+            <p v-if="orderList.tradingStatus==1||orderList.tradingStatus==2"><a href="#">物流跟踪</a></p>
           </td>
           <td>
             <div style="margin-bottom: 8px">
@@ -101,9 +101,6 @@
     -webkit-line-clamp: 3;
     overflow: hidden;
   }
-  table tfoot tr td{padding: 10px 0 !important;height: 22px}
-  table tfoot .el-pagination{
-    position: absolute;right: 0;
-    top: 5px;
-  }
+  table tbody td p a{color: gray;text-decoration: none}
+  table tbody td p a:hover{color: #67c23a;text-decoration: underline}
 </style>
