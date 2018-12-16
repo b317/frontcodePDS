@@ -151,6 +151,7 @@ i, em {
   background-color: #409eff ;
   border:1px solid #409eff ;
 }
+.product_list .el-input .el-button:hover{opacity: 0.8}
 .product_list .lists table{border:1px solid #DDD;width: 100%;border-collapse: collapse;}
 .product_list .lists table thead{
   /*display: table-header-group;*/border-bottom: 1px solid #ddd;
@@ -244,10 +245,18 @@ font-size:13px ;color:gray;text-align: center;
 
 /*ProductUpdate开始*/
 .update_product{margin-bottom: 50px}
+.update_product .step_btn {text-align: center;margin-top:30px;}
+.update_product .step_btn .el-button a{
+  text-decoration:none;color: white;
+}
+.update_product .step_btn .el-button:first-child a{
+  color: #606266;;
+}
+.update_product .step_btn .el-button:first-child:hover a{color:#409eff;}
 .update_product .step{margin: 20px 0 30px 0}
 .update_product .step_one .step_one_left,.step_one_right{
   width: 38%;display: inline-block;border:1px solid #ddd;font-size: 14px;
-  color: #606266;height: 400px;overflow: hidden;margin-bottom: 20px;
+  color: #606266;height: 400px;overflow: hidden;
 }
 .update_product .step_one header{background:#f7f7f7;padding: 10px 20px;text-align: left}
 .update_product .step_one ul{
@@ -270,4 +279,136 @@ width: 5%;display: inline-block;height: 240px;
   vertical-align: bottom;margin: 0 20px;
 }
 .update_product .step_one .right_icon img {vertical-align: middle}
+
+.update_product .step_two .step_two_top{
+  padding: 20px 122px;border-bottom:1px dashed #ddd;
+  border-top: 1px solid #23bc85;
+}
+.update_product .step_two .step_two_top:hover{background:#F9F9F9 }
+.update_product .step_two .step_two_input{
+  font-size: 15px;color: #606266 !important;
+}
+.update_product .step_two .step_two_input>div{padding: 20px 0;border-bottom:1px dotted #ddd;}
+.update_product .step_two .step_two_input>div:hover{background:#F9F9F9}
+.update_product .step_two .step_two_input span{
+  display: inline-block;width: 16%;text-align: right;padding-right: 25px;vertical-align: middle;
+}
+.update_product .step_two .step_two_input .el-input{
+ width: 40%;
+}
+.update_product .step_two .step_two_input .remind{
+  font-size: 12px;color: #bebebe;
+  width: 70%;display: inline-block;
+  margin-top: 8px;
+}
+.update_product .step_two .el-icon-edit-outline{padding-left: 5px;color: #409EFF;}
+.update_product .step_two .el-icon-edit-outline:hover{color: #E6A23C;}
+
+.step_three .uploadImg>div{padding: 20px 50px;}
+.step_three .product_main_img span{
+  font-size: 14px;padding-right: 15px;
+  color: #606266;
+}
+
+.step_three .product_main_img .img_link div:nth-of-type(2){
+  display: inline-block;width: 11%;
+}
+.step_three .product_main_img .img_link div:last-child{
+  font-size: 12px;color: #8c939d;display: inline-block;line-height: 30px;
+}
+.step_three .product_main_img .avatar-uploader .el-upload {
+  border-radius: 6px;vertical-align: middle;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;width: 150px;height:150px;
+}
+.step_three .product_main_img  .avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.step_three .product_main_img .avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
+}
+.step_three .product_main_img .avatar {
+  width: 150px;
+  height: 150px;
+  display: block;
+}
+.step_three .product_main_img>div{margin-top: 40px}
+.step_three .product_main_img .el-input{width: 50%}
+.step_three .product_vice_img>div:first-child{
+  font-size: 14px;
+  color: #606266;
+}
+.step_three .product_vice_img>div:nth-of-type(2){
+  border:1px solid #ddd;width: 93%;padding: 10px;padding-right: 0;margin-top: 10px;
+}
+
+.update_product .step_four .step_four_input{
+  font-size: 15px;color: #606266 !important;
+}
+.update_product .step_four .step_four_input>div{padding: 20px 0;border-bottom:1px dotted #ddd;}
+.update_product .step_four .step_four_input>div:hover{background:#F9F9F9}
+.update_product .step_four .step_four_input span{
+  display: inline-block;width: 16%;text-align: right;padding-right: 25px;
+}
+.update_product .step_four .step_four_input .el-input{
+  width: 40%;
+}
+.update_product .step_four .step_four_input .remind{
+  font-size: 12px;color: #bebebe;
+  width: 70%;display: inline-block;
+  margin-top: 8px;
+}
 /*ProductUpdate结束*/
+
+/*ProductDelete开始*/
+.product_delete{
+  margin:30px 0;
+}
+.product_delete .el-tabs__item:hover {
+  color: #28B779 !important;
+}
+.product_delete .el-tabs__item.is-active {
+  color: #28B779 !important;
+}
+.product_delete .el-tabs__active-bar{
+  background-color:#28B779 !important;
+}
+
+.product_delete table{
+  width: 90%;border-collapse: collapse;margin-left: 15px;text-align: center;
+}
+.product_delete thead{
+  border-top:1px solid #DDD;border-bottom: 1px solid #ddd;
+  vertical-align: middle;font-size: 13px;line-height: 40px;
+  background: #fafafa; font-weight: bold;;opacity: 0.7;
+}
+
+.product_delete tbody td{
+  border-bottom: 1px solid #ddd;color: grey;font-size: 13px;padding: 10px 0;
+}
+.product_delete .single_product tbody td:nth-of-type(3){
+  width: 50%;
+}
+.product_delete .single_product tbody td a{
+  color:#139ff0;text-decoration: none;
+  width:100%; display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.product_delete .single_product tbody td a:hover{color:#fe604b}
+.product_delete .input-with-select .el-button{
+  color: #fff ;border-radius: 0 3px 3px 0;
+  background-color: #409eff ;
+  border:1px solid #409eff ;
+}
+
+.product_delete .input-with-select{width: 25%;margin-bottom: 30px}
+.product_delete .input-with-select .el-button:hover{opacity: 0.8}
+/*ProductDelete结束*/

@@ -37,7 +37,6 @@
           <el-menu-item index="2-2" style="min-width: 180px; !important;">商品分类</el-menu-item>
           <el-menu-item index="2-3" style="min-width: 180px; !important;">商品上新</el-menu-item>
           <el-menu-item index="2-4" style="min-width: 180px; !important;">商品删除</el-menu-item>
-          <el-menu-item index="2-5" style="min-width: 180px; !important;">修改库存</el-menu-item>
       </el-submenu>
       <el-menu-item index="3">
         <i class="el-icon-document"></i>
@@ -100,9 +99,7 @@
               break;
             case '2-3':this.$router.push('/ProductUpdate');
               break;
-            case '2-4':this.$router.push('/productList');
-              break;
-            case '2-5':this.$router.push('/productList');
+            case '2-4':this.$router.push('/ProductDelete');
               break;
             case '3':this.$router.push('/CouponManage');
               break;
