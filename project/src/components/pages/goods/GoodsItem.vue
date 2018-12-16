@@ -67,7 +67,7 @@
               <span v-if="goods.orderStatus==0">等待付款</span>
               <span v-if="goods.orderStatus==1">等待发货</span>
               <span v-if="goods.orderStatus==2">已经发货</span>
-              <span v-if="goods.orderStatus==3">交易完成</span>
+              <span v-if="goods.orderStatus==3">交易成功</span>
               <span v-if="goods.orderStatus==4">正退款中</span>
               <span v-if="goods.orderStatus==5">交易失败</span>
             </p>

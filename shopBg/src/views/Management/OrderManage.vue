@@ -3,133 +3,71 @@
       <div class="bread_crumbs">
         <span>订单管理&nbsp;--&nbsp;订单列表</span>
       </div>
-      <el-row>
-        <el-col :span="5">
-          <left-tab type="card" v-bind:routeArr="routeArr"></left-tab>
-        </el-col>
-        <el-col :span="24">
-          <div class="grid-content bg-purple">
-            <template>
-              <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="全部订单" name="0">
-                  <template slot-scope="scope">
-                    <div>全部订单</div>
-                  </template>
-                </el-tab-pane>
-                <el-tab-pane label="已付款" name="2">
-                  <template slot-scope="scope">
-                    <div>已付款</div>
-                  </template>
-                </el-tab-pane>
-                <el-tab-pane label="待发货" name="3">
-                  <template slot-scope="scope">
-                    <div>待发货</div>
-                  </template>
-                </el-tab-pane>
-                <el-tab-pane label="已发货" name="4">
-                  <template slot-scope="scope">
-                    <div>已发货</div>
-                  </template>
-                </el-tab-pane>
-                <el-tab-pane label="已完成" name="5">
-                  <template slot-scope="scope">
-                    <div>已完成</div>
-                  </template>
-                </el-tab-pane>
-                <el-tab-pane label="正退款" name="6">
-                  <template slot-scope="scope">
-                    <div>正退款</div>
-                  </template>
-                </el-tab-pane>
-                <el-tab-pane label="已退款" name="7">
-                  <template slot-scope="scope">
-                    <div>已退款</div>
-                  </template>
-                </el-tab-pane>
-              </el-tabs>
-            </template>
-
-            <div class="order-search" style="margin: 30px 0">
-              <el-row>
-                <el-col :span="6">
-                  <el-input placeholder="请输入订单号" class="input-with-select" size="mini">
-                    <el-button slot="append" icon="el-icon-search"  size="mini" style="color: #fff;background-color: #409eff"></el-button>
-                  </el-input>
-                </el-col>
-              </el-row>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-      <div class="lists">
-        <div>
-          <table>
-            <thead>
-            <tr>
-              <th class="">订单号/时间</th>
-              <th class="">商品信息</th>
-              <th class="">单价</th>
-              <th>团购价</th>
-              <th>数量</th>
-              <th>实付款</th>
-              <th>交易状态</th>
-              <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(item,index) of orderList" :key="index">
-              <td class="" width="14%">
-                <p><span class="order_number">{{item.orderID}}</span></p>
-                <p><span class="order_time">{{item.orderTime}}</span></p>
-              </td>
-              <td class="" width="34%">
-                <!--<p><span class="order_time">{{item.orderTime}}</span><span class="order_number" style="padding-left: 10px">订单号：{{item.orderID}}</span></p>-->
-                <span class="goods_img"><img :src="'../../../static/'+ item.goodsImg" style=""/></span>
-                <div class="goods_title">
-                  <span><i>{{item.goodsTitle}}</i></span>
-                  <div><span class="goods_class" style="color: #999"><i>颜色分类：{{item.goodsClass}}</i></span></div>
-                </div>
-              </td>
-              <td class="" width="6%">￥{{item.price}}</td>
-              <td width="6%">￥{{item.groupPrice}}</td>
-              <td width="6%">{{item.goodsNumber}}</td>
-              <td width="14%">
-                <p>￥{{item.payMoney}}</p>
-                <p>(含运费)：￥{{item.freight}}</p>
-              </td>
-              <td width="10%">
-                <p>交易成功</p>
-                <p>订单详情</p>
-                <p>物流跟踪</p>
-              </td>
-              <td>
-                <div style="margin-bottom: 8px">
-                  <el-button type="success" size="mini">取消<i class="el-icon-remove-outline"></i></el-button>
-                </div>
-                <div>
-                  <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-              <td colspan="3"></td>
-              <td colspan="6" style="position: relative">
-                <el-pagination
-                  background
-                  layout="prev, pager, next"
-                  :total="1000"
-                  @current-change="pageChange"
-                  @prev-click="preClick"
-                  @next-click="nextClick"
-                >
-                </el-pagination>
-              </td>
-            </tr>
-            </tfoot>
-          </table>
+      <div class="grid-content bg-purple">
+        <template>
+          <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="全部订单" name="0">
+              <template slot-scope="scope">
+                <div>全部订单</div>
+              </template>
+            </el-tab-pane>
+            <el-tab-pane label="待发货" name="1">
+              <template slot-scope="scope">
+                <div>待发货</div>
+              </template>
+            </el-tab-pane>
+            <el-tab-pane label="已发货" name="2">
+              <template slot-scope="scope">
+                <div>已发货</div>
+              </template>
+            </el-tab-pane>
+            <el-tab-pane label="已完成" name="3">
+              <template slot-scope="scope">
+                <div>已完成</div>
+              </template>
+            </el-tab-pane>
+            <el-tab-pane label="审核退款" name="4">
+              <template slot-scope="scope">
+                <div>正退款</div>
+              </template>
+            </el-tab-pane>
+            <el-tab-pane label="已退款" name="5">
+              <template slot-scope="scope">
+                <div>已退款</div>
+              </template>
+            </el-tab-pane>
+          </el-tabs>
+        </template>
+        <div class="order-search" style="margin: 30px 0">
+          <el-row>
+            <el-col :span="24">
+              <el-input placeholder="请输入订单号" class="input-with-select" size="mini">
+                <el-button slot="append" icon="el-icon-search"  size="mini" style="color: #fff;background-color: #409eff"></el-button>
+              </el-input>
+            </el-col>
+          </el-row>
         </div>
+      </div>
+      <div class="lists">
+        <order-item v-for="(item,index) of orderList" :key="index" :orderList="item" :index="index"></order-item>
+        <table class="tb-tfoot">
+          <tfoot>
+          <tr>
+            <td colspan="3"></td>
+            <td colspan="6" style="position: relative">
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="1000"
+                @current-change="pageChange"
+                @prev-click="preClick"
+                @next-click="nextClick"
+              >
+              </el-pagination>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
 </template>
@@ -141,8 +79,7 @@
 
   .order_list .order-search {
     position: absolute;
-    /*top: 5px;*/
-    /*right: -37px;*/
+    top: 25px;
     z-index: 1;
   }
   .order_list .el-input .el-button{
@@ -151,36 +88,7 @@
     background-color: #409eff !important;
     border:1px solid #409eff !important;
   }
-  .order_list .lists table{border:1px solid #DDD;width: 100%;border-collapse: collapse;}
-  .order_list .lists table thead{
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;font-size: 13px;line-height: 40px;
-    background: #e5e5e5; font-weight: bold;;opacity: 0.7;
-  }
-  .order_list .lists table thead th:last-child{border-right: 1px solid #ddd !important;}
-  .order_list .lists table tbody{
-    font-size:13px ;color:gray;text-align: center;
-  }
-  .order_list .lists table tbody tr{border-bottom: 1px solid #ddd}
-  .order_list .lists table tbody td{padding: 10px 10px;}
-  .order_list .lists table tbody td:last-child{border-right: 1px solid #ddd}
-  .order_list .lists table tbody td:nth-of-type(2){text-align: left}
-  .order_list .lists table tbody .goods_img{
-    display: inline-block;border: 1px solid #ddd;
-    padding: 6px;width: 60px;height: 60px;line-height: 45px;
-  }
-  .order_list .lists table tbody img{
-    width:100%;height:100%;vertical-align: middle}
-  .order_list .lists table tbody td .goods_title{
-    font-size: 10px;display: inline-block;
-    width: 70%;line-height: 20px;vertical-align: middle;
-  }
-  .order_list .lists table tbody td .goods_title i{
-    width:100%; display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-  }
+  .order_list .lists table{border:1px solid #DDD;width: 100%;border-collapse: collapse;margin-top: 25px}
   .order_list .lists table tfoot tr td{padding: 10px 0 !important;height: 22px}
   .order_list .lists table tfoot .el-pagination{
     position: absolute;right: 0;
@@ -190,13 +98,15 @@
 <script>
   import ElRow from "element-ui/packages/row/src/row";
   import ElCol from "element-ui/packages/col/src/col";
+  import OrderItem from "@/views/Management/OrderItem";
 
     export default {
-      components: {ElCol,ElRow},
+      components: {ElCol,ElRow,OrderItem},
         data() {
           return {
             msg: '订单管理',
             value: 35,
+            activeName: "0",  // 默认选卡
             orderList: [],
             dataList: [
               {
@@ -210,6 +120,7 @@
                 goodsNumber: '1',
                 payMoney: '20.00',
                 freight: '0.00',
+                tradingStatus: 0
               },
               {
                 orderID: 266477474728649170,
@@ -222,6 +133,7 @@
                 goodsNumber: '2',
                 payMoney: '34.00',
                 freight: '0.00',
+                tradingStatus: 1
               },
               {
                 orderID: 266477474728649171,
@@ -234,6 +146,7 @@
                 goodsNumber: '1',
                 payMoney: '19.00',
                 freight: '0.00',
+                tradingStatus: 2
               },
               {
                 orderID: 266477474728649173,
@@ -246,6 +159,7 @@
                 goodsNumber: '2',
                 payMoney: '30.00',
                 freight: '0.00',
+                tradingStatus: 1
               },
               {
                 orderID: 266477474728649177,
@@ -258,6 +172,85 @@
                 goodsNumber: '1',
                 payMoney: '17.00',
                 freight: '0.00',
+                tradingStatus: 0
+              },
+              {
+                orderID: 266477474728649177,
+                orderTime: '2018-11-22 17:54:41',
+                goodsImg: 'shopImage1.jpg',
+                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
+                goodsClass: '灰白TY-45型号',
+                price: '19.00',
+                groupPrice: '17.00',
+                goodsNumber: '1',
+                payMoney: '17.00',
+                freight: '0.00',
+                tradingStatus: 0
+              },
+              {
+                orderID: 266477474728649177,
+                orderTime: '2018-11-22 17:54:41',
+                goodsImg: 'shopImage1.jpg',
+                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
+                goodsClass: '灰白TY-45型号',
+                price: '19.00',
+                groupPrice: '17.00',
+                goodsNumber: '1',
+                payMoney: '17.00',
+                freight: '0.00',
+                tradingStatus: 1
+              },
+              {
+                orderID: 266477474728649177,
+                orderTime: '2018-11-22 17:54:41',
+                goodsImg: 'shopImage1.jpg',
+                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
+                goodsClass: '灰白TY-45型号',
+                price: '19.00',
+                groupPrice: '17.00',
+                goodsNumber: '1',
+                payMoney: '17.00',
+                freight: '0.00',
+                tradingStatus: 2
+              },
+              {
+                orderID: 266477474728649177,
+                orderTime: '2018-11-22 17:54:41',
+                goodsImg: 'shopImage1.jpg',
+                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
+                goodsClass: '灰白TY-45型号',
+                price: '19.00',
+                groupPrice: '17.00',
+                goodsNumber: '1',
+                payMoney: '17.00',
+                freight: '0.00',
+                tradingStatus: 3
+              },
+              {
+                orderID: 266477474728649177,
+                orderTime: '2018-11-22 17:54:41',
+                goodsImg: 'shopImage1.jpg',
+                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
+                goodsClass: '灰白TY-45型号',
+                price: '19.00',
+                groupPrice: '17.00',
+                goodsNumber: '1',
+                payMoney: '17.00',
+                freight: '0.00',
+                tradingStatus: 4
+              },
+              {
+                orderID: 266477474728649177,
+                orderTime: '2018-11-22 17:54:41',
+                goodsImg: 'shopImage1.jpg',
+                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
+                goodsClass: '灰白TY-45型号',
+                price: '19.00',
+                groupPrice: '17.00',
+                goodsNumber: '1',
+                payMoney: '17.00',
+                freight: '0.00',
+                tradingStatus: 1
               }
             ]
           }
@@ -266,6 +259,20 @@
         this.orderList=this.dataList;
       },
       methods:{
+        handleClick(tab, event,) { // 点击选项卡
+//          console.log('点击' + tab.name);
+          if(tab.name==0){
+            this.orderList=this.dataList;
+          }else {
+            this.orderList = [];
+            this.dataList.forEach((item) => {
+              if (item.tradingStatus == (tab.name-1)) {
+                this.orderList.push(item);
+//                console.log('状态' + item.tradingStatus);
+              }
+            })
+          }
+        },
         pageChange(val){
 //        console.log(`当前页: ${val}`);
         },
@@ -274,7 +281,7 @@
         },
         nextClick(val){
 //        console.log(`下一页: ${val}`);
-        }
+        },
       }
     }
 </script>

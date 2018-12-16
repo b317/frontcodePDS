@@ -6,6 +6,7 @@ import ClientListManage from '@/views/Management/ClientListManage'
 import CouponManage from '@/views/Management/CouponManage'
 import GroupManage from '@/views/Management/GroupManage'
 import OrderManage from '@/views/Management/OrderManage'
+import OrderItem from '@/views/Management/OrderItem'
 import ProductList from '@/views/Management/ProductList'
 import ProductSort from '@/views/Management/ProductSort'
 import ProductUpdate from '@/views/Management/ProductUpdate'
@@ -40,6 +41,11 @@ export default new Router({
       path: '/OrderManage',
       name: 'OrderManage',
       component: OrderManage
+    },
+    {
+      path: '/OrderItem',
+      name: 'OrderItem',
+      component:OrderItem
     },
     {
       path: '/ProductList',
