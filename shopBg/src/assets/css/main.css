@@ -418,10 +418,17 @@ width: 5%;display: inline-block;height: 240px;
 .coupons_list>div:first-child{
   margin-top: 20px;
 }
-.coupons_list>div:first-child .el-button{
+
+.coupons_list>div:first-child .check_coupon{
+  width: 25%;float: left;
+}
+.coupons_list>div:first-child .check_coupon .el-button:hover{
+  background: #409eff;color: white;border: 1px solid #409eff;border-radius: 0;
+}
+.coupons_list>div:first-child .add_coupon{
   border-radius: 5px;border:1px solid #409EFF;color: #409EFF;float: right;
 }
-.coupons_list>div:first-child .el-button i{font-weight: bolder;padding-right: 3px;}
+.coupons_list>div:first-child .add_coupon i{font-weight: bolder;padding-right: 3px;}
 
 .coupons_list .coupons_table .el-tabs__item:hover {
   color: #28B779 !important;
@@ -436,7 +443,7 @@ width: 5%;display: inline-block;height: 240px;
 
 }
 .coupons_list table{
-  width: 100%;border-collapse: collapse;
+  width: 100%;border-collapse: collapse;margin-top: 15px;
 }
 .coupons_list thead{
   border-top:2px solid #DDD;border-bottom: 1px solid #ddd;
@@ -450,4 +457,44 @@ width: 5%;display: inline-block;height: 240px;
   text-align: center;border-bottom: 1px solid #ddd;color: grey;font-size: 13px;padding: 10px 0;
 }
 
+.addCoupon{width: 97%}
+.addCoupon .addCoupon_input{
+  font-size: 15px;color: #606266 !important;
+}
+.addCoupon .addCoupon_input>div{padding: 20px 0;border-bottom:1px dotted #ddd;}
+.addCoupon .addCoupon_input>div:hover{background:#F9F9F9}
+.addCoupon .addCoupon_input>div>span{
+  display: inline-block;width: 16%;text-align: right;padding-right: 25px;vertical-align: middle;
+}
+.addCoupon .addCoupon_input .el-input{
+  width: 40%;
+}
+.addCoupon .addCoupon_input .el-select  .el-input{width: 100% !important;}
+.addCoupon .addCoupon_input .el-select .el-input__inner{
+  color:#a7a6ac !important;
+}
+.addCoupon .addCoupon_input .remind{
+  font-size: 12px;color: #bebebe;
+  width: 70%;display: inline-block;
+  margin-top: 8px;
+}
+.addCoupon .addCoupon_input .el-radio__input{padding-right: 5px !important;}
+.addCoupon .addCoupon_input .el-radio__inner{
+  padding: 6px !important;width: 12px !important;height: 12px!important;
+}
+
+.addCoupon>div:first-child{
+  margin-top: 20px;border-bottom:1px solid #28B779;padding-bottom: 20px;
+}
+.addCoupon>div:first-child .el-button{
+  border-radius: 5px;border:1px solid #409EFF;color: #409EFF;float: right;
+}
+.addCoupon>div:first-child .el-button:first-child img{
+  vertical-align: middle;margin-right: 3px;
+}
+.addCoupon>div:first-child .el-button:last-child{float: right}
+
+.addCoupon .add_sure{
+  padding:20px 0;margin-bottom: 80px;padding-left: 120px;
+}
 /*CouponManage结束*/
