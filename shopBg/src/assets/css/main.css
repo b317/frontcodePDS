@@ -408,7 +408,46 @@ width: 5%;display: inline-block;height: 240px;
   background-color: #409eff ;
   border:1px solid #409eff ;
 }
-
 .product_delete .input-with-select{width: 25%;margin-bottom: 30px}
 .product_delete .input-with-select .el-button:hover{opacity: 0.8}
 /*ProductDelete结束*/
+
+
+/*CouponManage开始*/
+.coupons_list{margin-right: 30px}
+.coupons_list>div:first-child{
+  margin-top: 20px;
+}
+.coupons_list>div:first-child .el-button{
+  border-radius: 5px;border:1px solid #409EFF;color: #409EFF;float: right;
+}
+.coupons_list>div:first-child .el-button i{font-weight: bolder;padding-right: 3px;}
+
+.coupons_list .coupons_table .el-tabs__item:hover {
+  color: #28B779 !important;
+}
+.coupons_list .coupons_table .el-tabs__item.is-active {
+  color: #28B779 !important;
+}
+.coupons_list .coupons_table .el-tabs__active-bar{
+  background-color:#28B779 !important;
+}
+.coupons_list .coupons_table{
+
+}
+.coupons_list table{
+  width: 100%;border-collapse: collapse;
+}
+.coupons_list thead{
+  border-top:2px solid #DDD;border-bottom: 1px solid #ddd;
+  vertical-align: middle;font-size: 13px;line-height: 40px;
+  background: #fafafa; font-weight: bold;;opacity: 0.7;
+}
+.coupons_list tbody td:first-child{
+  font-weight: bold;opacity: 0.8;font-size: 14px;
+}
+.coupons_list tbody td{
+  text-align: center;border-bottom: 1px solid #ddd;color: grey;font-size: 13px;padding: 10px 0;
+}
+
+/*CouponManage结束*/
