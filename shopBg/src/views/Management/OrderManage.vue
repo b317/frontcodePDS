@@ -1,7 +1,7 @@
 <template>
     <div class="order_list">
       <div class="bread_crumbs">
-        <span>订单管理&nbsp;--&nbsp;订单列表</span>
+        <span>订单管理&nbsp;--&nbsp;<i class="present">订单列表</i></span>
       </div>
       <div class="grid-content bg-purple">
         <template>
@@ -49,8 +49,22 @@
         </div>
       </div>
       <div class="lists">
-        <order-item v-for="(item,index) of orderList" :key="index" :orderList="item" :index="index"></order-item>
-        <table class="tb-tfoot">
+        <table>
+          <thead>
+          <tr>
+            <th class="">订单号/时间</th>
+            <th class="">商品信息</th>
+            <th class="">单价</th>
+            <th>团购价</th>
+            <th>数量</th>
+            <th>实付款</th>
+            <th>交易状态</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <order-item v-for="(item,index) of orderList" :key="index" :orderList="item" :index="index"></order-item>
+          </tbody>
           <tfoot>
           <tr>
             <td colspan="3"></td>
@@ -89,6 +103,15 @@
     border:1px solid #409eff !important;
   }
   .order_list .lists table{border:1px solid #DDD;width: 100%;border-collapse: collapse;margin-top: 25px}
+  .order_list .lists table thead{
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;font-size: 13px;line-height: 40px;
+    background: #e5e5e5; font-weight: bold;;opacity: 0.7;
+  }
+  .order_list .lists table thead th:last-child{border-right: 1px solid #ddd !important;}
+  .order_list .lists table tbody{
+    font-size:13px ;color:gray;text-align: center;
+  }
   .order_list .lists table tfoot tr td{padding: 10px 0 !important;height: 22px}
   .order_list .lists table tfoot .el-pagination{
     position: absolute;right: 0;
