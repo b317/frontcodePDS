@@ -1,7 +1,13 @@
 <template>
   <div class="coupons">
     <div class="bread_crumbs">
-      <span>优惠券管理</span>
+      <span>优惠券管理&nbsp;
+        <i v-if="activeName=='first'&& !$route.query.add_coupon && !$route.query.modify_coupon" class="present">--&nbsp;全部优惠券</i>
+        <i v-if="activeName=='second'&& !$route.query.add_coupon && !$route.query.modify_coupon" class="present">--&nbsp;未过期优惠券</i>
+        <i v-if="activeName=='third'&& !$route.query.add_coupon && !$route.query.modify_coupon" class="present">--&nbsp;已过期优惠券</i>
+        <i v-if="$route.query.add_coupon" class="present">--&nbsp;添加优惠券</i>
+        <i v-if="$route.query.modify_coupon" class="present">--&nbsp;修改优惠券</i>
+      </span>
     </div>
     <div class="coupons_list" v-if="!$route.query.add_coupon && !$route.query.modify_coupon">
       <div>
