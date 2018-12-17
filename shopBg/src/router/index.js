@@ -11,6 +11,7 @@ import OrderDetail from '@/views/Management/OrderDetail'
 import ProductList from '@/views/Management/ProductList'
 import ProductSort from '@/views/Management/ProductSort'
 import ProductUpdate from '@/views/Management/ProductUpdate'
+import ProductDelete from '@/views/Management/ProductDelete'
 import GroupSendMes from '@/views/MesCenter/GroupSendMes'
 import SystemMes from '@/views/MesCenter/SystemMes'
 Vue.use(Router);
@@ -66,6 +67,11 @@ export default new Router({
       path: '/ProductUpdate',
       name: 'ProductUpdate',
       component: ProductUpdate
+    },
+    {
+      path: '/ProductDelete',
+      name: 'ProductDelete',
+      component: ProductDelete
     },
     {
       path: '/GroupSendMes',

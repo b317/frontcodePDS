@@ -1,7 +1,7 @@
 <template>
   <div class="product_list">
     <div class="bread_crumbs">
-      <span>商品管理&nbsp;--&nbsp;商品列表</span>
+      <span>商品管理&nbsp;<i class="present">--&nbsp;商品列表</i></span>
     </div>
     <div class="add_new">
       <el-button size="small" @click="addNewProduct"><i class="el-icon-plus"></i>添加新商品</el-button>
@@ -17,6 +17,7 @@
     </div>
     <div class="lists">
     <div>
+      <div>
         <table>
           <thead>
           <tr>
@@ -78,6 +79,7 @@
           </tr>
           </tfoot>
         </table>
+      </div>
     </div>
   </div>
   </div>
