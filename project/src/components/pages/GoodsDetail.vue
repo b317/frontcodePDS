@@ -245,6 +245,7 @@
     text-align: left;
   }
   table tr td.border-result{border-left: 1px solid #ececec;}
+
   .detail-list-tr td ul{
     margin: 0;
     padding: 0;
@@ -273,7 +274,6 @@
     display: inline-block;
     vertical-align: text-bottom;
   }
-
   .trade-status-table tr td .detailBlock{padding-left: 25px;}
   .detailBlock dl dt,.detailBlock dl dd{display: inline-block;}
   .detailBlock .trade-detail-imfor{

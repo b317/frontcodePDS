@@ -261,6 +261,8 @@
       methods:{
         handleClick(tab, event,) { // 点击选项卡
 //          console.log('点击' + tab.name);
+          let urlStr = '/OrderManage?orderType=' + tab.name;
+          this.$router.push(urlStr);
           if(tab.name==0){
             this.orderList=this.dataList;
           }else {

@@ -7,6 +7,7 @@ import CouponManage from '@/views/Management/CouponManage'
 import GroupManage from '@/views/Management/GroupManage'
 import OrderManage from '@/views/Management/OrderManage'
 import OrderItem from '@/views/Management/OrderItem'
+import OrderDetail from '@/views/Management/OrderDetail'
 import ProductList from '@/views/Management/ProductList'
 import ProductSort from '@/views/Management/ProductSort'
 import ProductUpdate from '@/views/Management/ProductUpdate'
@@ -46,6 +47,11 @@ export default new Router({
       path: '/OrderItem',
       name: 'OrderItem',
       component:OrderItem
+    },
+    {
+      path: '/OrderDetail',
+      name: 'OrderDetail',
+      component:OrderDetail
     },
     {
       path: '/ProductList',
