@@ -41,15 +41,58 @@
               <span v-if="orderList.tradingStatus==3">正退款中</span>
               <span v-if="orderList.tradingStatus==4">交易失败</span>
             </p>
-            <p><a href="#">订单详情</a></p>
+            <p><router-link href="javascript:void(0)" to="/OrderDetail">订单详情</router-link></p>
             <p v-if="orderList.tradingStatus==1||orderList.tradingStatus==2"><a href="#">物流跟踪</a></p>
           </td>
           <td>
             <div style="margin-bottom: 8px">
-              <el-button type="success" size="mini">取消<i class="el-icon-remove-outline"></i></el-button>
+                <span v-if="orderList.tradingStatus==0">
+                  <el-button type="success" size="mini" @click="dialogFormVisible = true">发货<i class="el-icon-location-outline"></i>
+                  </el-button>
+                  <!-- 快递对话框 -->
+                  <el-dialog title="物流快递" :visible.sync="dialogFormVisible">
+                    <el-form :model="form">
+                      <el-form-item label="快递名称" :label-width="formLabelWidth">
+                        <el-select
+                          style="width: 100%"
+                          v-model="form.trackingName"
+                          filterable
+                          allow-create
+                          default-first-option
+                          placeholder="请输入或选择快递">
+                          <el-option
+                            v-for="item in options5"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                          </el-option>
+                        </el-select>
+                      </el-form-item>
+                      <el-form-item label="快运单号" :label-width="formLabelWidth">
+                        <el-input v-model="form.trackingNumber" autocomplete="off"></el-input>
+                      </el-form-item>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                      <el-button @click="dialogFormVisible = false">取 消</el-button>
+                      <el-button type="primary" @click="dialogFormVisible = false">确认</el-button>
+                    </div>
+                  </el-dialog>
+                </span>
+                <span v-if="orderList.tradingStatus==3">
+                   <el-button type="success" size="mini">退款<i class="el-icon-remove-outline"></i>
+                   </el-button>
+                </span>
             </div>
-            <div>
-              <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
+            <div style="margin-bottom: 8px">
+              <span v-if="orderList.tradingStatus==0||orderList.tradingStatus==3">
+                <el-button size="mini">取消<i class="el-icon-remove-outline"></i></el-button>
+              </span>
+              <span v-if="orderList.tradingStatus==2||orderList.tradingStatus==4">
+                <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
+              </span>
+              <span v-if="orderList.tradingStatus==1">
+                已发货
+              </span>
             </div>
           </td>
         </tr>
@@ -62,11 +105,33 @@
       props:['orderList','index'],
         data() {
             return {
-                msg: 'hello world'
+              sg: 'hello world',
+              dialogFormVisible: false,
+              options5: [{
+                value: '顺丰快递',
+                label: '顺丰快递'
+              }, {
+                value: '韵达快递',
+                label: '韵达快递'
+              }, {
+                value: '圆通快递',
+                label: '圆通快递'
+              }, {
+                value: '申通快递',
+                label: '申通快递'
+              }, {
+                value: '中通快递',
+                label: '中通快递'
+              }],
+              select: [],
+              form: {
+                trackingName: '',
+                trackingNumber: '',
+              },
+              formLabelWidth: '120px'
             }
         },
       methods: {
-
       }
     }
 </script>
@@ -103,4 +168,6 @@
   }
   table tbody td p a{color: gray;text-decoration: none}
   table tbody td p a:hover{color: #67c23a;text-decoration: underline}
+  /* 快递 */
+
 </style>
