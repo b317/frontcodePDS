@@ -18,7 +18,7 @@
         <div style="clear: both"></div>
       </div>
       <div class="coupons_table">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName">
           <el-tab-pane label="全部" name="first">
             <table>
               <thead>
