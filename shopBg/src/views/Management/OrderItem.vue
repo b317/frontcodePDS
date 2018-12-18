@@ -33,54 +33,52 @@
     </td>
     <td>
       <div style="margin-bottom: 8px">
-                <span v-if="orderList.tradingStatus==0">
-                  <el-button type="success" size="mini" @click="dialogFormVisible = true">发货<i
-                    class="el-icon-location-outline"></i>
-                  </el-button>
-                  <!-- 快递对话框 -->
-                  <el-dialog title="物流快递" :visible.sync="dialogFormVisible">
-                    <el-form :model="form">
-                      <el-form-item label="快递名称" :label-width="formLabelWidth">
-                        <el-select
-                          style="width: 100%"
-                          v-model="form.trackingName"
-                          filterable
-                          allow-create
-                          default-first-option
-                          placeholder="请输入或选择快递">
-                          <el-option
-                            v-for="item in options5"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                          </el-option>
-                        </el-select>
-                      </el-form-item>
-                      <el-form-item label="快运单号" :label-width="formLabelWidth">
-                        <el-input v-model="form.trackingNumber" autocomplete="off"></el-input>
-                      </el-form-item>
-                    </el-form>
-                    <div slot="footer" class="dialog-footer">
-                      <el-button @click="dialogFormVisible = false">取 消</el-button>
-                      <el-button type="primary" @click="dialogFormVisible = false">确认</el-button>
-                    </div>
-                  </el-dialog>
-                </span>
+        <span v-if="orderList.tradingStatus==0">
+          <el-button type="success" size="mini" @click="dialogFormVisible = true">发货<i
+            class="el-icon-location-outline"></i>
+          </el-button>
+          <!-- 快递对话框 -->
+          <el-dialog title="物流快递" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+              <el-form-item label="快递名称" :label-width="formLabelWidth">
+                <el-select
+                  style="width: 100%"
+                  v-model="form.trackingName"
+                  filterable
+                  allow-create
+                  default-first-option
+                  placeholder="请输入或选择快递">
+                  <el-option
+                    v-for="item in options5"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="快运单号" :label-width="formLabelWidth">
+                <el-input v-model="form.trackingNumber" autocomplete="off"></el-input>
+              </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+              <el-button @click="dialogFormVisible = false">取 消</el-button>
+              <el-button type="primary" @click="dialogFormVisible = false">确认</el-button>
+            </div>
+          </el-dialog>
+        </span>
         <span v-if="orderList.tradingStatus==3">
-                   <el-button type="success" size="mini">退款<i class="el-icon-remove-outline"></i>
-                   </el-button>
-                </span>
+          <el-button type="success" size="mini">退款<i class="el-icon-remove-outline"></i>
+          </el-button>
+        </span>
       </div>
       <div style="margin-bottom: 8px">
-              <span v-if="orderList.tradingStatus==0||orderList.tradingStatus==3">
-                <el-button size="mini">取消<i class="el-icon-remove-outline"></i></el-button>
-              </span>
+        <span v-if="orderList.tradingStatus==0||orderList.tradingStatus==3">
+          <el-button size="mini">取消<i class="el-icon-remove-outline"></i></el-button>
+        </span>
         <span v-if="orderList.tradingStatus==2||orderList.tradingStatus==4">
-                <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
-              </span>
-        <span v-if="orderList.tradingStatus==1">
-                已发货
-              </span>
+          <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
+        </span>
+        <span v-if="orderList.tradingStatus==1">已发货</span>
       </div>
     </td>
   </tr>
