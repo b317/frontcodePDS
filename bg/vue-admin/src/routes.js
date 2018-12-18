@@ -7,6 +7,7 @@ import userTable from './views/user/userTable.vue'
 import setBanner from './views/banner/setBanner.vue'
 import power from './views/power/power.vue'
 import admin from './views/admin/admin.vue'
+import shop from './views/shop/shop.vue'
 let routes = [
     {
         path: '/login',
@@ -60,6 +61,14 @@ let routes = [
         leaf: true,//只有一个节点
         children: [
             { path: '/admin', component: admin, name: '管理员管理' }
+        ]
+    },{
+        path: '/',
+        component: Home,
+        name: '',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/shop', component: shop, name: '商铺管理' }
         ]
     },
     {

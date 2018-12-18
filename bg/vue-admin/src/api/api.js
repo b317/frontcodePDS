@@ -89,3 +89,22 @@ export const delmainsort = (id) => { return axios.delete(` /v1/admin/mainsort/${
 export const delsubsort = (id) => { return axios.delete(`/v1/admin/subsort/${id}`,{headers:{
     "Authorization":"Bearer "+sessionStorage.getItem('token')
 }}); };
+//商铺管理
+export const addshop = params => { return axios.post(` /v1/admin/merchant/`, params,{headers:{
+    "Authorization":"Bearer "+sessionStorage.getItem('token')
+}}); };
+export const checkshop = (params,id) => {
+    return axios.put(`/v1/admin/merchant/${id}`,  params,{headers:{
+    "Authorization":"Bearer "+sessionStorage.getItem('token')
+}}); };
+export const getshop = params => { return axios.get(`/v1/admin/merchant/?offset=${params.offset}&limit=10`, { params: params,headers:{
+    "Authorization":"Bearer "+sessionStorage.getItem('token')
+}}); };
+export const getshopdetail = id => { return axios.get(`/v1/admin/merchant/?id=${id}`, {headers:{
+    "Authorization":"Bearer "+sessionStorage.getItem('token')
+}}); };
+export const delshop = (id) => { 
+    console.log(id)
+    return axios.delete(`/v1/admin/merchant/${id}`,{headers:{
+    "Authorization":"Bearer "+sessionStorage.getItem('token')
+}}); };

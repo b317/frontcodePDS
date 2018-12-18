@@ -1,30 +1,33 @@
 // initial state
 // shape: [{ id, quantity }]
 const state = {
-    userName: "",
+    username: "",
     id:"",
-    role_id:""
+    role_id:"",
+    headpic:""
 }
   
 // getters
 const getters = {
-    username:state=>state.userName,
+    username:state=>state.username,
     id:state=>state.id,
-    role_id:state=>state.role_id
+    role_id:state=>state.role_id,
+    headpic:state=>state.headpic
 }
 // mutations
 const mutations = {
-    setUserName: (state,{userName}) => {
-        state.userName = userName
-        console.log(userName)
+    setUserName: (state,username) => {
+        state.username = username
     },
-    setRoleId: (state,{role_id}) => {
+    setRoleId: (state,role_id) => {
         state.role_id = role_id
-        console.log(role_id)
     },
-    setId: (state,{id}) => {
+    setId: (state,id) => {
         state.id = id
-        console.log(id)
+    },
+    setpic: (state,str) => {
+        console.log(str)
+        state.headpic = str
     },
 }
 // actions

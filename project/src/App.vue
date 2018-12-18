@@ -64,8 +64,11 @@ export default {
     NavFooter,LoginFooter,TopBtn
   },
   computed: {
+    ...mapGetters({
+        username: 'user/username'
+      }),
     showName(){
-      return getName() === "" ? "请登录":getName()
+      return this.username === "" ? "请登录":this.username
     },
     title(){
       if(this.activeIndex == 2){
@@ -84,27 +87,14 @@ export default {
   },
   mounted(){
     if(getId()){
-      let id = getId()
-      getUserInfo({
-        id:id
-      }).then((res) => {
+      getUserInfo({id:getId()}).then(res => {
         let data = res.data.data
-        this.setId({id:data.id})
-        if(data.nick_name != ""){
-          this.setName({username:data.nick_name})
-        }else{
-          this.setName({username:data.username})
-        }
-        this.setRoleId({role_id:data.role_id})
-        if(getName() == ""){
-          if(data.nick_name==""){
-            setName(data.username)
-          }else{
-            setName(data.nick_name)
-          }
-        }
+        let a = data.nick_name==""?data.username:data.nick_name
+        this.setuserName(a)
+        this.setpic("http://134.175.113.58/"+data.head_image)
       })
     }
+    
     this.$bus.$on("loading",(a) => {
       this.isLoading = a
     })
@@ -114,7 +104,8 @@ export default {
     ...mapMutations({
       setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
       setId:'user/setId',
-      setRoleId:'user/setRoleId'
+      setRoleId:'user/setRoleId',
+      setpic:"user/setpic"
     }),
       handleSelect(key, keyPath) {
         this.activeIndex = key;

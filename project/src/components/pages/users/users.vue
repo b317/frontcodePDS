@@ -3,8 +3,8 @@
   <div class="user">
     <beaty-date></beaty-date>
     <div class="userInfo">
-      <div class="touxiang"><img src="@/assets/touxiang.jpg"></div>
-      <div class="username">{{username}}(用户)</div>
+      <div class="touxiang"><img :src="src"></div>
+      <div class="username">{{username}}</div>
       <div class="set">
         <div @click="setClick(1)">个人中心</div>
         <div class="address" @click="setClick(2)">设置收货地址</div>
@@ -21,8 +21,10 @@
 <script>
 import leftTab from "@/components/module/leftTab"
 import beatyDate from "@/components/module/beatyDate"
+import {getId,getName,setName} from "@/util/auth";
+import {getUserInfo} from "@/api/http";
 
-import { mapState,mapGetters } from 'vuex'
+import { mapState,mapGetters,mapMutations } from 'vuex'
 
 export default {
   components:{
@@ -35,15 +37,28 @@ export default {
           coupon:"我的红包",
           order:"我的团购",
           goods:"我的订单",
-        },
+        }
     }
   },
   computed:{
     ...mapGetters({
-      username:'user/username'
+      src:'user/headpic',
+      username:'user/username',
+    }),
+  },
+  mounted() {
+    getUserInfo({id:getId()}).then(res => {
+      let data = res.data.data
+      let username = data.nick_name == "" ? data.username:data.nick_name
+      this.setuserName(username)
+      this.setpic("http://134.175.113.58/"+data.head_image)
     })
   },
   methods:{
+    ...mapMutations({
+      setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+      setpic:'user/setpic'
+    }),
     setClick(index){
       if(index == 1){
         this.$router.push("userInfo")
