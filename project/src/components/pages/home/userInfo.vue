@@ -1,8 +1,8 @@
 <template>
   <div class="content">
       <div class="header">
-            <img :src=src>
-            <div class="name">{{username}}</div>
+            <img :src=src  @click="showLogin" style="cursor: pointer;">
+            <div class="name">{{showname}}</div>
             <div class="wrap">
                 <div class="tip" @click="shownews">消息</div>
                 <div class="tip" @click="showGoods">订单</div>
@@ -46,6 +46,9 @@ export default {
       }
     },
   methods: {
+    showLogin(){
+      this.$router.push("/login")
+    },
     showGoods() {
       this.$router.push("/goods")
     },

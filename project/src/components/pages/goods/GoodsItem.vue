@@ -5,7 +5,6 @@
       <tr style="height: 42px;background-color: #f5f5f5;border: 1px solid #e8e8e8;">
         <td style="width: 330px;">
           <div class="h-order-num">
-            <!--<span><el-checkbox v-model="checked"></el-checkbox><label>{{goods.orderTime}}</label></span>-->
             <span><label>{{goods.orderTime}}</label></span>
             <span class="order-num">订单号：<span>{{goods.orderNumber}}</span></span>
           </div>
@@ -38,10 +37,9 @@
         </td>
         <td style="width: 87px;border: none;">
           <div>
-            <p style="color: #9c9c9c;">
-              <del><span>￥</span><span>{{goods.originalPrice}}</span></del>
-            </p>
+            <p style="color: #9c9c9c;"><del><span>￥</span><span>{{goods.originalPrice}}</span></del></p>
             <p><span>￥</span><span>{{goods.price}}</span></p>
+            <p style="color: red;font-weight: bolder"><span>￥</span><span>{{goods.groupPrice}}</span></p>
           </div>
         </td>
         <td style="width: 44px;border: none;">
@@ -51,8 +49,8 @@
         </td>
         <td style="width: 106px;border-left: none;">
           <div>
-            <p><span v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3"><a href="#">申请退款</a></span>
-              <span v-if="goods.orderStatus==0 || goods.orderStatus==5"><a href="#"></a></span>
+            <p>
+              <span v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3"><a href="#">申请退款</a></span>
             </p>
             <p><span><a href="#">投诉商家</a></span></p>
           </div>
@@ -66,24 +64,23 @@
         <td rowspan="2" style="width: 94px;">
           <div>
             <p>
-              <!--<span v-if="goods.orderStatus==0">等待付款</span>-->
-              <span v-if="goods.orderStatus==1">已经付款</span>
-              <span v-if="goods.orderStatus==2">等待发货</span>
-              <span v-if="goods.orderStatus==3">已经发货</span>
-              <span v-if="goods.orderStatus==4">交易完成</span>
-              <span v-if="goods.orderStatus==5">正退款中</span>
-              <span v-if="goods.orderStatus==6">交易失败</span>
+              <span v-if="goods.orderStatus==0">等待付款</span>
+              <span v-if="goods.orderStatus==1">等待发货</span>
+              <span v-if="goods.orderStatus==2">已经发货</span>
+              <span v-if="goods.orderStatus==3">交易成功</span>
+              <span v-if="goods.orderStatus==4">正退款中</span>
+              <span v-if="goods.orderStatus==5">交易失败</span>
             </p>
             <p><span @click="showGoodsDetail" style="cursor: pointer;">订单详情</span></p>
-            <p><span v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3 || goods.orderStatus==4">
+            <p><span v-if="goods.orderStatus==2 || goods.orderStatus==3">
               <a href="#">查看物流</a></span>
             </p>
           </div>
         </td>
         <td rowspan="2" style="width: 75px;vertical-align: middle;">
           <div>
-            <p v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3"><el-button size="mini" type="primary" plain @click="isRefund">退款</el-button></p>
-            <p><el-button size="mini" type="primary" plain @click="isDelete">删除</el-button></p>
+            <p v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3"><el-button size="mini" type="primary" plain @click="isRefund">取消订单</el-button></p>
+            <p><el-button size="mini" type="primary" plain @click="isDelete">删除订单</el-button></p>
           </div>
         </td>
       </tr>
@@ -106,56 +103,6 @@
     </table>
   </div>
 </template>
-<style scoped>
-  table{border: 1px solid #e8e8e8;}
-  table a {text-decoration: none;color: #3c3c3c;}
-  table a:hover {text-decoration: none;color: #ff4200;}
-  table tr.g-tr-center td{
-    line-height: 1;
-    text-align: center;
-    vertical-align: top;}
-  .goods-item-table,.goods-item-table tr,.goods-item-table td {
-    border-collapse: collapse;
-  }
-  .g-tr-center td{
-    border-width: 1px 1px 0 0;
-    border-style: solid;
-    border-color: #ececec;
-  }
-  .goods-item-table {
-    color: #3c3c3c;
-    font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
-    /*margin-left: 225px;*/
-    margin-top: 10px;
-  }
-  .h-order-num {
-    margin-left: 12px;
-  }
-  .h-order-num label {
-    margin-left: 5px;
-  }
-  .h-order-num .order-num {
-    margin-left: 10px;
-  }
-  .g-shop-name{
-    display: inline-block;
-    width: 70px;
-    line-height: 16px;
-    vertical-align: middle;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: left;
-  }
-  .g-img-a{
-    float: left;
-    margin: 12px;
-  }
-  .g-cont-a{
-    margin-left: 90px;
-    text-align: left;
-  }
-</style>
 <script>
   import ElButton from "../../../../node_modules/element-ui/packages/button/src/button.vue";
 
@@ -232,3 +179,54 @@
     }
   }
 </script>
+
+<style scoped>
+  table{border: 1px solid #e8e8e8;}
+  table a {text-decoration: none;color: #3c3c3c;}
+  table a:hover {text-decoration: none;color: #ff4200;}
+  table tr.g-tr-center td{
+    line-height: 1;
+    text-align: center;
+    vertical-align: top;}
+  .goods-item-table,.goods-item-table tr,.goods-item-table td {
+    border-collapse: collapse;
+  }
+  .g-tr-center td{
+    border-width: 1px 1px 0 0;
+    border-style: solid;
+    border-color: #ececec;
+  }
+  .goods-item-table {
+    color: #3c3c3c;
+    font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
+    /*margin-left: 225px;*/
+    margin-top: 10px;
+  }
+  .h-order-num {
+    margin-left: 12px;
+  }
+  .h-order-num label {
+    margin-left: 5px;
+  }
+  .h-order-num .order-num {
+    margin-left: 10px;
+  }
+  .g-shop-name{
+    display: inline-block;
+    width: 70px;
+    line-height: 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+  }
+  .g-img-a{
+    float: left;
+    margin: 12px;
+  }
+  .g-cont-a{
+    margin-left: 90px;
+    text-align: left;
+  }
+</style>

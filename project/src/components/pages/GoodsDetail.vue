@@ -9,13 +9,13 @@
           <span>服务热线：</span><em><span class="ui-trade-label ">0000 000 000</span></em>
         </div>
       </div>
-      <div>
-        <el-steps :space="200" :active="5" finish-status="success">
-          <el-step title="已完成" description="拍下商品"></el-step>
-          <el-step title="已完成" description="等待付款"></el-step>
-          <el-step title="已完成" description="进行付款"></el-step>
-          <el-step title="已完成" description="完成付款"></el-step>
-          <el-step title="已完成" description="交易成功"></el-step>
+      <div class="appStep">
+        <el-steps :space="200" :active="active" finish-status="success">
+          <el-step title="拍下商品" description="2018-12-10 21:46:44"></el-step>
+          <el-step title="进行付款" description="2018-12-10 21:46:57"></el-step>
+          <el-step title="卖家发货" description="2018-12-11 09:55:21"></el-step>
+          <el-step title="确认收货" description="2018-12-13 16:06:32"></el-step>
+          <el-step title="交易成功" description="2018-12-13 16:06:52"></el-step>
         </el-steps>
       </div>
       <div class="appDetailPanel">
@@ -57,13 +57,12 @@
             <td><span>1</span></td>
             <td><span></span></td>
             <td class="border-result">
-              <!--<span>交易成功</span>-->
-              <span v-if="this.$route.params.orderStatus==1">已经付款</span>
-              <span v-if="this.$route.params.orderStatus==2">等待发货</span>
-              <span v-if="this.$route.params.orderStatus==3">已经发货</span>
-              <span v-if="this.$route.params.orderStatus==4">交易完成</span>
-              <span v-if="this.$route.params.orderStatus==5">正退款中</span>
-              <span v-if="this.$route.params.orderStatus==6">交易失败</span>
+              <span v-if="this.$route.params.orderStatus==0">等待付款</span>
+              <span v-if="this.$route.params.orderStatus==1">等待发货</span>
+              <span v-if="this.$route.params.orderStatus==2">已经发货</span>
+              <span v-if="this.$route.params.orderStatus==3">交易完成</span>
+              <span v-if="this.$route.params.orderStatus==4">正退款中</span>
+              <span v-if="this.$route.params.orderStatus==5">交易失败</span>
             </td>
           </tr>
           </tbody>
@@ -76,7 +75,18 @@
               <div class="detailBlock">
                 <div class="trade-detail-imfor">
                   <span class="imfor-icon"><img src="../../../static/T1e.aoXuXdXXa94Hfd-32-32.png"></span>
-                  <span class="imfor-title"><span class=""><h3>订单状态: <span>交易成功</span></h3></span></span>
+                  <span class="imfor-title">
+                    <span class="">
+                      <h3>订单状态:
+                        <span v-if="this.$route.params.orderStatus==0">等待付款</span>
+                        <span v-if="this.$route.params.orderStatus==1">等待发货</span>
+                        <span v-if="this.$route.params.orderStatus==2">已经发货</span>
+                        <span v-if="this.$route.params.orderStatus==3">交易成功</span>
+                        <span v-if="this.$route.params.orderStatus==4">正退款中</span>
+                        <span v-if="this.$route.params.orderStatus==5">交易失败</span>
+                      </h3>
+                    </span>
+                  </span>
                 </div>
                 <div class="trade-detail-prompt">
                   <div class="dotted-node"><span>&nbsp;</span><span>物流：</span></div>
@@ -188,13 +198,24 @@
     </div>
 </template>
 <script>
-    export default {
-        data() {
-            return {
-                msg: 'hello world'
-            }
-        }
+  export default {
+    props: [],
+    data() {
+      return {
+        msg: 'hello world',
+        active: 0
+      }
+    },
+    methods: {
+
+    },
+    mounted(){
+      this.active = this.$route.params.orderStatus + 1
+      if( this.active == 4){
+        this.active =5
+      }
     }
+  }
 </script>
 <style scoped>
   ul, li{list-style: none;}
@@ -224,6 +245,7 @@
     text-align: left;
   }
   table tr td.border-result{border-left: 1px solid #ececec;}
+
   .detail-list-tr td ul{
     margin: 0;
     padding: 0;
@@ -252,7 +274,6 @@
     display: inline-block;
     vertical-align: text-bottom;
   }
-
   .trade-status-table tr td .detailBlock{padding-left: 25px;}
   .detailBlock dl dt,.detailBlock dl dd{display: inline-block;}
   .detailBlock .trade-detail-imfor{
