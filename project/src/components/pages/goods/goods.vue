@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-content">
     <el-row>
       <el-col :span="5">
         <left-tab type="card" v-bind:routeArr="routeArr"></left-tab>
@@ -175,6 +175,9 @@
   </div>
 </template>
 <style scoped>
+  .my-content{
+    min-height: 600px;
+  }
   .bg-purple {
     position: relative;
   }

@@ -30,8 +30,9 @@
 
 <script>
 import {setName,getName,setId,setRoleId} from "@/util/auth";
-import {login,loginByvCode,getvCode} from "@/api/http";
+import {login,loginByvCode,getvCode,getUserInfo } from "@/api/http";
 import { mapState,mapGetters,mapMutations } from 'vuex'
+import { setCookie, getCookie } from '../../../../bg/vue-admin/src/common/auth';
 
 export default {
   data () {
@@ -54,6 +55,7 @@ export default {
     }
   },
   mounted() {
+    this.phone = getCookie("phone")
   },
   methods:{
     ...mapMutations({
@@ -99,8 +101,8 @@ export default {
       }
       this.isLogin = a
     },
-    cb(obj){
-      if(obj.code == 0){
+    cb(res){
+      if(res.data.code == 0){
         this.$alert('将自动登录并跳转至首页', '登录成功', {
           confirmButtonText: '确定',
           callback: action => {
@@ -112,21 +114,27 @@ export default {
           confirmButtonText: '确定',
         });
       }
+      const data = res.data.data;
+      setId(data.id)
+      setRoleId(data.role_id)
+      setCookie("token",data.token)
+      if(isLoginAuto){
+        setCookie("phone",data.username)
+      }
+      getUserInfo({id:data.id}).then(res => {
+        const data = res.data.data;
+        console.log(data)
+        let a = data.nick_name==""?data.username:data.nick_name
+        this.setuserName(a)//cookie
+      })
     },
     loginclick(){
       if(this.isLogin){//如果是验证码登录
         loginByvCode({
           username:this.phone,
           vcode:this.idencode
-        }).then((response) => {
-          const data = response.data.data;
-          console.log(data)
-          this.setuserName({userName:data.username})//vuex
-          this.setId({id:data.id})//vuex
-          this.setRoleId({role_id:data.role_id})//vuex
-          setName(data.username)//cookie
-          setId(data.id)
-          setRoleId(data.role_id)
+        }).then((res) => {
+          this.cb(res)
         })
         .catch(function (error) {//出错
             console.log(error);
@@ -135,15 +143,8 @@ export default {
         login({
           username:this.phone,
           password:this.password
-        }).then((response) => {
-            console.log(response)
-            const data = response.data.data;
-            this.setuserName({userName:data.username})//vuex
-            this.setId({id:data.id})//vuex
-            this.setRoleId({role_id:data.role_id})//vuex
-            setName(data.username)//cookie
-            setId(data.id)
-            setRoleId(data.role_id)
+        }).then((res) => {
+          this.cb(res)
         })
         .catch(function (error) {//出错
             console.log(error);

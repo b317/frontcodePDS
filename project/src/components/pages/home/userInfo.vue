@@ -2,11 +2,11 @@
   <div class="content">
       <div class="header">
             <img :src=src>
-            <div class="name">{{showname}}</div>
+            <div class="name">{{username}}</div>
             <div class="wrap">
-                <div class="tip">消息</div>
+                <div class="tip" @click="shownews">消息</div>
                 <div class="tip" @click="showGoods">订单</div>
-                <div class="tip">红包</div>
+                <div class="tip" @click="showcoupon">红包</div>
             </div>
       </div>
     <el-card :body-style="{ padding: '10px' }">
@@ -28,27 +28,32 @@ import {setName,getName} from "@/util/auth";
 import {mapGetters} from "vuex"
 export default {
     mounted() {
-        this.src = "./static/touxiang.jpg"
     },
     data () {
         return {
             currentDate: "2018-11-11",
-            src:"",
             news:[4,2,1],
             show:false
         }
     },
     computed: {
       ...mapGetters({
-        username: 'user/username'
+        username: 'user/username',
+        src:"user/headpic"
       }),
       showname() {
-        return this.username ? this.username : "请登录"
+        return getName() != "" ?  getName() : "请登录" 
       }
     },
   methods: {
     showGoods() {
       this.$router.push("/goods")
+    },
+    shownews() {
+      this.$router.push("/news")
+    },
+    showcoupon() {
+      this.$router.push("/coupon")
     }
   }
 }

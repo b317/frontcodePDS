@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-content">
     <el-row style="min-width: 1104px !important;">
       <el-col :span="4">
         <div class="grid-content bg-purple">
@@ -198,6 +198,9 @@
 </script>
 
 <style >
+.my-content{
+  min-height: 600px;
+}
   .order_list .el-tabs__item{
     font-family: Microsoft YaHei;font-weight: 700;font-size: 16px;
   }

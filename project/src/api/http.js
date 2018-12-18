@@ -1,7 +1,6 @@
 import axios from 'axios'
-
+import {getCookie} from "../util/auth"
 export function login(userInfo){
-    console.log(userInfo)
     return axios.post("/v1/global/userlogin",{
             username: userInfo.username,
             password: userInfo.password
@@ -25,38 +24,68 @@ export function getvCode(info){//获取短信验证码
         phone_num: info.phone
     })
 }
-export function updateUser(info){//更新用户信息
-    console.log(info)
-    return axios.put("/v1/user/update/"+info.id,
-        info.data,
-        // {
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded'
-        //     }
-        // }
-    )
-}
-export function getUserInfo(info){//获取用户信息
-    return axios.get("/v1/user/"+info.id)
-}
-export function resetPass(info){//重置密码
-    return axios.put("/v1/user/resetpwd/"+info.id,{
-            password:info.password
-        },
+export function updateUser(id,params){//更新用户信息
+    return axios.put("/v1/user/update/"+id,
+        params,
         {
-            headers:{
-                "content-type":"x-www-form-urlencoded"
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Bearer '+getCookie("token")
             }
         }
     )
 }
-export function upload(info){//重置密码
-    return axios.put("/v1/user/upload/"+info.id,{
-            file:info.file.file
-        },
+export function upuserpic(id,params){//更新用户头像
+    return axios.put("/v1/user/upload/"+id,
+    params,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
+export function getUserInfo(info){//获取用户信息
+    return axios.get("/v1/user/detail/"+info.id,{
+        headers: {
+            'Authorization': 'Bearer '+getCookie("token")
+        }
+    })
+}
+export function resetPass(id,params){//重置密码
+    return axios.put("/v1/user/resetpwd/"+id,params,
         {
             headers:{
-                "content-type":"multipart/form-data"
+                "content-type":"x-www-form-urlencoded",
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
+export function banner(){//获取轮播图
+    return axios.get("/v1/global/banner/?offset=1&limit=4",
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
+export function getmainsort(){//获取轮播图
+    return axios.get("/v1/global/mainsort/?offset=1&limit=13",
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
+export function getsubsort(id){//获取轮播图
+    return axios.get("/v1/global/subsort/?offset=1&limit=20&pid="+id,
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
             }
         }
     )

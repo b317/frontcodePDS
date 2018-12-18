@@ -1,3 +1,4 @@
+
 export default{
     arr:[
       {
@@ -7,7 +8,6 @@ export default{
         },
         data:
           [
-
             {src:"../../../static/goods/400x400q90.jpg",rate:2.7,title:"金娃娃萱草",sell:21.00,tipshow:[1,1,0],sellhot:false},
             {src:"../../../static/goods/400x400q91.jpg",rate:3.7,title:"转子莲艾丽塔",sell:23.00,tipshow:[0,1,1],sellhot:false},
             {src:"../../../static/goods/item_pic.jpg",rate:3.7,title:"兰花苗盆栽",sell:22.00,tipshow:[1,0,1],sellhot:true},
