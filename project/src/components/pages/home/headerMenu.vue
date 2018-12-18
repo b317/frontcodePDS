@@ -1,22 +1,28 @@
 <template>
   <div class="content">
       <div class="home">主题市场</div>
-      <div class="li" v-for="(item,key) in data" :key=key>
-          {{item}}
+      <div @click="click(item.url)" class="li" v-for="(item,key) in data" :key=key>
+          {{item.title}}
       </div>
   </div>
 </template>
 
 <script>
 export default {
+    mounted() {
+    this.$bus.$on("cal",a=>{
+        this.data = a
+    })
+    },
   data () {
     return {
-        data:[
-            "超级团购",
-            "2018盛典",
-            "超级便宜"
-        ]
+        data:{}
     }
+  },
+  methods:{
+      click(a){
+          window.open("http://"+a)
+      }
   }
 }
 </script>

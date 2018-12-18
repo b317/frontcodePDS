@@ -20,7 +20,7 @@
 
 <script>
 import ddd from "./hot.js"
-import {setName,getName} from "@/util/auth";
+import {setName,getName,getCookie} from "@/util/auth";
 import headmenu from "@/components/pages/home/headerMenu"
 import userInfo from "@/components/pages/home/userInfo"
 import hotp from "@/components/pages/home/hotp"

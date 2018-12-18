@@ -6,11 +6,11 @@
           <div class="input-font picfont">用户头像</div>
           <el-upload
             class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action=""
             :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload">
-            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+            :http-request="beforeAvatarUpload"
+            >
+            <img v-if="imageUrl" :src="src" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           <el-button class="picbtn" size="small" type="primary">点击上传</el-button>
           </el-upload>
@@ -18,32 +18,25 @@
         <div class="input-group"><div class="input-font">用户昵称</div><input  v-model="nickname"/></div>
         <div class="input-group"><div class="input-font">真实姓名</div><input  v-model="name"/><div class="warn">{{msg1}}</div></div>
         <div class="input-group"><div class="input-font">绑定手机</div><input readonly class="readonly" v-model="phone"/></div>
-        <div class="input-group"><div class="input-font bday-font">用户生日</div>
+        <!-- <div class="input-group"><div class="input-font bday-font">用户生日</div>
           <el-date-picker
             v-model="bDay"
             type="date"
             placeholder="选择日期">
           </el-date-picker>
-        </div>
+        </div> -->
         <button @click="clickbtn">保存</button>
       </div>
     </div>
 </template>
 
 <script>
-import {updateUser,getUserInfo,upload} from "@/api/http";
-import { mapState,mapGetters } from 'vuex'
+import {updateUser,getUserInfo,upuserpic} from "@/api/http";
+import { mapState,mapGetters,mapMutations } from 'vuex'
 import {getId,getName,setName} from "@/util/auth";
 
 export default {
-  components:{
-  },
-  computed:{
-    ...mapGetters({
-      username:'user/username',
-      id:"user/id"
-    }),
-  },
+
   mounted() {
     getUserInfo({id:getId()}).then(res => {
       let data = res.data.data
@@ -53,7 +46,6 @@ export default {
       }
       this.name = data.name
       this.phone = data.username
-      this.imageUrl = data.head_image
     })
   },
   data () {
@@ -70,7 +62,20 @@ export default {
         headPicSuccess:false
     }
   },
+  computed:{
+    url(){
+      return "/v1/user/upload/"+getId()
+    },
+    ...mapGetters({
+      src:'user/headpic',
+      username:'user/username',
+    }),
+  },
   methods:{
+    ...mapMutations({
+      setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+      setpic:'user/setpic'
+    }),
      wIconClick(){
       this.showWarn = true
     },
@@ -82,20 +87,12 @@ export default {
     },
     beforeAvatarUpload(file) {
       let commit = new FormData() 
-      commit.append("file",file)
-      upload({
-        id:this.id,
-        file:commit
-      }).then(res => {
-        if(res.code == 0){
-          this.headPicSuccess = true
-        }
+      commit.append("file",file.file)
+      console.log(file.file)
+      upuserpic(getId(),commit).then(res=>{
+        this.setpic("http://134.175.113.58/"+res.data.data.head_image)
+        this.imageUrl = "http://134.175.113.58/"+res.data.data.head_image
       })
-      const isLt2M = file.size / 1024 / 1024 < 2;
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return  isLt2M;
     },
     clickbtn(){
       if(!this.name){
@@ -107,13 +104,16 @@ export default {
       let commit = new FormData() 
       commit.append("nick_name",this.nickname)
       commit.append("name",this.name)
-      updateUser({
-        id:getId(),
-        data:commit
-      }).then(res => {
-        console.log(res)
-        if(res.code == 0){
-          console.log("更改用户信息成功")
+      updateUser(
+        getId(),
+        commit
+      ).then(res => {
+        if(res.data.code == 0){
+          this.setuserName(this.nickname)
+          this.$message({
+							message: '修改成功',
+							type: 'success'
+						});
         }
       })
     }

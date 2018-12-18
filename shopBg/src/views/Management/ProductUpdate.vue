@@ -111,9 +111,7 @@
             <div>
               <el-upload style="display: inline-block !important ;vertical-align: middle !important;"
                          action="https://jsonplaceholder.typicode.com/posts/"
-                         list-type="picture-card"
-                         :on-preview="handlePictureCardPreview"
-                         :on-remove="handleRemove">
+                         list-type="picture-card">
                 <i class="el-icon-plus"></i>
               </el-upload>
               <el-dialog :visible.sync="dialogVisible">
@@ -141,14 +139,20 @@
             <span>商品运费</span><el-input placeholder="请输入商品运费" :disabled="carriage"></el-input><br>
           </div>
           <div class="">
-            <span>团购优惠人数</span><el-input placeholder="请输入团购人数"></el-input><br>
+            <span>拼团优惠人数</span><el-input placeholder="请输入团购人数"></el-input><br>
             <div style="display: inline-block;width: 16%;padding-right: 25px;"></div>
             <div class=" remind">设置团购优惠的人数。当满足人数的时候普通买家能享受拼团优惠</div>
           </div>
           <div class="">
-            <span>团购优惠金额</span><el-input placeholder="团购优惠金额"></el-input><br>
+            <span>拼团优惠金额</span><el-input placeholder="团购优惠金额"></el-input><br>
             <div style="display: inline-block;width: 16%;padding-right: 25px;"></div>
             <div class=" remind">拼团完成时个人能优惠的金额</div>
+          </div>
+          <div class="">
+            <span>拼团时效</span><el-input style="width: 10%"></el-input>
+            <i style="padding-left: 5px;">小时</i><br>
+            <div style="display: inline-block;width: 16%;padding-right: 25px;"></div>
+            <div class=" remind">团长开团成功后开始倒计时，超过时效拼团将取消</div>
           </div>
           <!--<div class="">-->
             <!--<span>是否发放优惠券</span><el-switch v-model="coupon"></el-switch>-->

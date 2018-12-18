@@ -24,8 +24,8 @@
       return {
         logining: false,
         ruleForm2: {
-          username: '',
-          password: ''
+          username: 'wertsafc',
+          password: '123456'
         },
         rules2: {
           account: [
@@ -39,8 +39,8 @@
       };
     },
     mounted() {
-      this.ruleForm2.username = getCookie("username")
-      this.ruleForm2.password = getCookie("password")
+      // this.ruleForm2.username = getCookie("username")
+      // this.ruleForm2.password = getCookie("password")
     },
     methods: {
       handleReset2() {

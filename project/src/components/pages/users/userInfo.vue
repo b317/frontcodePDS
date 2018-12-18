@@ -1,6 +1,7 @@
 <template>
     <div class="container">
       <div class="fontwarn">没有什么消息</div>
+      <div class="info"></div>
     </div>
 </template>
 
