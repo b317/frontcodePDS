@@ -118,6 +118,7 @@
 <script>
   import ElRow from "element-ui/packages/row/src/row";
   import ElCol from "element-ui/packages/col/src/col";
+  import { getCookie } from '../common/auth';
 
   export default {
     components: {
@@ -128,6 +129,20 @@
         msg: 'hello world',
         value: 3.7
       }
+    },
+    mounted(){
+      this.axios.get('/v1/merchant/mainsort/subcount',
+        {
+          headers:{
+//            "Authorization":"Bearer "+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NDUxMDM4MTMsImlkIjo1LCJuYmYiOjE1NDUxMDM4MTMsInJvbGVpZCI6MiwidXNlcm5hbWUiOiIxMzQyMDEyMDc1MCJ9.jyqnBoIL7YMLAXcwZMvPaxUVYdM1cep6y3w4i99dQOY'
+            "Authorization":"Bearer "+ getCookie("token")
+          }
+        }).then((response)=>{
+        let data = response.data;
+        console.log(data+"gg")
+      }).catch((err)=>{
+        console.log(err+"haha");
+      })
     }
   }
 </script>
