@@ -90,3 +90,53 @@ export function getsubsort(id){//获取轮播图
         }
     )
 }
+export function getstatus(id){//获取状态
+    return axios.get("/v1/user/merchant/"+id,
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
+export function renshop(params){//商家认证
+    let data = new FormData()
+    data.append("shop_name",params.shop_name)
+    data.append("shop_phone",params.shop_phone)
+    data.append("shop_cert",params.shop_cert)
+    data.append("shop_qq",params.shop_qq)
+    data.append("shop_intro",params.shop_intro)
+    data.append("shop_addr",params.shop_addr)
+    data.append("owner_cert",params.owner_cert)
+    data.append("owner_id",params.owner_id)
+    data.append("shop_logo",params.shop_logo)
+    return axios.post("/v1/user/merchant/",
+        data,
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
+
+export function upnshop(params){//重新认证
+    let data = new FormData()
+    data.append("shop_name",params.shop_name)
+    data.append("shop_phone",params.shop_phone)
+    data.append("shop_cert",params.shop_cert)
+    data.append("shop_qq",params.shop_qq)
+    data.append("shop_intro",params.shop_intro)
+    data.append("shop_addr",params.shop_addr)
+    data.append("owner_cert",params.owner_cert)
+    data.append("shop_logo",params.shop_logo)
+    return axios.put("/v1/user/merchant/"+params.id,
+        data,
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
+
