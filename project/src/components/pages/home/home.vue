@@ -15,6 +15,7 @@
       </div>
     </div>
     <contenter></contenter>
+    
   </div>
 </template>
 
@@ -36,7 +37,7 @@ export default {
     return {
       msg: 'home',
       data:[],
-      type:[1,2],
+      type:[1,2]
     }
   },
   mounted() {
@@ -44,6 +45,7 @@ export default {
     this.$bus.$on("test",(a) => {
       console.log(a)
     })
+    
   },
   methods:{
     click(){
@@ -52,8 +54,7 @@ export default {
     clicked(){
       console.log(getName())
     }
-  }
-
+  }  
 }
 </script>
 

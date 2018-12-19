@@ -57,11 +57,9 @@
     <div class="shop-item my-ref" ref='tourism' data-title='tourism'>
         <shopContent title="旅游"/>
     </div>
-    <transition name="router" mode="out-in">
-    <div class="navigation-elevator" v-if="isShowNav">
+    <div class="navigation-elevator trasition" v-if="isShowNav">
         <NavigationElevator :title='title' @nav='goToNav' />
     </div>
-    </transition>
     </div>
 </template>
 

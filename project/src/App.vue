@@ -32,9 +32,7 @@
       </div>
       <router-view/>
     </div>
-    <div class="top-btn" style="position: absolute; z-index: 999;">
-      <top-btn></top-btn>
-    </div>
+
     <nav-footer v-if="isShow"></nav-footer>
     <login-footer v-if="!isShow"></login-footer>
   </div>
@@ -46,7 +44,6 @@ import {getId,getName,setName} from "@/util/auth";
 import {getUserInfo} from "@/api/http";
 import NavFooter from '@/components/module/NavFooter'
 import LoginFooter from '@/components/module/LoginFooter'
-import TopBtn from '@/components/module/TopBtn'
 
 export default {
   name: 'App',
@@ -61,7 +58,7 @@ export default {
     }
   },
   components:{
-    NavFooter,LoginFooter,TopBtn
+    NavFooter,LoginFooter
   },
   computed: {
     ...mapGetters({
@@ -145,6 +142,11 @@ export default {
   @import './css/header.scss';
   @import "./css/footer.css";
   @import "./css/newsCenter.css";
+  .top-btn{
+    position: fixed;
+    right: 0px;
+    top: 40%;
+  }
   .app-username{
     max-width: 120px !important;
     overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
