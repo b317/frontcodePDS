@@ -23,7 +23,7 @@
               </div>
               <div class="goods-price">
                 <span class="price">￥<span style="color: red;font-size: 18px;font-weight: bolder;">{{pickgoods.price}}</span></span>
-                <span class="price" style="margin-left: 10px;">￥<del><span style="color: #666;font-size: 12px;">{{pickgoods.originalPrice}}</span></del></span>
+                <span class="price" style="margin-left: 10px;">￥<del><span style="color: #666;font-size: 12px;">{{pickgoods.delprice}}</span></del></span>
                 <div class="sell">
                   <div class="tip" v-show="pickgoods.tipshow[0]">
                     拼团打折

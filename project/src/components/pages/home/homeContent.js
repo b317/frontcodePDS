@@ -8,11 +8,11 @@ export default{
         },
         data:
           [
-            {src:"../../../static/goods/400x400q90.jpg",rate:2.7,title:"金娃娃萱草",sell:21.00,tipshow:[1,1,0],sellhot:false},
-            {src:"../../../static/goods/400x400q91.jpg",rate:3.7,title:"转子莲艾丽塔",sell:23.00,tipshow:[0,1,1],sellhot:false},
-            {src:"../../../static/goods/item_pic.jpg",rate:3.7,title:"兰花苗盆栽",sell:22.00,tipshow:[1,0,1],sellhot:true},
-            {src:"../../../static/goods/item_pic2.jpg",rate:4.7,title:"绿萝盆栽园艺",sell:38.00,tipshow:[1,1,1],sellhot:true},
-            {src:"../../../static/goods/400x400q92.jpg",rate:4.7,title:"紫丁香花---花语代表初恋",sell:27.00,tipshow:[1,0,0],sellhot:true},
+            {src:"../../../static/goods/400x400q90.jpg",rate:2.7,title:"金娃娃萱草",sell:"21.00",tipshow:[1,1,0],sellhot:false},
+            {src:"../../../static/goods/400x400q91.jpg",rate:3.7,title:"转子莲艾丽塔",sell:"23.00",tipshow:[0,1,1],sellhot:false},
+            {src:"../../../static/goods/item_pic.jpg",rate:3.7,title:"兰花苗盆栽",sell:"24.00",tipshow:[1,0,1],sellhot:true},
+            {src:"../../../static/goods/item_pic2.jpg",rate:4.7,title:"绿萝盆栽园艺",sell:"28.00",tipshow:[1,1,1],sellhot:true},
+            {src:"../../../static/goods/400x400q92.jpg",rate:4.7,title:"紫丁香花---花语代表初恋",sell:"35.00",tipshow:[1,0,0],sellhot:true},
             {src:"../../../static/goods/400x400q93.jpg",rate:4.5,title:"古典玫瑰紫袍",sell:"25.00",tipshow:[1,1,0],sellhot:false}
           ]
       },

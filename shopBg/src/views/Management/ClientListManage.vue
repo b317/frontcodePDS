@@ -327,7 +327,7 @@
             phone: '',
           };
         },
-        //性别显示转换
+        //性别显示转换 
         formatSex(sex) {
           let s = sex == '男' ? 1 : sex == '女' ? 0 : -1;
           return s;
