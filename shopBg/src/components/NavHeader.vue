@@ -26,9 +26,17 @@
       <el-col :span="7">
         <div class="grid-content bg-purple header_right">
           <el-row>
-            <el-col :span="10">
+            <el-col :span="10" style="position: relative;z-index: 1000">
               <img src="/static/touxiang.jpg">
-              <span style="color: rgb(255, 208, 75);font-size: 14px">admin</span>
+              <div style="" class="admin">
+                admin
+                <i class="el-icon-caret-bottom"></i>
+                <div style="position: absolute;top:40px;left:46px;width: 45%;height:20px;"></div>
+                <div class="admin_pull_down">
+                  <div><a href="javascript:void(0)" @click="dialogFormVisible = true">修改店铺信息</a></div>
+                  <div><a href="javascript:void(0)">修改个人信息</a></div>
+                </div>
+              </div>
             </el-col>
             <el-col :span="14">
               <ul>
@@ -39,10 +47,27 @@
               </ul>
             </el-col>
           </el-row>
-
         </div>
       </el-col>
     </el-row>
+    <!--修改店铺信息弹出框-->
+    <el-dialog title="修改店铺信息" :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item label="店铺名称" :label-width="formLabelWidth">
+          <el-input v-model="form.shop_name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="活动区域" :label-width="formLabelWidth">
+          <el-select v-model="form.region" placeholder="请选择活动区域">
+            <el-option label="区域一" value="shanghai"></el-option>
+            <el-option label="区域二" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -53,6 +78,18 @@
     data() {
       return {
 //        activeIndex: '1',
+        dialogFormVisible: false,
+        form: {
+          shop_name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        formLabelWidth: '120px'
       };
     },
     computed:{

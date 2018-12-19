@@ -4,7 +4,8 @@ i, em {
 
 /*navheader开始*/
 /*.nav_header .el-col:first-child{width:20px}*/
-.nav_header .el-col:first-child div{
+.nav_header{z-index: 1001}
+.nav_header .el-col:first-child>div{
   vertical-align: middle;line-height: 50px;padding-left:20px ;
 }
 .nav_header .logo{
@@ -34,6 +35,57 @@ i, em {
 .nav_header .header_right ul li:hover{
   background-color: #303133;
 }
+.nav_header .header_right .admin{
+  color: rgb(255, 208, 75);font-size: 14px;display: inline-block;
+}
+.nav_header .header_right .admin:hover{
+ color:#E6A23C;cursor:pointer;
+}
+.nav_header .header_right .admin i{transition: all 0.1s linear}
+.nav_header .header_right .admin:hover i{
+  transform: rotate(180deg);
+}
+.nav_header .header_right .admin_pull_down{
+position: absolute;width: 110%;height: auto;border:1px solid #e5e5e5;
+  z-index: 10;top:60px;left:0;display: none;transform: translateX(-90%);
+  opacity: 0;box-shadow: 0 0 5px #e5e5e5;
+}
+.nav_header .header_right .admin:hover .admin_pull_down{
+  display: block;z-index: 100 !important;;
+  -webkit-animation:mymove .35s ease-out;
+  -o-animation:mymove .35s ease-out ;
+  animation:mymove .35s ease-out;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@keyframes mymove {
+  from{
+    transform: translateX(-90%);
+    opacity: 0
+  }
+  to{
+    transform: translateX(0);
+    opacity: 1
+  }
+}
+@-webkit-keyframes mymove {
+  from{
+    transform: translateX(-100%);
+    opacity: 0
+  }
+  to{
+    transform: translateX(0);
+    opacity: 0
+  }
+}
+
+.nav_header .header_right .admin_pull_down div{
+  line-height: 20px;border-bottom:1px solid #e5e5e5;margin: 10px 20px;
+}
+.nav_header .header_right .admin_pull_down div a{color:#409EFF;text-decoration: none;font-size: 12px}
+.nav_header .header_right .admin_pull_down div a:hover{color:#F56C6C}
 /*navheader结束*/
 
 /*home开始*/

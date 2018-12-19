@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="bread_crumbs">
-      <span>拼团管理</span>
+      <span>拼团管理&nbsp;
+        <i v-if="activeName=='first'" class="present">--&nbsp;全部拼团</i>
+        <i v-if="activeName=='second'" class="present">--&nbsp;未完成拼团</i>
+        <i v-if="activeName=='third'" class="present">--&nbsp;已完成拼团</i>
+      </span>
     </div>
     <div class="group_list">
       <div>
