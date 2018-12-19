@@ -73,23 +73,23 @@
             </div>
             <div class="tm-type-panel">
               <span class="tb-metatit" style="vertical-align: top">颜色分类</span>
-              <ul class="tb-type">
-                <li title="白色铃兰10株+盆" class="tb-txt">
-                  <a href="#" role="button" tabindex="0" class="tb-txt-a active"><span>白色铃兰5株+盆</span><i>已选中</i></a>
-                </li>
-                <li title="白色铃兰20株+盆" class="tb-txt">
-                  <a href="#" role="button" tabindex="0" class="tb-txt-a"><span>白色铃兰10株+盆</span><i>已选中</i></a>
-                </li>
-                <li title="白色铃兰20株+盆" class="tb-txt">
-                  <a href="#" role="button" tabindex="0" class="tb-txt-a"><span>白色铃兰15株+盆</span><i>已选中</i></a>
-                </li>
-                <li title="白色铃兰20株+盆" class="tb-txt">
-                  <a href="#" role="button" tabindex="0" class="tb-txt-a"><span>白色铃兰20株+盆</span><i>已选中</i></a>
-                </li>
-                <!--<type-item-li></type-item-li>-->
-                <!--<type-item-li></type-item-li>-->
-                <!--<type-item-li></type-item-li>-->
-                <!--<type-item-li></type-item-li>-->
+              <ul class="tb-type" :model="listForm">
+                <!--<li title="白色铃兰10株+盆" class="tb-txt">-->
+                  <!--<a href="#" role="button" tabindex="0" class="tb-txt-a" :class="{'active': isActive=true}"><span>白色铃兰5株+盆</span><i>已选中</i></a>-->
+                <!--</li>-->
+                <!--<li :title="白色铃兰20株+盆" class="tb-txt">-->
+                  <!--<a href="#" role="button" tabindex="1" class="tb-txt-a"><span>白色铃兰10株+盆</span><i>已选中</i></a>-->
+                <!--</li>-->
+                <!--<li title="白色铃兰20株+盆" class="tb-txt">-->
+                  <!--<a href="#" role="button" tabindex="2" class="tb-txt-a"><span>白色铃兰15株+盆</span><i>已选中</i></a>-->
+                <!--</li>-->
+                <!--<li :title="listForm.title" class="tb-txt">-->
+                  <!--<a href="#" role="button" tabindex="1" class="tb-txt-a"><span>{{listForm.title}}</span><i>已选中</i></a>-->
+                <!--</li>-->
+                <type-item-li></type-item-li>
+                <type-item-li></type-item-li>
+                <type-item-li></type-item-li>
+                <type-item-li></type-item-li>
               </ul>
             </div>
             <div></div>
@@ -97,7 +97,7 @@
               <span class="tb-metatit">数量</span>
               <div class="mui-amount-btn" style="display: inline-block;">
             <span class="tb-amount-widget mui-amount-wrap">
-              <input class="tb-text mui-amount-input" v-model="inputValue" title="请输入购买量">
+              <input class="tb-text mui-amount-input" v-model="number" title="请输入购买量">
               <span class="mui-amount-btn">
                 <span class="mui-amount-increase" @click="incr"><i class="el-icon-arrow-up" style="line-height: 5px"></i></span>
                 <span class="mui-amount-decrease" @click="decr"><i class="el-icon-arrow-down" style="line-height: 5px"></i></span>
@@ -148,14 +148,13 @@
     import RecommendItem from "./RecommendItem.vue";
     import GoodsRecommendItem from "./GoodsRecommendItem.vue";
     import TypeItemLi from "./TypeItemLi.vue";
-
     export default {
       components: {ElButton, RecommendItem,GoodsRecommendItem,TypeItemLi},
       data() {
         return {
           msg: 'hello world',
           num8: 1,
-          inputValue: '1',
+          number: '1',
           isShow:true,  // 是否有数据
           datelist: [
             {
@@ -247,41 +246,49 @@
               tipshow:[1,0,1]
             },
           ], // 数据集
-          address: '广东湛江'
+          address: '广东湛江',
+          listForm:{
+            title: '白色铃兰20株+盆'
+          }
         }
       },
       methods:{
+        //增加购买数量
         incr(){
-          if(this.inputValue==3){
+          if(this.number==100){
             this.$message({
-              message: '警告，数量已达到10件',
+              message: '警告，数量已达到100件',
               type: 'warning'
             });
           }else{
-            this.inputValue++
+            this.number++
           }
         },
+        //减少购买数量
         decr(){
-          if(this.inputValue==1){
+          if(this.number==1){
             this.$message({
               message: '提示，数量已低到1件',
               type: 'warning'
             });
           }else{
-            this.inputValue--
+            this.number--
+          }
+        },
+        //是否有数据
+        ifShow(item){
+          if(item.length==0){
+            this.isShow=false;
+          }else{
+            this.isShow=true;
           }
         },
       },
       mounted(){
-        if(this.datelist.length==0){
-          this.isShow=false;
-        }else{
-          this.isShow=true;
-        }
+        this.ifShow(this.datelist);
       }
     }
 </script>
-
 <style scoped>
   ul li {
     list-style: none;
@@ -464,10 +471,10 @@
     font-size: 14px;
     color: #333;
   }
+  /* 颜色分类 */
   .contentView .tm-type-panel{
     margin-top: 25px;
   }
-  /* 颜色分类 */
   .contentView .tm-type-panel .tb-type{
     display: inline-block;
     margin: 0;
@@ -532,7 +539,7 @@
   .tb-type li .tb-txt-a.active i {
     display: block
   }
-
+  /* 数量 */
   .contentView .tb-amount{
     margin-top: 25px;
     color: #333;

@@ -19,12 +19,12 @@
     }
 </script>
 <style scoped>
-  li.tb-txt a {
+  ul li.tb-txt a {
     padding: 0 5px;
     width: auto!important;
   }
-  li{float: left;margin-bottom: 10px}
-  li a {
+  ul li{float: left;margin-bottom: 10px}
+  ul li a {
     width: 38px!important;
     height: 38px;
     padding: 0;
@@ -33,7 +33,7 @@
     outline: 0;
     background-position: center center;
   }
-  li a{
+  ul li a{
     float: left;
     background-color: #fff;
     border: 1px solid #b8b7bd;
@@ -44,11 +44,11 @@
     text-decoration: none;
     margin-left: 6px;
   }
-  li a:hover{
+  ul li a:hover{
     border: 2px solid #FF0036;
     margin: -1px -1px -1px 5px;
   }
-  li .tb-txt-a i {
+  ul li .tb-txt-a i {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -60,21 +60,21 @@
     background-repeat: no-repeat;
     background-position: 0 0;
   }
-  li a.tb-txt-a.active i{
+  ul li a.tb-txt-a.active i{
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJUExURUxpcf8AN////7f4NBoAAAABdFJOUwBA5thmAAAAMUlEQVQI103MAQ4AMAQEQev/j66i6YrEXIKIX9jY2NjYyDmhZnlCo5rdyWvebfYDVAcSmABbA7WD+QAAAABJRU5ErkJggg==);
   }
-  li .tb-txt-a {
+  ul li .tb-txt-a {
     position: relative;
     border: 2px solid #ddd;
     padding: 2px 6px;
     border-radius: 2px;
     cursor: pointer
   }
-  li a.tb-txt-a.active, li .tb-txt-a:hover{
+  ul li a.tb-txt-a.active, ul li .tb-txt-a:hover{
     border: 2px solid #FF0036;
     margin: -1px -1px -1px 5px;
   }
-  li .tb-txt-a.active i {
+  ul li .tb-txt-a.active i {
     display: block
   }
 </style>
