@@ -2,11 +2,14 @@
     <div class="container">
       <div class="fontwarn">没有什么消息</div>
       <div class="info"></div>
+      <watchpic :src="src"></watchpic>
     </div>
 </template>
 
 <script>
+import watchpic from "@/components/module/watch"
 export default {
+  components:{watchpic},
    wIconClick(){
       this.showWarn = false
     },
@@ -18,7 +21,8 @@ export default {
         msg1:"",
         msg2:"",
         msg3:"",
-        canS:false
+        canS:false,
+        src:"../../../static/meinv.jpg"
     }
   },
   methods:{
