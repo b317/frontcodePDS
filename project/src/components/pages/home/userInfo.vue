@@ -42,7 +42,7 @@ export default {
         src:"user/headpic"
       }),
       showname() {
-        return getName() != "" ?  getName() : "请登录" 
+        return this.username != "" ?  this.username : "请登录" 
       }
     },
   methods: {
