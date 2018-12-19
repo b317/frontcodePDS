@@ -1,12 +1,13 @@
 <template>
     <div class="shop-content">
+      <!--商铺顶部-->
       <div class="goods-shop-hd" id="hd">
         <div class="layout grid-m J_TLayout">
           <div class="col-main">
             <div class="hd-head rela" style="height:120px;display: inline-block;">
               <div class="hd-name" style="height:80px;text-align:left;padding:20px 16px;">
                 <span class="h1" style="line-height:80px;font-size:40px;font-family:宋体;">馨语给您一个温馨的家</span>
-                <span class="h2" style="padding-top:16px;line-height:64px;font-size:16px;font-family:宋体;">绿色家居生活</span>
+                <span class="h2" style="padding-top:16px;line-height:64px;font-size:16px;font-family:宋体;">生活有你更美好</span>
               </div>
             </div>
             <div class="shopExtra" style="height: 120px;display: inline-block;">
@@ -33,6 +34,7 @@
           </div>
         </div>
       </div>
+      <!--商铺内容-->
       <div class="goods-detail-panel">
         <div class="leftView">
           <div class="imgView">
@@ -42,7 +44,7 @@
             <p class="tm-action">
               <span id="J_EditItem" style="float: right;padding-right: 40px;"><a href=""><i class="el-icon-phone-outline"></i>举报</a></span>
               <a id="J_IShare" class="iShare tm-event" href="#"><i class="el-icon-share"></i>分享</a>
-              <span style="padding-left: 15px;"><i class="el-icon-loading"></i>已销售<span id="J_CollectCount">3337</span></span>
+              <span style="padding-left: 15px;"><i class="el-icon-loading"></i>已销售<span id="J_CollectCount">0000</span></span>
             </p>
           </div>
           <div class="contentView">
@@ -50,19 +52,23 @@
               <h1>{{this.$route.params.title}}</h1>
             </div>
             <div class="tm-fcs-panel">
-              <p><span class="tb-metatit">价格</span>
-                <span class="tb-tm-original-price"><em class="tm-yen">¥</em> <del><span class="tm-original-price">33.80</span></del></span></p>
-              <p><span class="tb-metatit">促销价</span>
-                <span class="tb-tm-price"><em class="tm-yen">¥ </em><span class="tm-price">{{this.$route.params.price}}</span></span></p>
+              <!--<p><span class="tb-metatit">价格</span>-->
+                <!--<span class="tb-tm-price"><em class="tm-yen">¥ </em>-->
+                  <!--<del><span class="tm-price">00.00</span></del></span>-->
+              <!--</p>-->
               <p><span class="tb-metatit">团购价</span>
-                <span class="tb-tm-price"><em class="tm-yen">¥ </em><span class="tm-price">21.00</span></span></p>
+                <span class="tb-tm-group-price"><em class="tm-yen">¥ </em>
+                  <span class="tm-group-price">{{this.$route.params.price}}</span></span>
+              </p>
             </div>
             <div class="tm-delivery-panel">
               <span class="tb-metatit">配送</span>
               <div class="tb-postAge" style="display: inline-block;">
                 <span class="tb-deliveryAdd" id="J_deliveryAdd">江苏宿迁</span> 至 <span>
-                <span role="button" class="sel-address" style="cursor: pointer;">广东湛江</span><i class="el-icon-arrow-down"></i></span>
-                <span>快递：<span>0.00</span></span>
+                <span role="button" class="sel-address" style="cursor: pointer;">{{address}}</span>
+                <!--<i class="el-icon-arrow-down"></i>-->
+              </span>
+                <!--<span>快递：<span>0.00</span></span>-->
               </div>
             </div>
             <div class="tm-type-panel">
@@ -91,7 +97,7 @@
               <span class="tb-metatit">数量</span>
               <div class="mui-amount-btn" style="display: inline-block;">
             <span class="tb-amount-widget mui-amount-wrap">
-              <input type="text" class="tb-text mui-amount-input" v-model="inputValue" title="请输入购买量">
+              <input class="tb-text mui-amount-input" v-model="inputValue" title="请输入购买量">
               <span class="mui-amount-btn">
                 <span class="mui-amount-increase" @click="incr"><i class="el-icon-arrow-up" style="line-height: 5px"></i></span>
                 <span class="mui-amount-decrease" @click="decr"><i class="el-icon-arrow-down" style="line-height: 5px"></i></span>
@@ -99,7 +105,7 @@
               <span class="mui-amount-unit">件</span>
             </span>
               </div>
-              <em id="J_EmStock" class="tb-hidden" style="display: inline;">库存<span>902</span>件</em>
+              <em id="J_EmStock" class="tb-hidden" style="display: inline;">库存<span>000</span>件</em>
             </div>
             <div></div>
             <div class="tb-action-btn">
@@ -156,91 +162,92 @@
               icon: "../../../static/goods/430x430q90.jpg",
               name: "茉莉花盆栽",
               rate: 1.7,
-              price: "22.00",
-              originalPrice: "27.00",
+              delprice: "24.00",
+              price: "23.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q90.jpg",
               name: "金娃娃萱草",
               rate: 2.7,
-              price: "21.00",
-              originalPrice: "24.00",
+              delprice: "27.00",
+              price: "26.00",
               tipshow:[1,0,0]
             },
             {
               icon: "../../../static/goods/400x400q91.jpg",
               name: "转子莲艾丽塔",
               rate: 3.7,
-              price: "23.00",
-              originalPrice: "29.00",
+              delprice: "26.00",
+              price: "24.00",
               tipshow:[1,1,1]
             },
             {
               icon: "../../../static/goods/400x400q92.jpg",
               name: "紫丁香花---花语代表初恋",
               rate: 4.3,
-              price: "25.00",
-              originalPrice: "30.00",
+              delprice: "23.00",
+              price: "21.00",
               tipshow:[0,0,1]
             },
             {
               icon: "../../../static/goods/400x400q93.jpg",
               name: "古典玫瑰紫袍",
               rate: 4.7,
-              price: "24.00",
-              originalPrice: "27.00",
+              delprice: "22.00",
+              price: "22.00",
               tipshow:[1,1,0]
             },
             {
               icon: "../../../static/goods/400x400q90.jpg",
               name: "金娃娃萱草",
               rate: 4.3,
-              price: "21.00",
-              originalPrice: "25.00",
+              delprice: "27.00",
+              price: "24.00",
               tipshow:[0,1,1]
             },
             {
               icon: "../../../static/goods/400x400q91.jpg",
               name: "转子莲艾丽塔",
               rate: 4.3,
+              delprice: "24.00",
               price: "23.00",
-              originalPrice: "27.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q92.jpg",
               name: "初恋紫丁香花",
               rate: 4.3,
-              price: "25.00",
-              originalPrice: "27.00",
+              delprice: "24.00",
+              price: "20.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q93.jpg",
               name: "古典玫瑰紫袍",
               rate: 4.3,
-              price: "24.00",
-              originalPrice: "27.00",
+              delprice: "29.00",
+              price: "27.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q90.jpg",
               name: "金娃娃萱草",
               rate: 4.3,
-              price: "21.00",
-              originalPrice: "27.00",
+              delprice: "28.00",
+              price: "24.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q91.jpg",
               name: "转子莲艾丽塔",
               rate: 4.3,
-              price: "23.00",
-              originalPrice: "27.00",
+              delprice: "34.00",
+              price: "32.00",
               tipshow:[1,0,1]
             },
           ], // 数据集
+          address: '广东湛江'
         }
       },
       methods:{
@@ -435,20 +442,20 @@
     color: #999;
     font-size: 12px;
   }
-  .contentView .tm-fcs-panel .tb-tm-original-price{
+  .contentView .tm-fcs-panel .tb-tm-price{
     font-size: 14px;
     color: #333;
     margin-left: 30px;
     font-family: Arial;
   }
-  .contentView .tm-fcs-panel .tb-tm-price{
+  .contentView .tm-fcs-panel .tb-tm-group-price{
     font-size: 18px;
     color: #FF0036;
     margin-left: 18px;
     font-weight: bolder;
     font-family: Arial;
   }
-  .contentView .tm-fcs-panel .tb-tm-price .tm-price{
+  .contentView .tm-fcs-panel .tb-tm-group-price .tm-group-price{
     font-size: 28px;
   }
   .contentView .tm-delivery-panel{margin-top: 25px;}
