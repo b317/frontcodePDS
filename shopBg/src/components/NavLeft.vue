@@ -1,7 +1,7 @@
 <template>
   <div class="nav_left">
     <el-menu v-if="selectIndex==1 || selectIndex==null"
-             default-active="1"
+             :default-active="active_index2"
              class="el-menu-vertical-demo"
              @select="handleSelect"
              background-color="#2C3E50"
@@ -14,7 +14,7 @@
     </el-menu>
 
     <el-menu v-if="selectIndex==2"
-             default-active="1"
+             :default-active="active_index2"
              class="el-menu-vertical-demo"
              @select="handleSelect"
              background-color="#2C3E50"
@@ -53,7 +53,7 @@
     </el-menu>
 
     <el-menu v-if="selectIndex==3"
-             default-active="1"
+             :default-active="active_index2"
              class="el-menu-vertical-demo"
              @select="handleSelect"
              background-color="#2C3E50"
@@ -81,38 +81,50 @@
     data() {
       return {
         msg: 'hello world',
-        activeIndex:''
+      }
+    },
+    computed:{
+      active_index2(){
+        return this.$store.state.LeftTag.activeIndex2;
+      }
+    },
+    mounted(){
+      if(sessionStorage.getItem("active_index2")){
+        let index = sessionStorage.getItem("active_index2");
+        this.$store.dispatch("checkIndex2Action",index);
+      }else{
+        this.$store.dispatch("checkIndex2Action",'1');
       }
     },
     methods: {
       handleSelect(key, keyPath) {
-        console.log(key, keyPath);
         if(this.selectIndex=='1'){
+          this.$store.dispatch("checkIndex2Action",key)
           this.$router.push('/')
         }else if(this.selectIndex=='2'){
           switch (key){
-            case '1':this.$router.push('/OrderManage');
+            case '1':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/OrderManage');
               break;
-            case '2-1':this.$router.push('/ProductList');
+            case '2-1':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ProductList');
               break;
-            case '2-2':this.$router.push('/ProductSort');
+            case '2-2':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ProductSort');
               break;
-            case '2-3':this.$router.push('/ProductUpdate');
+            case '2-3':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ProductUpdate');
               break;
-            case '2-4':this.$router.push('/ProductDelete');
+            case '2-4':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ProductDelete');
               break;
-            case '3':this.$router.push('/CouponManage');
+            case '3':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/CouponManage');
               break;
-            case '4':this.$router.push('/GroupManage');
+            case '4':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/GroupManage');
               break;
-            case '5':this.$router.push('/ClientListManage');
+            case '5':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ClientListManage');
               break;
           }
         }else{
           switch (key){
-            case '1':this.$router.push('/SystemMes');
+            case '1':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/SystemMes');
               break;
-            case '2':this.$router.push('/GroupSendMes');
+            case '2':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/GroupSendMes');
               break;
           }
         }

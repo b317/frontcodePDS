@@ -86,6 +86,41 @@ position: absolute;width: 110%;height: auto;border:1px solid #e5e5e5;
 }
 .nav_header .header_right .admin_pull_down div a{color:#409EFF;text-decoration: none;font-size: 12px}
 .nav_header .header_right .admin_pull_down div a:hover{color:#F56C6C}
+/*.nav_header .changeFlame .el-dialog{height:500px}*/
+.nav_header .changeFlame .el-dialog__body{
+  height:280px;overflow-y: auto;
+}
+.nav_header .changeFlame .el-dialog__body::-webkit-scrollbar{
+  display: none;
+}
+.nav_header .changeFlame .el-dialog__footer{border-top: 1px solid #e5e5e5}
+.nav_header .changeFlame .el-input{width: 80%;}
+.nav_header .changeFlame .avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 40px;
+  vertical-align: middle;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav_header .changeFlame .avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+}
+.nav_header .changeFlame .avatar {
+  width: 80px;
+  height: 80px;
+  display: block;
+}
+.nav_header .changeFlame .el-form .el-textarea{
+  width: 80%;
+}
+.nav_header .changeFlame .el-form .el-textarea .el-textarea__inner{resize:none}
 /*navheader结束*/
 
 /*home开始*/
@@ -95,7 +130,7 @@ position: absolute;width: 110%;height: auto;border:1px solid #e5e5e5;
   justify-content:center; display: flex;height: 110px;
   align-items: center;
 }
-.shop_home .shop_intro img{width: 60px;border-radius: 30px;vertical-align: middle}
+.shop_home .shop_intro img{width: 60px;border-radius: 30px;vertical-align: middle;height:60px}
 .shop_home .shop_intro .el-col:last-child{
   font-size: 13px;
 }
@@ -133,7 +168,9 @@ position: absolute;width: 110%;height: auto;border:1px solid #e5e5e5;
 .shop_home .product_tag{width: 55%;display: inline-block;margin-right: 30px}
 .shop_home .product_tag>div div{border-left:5px solid #28B779;line-height: 18px;
   padding-left:20px;}
-.shop_home .product_tag ul{list-style: none;border-top: 1px solid #e5e5e5;display: inline-block}
+.shop_home .product_tag ul{
+  list-style: none;width: 570px;
+  border-top: 1px solid #e5e5e5;display: inline-block}
 .shop_home .product_tag ul li{
   float: left;
   border: 1px solid #23bc85;
@@ -154,7 +191,10 @@ position: absolute;width: 110%;height: auto;border:1px solid #e5e5e5;
 }
 .shop_home .product_tag ul li a em{ margin-left: 2px;
   color: #fa6363;}
+.shop_home .product_tag .tag_none{padding-left: 40px;padding-right: 40px;width: 530px}
+.shop_home .product_tag .tag_none div{border: none}
 .product_tag .shop_deal{margin: 20px 0}
+.product_tag .shop_deal .deal_hint{width: 570px;}
 .product_tag .shop_deal .deal_hint li{min-width: 90px;}
 .shop_contact{width: 40%;display: inline-block ;vertical-align: top;}
 .shop_contact>div:first-child div{line-height: 18px; padding-left:20px;border-left:5px solid #28B779; }
@@ -190,7 +230,7 @@ position: absolute;width: 110%;height: auto;border:1px solid #e5e5e5;
 /*ProductList开始*/
 .product_list{padding-right: 40px;margin-bottom: 50px}
 .product_list .add_new{
-  width: 100%;display: inline-block;margin: 30px 0;
+  width: 100%;display: inline-block;margin: 30px 0 20px 0;
 }
 .product_list .add_new .el-button{
   float: right; border-radius: 5px;border:1px solid #409EFF;color: #409EFF;

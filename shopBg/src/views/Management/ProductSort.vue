@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(item,index) of datalist">
+        <tr v-for="(item,index) of sortlist">
           <td><i v-show="item.isLevelOne">Level one</i></td>
           <td>{{item.levelOneLabel}}</td>
           <td>{{item.LevelTwoLabel.length}}</td>
@@ -43,7 +43,34 @@
           </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="24" v-if="totalProduct==0 || noneProduct">
+            <el-alert
+              style="width: 100%"
+              title="当前没有数据"
+              type="info"
+              center
+              :closable="false"
+              show-icon>
+            </el-alert>
+          </td>
+        </tr>
+        </tfoot>
       </table>
+      <div style="margin-bottom: 50px">
+        <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="totalProduct"
+        :page-size="limit"
+        @current-change="pageChange"
+        @prev-click="preClick"
+        @next-click="nextClick"
+        v-if="showPading"
+        >
+        </el-pagination>
+      </div>
     </div>
     <div v-if="$route.query.add_label>=0" class="add_label">
       <div><el-button size="small" @click="$router.push('/ProductSort')"><img src="/static/back.png"></img>返回商品分类</el-button></div>
@@ -121,6 +148,35 @@
           </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="24" v-if="totalProduct==0 || noneProduct">
+            <el-alert
+              style="width: 100%"
+              title="当前没有数据"
+              type="info"
+              center
+              :closable="false"
+              show-icon>
+            </el-alert>
+          </td>
+          <td colspan="3"></td>
+          <td colspan="9" style="position: relative">
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="totalProduct"
+              :pager-count="7"
+              :page-size="limit"
+              @current-change="pageChange"
+              @prev-click="preClick"
+              @next-click="nextClick"
+              v-if="showPading"
+            >
+            </el-pagination>
+          </td>
+        </tr>
+        </tfoot>
       </table>
     </div>
   </div>
@@ -134,12 +190,19 @@
   textarea{resize: none !important;}
 </style>
 <script>
+  import {getCookie} from "@/common/auth";
   export default {
     data() {
       return {
         msg: '商品分类',
         add_label:null,
         allProductNumArray:[],
+        totalProduct:100,
+        page:1,
+        limit:6,
+        showPading:true,
+        noneProduct:false,
+        sortlist:[],
         datalist:[
           {
             isLevelOne:1,
@@ -279,8 +342,36 @@
         });
         this.allProductNumArray.push(allProductNum);
       });
+      this.findAllMainSort({'offset':this.page,'limit':this.limit});
     },
     methods:{
+      findAllMainSort(params){
+        this.axios.get('/v1/merchant/mainsort/?offset='+params.offset+'&limit='+params.limit,{
+          headers:{
+            "Authorization":"Bearer "+ getCookie('token')
+          }
+        }).then((res)=>{
+          let data =res.data.data;
+          this.sortlist =data.categoryList;
+        }).catch((err)=>{
+          console.log(err)
+        })
+      },
+      pageChange(val){
+//        console.log(`当前页: ${val}`);
+        this.page=val;
+        this.findAllMainSort({'offset':this.page,'limit':this.limit});
+      },
+      preClick(val){
+//        console.log(`上一页: ${val}`);
+        this.page=val;
+        this.findAllMainSort({'offset':this.page,'limit':this.limit});
+      },
+      nextClick(val){
+//        console.log(`下一页: ${val}`);
+        this.page=val;
+        this.findAllMainSort({'offset':this.page,'limit':this.limit});
+      },
       addLabel(){
         this.add_label=0;
         this.$router.push({
@@ -301,7 +392,6 @@
           path:'/ProductSort',
           query:{
             add_label:index+1,
-            item:item
           }
         });
         this.ruleForm.LevelOneLabel=item.levelOneLabel;

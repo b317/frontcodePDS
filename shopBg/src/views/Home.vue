@@ -5,12 +5,12 @@
         <div class="shop_intro">
           <el-row>
             <el-col :span="5">
-              <div><img src="/static/shopImage1.jpg"></div>
+              <div><img :src="shopdata.shop_logo"></div>
             </el-col>
             <el-col :span="19">
-              <p style="font-size: 16px;color: #F56C6C;font-family: microsoft yahei">乐扣乐扣峻佳专卖店</p>
-              <span>商家名：<span class="mes">admin</span></span>
-              <span>开店时间：<span class="mes">2014-08-22</span></span><br/>
+              <p style="font-size: 16px;color: #F56C6C;font-family: microsoft yahei">{{shopdata.shop_name}}</p>
+              <span>商家名：<span class="mes">{{shopowner.username}}</span></span>
+              <span>开店时间：<span class="mes">{{shopdata.createdAt}}</span></span><br/>
               <span>管理权限：<span class="mes">管理员</span></span>
             </el-col>
           </el-row>
@@ -57,13 +57,16 @@
       <div class="product_tag">
         <div>
           <div>店铺商品标签类别</div>
+          <ul class="tag_none" v-if="!sortexit">
+            <li style="width: 100%;border:none;text-align: center">
+              <el-alert title="当前店铺还没有商品标签哦 请前往添加！" type="info" center show-icon  :closable="false"></el-alert>
+            </li>
+          </ul>
           <ul>
-            <li><a href="javascript:void(0)">生活用品类<em>(10)</em></a></li>
-            <li><a href="javascript:void(0)">零食类<em>(10)</em></a></li>
-            <li><a href="javascript:void(0)">家具电器类<em>(10)</em></a></li>
-            <li><a href="javascript:void(0)">服装衣服类<em>(10)</em></a></li>
-            <li><a href="javascript:void(0)">运动户外类<em>(10)</em></a></li>
-            <li><a href="javascript:void(0)">学习提升类<em>(10)</em></a></li>
+            <li v-for="(item,index) of sortdata" :key="index">
+              <a href="javascript:void(0)">{{item.main_category.sort}}
+                <em>({{item.sub_count}})</em></a>
+            </li>
           </ul>
         </div>
         <div class="shop_deal">
@@ -93,20 +96,17 @@
         <div>
           <div>联系方式</div>
           <ul>
-            <li>电话：</li>
-            <li>邮箱：</li>
+            <li>电话：{{shopdata.shop_phone}}</li>
+            <li>qq：{{shopdata.shop_qq}}</li>
             <li class="address">
-              <span>地址：</span>
-              <em>广东省湛江市麻章区海大路1号广东海洋大学湖光校区</em>
+              <span>地址：</span><em>{{shopdata.shop_addr}}</em>
             </li>
           </ul>
         </div>
         <div class="shop_introduction">
           <div>店铺简介</div>
           <p>
-            <em>乐扣乐扣峻佳专卖店</em>是一家噼里啪啦稀里哗啦噼里啪啦稀里哗啦噼里啪啦稀里哗啦噼里啪啦稀里哗啦
-            噼里啪啦稀里哗啦噼里啪啦稀里哗啦噼里啪啦稀里哗啦噼里啪啦稀里哗啦噼里啪啦稀里哗啦
-            噼里啪啦稀里哗啦噼里啪啦稀里哗啦噼里啪啦稀里哗啦噼里啪啦稀里哗啦噼里啪啦稀里哗啦。
+            <em>{{shopdata.shop_name}}</em>是一家{{shopdata.shop_intro}}
           </p>
         </div>
       </div>
@@ -121,28 +121,75 @@
   import { getCookie } from '../common/auth';
 
   export default {
+    props:['shopowner'],
     components: {
       ElCol,
       ElRow},
     data() {
       return {
         msg: 'hello world',
-        value: 3.7
+        value: 3.7,
+        shopdata:[],
+        sortdata:[],
+        sortexit:false,
       }
     },
     mounted(){
-      this.axios.get('/v1/merchant/mainsort/subcount',
-        {
-          headers:{
+      this.findShopMes();
+      this.findMainSort();
+      this.findShopOwner();
+//      this.userId=getCookie('name')
+    },
+    methods:{
+      findMainSort(){
+        this.axios.get('/v1/merchant/mainsort/subcount',
+          {
+            headers:{
 //            "Authorization":"Bearer "+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NDUxMDM4MTMsImlkIjo1LCJuYmYiOjE1NDUxMDM4MTMsInJvbGVpZCI6MiwidXNlcm5hbWUiOiIxMzQyMDEyMDc1MCJ9.jyqnBoIL7YMLAXcwZMvPaxUVYdM1cep6y3w4i99dQOY'
-            "Authorization":"Bearer "+ getCookie("token")
+              "Authorization":"Bearer "+ getCookie("token")
+            }
+          }).then((response)=>{
+          let data = response.data.data.categoryList;
+          this.sortdata=data;
+          console.log(data+"gg")
+        }).catch((err)=>{
+          console.log(err+"haha");
+        })
+      },
+      findShopMes(){
+        this.axios.get('/v1/merchant/detailbyuser/'+getCookie('id'),
+          {
+            headers:{
+              "Authorization":"Bearer "+ getCookie("token")
+            }
+          }).then((response)=>{
+          if(response.data.message=='OK'){
+            this.sortexit=true
           }
-        }).then((response)=>{
-        let data = response.data;
-        console.log(data+"gg")
-      }).catch((err)=>{
-        console.log(err+"haha");
-      })
+          let data = response.data.data;
+          this.shopdata=data;
+          let time=this.shopdata.createdAt;
+          var date = new Date(time).toJSON();
+          this.shopdata.createdAt= new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+          console.log(data+getCookie('id'))
+        }).catch((err)=>{
+          console.log(err+"heihei");
+        })
+      },
+      findShopOwner(){
+//        this.axios.get('/v1/user/detail/'+getCookie('id'),
+//          {
+//            headers:{
+//              "Authorization":"Bearer "+ getCookie("token")
+//            }
+//          }).then((response)=>{
+//          let data = response.data.data;
+//          this.shopowner=data;
+//          this.$emit("shopowner",this.shopowner)
+//        }).catch((err)=>{
+//          console.log(err);
+//        })
+      }
     }
   }
 </script>

@@ -10,6 +10,7 @@ import axios from 'axios'
 Vue.prototype.axios = axios;
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
+window.eventBus=new Vue();
 /* eslint-disable no-new */
 new Vue({
   store,
