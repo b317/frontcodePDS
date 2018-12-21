@@ -18,7 +18,7 @@ export default {
         maskWidth:100,
         maskHeight:100,
         maskColor:'#ddd',
-        maskOpacity:0.2
+        maskOpacity:0.8
       }
     }
   },

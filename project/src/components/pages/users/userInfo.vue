@@ -2,7 +2,7 @@
     <div class="container">
       <div class="fontwarn">没有什么消息</div>
       <div class="info"></div>
-      <watchpic :src="src"></watchpic>
+      <!-- <watchpic :src="src"></watchpic> -->
     </div>
 </template>
 
