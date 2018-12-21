@@ -44,11 +44,12 @@
     },
     methods: {
       showProductDetail() {
-//        this.$router.push("/ProductDetail")
-        console.log(this.src)
+//        let urlStr = '/ProductDetail?goodsname=' + this.msg;
+//        this.$router.push(urlStr);
+        console.log(this.src);
         this.$router.push({
-          name:'ProductDetail',
-          params:{
+          path:'/ProductDetail',
+          query:{
             src:this.src,
             title:this.msg,
             price:this.sell
