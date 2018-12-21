@@ -120,16 +120,16 @@
       },
       methods:{
         showDetail () {
-          this.$router.push("/ProductDetail")
-          console.log("花名："+ this.pickgoods.name)
-//          this.$router.push({
-//            name:'ProductDetail',
-//            params:{
-//              src: this.pickgoods.icon,
-//              title: this.pickgoods.name,
-//              price: this.pickgoods.price
-//            }
-//          })
+//          this.$router.push("/ProductDetail")
+          console.log("花名："+ this.pickgoods.name);
+          this.$router.push({
+            path:'/ProductDetail',
+            query:{
+              src:this.pickgoods.icon,
+              title:this.pickgoods.name,
+              price:this.pickgoods.price
+            }
+          })
         }
       }
     }
