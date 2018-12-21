@@ -8,6 +8,7 @@
           <el-menu-item index="4-1">我的团购</el-menu-item>
           <el-menu-item index="4-4">我的订单</el-menu-item>
           <el-menu-item index="4-2">我的红包</el-menu-item>
+          <el-menu-item index="4-5">{{shopclick}}</el-menu-item>
         </el-submenu>
         <el-menu-item index="3" style="color:#f65d29;">免费注册</el-menu-item>
         <el-menu-item index="2" class="app-username">你好,{{showName}}
@@ -32,9 +33,7 @@
       </div>
       <router-view/>
     </div>
-    <div class="top-btn" style="position: absolute; z-index: 999;">
-      <top-btn></top-btn>
-    </div>
+
     <nav-footer v-if="isShow"></nav-footer>
     <login-footer v-if="!isShow"></login-footer>
   </div>
@@ -46,7 +45,6 @@ import {getId,getName,setName} from "@/util/auth";
 import {getUserInfo} from "@/api/http";
 import NavFooter from '@/components/module/NavFooter'
 import LoginFooter from '@/components/module/LoginFooter'
-import TopBtn from '@/components/module/TopBtn'
 
 export default {
   name: 'App',
@@ -61,14 +59,18 @@ export default {
     }
   },
   components:{
-    NavFooter,LoginFooter,TopBtn
+    NavFooter,LoginFooter
   },
   computed: {
     ...mapGetters({
-        username: 'user/username'
+        username: 'user/username',
+        role_id: 'user/role_id'
       }),
     showName(){
       return this.username === "" ? "请登录":this.username
+    },
+    shopclick(){
+      return this.role_id == 2 ? "我的商铺":"商家认证"
     },
     title(){
       if(this.activeIndex == 2){
@@ -91,10 +93,10 @@ export default {
         let data = res.data.data
         let a = data.nick_name==""?data.username:data.nick_name
         this.setuserName(a)
+        this.setRoleId(data.role_id)
         this.setpic("http://134.175.113.58/"+data.head_image)
       })
     }
-    
     this.$bus.$on("loading",(a) => {
       this.isLoading = a
     })
@@ -125,6 +127,13 @@ export default {
           this.$router.push("/userInfo")
         }else if(key == "4-4"){
           this.$router.push("/goods")
+        }else if(key == "4-5"){
+          console.log(this.role_id)
+          if(this.role_id == 1){
+            this.$router.push("/MerchantEntry")
+          }else{
+            window.open("")
+          }
         }
         this.checkShowFooter(); //检查不同的页面显示不同的页脚
       },
@@ -145,6 +154,11 @@ export default {
   @import './css/header.scss';
   @import "./css/footer.css";
   @import "./css/newsCenter.css";
+  .top-btn{
+    position: fixed;
+    right: 0px;
+    top: 40%;
+  }
   .app-username{
     max-width: 120px !important;
     overflow: hidden;white-space: nowrap;text-overflow: ellipsis;

@@ -103,6 +103,8 @@ export default {
         z-index: 99;
         display: flex;
         background: #fff;
+        flex-direction: column;
+        flex-wrap: wrap;
         width: 66%;
         border: 2px solid #f65d29;
         border-left: 1px solid #eee;
@@ -111,7 +113,7 @@ export default {
             min-height: 26px;
             height: 26px;
             cursor: pointer;
-            min-width: 50px;
+            width: 25%;
             text-align: center;
             line-height: 26px;
             font-size: 13px;

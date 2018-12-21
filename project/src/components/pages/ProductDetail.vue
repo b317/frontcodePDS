@@ -1,12 +1,13 @@
 <template>
     <div class="shop-content">
+      <!--商铺顶部-->
       <div class="goods-shop-hd" id="hd">
         <div class="layout grid-m J_TLayout">
           <div class="col-main">
             <div class="hd-head rela" style="height:120px;display: inline-block;">
               <div class="hd-name" style="height:80px;text-align:left;padding:20px 16px;">
                 <span class="h1" style="line-height:80px;font-size:40px;font-family:宋体;">馨语给您一个温馨的家</span>
-                <span class="h2" style="padding-top:16px;line-height:64px;font-size:16px;font-family:宋体;">绿色家居生活</span>
+                <span class="h2" style="padding-top:16px;line-height:64px;font-size:16px;font-family:宋体;">生活有你更美好</span>
               </div>
             </div>
             <div class="shopExtra" style="height: 120px;display: inline-block;">
@@ -17,13 +18,13 @@
               <div class="other-info" style="margin-top: 15px;">
                 <span class="info-item">
                   <span class="title">信 誉:</span>
-                  <a class="r-rank-icon" href="#">
+                  <a class="r-rank-icon" href="#/ProductDetail">
                     <img src="../../../static/icon-16-16.gif">
                   </a>
                 </span>
                 <span class="info-item cs-rank-icon" style="margin-left: 25px;">
                   <span class="title">客 服:</span>
-                  <a class="ww-inline ww-online" href="#"
+                  <a class="ww-inline ww-online" href="#/ProductDetail"
                    title="点此可以直接和卖家交流选好的宝贝，或相互交流网购体验，还支持语音视频噢。">
                     <span>客服在线</span>
                   </a>
@@ -33,57 +34,52 @@
           </div>
         </div>
       </div>
+      <!--商铺内容-->
       <div class="goods-detail-panel">
         <div class="leftView">
           <div class="imgView">
             <div class="goods-img">
-              <img class="small" :src="this.$route.params.src">
+              <img class="small" :src="this.$route.query.src">
             </div>
             <p class="tm-action">
-              <span id="J_EditItem" style="float: right;padding-right: 40px;"><a href=""><i class="el-icon-phone-outline"></i>举报</a></span>
-              <a id="J_IShare" class="iShare tm-event" href="#"><i class="el-icon-share"></i>分享</a>
-              <span style="padding-left: 15px;"><i class="el-icon-loading"></i>已销售<span id="J_CollectCount">3337</span></span>
+              <span id="J_EditItem" style="float: right;padding-right: 40px;"><a href="#/ProductDetail"><i class="el-icon-phone-outline"></i>举报</a></span>
+              <a id="J_IShare" class="iShare tm-event" href="#/ProductDetail"><i class="el-icon-share"></i>分享</a>
+              <span style="padding-left: 15px;"><i class="el-icon-loading"></i>已销售<span id="J_CollectCount">0000</span></span>
             </p>
           </div>
           <div class="contentView">
             <div class="tb-detail-hd">
-              <h1>{{this.$route.params.title}}</h1>
+              <h1>{{this.$route.query.title}}</h1>
             </div>
             <div class="tm-fcs-panel">
-              <p><span class="tb-metatit">价格</span>
-                <span class="tb-tm-original-price"><em class="tm-yen">¥</em> <del><span class="tm-original-price">33.80</span></del></span></p>
-              <p><span class="tb-metatit">促销价</span>
-                <span class="tb-tm-price"><em class="tm-yen">¥ </em><span class="tm-price">{{this.$route.params.price}}</span></span></p>
+              <!--<p><span class="tb-metatit">价格</span>-->
+                <!--<span class="tb-tm-price"><em class="tm-yen">¥ </em>-->
+                  <!--<del><span class="tm-price">00.00</span></del></span>-->
+              <!--</p>-->
               <p><span class="tb-metatit">团购价</span>
-                <span class="tb-tm-price"><em class="tm-yen">¥ </em><span class="tm-price">21.00</span></span></p>
+                <span class="tb-tm-group-price"><em class="tm-yen">¥ </em>
+                  <span class="tm-group-price">{{this.$route.query.price}}</span></span>
+              </p>
             </div>
             <div class="tm-delivery-panel">
               <span class="tb-metatit">配送</span>
               <div class="tb-postAge" style="display: inline-block;">
                 <span class="tb-deliveryAdd" id="J_deliveryAdd">江苏宿迁</span> 至 <span>
-                <span role="button" class="sel-address" style="cursor: pointer;">广东湛江</span><i class="el-icon-arrow-down"></i></span>
-                <span>快递：<span>0.00</span></span>
+                <span role="button" class="sel-address" style="cursor: pointer;">{{address}}</span>
+                <!--<i class="el-icon-arrow-down"></i>-->
+              </span>
+                <!--<span>快递：<span>0.00</span></span>-->
               </div>
             </div>
             <div class="tm-type-panel">
               <span class="tb-metatit" style="vertical-align: top">颜色分类</span>
               <ul class="tb-type">
-                <li title="白色铃兰10株+盆" class="tb-txt">
-                  <a href="#" role="button" tabindex="0" class="tb-txt-a active"><span>白色铃兰5株+盆</span><i>已选中</i></a>
+                <li v-for="(item,index) in lilist" :key="index" @click="selectLi(item,index)"
+                    :title="item.title" :alt="item.title" class="tb-txt">
+                  <span role="button" :tabindex="item.tabindex" class="tb-txt-s "
+                        :class="{'active':item.active,'':!item.active}"
+                  ><span>{{item.title}}</span><i>已选中</i></span>
                 </li>
-                <li title="白色铃兰20株+盆" class="tb-txt">
-                  <a href="#" role="button" tabindex="0" class="tb-txt-a"><span>白色铃兰10株+盆</span><i>已选中</i></a>
-                </li>
-                <li title="白色铃兰20株+盆" class="tb-txt">
-                  <a href="#" role="button" tabindex="0" class="tb-txt-a"><span>白色铃兰15株+盆</span><i>已选中</i></a>
-                </li>
-                <li title="白色铃兰20株+盆" class="tb-txt">
-                  <a href="#" role="button" tabindex="0" class="tb-txt-a"><span>白色铃兰20株+盆</span><i>已选中</i></a>
-                </li>
-                <!--<type-item-li></type-item-li>-->
-                <!--<type-item-li></type-item-li>-->
-                <!--<type-item-li></type-item-li>-->
-                <!--<type-item-li></type-item-li>-->
               </ul>
             </div>
             <div></div>
@@ -91,7 +87,7 @@
               <span class="tb-metatit">数量</span>
               <div class="mui-amount-btn" style="display: inline-block;">
             <span class="tb-amount-widget mui-amount-wrap">
-              <input type="text" class="tb-text mui-amount-input" v-model="inputValue" title="请输入购买量">
+              <input class="tb-text mui-amount-input" v-model="number" title="请输入购买量">
               <span class="mui-amount-btn">
                 <span class="mui-amount-increase" @click="incr"><i class="el-icon-arrow-up" style="line-height: 5px"></i></span>
                 <span class="mui-amount-decrease" @click="decr"><i class="el-icon-arrow-down" style="line-height: 5px"></i></span>
@@ -99,7 +95,7 @@
               <span class="mui-amount-unit">件</span>
             </span>
               </div>
-              <em id="J_EmStock" class="tb-hidden" style="display: inline;">库存<span>902</span>件</em>
+              <em id="J_EmStock" class="tb-hidden" style="display: inline;">库存<span>000</span>件</em>
             </div>
             <div></div>
             <div class="tb-action-btn">
@@ -109,9 +105,9 @@
             <div class="tm-ser">
               <span class="tb-metatit">服务承诺</span>
               <div class="tm-laysku-dd" style="display: inline-block;">
-                <span><a href="#" title="该商品由中国人保承保正品保证险">正品保证</a></span>
-                <span><a href="#" title="极速退款是为诚信会员提供的退款退货流程的专享特权，额度是根据每个用户当前的信誉评级情况而定">极速退款</a></span>
-                <span><a href="#" title="卖家为您购买的商品投保退货运费险（保单生效以下单显示为准）">赠运费险</a></span>
+                <span><a href="#/ProductDetail" title="该商品由中国人保承保正品保证险">正品保证</a></span>
+                <span><a href="#/ProductDetail" title="极速退款是为诚信会员提供的退款退货流程的专享特权，额度是根据每个用户当前的信誉评级情况而定">极速退款</a></span>
+                <span><a href="#/ProductDetail" title="卖家为您购买的商品温馨诚意服务">温馨服务</a></span>
               </div>
             </div>
           </div>
@@ -120,9 +116,7 @@
           <div class="recommend-label "><s></s><span>看了又看</span></div>
           <div class="recommend-bd">
             <ul>
-              <recommend-item></recommend-item>
-              <recommend-item></recommend-item>
-              <recommend-item></recommend-item>
+              <recommend-item v-for="(item,index) in recList" :key="index" :recList="item" :index="index"></recommend-item>
             </ul>
           </div>
         </div>
@@ -138,143 +132,212 @@
     </div>
 </template>
 <script>
+    import Vue from 'vue'
     import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
     import RecommendItem from "./RecommendItem.vue";
     import GoodsRecommendItem from "./GoodsRecommendItem.vue";
-    import TypeItemLi from "./TypeItemLi.vue";
-
     export default {
-      components: {ElButton, RecommendItem,GoodsRecommendItem,TypeItemLi},
+      components: {ElButton, RecommendItem,GoodsRecommendItem},
       data() {
         return {
           msg: 'hello world',
           num8: 1,
-          inputValue: '1',
+          number: '1',
           isShow:true,  // 是否有数据
           datelist: [
             {
               icon: "../../../static/goods/430x430q90.jpg",
               name: "茉莉花盆栽",
               rate: 1.7,
-              price: "22.00",
-              originalPrice: "27.00",
+              delprice: "24.00",
+              price: "23.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q90.jpg",
               name: "金娃娃萱草",
               rate: 2.7,
-              price: "21.00",
-              originalPrice: "24.00",
+              delprice: "27.00",
+              price: "26.00",
               tipshow:[1,0,0]
             },
             {
               icon: "../../../static/goods/400x400q91.jpg",
               name: "转子莲艾丽塔",
               rate: 3.7,
-              price: "23.00",
-              originalPrice: "29.00",
+              delprice: "26.00",
+              price: "24.00",
               tipshow:[1,1,1]
             },
             {
               icon: "../../../static/goods/400x400q92.jpg",
               name: "紫丁香花---花语代表初恋",
               rate: 4.3,
-              price: "25.00",
-              originalPrice: "30.00",
+              delprice: "23.00",
+              price: "21.00",
               tipshow:[0,0,1]
             },
             {
               icon: "../../../static/goods/400x400q93.jpg",
               name: "古典玫瑰紫袍",
               rate: 4.7,
-              price: "24.00",
-              originalPrice: "27.00",
+              delprice: "22.00",
+              price: "22.00",
               tipshow:[1,1,0]
             },
             {
               icon: "../../../static/goods/400x400q90.jpg",
               name: "金娃娃萱草",
               rate: 4.3,
-              price: "21.00",
-              originalPrice: "25.00",
+              delprice: "27.00",
+              price: "24.00",
               tipshow:[0,1,1]
             },
             {
               icon: "../../../static/goods/400x400q91.jpg",
               name: "转子莲艾丽塔",
               rate: 4.3,
+              delprice: "24.00",
               price: "23.00",
-              originalPrice: "27.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q92.jpg",
               name: "初恋紫丁香花",
               rate: 4.3,
-              price: "25.00",
-              originalPrice: "27.00",
+              delprice: "24.00",
+              price: "20.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q93.jpg",
               name: "古典玫瑰紫袍",
               rate: 4.3,
-              price: "24.00",
-              originalPrice: "27.00",
+              delprice: "29.00",
+              price: "27.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q90.jpg",
               name: "金娃娃萱草",
               rate: 4.3,
-              price: "21.00",
-              originalPrice: "27.00",
+              delprice: "28.00",
+              price: "24.00",
               tipshow:[1,0,1]
             },
             {
               icon: "../../../static/goods/400x400q91.jpg",
               name: "转子莲艾丽塔",
               rate: 4.3,
-              price: "23.00",
-              originalPrice: "27.00",
+              delprice: "34.00",
+              price: "32.00",
               tipshow:[1,0,1]
             },
           ], // 数据集
+          address: '广东湛江',
+          lilist:[
+            {
+              tabindex: 0,
+              title: '白色铃兰5株+盆',
+            },
+            {
+              tabindex: 1,
+              title: '白色铃兰10株+盆',
+            },
+            {
+              tabindex: 2,
+              title: '白色铃兰15株+盆',
+            },
+            {
+              tabindex: 3,
+              title: '白色铃兰20株+盆',
+            },
+            {
+              tabindex: 4,
+              title: '白色铃兰25株+盆',
+            },
+            {
+              tabindex: 5,
+              title: '白色铃兰20株+盆',
+            },
+            {
+              tabindex: 6,
+              title: '白色铃兰25株+盆',
+            },
+          ],//分类
+          active: false,
+
+          recList: [
+            {
+              icon: "../../../static/goods/rd1.jpg",
+              title:'免费领包活藤本皇后铁线莲皇家丝绒多颜色可选买2送一',
+              name: "紫丁香花",
+              tell: '花语初恋',
+              price: "23.00"
+            },
+            {
+              icon: "../../../static/goods/pdm1.jpg",
+              title:'免费领包茉莉花盆栽莲皇家丝绒多颜色可选买4送一',
+              name: "茉莉花",
+              tell: '茉莉花',
+              price: "27.00"
+            },
+            {
+              icon: "../../../static/goods/pdm2.jpg",
+              title:'免费领包金娃娃萱草莲皇家丝绒多颜色可选买1送一',
+              name: "金娃娃萱草",
+              tell: '金娃娃',
+              price: "21.00"
+            },
+          ], //看了又看
         }
       },
       methods:{
+        //增加购买数量
         incr(){
-          if(this.inputValue==3){
+          if(this.number==100){
             this.$message({
-              message: '警告，数量已达到10件',
+              message: '警告，数量已达到100件',
               type: 'warning'
             });
           }else{
-            this.inputValue++
+            this.number++
           }
         },
+        //减少购买数量
         decr(){
-          if(this.inputValue==1){
+          if(this.number==1){
             this.$message({
               message: '提示，数量已低到1件',
               type: 'warning'
             });
           }else{
-            this.inputValue--
+            this.number--
           }
+        },
+        //是否有数据
+        ifShow(item){
+          if(item.length==0){
+            this.isShow=false;
+          }else{
+            this.isShow=true;
+          }
+        },
+        //分类选择
+        selectLi(item,index){
+          this.$nextTick(function () {
+            this.lilist.forEach(function (item) {
+              Vue.set(item,'active',false);
+            });
+            Vue.set(item,'active',true);
+          });
         },
       },
       mounted(){
-        if(this.datelist.length==0){
-          this.isShow=false;
-        }else{
-          this.isShow=true;
-        }
+        this.ifShow(this.datelist);
       }
     }
 </script>
-
 <style scoped>
   ul li {
     list-style: none;
@@ -390,7 +453,7 @@
   .goods-detail-panel{
     margin-top: 165px;
     width: 1077px;
-    height: 474px;
+    height: 494px;
     position: relative;
     /*border: 1px solid red;*/
   }
@@ -435,20 +498,20 @@
     color: #999;
     font-size: 12px;
   }
-  .contentView .tm-fcs-panel .tb-tm-original-price{
+  .contentView .tm-fcs-panel .tb-tm-price{
     font-size: 14px;
     color: #333;
     margin-left: 30px;
     font-family: Arial;
   }
-  .contentView .tm-fcs-panel .tb-tm-price{
+  .contentView .tm-fcs-panel .tb-tm-group-price{
     font-size: 18px;
     color: #FF0036;
     margin-left: 18px;
     font-weight: bolder;
     font-family: Arial;
   }
-  .contentView .tm-fcs-panel .tb-tm-price .tm-price{
+  .contentView .tm-fcs-panel .tb-tm-group-price .tm-group-price{
     font-size: 28px;
   }
   .contentView .tm-delivery-panel{margin-top: 25px;}
@@ -457,22 +520,24 @@
     font-size: 14px;
     color: #333;
   }
+  /* 颜色分类 */
   .contentView .tm-type-panel{
     margin-top: 25px;
   }
-  /* 颜色分类 */
   .contentView .tm-type-panel .tb-type{
     display: inline-block;
     margin: 0;
     padding: 0;
-    width: 320px;
+    width: 340px;
+    /*border: 1px solid red;*/
   }
-  .tb-type li.tb-txt a {
+
+  ul.tb-type li.tb-txt>span {
     padding: 0 5px;
     width: auto!important;
   }
-  .tb-type li{float: left;margin-bottom: 10px}
-  .tb-type li a {
+  ul.tb-type li{float: left;margin-bottom: 10px}
+  ul.tb-type li>span{
     width: 38px!important;
     height: 38px;
     padding: 0;
@@ -481,22 +546,22 @@
     outline: 0;
     background-position: center center;
   }
-  .contentView .tm-type-panel .tb-type li a{
+  ul.tb-type li>span{
     float: left;
     background-color: #fff;
     border: 1px solid #b8b7bd;
     color: #000;
+    font-size: 10px;
     min-width: 10px;
     padding: 0 9px;
     text-align: center;
     text-decoration: none;
     margin-left: 6px;
   }
-  .contentView .tm-type-panel .tb-type li a:hover{
+  ul.tb-type li>span:hover{
     border: 2px solid #FF0036;
-    margin: -1px -1px -1px 5px;
   }
-  .tb-type li .tb-txt-a i {
+  ul.tb-type li .tb-txt-s i {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -508,24 +573,23 @@
     background-repeat: no-repeat;
     background-position: 0 0;
   }
-  .tb-type li a.tb-txt-a.active i{
+  ul.tb-type li span.tb-txt-s.active i{
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJUExURUxpcf8AN////7f4NBoAAAABdFJOUwBA5thmAAAAMUlEQVQI103MAQ4AMAQEQev/j66i6YrEXIKIX9jY2NjYyDmhZnlCo5rdyWvebfYDVAcSmABbA7WD+QAAAABJRU5ErkJggg==);
   }
-  .tb-type li .tb-txt-a {
+  ul.tb-type li .tb-txt-s {
     position: relative;
     border: 2px solid #ddd;
     padding: 2px 6px;
     border-radius: 2px;
     cursor: pointer
   }
-  .tb-type li a.tb-txt-a.active, .tb-type li .tb-txt-a:hover{
+  ul.tb-type li span.tb-txt-s.active, ul li .tb-txt-s:hover{
     border: 2px solid #FF0036;
-    margin: -1px -1px -1px 5px;
   }
-  .tb-type li .tb-txt-a.active i {
+  ul.tb-type li .tb-txt-s.active i {
     display: block
   }
-
+  /* 数量 */
   .contentView .tb-amount{
     margin-top: 25px;
     color: #333;

@@ -1,54 +1,70 @@
 <template>
   <div>
-    <button type="button" class="back-top small" @click="backTop()" v-show="backTopShow">飞到顶部</button>
+    <ul ref="ul" @click.stop.prevent="handlerClick($event)" class="my-list fontsize12">
+      <li ref="hot" data-title='hot'>热卖</li>
+      <li ref="food" data-title='food'>美食</li>
+      <li ref="play" data-title='play'>娱乐</li>
+      <li ref="movie" data-title='movie'>电影</li>
+      <li ref="test" data-title='test'>测试</li>
+    </ul>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   export default {
-    data() {
-      return {
-        backTopShow:false
+    props: {
+      title: {
+        type: String,
+        default: "1"
       }
     },
-    components: {},
-    mounted() {
-      window.addEventListener('scroll', this.handleScroll)
-    },
     methods: {
-      backTop() {
-        let back = setInterval(() => {
-          if(document.body.scrollTop||document.documentElement.scrollTop){
-            document.body.scrollTop-=100;
-            document.documentElement.scrollTop-=100;
-          }else {
-            clearInterval(back)
-          }
-        });
+      handlerClick(e) {
+        this.$emit("nav", e.target.dataset.title);
+        this.doSomething(e.currentTarget.children, e.target);
       },
-      handleScroll(){
-        if (document.documentElement.scrollTop + document.body.scrollTop > 100) {
-          this.backTopShow=true;
+      doSomething(children, target) {
+        for (let i = 0; i < children.length; i++) {
+          children[i].style.backgroundColor = "";
+          children[i].style.color = "";
         }
-        else {
-          this.backTopShow=false;
+        target.style.backgroundColor = "#ff5000";
+        target.style.color = "white";
+      }
+    },
+    watch: {
+      title: {
+        immediate: true,
+        handler: function (newval) {
+          console.log(newval)
+          this.$nextTick(() => {
+            this.doSomething(this.$refs.ul.children, this.$refs[newval]);
+          })
         }
       }
     }
-  }
+  };
 </script>
 
+
 <style lang="scss" scoped>
-  .back-top {
-    position: fixed;
-    right: 10px;
-    bottom: 10px
-  }
-  .back-top{
-    width: 42px;
-    height: 42px;
-    color: #999;
-    font-size: 12px;
-  }
-  button{border: 1px solid #ccc;}
+.my-list{
+  display: fixed;
+  right: 0px;
+  background-color: white;
+  list-style: none;
+  border: 1px #ddd solid;
+  padding: 0px;
+  li{
+    width: 56px;
+    height: 33px;
+    text-align: center;
+    line-height: 33px;
+    cursor: pointer;
+  }:hover{
+      background-color: #ff9000;
+      color: white;
+    }
+}
 </style>
+
