@@ -139,4 +139,22 @@ export function upnshop(params){//重新认证
         }
     )
 }
+export function goodsforhome(){//获取状态
+    return axios.get("/v1/global/goodsforhome/",
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
 
+export function querygood(params){//获取状态
+    return axios.get(`/v1/global/goodsforquery/?offset=${params.offset}&limit=${params.limit}&q=${params.q}`,
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}

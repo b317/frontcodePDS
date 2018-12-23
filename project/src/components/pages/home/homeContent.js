@@ -1,82 +1,35 @@
-
-export default{
-    arr:[
-      {
-        title:{
-          title:"鸟语花香",
-          tip:["转子莲","紫丁香","兰花"]
-        },
-        data:
-          [
-            {src:"../../../static/goods/400x400q90.jpg",rate:2.7,title:"金娃娃萱草",sell:"21.00",tipshow:[1,1,0],sellhot:false},
-            {src:"../../../static/goods/400x400q91.jpg",rate:3.7,title:"转子莲艾丽塔",sell:"23.00",tipshow:[0,1,1],sellhot:false},
-            {src:"../../../static/goods/item_pic.jpg",rate:3.7,title:"兰花苗盆栽",sell:"24.00",tipshow:[1,0,1],sellhot:true},
-            {src:"../../../static/goods/item_pic2.jpg",rate:4.7,title:"绿萝盆栽园艺",sell:"28.00",tipshow:[1,1,1],sellhot:true},
-            {src:"../../../static/goods/400x400q92.jpg",rate:4.7,title:"紫丁香花---花语代表初恋",sell:"35.00",tipshow:[1,0,0],sellhot:true},
-            {src:"../../../static/goods/400x400q93.jpg",rate:4.5,title:"古典玫瑰紫袍",sell:"25.00",tipshow:[1,1,0],sellhot:false}
-          ]
-      },
-        {
-            title:{
-                title:"数码商城",
-                tip:["笔记本","照相机"]
-            },
-            data:
-            [
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,0,1],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,0],sellhot:false},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,1],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[0,1,1],sellhot:false},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,0,0],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,0],sellhot:false}
-            ]
-        },
-        {
-            title:{
-                title:"零食卖场",
-                tip:["烤面筋","吸吸冰"]
-            },
-            data:
-            [
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,0,1],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,0],sellhot:false},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,1],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[0,1,1],sellhot:false},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,0,0],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,0],sellhot:false}
-            ]
-        },
-        {
-            title:{
-                title:"零食卖场",
-                tip:["烤面筋","吸吸冰"]
-            },
-            data:
-            [
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,0,1],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,0],sellhot:false},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,1],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[0,1,1],sellhot:false},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,0,0],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,0],sellhot:false}
-            ]
-        ,
-        },
-        {
-            title:{
-                title:"零食卖场",
-                tip:["烤面筋","吸吸冰"]
-            },
-            data:
-            [
-                {src:"../../../../static/goods.jpg",rate:3.2,title:"苹果电脑",sell:3000,tipshow:[1,0,1],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:3.3,title:"苹果电脑",sell:3000,tipshow:[1,1,0],sellhot:false},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,1],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[0,1,1],sellhot:false},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,0,0],sellhot:true},
-                {src:"../../../../static/goods.jpg",rate:4.3,title:"苹果电脑",sell:3000,tipshow:[1,1,0],sellhot:false}
-            ]
-        ,
+import {goodsforhome} from "@/api/http";
+let arr = []
+let ddd = []
+goodsforhome().then(res => {
+    res.data.data.goodsList.map((item,key) => {
+        if(key >= 4){
+            return;
         }
-    ]
+        let arr1 = item.goodslist.map(item =>{
+            return item.goods_name
+        })
+        let arr2 = item.goodslist.map(item =>{
+            return {
+                goods_name:item.goods_name,
+                goods_price:item.goods_price,
+                goods_discount:item.goods_discount,
+                goods_photo:item.goods_photo
+            }
+        })
+        let arritem = {
+            title:{
+                title:item.mainsort.sort,
+                tip:arr1
+            },
+            data:arr2
+        }
+        ddd.push(item.mainsort.sort)
+        console.log(ddd)
+        arr.push(arritem)
+    })
+})
+export default{
+   arr:arr,
+   arr2:ddd
 }

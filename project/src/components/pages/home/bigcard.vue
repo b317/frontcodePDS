@@ -6,7 +6,11 @@
       <div class="right">更多<i class="el-icon-arrow-right"></i></div>
     </div>
     <div class="card" v-for="(item,key) in dataArr" :key=key>
-        <smallcard :src=item.src :msg=item.title :sellhot=item.sellhot :tipshow=item.tipshow :rate=item.rate :sell=item.sell></smallcard>
+        <smallcard :goods_photo="item.goods_photo"
+        :goods_name="item.goods_name"
+        :goods_price="item.goods_price"
+        :goods_discount="item.goods_discount"
+        ></smallcard>
     </div>
   </div>
 </template>

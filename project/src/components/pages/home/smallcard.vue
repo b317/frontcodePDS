@@ -2,31 +2,19 @@
   <div class="content">
     <img :src=src @mouseover="show = true" class="img" @click="showProductDetail" :class="{hover:show}" @mouseout="show = false">
     <div class="wrap">
-        <el-rate
-        v-model="rate"
-        disabled
-        show-score
-        text-color="#ff9900"
-        score-template="{value}"
-        class="rate">
-        </el-rate>
         <div class="msg" >
-            {{msg}}
-            <!--<router-link href="javascript:void(0)" to="/ProductDetail">{{msg}}</router-link>-->
-            <img src="../../../../static/hotSell.jpg" v-show="sellhot">
+            {{goods_name}}
             <div class="warn" v-show="show"  @mouseover="show = true" @click="showProductDetail">点击前往拼团</div>
         </div>
         <div class="sell">
-                {{sell}}
-            <div class="tip" v-show="tipshow[0]">
-                拼团打折
+            <div class="tip">
+                立刻购买
             </div>
-            <div class="tip" v-show="tipshow[1]">
-                商家优惠
+            {{goods_price}}
+            <div class="tip">
+                拼团优惠
             </div>
-            <div class="tip" v-show="tipshow[2]">
-                活动优惠
-            </div>
+            {{goods_discount}}
         </div>
     </div>
   </div>
@@ -34,7 +22,7 @@
 
 <script>
   export default {
-    props: ["src", "msg", "rate", "sell", "tipshow", "sellhot"],
+    props: ["goods_photo", "goods_name", "goods_price", "goods_discount"],
     data() {
       return {
         show: false,
@@ -42,16 +30,19 @@
     },
     mounted(){
     },
+    computed: {
+        src(){
+            return "http://134.175.113.58/"+this.goods_photo
+        }
+    },
     methods: {
       showProductDetail() {
-//        this.$router.push("/ProductDetail")
-        console.log(this.src)
         this.$router.push({
           name:'ProductDetail',
           params:{
             src:this.src,
-            title:this.msg,
-            price:this.sell
+            title:this.goods_name,
+            price:this.goods_price
           }
         })
       }

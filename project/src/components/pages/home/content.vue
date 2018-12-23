@@ -1,6 +1,14 @@
 <template>
   <div class="content">
-    <div><bigcard class="my-ref" :data-title="arr2[key]" :ref="arr2[key]" v-for="(item,key) in arr" :key = key :dataArr=item.data :title = item.title></bigcard>
+    <div>
+        <bigcard class="my-ref" 
+        :data-title="arr2[key]" 
+        :ref="arr2[key]"
+         v-for="(item,key) in arr" 
+         :key = key 
+         :dataArr=item.data 
+         :title = item.title>
+         </bigcard>
     </div>
     <div class="top-btn">
         <transition name="fade" mode="out-in">
@@ -32,7 +40,7 @@ export default {
             isShowNav: false,
             num: 0,
             navTimer:null,
-            arr2:["hot","food","play","movie","test"]
+            arr2:["hot","food","play","movie"]
         }
     },
     methods:{
