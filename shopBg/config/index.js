@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/':  {
-        target:'http://groupweb.free.idcfengye.com',
+        target:'http://134.175.113.58/',
         changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
       }
     },

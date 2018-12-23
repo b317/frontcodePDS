@@ -38,8 +38,8 @@
     methods: {
       showProductDetail() {
         this.$router.push({
-          name:'ProductDetail',
-          params:{
+          path:'/ProductDetail',
+          query:{
             src:this.src,
             title:this.goods_name,
             price:this.goods_price

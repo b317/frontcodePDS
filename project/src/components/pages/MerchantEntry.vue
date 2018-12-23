@@ -1,5 +1,6 @@
 <template>
     <div>
+      <!--位置-->
       <div class="authenticate-top" style="min-width: 1079px;">
         <span>您的位置：</span><span class="">
         <a class="" title="首页" href="#" target="_blank">首页</a>&gt;</span><span class="">
@@ -8,6 +9,7 @@
           <span>服务热线：</span><em><span class="ui-trade-label ">0000 000 000</span></em>
         </div>
       </div>
+      <!--步骤-->
       <div class="authenticate-step">
         <!--<el-steps :active="1" finish-status="success" simple style="margin-top: 20px">-->
           <!--<el-step title="完善商家信息" ></el-step>-->
@@ -16,6 +18,7 @@
           <!--<el-step title="进入商家后台" ></el-step>-->
         <!--</el-steps>-->
       </div>
+      <!--内容-->
       <div class="authenticate-main" style="">
         <el-form ref="form" :model="form" label-width="80px">
           <el-form-item label="商铺图标">

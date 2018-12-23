@@ -18,13 +18,13 @@
               <div class="other-info" style="margin-top: 15px;">
                 <span class="info-item">
                   <span class="title">信 誉:</span>
-                  <a class="r-rank-icon" href="#">
+                  <a class="r-rank-icon" href="#/ProductDetail">
                     <img src="../../../static/icon-16-16.gif">
                   </a>
                 </span>
                 <span class="info-item cs-rank-icon" style="margin-left: 25px;">
                   <span class="title">客 服:</span>
-                  <a class="ww-inline ww-online" href="#"
+                  <a class="ww-inline ww-online" href="#/ProductDetail"
                    title="点此可以直接和卖家交流选好的宝贝，或相互交流网购体验，还支持语音视频噢。">
                     <span>客服在线</span>
                   </a>
@@ -39,17 +39,17 @@
         <div class="leftView">
           <div class="imgView">
             <div class="goods-img">
-              <img class="small" :src="this.$route.params.src">
+              <img class="small" :src="this.$route.query.src">
             </div>
             <p class="tm-action">
-              <span id="J_EditItem" style="float: right;padding-right: 40px;"><a href=""><i class="el-icon-phone-outline"></i>举报</a></span>
-              <a id="J_IShare" class="iShare tm-event" href="#"><i class="el-icon-share"></i>分享</a>
+              <span id="J_EditItem" style="float: right;padding-right: 40px;"><a href="#/ProductDetail"><i class="el-icon-phone-outline"></i>举报</a></span>
+              <a id="J_IShare" class="iShare tm-event" href="#/ProductDetail"><i class="el-icon-share"></i>分享</a>
               <span style="padding-left: 15px;"><i class="el-icon-loading"></i>已销售<span id="J_CollectCount">0000</span></span>
             </p>
           </div>
           <div class="contentView">
             <div class="tb-detail-hd">
-              <h1>{{this.$route.params.title}}</h1>
+              <h1>{{this.$route.query.title}}</h1>
             </div>
             <div class="tm-fcs-panel">
               <!--<p><span class="tb-metatit">价格</span>-->
@@ -58,7 +58,7 @@
               <!--</p>-->
               <p><span class="tb-metatit">团购价</span>
                 <span class="tb-tm-group-price"><em class="tm-yen">¥ </em>
-                  <span class="tm-group-price">{{this.$route.params.price}}</span></span>
+                  <span class="tm-group-price">{{this.$route.query.price}}</span></span>
               </p>
             </div>
             <div class="tm-delivery-panel">
@@ -73,23 +73,13 @@
             </div>
             <div class="tm-type-panel">
               <span class="tb-metatit" style="vertical-align: top">颜色分类</span>
-              <ul class="tb-type" :model="listForm">
-                <!--<li title="白色铃兰10株+盆" class="tb-txt">-->
-                  <!--<a href="#" role="button" tabindex="0" class="tb-txt-a" :class="{'active': isActive=true}"><span>白色铃兰5株+盆</span><i>已选中</i></a>-->
-                <!--</li>-->
-                <!--<li :title="白色铃兰20株+盆" class="tb-txt">-->
-                  <!--<a href="#" role="button" tabindex="1" class="tb-txt-a"><span>白色铃兰10株+盆</span><i>已选中</i></a>-->
-                <!--</li>-->
-                <!--<li title="白色铃兰20株+盆" class="tb-txt">-->
-                  <!--<a href="#" role="button" tabindex="2" class="tb-txt-a"><span>白色铃兰15株+盆</span><i>已选中</i></a>-->
-                <!--</li>-->
-                <!--<li :title="listForm.title" class="tb-txt">-->
-                  <!--<a href="#" role="button" tabindex="1" class="tb-txt-a"><span>{{listForm.title}}</span><i>已选中</i></a>-->
-                <!--</li>-->
-                <type-item-li></type-item-li>
-                <type-item-li></type-item-li>
-                <type-item-li></type-item-li>
-                <type-item-li></type-item-li>
+              <ul class="tb-type">
+                <li v-for="(item,index) in lilist" :key="index" @click="selectLi(item,index)"
+                    :title="item.title" :alt="item.title" class="tb-txt">
+                  <span role="button" :tabindex="item.tabindex" class="tb-txt-s "
+                        :class="{'active':item.active,'':!item.active}"
+                  ><span>{{item.title}}</span><i>已选中</i></span>
+                </li>
               </ul>
             </div>
             <div></div>
@@ -115,9 +105,9 @@
             <div class="tm-ser">
               <span class="tb-metatit">服务承诺</span>
               <div class="tm-laysku-dd" style="display: inline-block;">
-                <span><a href="#" title="该商品由中国人保承保正品保证险">正品保证</a></span>
-                <span><a href="#" title="极速退款是为诚信会员提供的退款退货流程的专享特权，额度是根据每个用户当前的信誉评级情况而定">极速退款</a></span>
-                <span><a href="#" title="卖家为您购买的商品投保退货运费险（保单生效以下单显示为准）">赠运费险</a></span>
+                <span><a href="#/ProductDetail" title="该商品由中国人保承保正品保证险">正品保证</a></span>
+                <span><a href="#/ProductDetail" title="极速退款是为诚信会员提供的退款退货流程的专享特权，额度是根据每个用户当前的信誉评级情况而定">极速退款</a></span>
+                <span><a href="#/ProductDetail" title="卖家为您购买的商品温馨诚意服务">温馨服务</a></span>
               </div>
             </div>
           </div>
@@ -126,9 +116,7 @@
           <div class="recommend-label "><s></s><span>看了又看</span></div>
           <div class="recommend-bd">
             <ul>
-              <recommend-item></recommend-item>
-              <recommend-item></recommend-item>
-              <recommend-item></recommend-item>
+              <recommend-item v-for="(item,index) in recList" :key="index" :recList="item" :index="index"></recommend-item>
             </ul>
           </div>
         </div>
@@ -144,12 +132,12 @@
     </div>
 </template>
 <script>
+    import Vue from 'vue'
     import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
     import RecommendItem from "./RecommendItem.vue";
     import GoodsRecommendItem from "./GoodsRecommendItem.vue";
-    import TypeItemLi from "./TypeItemLi.vue";
     export default {
-      components: {ElButton, RecommendItem,GoodsRecommendItem,TypeItemLi},
+      components: {ElButton, RecommendItem,GoodsRecommendItem},
       data() {
         return {
           msg: 'hello world',
@@ -247,9 +235,61 @@
             },
           ], // 数据集
           address: '广东湛江',
-          listForm:{
-            title: '白色铃兰20株+盆'
-          }
+          lilist:[
+            {
+              tabindex: 0,
+              title: '白色铃兰5株+盆',
+            },
+            {
+              tabindex: 1,
+              title: '白色铃兰10株+盆',
+            },
+            {
+              tabindex: 2,
+              title: '白色铃兰15株+盆',
+            },
+            {
+              tabindex: 3,
+              title: '白色铃兰20株+盆',
+            },
+            {
+              tabindex: 4,
+              title: '白色铃兰25株+盆',
+            },
+            {
+              tabindex: 5,
+              title: '白色铃兰20株+盆',
+            },
+            {
+              tabindex: 6,
+              title: '白色铃兰25株+盆',
+            },
+          ],//分类
+          active: false,
+
+          recList: [
+            {
+              icon: "../../../static/goods/rd1.jpg",
+              title:'免费领包活藤本皇后铁线莲皇家丝绒多颜色可选买2送一',
+              name: "紫丁香花",
+              tell: '花语初恋',
+              price: "23.00"
+            },
+            {
+              icon: "../../../static/goods/pdm1.jpg",
+              title:'免费领包茉莉花盆栽莲皇家丝绒多颜色可选买4送一',
+              name: "茉莉花",
+              tell: '茉莉花',
+              price: "27.00"
+            },
+            {
+              icon: "../../../static/goods/pdm2.jpg",
+              title:'免费领包金娃娃萱草莲皇家丝绒多颜色可选买1送一',
+              name: "金娃娃萱草",
+              tell: '金娃娃',
+              price: "21.00"
+            },
+          ], //看了又看
         }
       },
       methods:{
@@ -282,6 +322,15 @@
           }else{
             this.isShow=true;
           }
+        },
+        //分类选择
+        selectLi(item,index){
+          this.$nextTick(function () {
+            this.lilist.forEach(function (item) {
+              Vue.set(item,'active',false);
+            });
+            Vue.set(item,'active',true);
+          });
         },
       },
       mounted(){
@@ -404,7 +453,7 @@
   .goods-detail-panel{
     margin-top: 165px;
     width: 1077px;
-    height: 474px;
+    height: 494px;
     position: relative;
     /*border: 1px solid red;*/
   }
@@ -479,14 +528,16 @@
     display: inline-block;
     margin: 0;
     padding: 0;
-    width: 320px;
+    width: 340px;
+    /*border: 1px solid red;*/
   }
-  .tb-type li.tb-txt a {
+
+  ul.tb-type li.tb-txt>span {
     padding: 0 5px;
     width: auto!important;
   }
-  .tb-type li{float: left;margin-bottom: 10px}
-  .tb-type li a {
+  ul.tb-type li{float: left;margin-bottom: 10px}
+  ul.tb-type li>span{
     width: 38px!important;
     height: 38px;
     padding: 0;
@@ -495,22 +546,22 @@
     outline: 0;
     background-position: center center;
   }
-  .contentView .tm-type-panel .tb-type li a{
+  ul.tb-type li>span{
     float: left;
     background-color: #fff;
     border: 1px solid #b8b7bd;
     color: #000;
+    font-size: 10px;
     min-width: 10px;
     padding: 0 9px;
     text-align: center;
     text-decoration: none;
     margin-left: 6px;
   }
-  .contentView .tm-type-panel .tb-type li a:hover{
+  ul.tb-type li>span:hover{
     border: 2px solid #FF0036;
-    margin: -1px -1px -1px 5px;
   }
-  .tb-type li .tb-txt-a i {
+  ul.tb-type li .tb-txt-s i {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -522,21 +573,20 @@
     background-repeat: no-repeat;
     background-position: 0 0;
   }
-  .tb-type li a.tb-txt-a.active i{
+  ul.tb-type li span.tb-txt-s.active i{
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJUExURUxpcf8AN////7f4NBoAAAABdFJOUwBA5thmAAAAMUlEQVQI103MAQ4AMAQEQev/j66i6YrEXIKIX9jY2NjYyDmhZnlCo5rdyWvebfYDVAcSmABbA7WD+QAAAABJRU5ErkJggg==);
   }
-  .tb-type li .tb-txt-a {
+  ul.tb-type li .tb-txt-s {
     position: relative;
     border: 2px solid #ddd;
     padding: 2px 6px;
     border-radius: 2px;
     cursor: pointer
   }
-  .tb-type li a.tb-txt-a.active, .tb-type li .tb-txt-a:hover{
+  ul.tb-type li span.tb-txt-s.active, ul li .tb-txt-s:hover{
     border: 2px solid #FF0036;
-    margin: -1px -1px -1px 5px;
   }
-  .tb-type li .tb-txt-a.active i {
+  ul.tb-type li .tb-txt-s.active i {
     display: block
   }
   /* 数量 */

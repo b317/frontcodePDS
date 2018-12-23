@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <nav-header @selectTag="selectTag"></nav-header>
+    <nav-header @selectTag="selectTag" :shopowner="shopowner"></nav-header>
     <div>
       <el-row :gutter="20">
         <el-col :span="4">
           <div class="grid-content bg-purple tag_left">
-            <nav-left v-bind:selectIndex="selectIndex"></nav-left>
+            <nav-left v-bind:selectIndex="selectIndex" ></nav-left>
           </div>
         </el-col>
         <el-col :span="20">
           <div class="grid-content bg-purple content">
-            <router-view/>
+            <router-view :shopowner="shopowner"/>
           </div>
         </el-col>
       </el-row>
@@ -24,6 +24,7 @@
   import NavHeader from '@/components/NavHeader'
   import NavFooter from '@/components/NavFooter'
   import NavLeft from '@/components/NavLeft'
+  import { getCookie } from './common/auth'
   export default {
     name: 'App',
     components:{
@@ -32,10 +33,23 @@
     data(){
       return{
         selectIndex:'',
+        shopowner:[]
       }
     },
     mounted(){
       this.selectIndex=sessionStorage.getItem("selectIndex");
+      this.axios.get('/v1/user/detail/'+getCookie('id'),
+        {
+          headers:{
+            "Authorization":"Bearer "+ getCookie("token")
+          }
+        }).then((response)=>{
+        let data = response.data.data;
+        this.shopowner=data;
+        console.log(data+"iii");
+      }).catch((err)=>{
+        console.log(err);
+      })
     },
     methods:{
       selectTag(key){
