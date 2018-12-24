@@ -1,6 +1,6 @@
 <template>
     <div class="login-container">
-      <img class="login-bigpic" src="@/assets/login-bigpic.jpg">
+      <img class="login-bigpic" :src="src">
       <div class="login-table">
         <div class="tab">
           <div class="tab-login-text" v-bind:class="{ active: isLogin }" @click="tabClick(true)">短信登录</div>
@@ -30,7 +30,7 @@
 
 <script>
 import {setName,getName,setId,setRoleId} from "@/util/auth";
-import {login,loginByvCode,getvCode,getUserInfo } from "@/api/http";
+import {login,loginByvCode,getvCode,getUserInfo,banner2 } from "@/api/http";
 import { mapState,mapGetters,mapMutations } from 'vuex'
 import { setCookie, getCookie } from '../../../../bg/vue-admin/src/common/auth';
 
@@ -46,7 +46,8 @@ export default {
       isLoginAuto:true,
       warntext:"",
       getIdenBtnText:"获得验证码",
-      totalTime: 61
+      totalTime: 61,
+      src:""
     }
   },
   computed:{
@@ -56,6 +57,10 @@ export default {
   },
   mounted() {
     this.phone = getCookie("phone")
+    banner2().then(res => {
+      console.log(res)
+      this.src = "http://134.175.113.58/" +res.data.data.bannerList[0].image
+    })
   },
   methods:{
     ...mapMutations({

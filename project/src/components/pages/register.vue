@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="login-container">
-      <img class="login-bigpic" src="@/assets/login-bigpic.jpg">
+      <img class="login-bigpic" :src="src">
       <div class="login-table res-tab" >
         <div class="tab-register">
           <div class="tab-login-text">账号注册</div>
@@ -25,7 +25,7 @@
 
 <script>
 import {setName,getName} from "@/util/auth";
-import {register,getvCode} from "@/api/http";
+import {register,getvCode,banner2} from "@/api/http";
 import axios from 'axios'
 export default {
   data () {
@@ -39,7 +39,8 @@ export default {
       warntext:"",
       getIdenBtnText:"获得验证码",
       totalTime: 3,
-      password2:""
+      password2:"",
+      src:""
     }
   },
   beforeMount() {
@@ -55,6 +56,12 @@ export default {
     checkPhone(){
         return (/^1[34578]\d{9}$/.test(this.phone));
     }
+  },
+  mounted() {
+    banner2().then(res => {
+      console.log(res)
+      this.src = "http://134.175.113.58/" +res.data.data.bannerList[0].image
+    })
   },
   methods:{
     idenCodeclick(){
