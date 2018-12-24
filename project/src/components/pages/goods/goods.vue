@@ -12,54 +12,20 @@
               <template slot-scope="scope">
                 <goods-table-header></goods-table-header>
                 <div class="goods-item-list">
-                  <goods-item
-                    v-for="(item,index) of goodslist"
-                    :key="index"
-                    :goods="item"
-                    :index="index"
-                    v-if="isdata"
-                    ref="goods"
-                    @delete="handleDelete"
-                  ></goods-item>
+                  <goods-item v-for="(item,index) of goodslist" :key="index" :goods="item"
+                              :index="index" v-if="isdata" ref="goods" @delete="handleDelete"></goods-item>
                   <div class="goods-nodate" v-if="!isdata">
                     <div class="g-nodate">没有数据</div>
                   </div>
                 </div>
-                <!--<goods-table-footer></goods-table-footer>-->
               </template>
             </el-tab-pane>
-            <!--<el-tab-pane label="待付款" name="1">-->
-              <!--<template slot-scope="scope">-->
-                <!--<goods-table-header></goods-table-header>-->
-                <!--<div class="goods-item-list">-->
-                  <!--<goods-item-->
-                    <!--v-for="(item,index) of goodslist"-->
-                    <!--:key="index"-->
-                    <!--:goods="item"-->
-                    <!--:index="index"-->
-                    <!--v-if="isdata"-->
-                    <!--ref="goods"-->
-                    <!--@delete="handleDelete"-->
-                  <!--&gt;</goods-item>-->
-                  <!--<div class="goods-nodate" v-if="!isdata">-->
-                    <!--<div class="g-nodate">没有数据</div>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</template>-->
-            <!--</el-tab-pane>-->
             <el-tab-pane label="已付款" name="2">
               <template slot-scope="scope">
                 <goods-table-header></goods-table-header>
                 <div class="goods-item-list">
-                  <goods-item
-                    v-for="(item,index) of goodslist"
-                    :key="index"
-                    :goods="item"
-                    :index="index"
-                    v-if="isdata"
-                    ref="goods"
-                    @delete="handleDelete"
-                  ></goods-item>
+                  <goods-item v-for="(item,index) of goodslist" :key="index" :goods="item"
+                              :index="index" v-if="isdata" ref="goods" @delete="handleDelete"></goods-item>
                   <div class="goods-nodate" v-if="!isdata">
                     <div class="g-nodate">没有数据</div>
                   </div>
@@ -70,15 +36,8 @@
               <template slot-scope="scope">
                 <goods-table-header></goods-table-header>
                 <div class="goods-item-list">
-                  <goods-item
-                    v-for="(item,index) of goodslist"
-                    :key="index"
-                    :goods="item"
-                    :index="index"
-                    v-if="isdata"
-                    ref="goods"
-                    @delete="handleDelete"
-                  ></goods-item>
+                  <goods-item v-for="(item,index) of goodslist" :key="index" :goods="item"
+                              :index="index" v-if="isdata" ref="goods" @delete="handleDelete"></goods-item>
                   <div class="goods-nodate" v-if="!isdata">
                     <div class="g-nodate">没有数据</div>
                   </div>
@@ -89,15 +48,8 @@
               <template slot-scope="scope">
                 <goods-table-header></goods-table-header>
                 <div class="goods-item-list">
-                  <goods-item
-                    v-for="(item,index) of goodslist"
-                    :key="index"
-                    :goods="item"
-                    :index="index"
-                    v-if="isdata"
-                    ref="goods"
-                    @delete="handleDelete"
-                  ></goods-item>
+                  <goods-item v-for="(item,index) of goodslist" :key="index" :goods="item"
+                              :index="index" v-if="isdata" ref="goods" @delete="handleDelete"></goods-item>
                   <div class="goods-nodate" v-if="!isdata">
                     <div class="g-nodate">没有数据</div>
                   </div>
@@ -108,15 +60,8 @@
               <template slot-scope="scope">
                 <goods-table-header></goods-table-header>
                 <div class="goods-item-list">
-                  <goods-item
-                    v-for="(item,index) of goodslist"
-                    :key="index"
-                    :goods="item"
-                    :index="index"
-                    v-if="isdata"
-                    ref="goods"
-                    @delete="handleDelete"
-                  ></goods-item>
+                  <goods-item v-for="(item,index) of goodslist" :key="index" :goods="item"
+                              :index="index" v-if="isdata" ref="goods" @delete="handleDelete"></goods-item>
                   <div class="goods-nodate" v-if="!isdata">
                     <div class="g-nodate">没有数据</div>
                   </div>
@@ -127,15 +72,8 @@
               <template slot-scope="scope">
                 <goods-table-header></goods-table-header>
                 <div class="goods-item-list">
-                  <goods-item
-                    v-for="(item,index) of goodslist"
-                    :key="index"
-                    :goods="item"
-                    :index="index"
-                    v-if="isdata"
-                    ref="goods"
-                    @delete="handleDelete"
-                  ></goods-item>
+                  <goods-item v-for="(item,index) of goodslist" :key="index" :goods="item"
+                              :index="index" v-if="isdata" ref="goods" @delete="handleDelete"></goods-item>
                   <div class="goods-nodate" v-if="!isdata">
                     <div class="g-nodate">没有数据</div>
                   </div>
@@ -146,15 +84,8 @@
               <template slot-scope="scope">
                 <goods-table-header></goods-table-header>
                 <div class="goods-item-list">
-                  <goods-item
-                    v-for="(item,index) of goodslist"
-                    :key="index"
-                    :goods="item"
-                    :index="index"
-                    v-if="isdata"
-                    ref="goods"
-                    @delete="handleDelete"
-                  ></goods-item>
+                  <goods-item v-for="(item,index) of goodslist" :key="index" :goods="item"
+                              :index="index" v-if="isdata" ref="goods" @delete="handleDelete"></goods-item>
                   <div class="goods-nodate" v-if="!isdata">
                     <div class="g-nodate">没有数据</div>
                   </div>
@@ -246,7 +177,7 @@
         goodslist:[], // 数据缓存
         datelist: [
           {
-            orderTime: "2018-12-3",
+            orderTime: "2018-12-31",
             orderNumber: "266477474728649150",
             shopIcon: "../../../static/goods/item_pic.jpg",
             shopName: "百花仙居",
