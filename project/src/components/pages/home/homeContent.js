@@ -25,7 +25,6 @@ goodsforhome().then(res => {
             data:arr2
         }
         ddd.push(item.mainsort.sort)
-        console.log(ddd)
         arr.push(arritem)
     })
 })

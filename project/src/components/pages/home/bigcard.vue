@@ -2,8 +2,8 @@
   <div class="content">
     <div class="title">
       <div class="big">{{title.title}}</div>
-      <div class="tip" v-for="(item,key) in title.tip" :key=key>{{item}}</div>
-      <div class="right">更多<i class="el-icon-arrow-right"></i></div>
+      <div class="tip" v-for="(item,key) in title.tip" :key=key @click="btnclick2(item)">{{item}}</div>
+      <div class="right" @click="btnclick">更多<i class="el-icon-arrow-right"></i></div>
     </div>
     <div class="card" v-for="(item,key) in dataArr" :key=key>
         <smallcard :goods_photo="item.goods_photo"
@@ -28,7 +28,19 @@ export default {
       currentDate:"2010-1-1",
       show:false
     }
-  }
+  },
+  methods: {
+    btnclick(){
+      this.$bus.$emit("seach2",this.title.title)
+      scrollTo(0,0);
+      this.$router.push({ name: 'seach', params: { sval: this.title.title }})
+    },
+    btnclick2(a){
+      this.$bus.$emit("seach2",a)
+      scrollTo(0,0);
+      this.$router.push({ name: 'seach', params: { sval: this.title.title }})
+    },
+  },
 }
 </script>
 

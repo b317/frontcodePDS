@@ -72,6 +72,15 @@ export function banner(){//获取轮播图
         }
     )
 }
+export function banner2(){//获取轮播图
+    return axios.get("/v1/global/banner/?offset=5&limit=1",
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
 export function getmainsort(){//获取轮播图
     return axios.get("/v1/global/mainsort/?offset=1&limit=13",
         {
@@ -149,8 +158,8 @@ export function goodsforhome(){//获取状态
     )
 }
 
-export function querygood(params){//获取状态
-    return axios.get(`/v1/global/goodsforquery/?offset=${params.offset}&limit=${params.limit}&q=${params.q}`,
+export function querygood(params){
+    return axios.get(`/v1/global/goodsforquery/?offset=${params.offset}&limit=20&q=${params.q}`,
         {
             headers:{
                 'Authorization': 'Bearer '+getCookie("token")

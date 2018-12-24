@@ -25,6 +25,7 @@ export default {
         src:"../../../static/meinv.jpg"
     }
   },
+
   methods:{
     clickbtn(){
       if(!this.oldpass){

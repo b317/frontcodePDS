@@ -28,6 +28,7 @@ import {getName} from "@/util/auth";
 import smallcard from "@/components/pages/home/smallcard";
 
 import MerchantEntry from  "@/components/pages/MerchantEntry";
+import seach from '@/components/pages/seach/seach';
 
 Vue.use(Router)
 
@@ -68,6 +69,11 @@ const route = new Router({
       path: '/home',
       name: 'home',
       component: home
+    },
+    {
+      path: '/seach/:sval',
+      name: 'seach',
+      component: seach
     },
     {
       path: '/news',

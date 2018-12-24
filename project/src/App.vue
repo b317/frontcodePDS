@@ -26,14 +26,13 @@
         <div v-else class="body-head-title">
           <div class="top-input-class">
             <div><i class="el-icon-search"></i></div>
-            <input placeholder="搜索商品，商家，优惠卷等等">
-            <button>搜索</button>
+            <input placeholder="搜索商品，商家，优惠卷等等" v-model="sval">
+            <button @click="btnclick">搜索</button>
           </div>
         </div>
       </div>
       <router-view/>
     </div>
-
     <nav-footer v-if="isShow"></nav-footer>
     <login-footer v-if="!isShow"></login-footer>
   </div>
@@ -55,7 +54,8 @@ export default {
       inputInfo:"请输入",
       isShow:false,
       LoadingTime:3,
-      haveMes:true
+      haveMes:true,
+      sval:""
     }
   },
   components:{
@@ -88,6 +88,7 @@ export default {
     }
   },
   mounted(){
+    this.$bus.$on("seach2",this.heih)
     if(getId()){
       getUserInfo({id:getId()}).then(res => {
         let data = res.data.data
@@ -102,14 +103,24 @@ export default {
     })
     this.checkShowFooter();
   },
+  beforeDestroy() {
+    this.$bus.$off("seach2",this.heih)
+  },
   methods: {
+    heih(a){
+      this.sval = a
+    },
     ...mapMutations({
       setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
       setId:'user/setId',
       setRoleId:'user/setRoleId',
       setpic:"user/setpic"
     }),
+    btnclick(){
+      this.$router.push({ name: 'seach', params: { sval: this.sval }})
+    },
       handleSelect(key, keyPath) {
+        this.sval =""
         this.activeIndex = key;
         if(key == 1){
           this.$router.push("/home")
@@ -147,6 +158,8 @@ export default {
         })
       }
     }
+  
+  
   }
 </script>
 
