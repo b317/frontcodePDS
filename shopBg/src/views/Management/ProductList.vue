@@ -37,12 +37,13 @@
                 <span class="title"><i>{{item.goods_name}}：{{item.goods_desc}}</i></span>
               </td>
               <td class=""  width="14%">
-                {{item.levelOneLabel}}
                 <i v-for="(item1,index1) of allMainSort">
                   <i v-if="item1.id==item.mainsort_id">{{item1.sort}}</i>
                 </i>
                 &nbsp;>&nbsp;
-                {{item.levelTwoLabel}}
+                <i v-for="(item2,index2) of allSubSort">
+                  <i v-if="item2.id==item.subsort_id">{{item2.sort}}</i>
+                </i>
               </td>
               <td  width="6%">￥{{item.goods_price}}</td>
               <td  width="6%">{{item.goods_stock}}</td>
@@ -180,7 +181,9 @@
         goods_data:'',
         disabled:true,
         allMainSort:[],
-        updateFormData:''
+        allSubSort:[],
+        updateFormData:'',
+        change_photo:false
       }
     },
     computed:{
@@ -211,8 +214,16 @@
       }).then((res)=>{
         let data = res.data.data;
         this.allMainSort = data.categoryList;
-      })
+      });
 //      查询所有二级标签
+      this.axios.get('/v1/merchant/suball',{
+        headers:{
+          "Authorization":"Bearer "+ getCookie('token')
+        }
+      }).then((res)=>{
+        let data = res.data.data;
+        this.allSubSort = data.categoryList;
+      })
     },
     methods:{
       findProductList(params,status){
@@ -315,6 +326,7 @@
         this.goods_data.goods_photo= windowURL.createObjectURL(file);
 //        this.productFormData.append('goods_photo');
         this.updateFormData.append('goods_photo',file);
+        this.change_photo=true;
         return false;
       },
       checkGoodsItem(item){//查看商品
@@ -333,7 +345,7 @@
         }else if(!this.goods_data.is_fare && !this.goods_data.goods_fare==''){
           this.updateFormData.append("goods_fare",this.goods_data.goods_fare.toString());
         }else if(this.is_fare){
-          this.updateFormData.append("goods_fare",this.goods_data.goods_fare.toString());
+          this.updateFormData.append("goods_fare",'0');
         }
         this.updateFormData.append("goods_name",this.goods_data.goods_name.toString());
         this.updateFormData.append("goods_desc",this.goods_data.goods_desc.toString());
@@ -348,6 +360,7 @@
         this.updateFormData.append("mainsort_id",this.goods_data.mainsort_id.toString());
         this.updateFormData.append("subsort_id",this.goods_data.subsort_id.toString());
         this.updateFormData.append("is_fare",this.goods_data.is_fare.toString());
+        this.updateFormData.append('change_photo',this.change_photo.toString());
 
         this.axios.put('/v1/merchant/goods/'+this.goods_data.id,this.updateFormData,{
           headers:{
@@ -385,6 +398,9 @@
                 type: 'success',
                 message: '删除成功!'
               });
+              setTimeout(function () {
+                window.location.reload();
+              },1500);
             }else{
               this.$message({
                 type: 'error',
@@ -394,8 +410,6 @@
           }).catch((err)=>{
             console.log(err);
           });
-
-
         }).catch(() => {
           this.$message({
             type: 'info',
