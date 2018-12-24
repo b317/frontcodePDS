@@ -8,7 +8,6 @@
           <thead>
           <tr>
             <th class="">商品信息</th>
-            <!--<th class="">单价</th>-->
             <th class="">团购价</th>
             <th class="">数量</th>
             <th class="">实付款</th>
@@ -28,10 +27,9 @@
                 <div><span class="goods_class" style="color: #999"><i>颜色分类：{{goodsData.goods_name}}</i></span></div>
               </div>
             </td>
-            <!--<td class="" width="6%">￥29.90</td>-->
             <td width="6%">￥{{goodsData.goods_price}}</td>
-            <td width="6%">2</td>
-            <td width="14%">￥49.80</td>
+            <td width="6%">{{orderData.order_price/goodsData.goods_price}}</td>
+            <td width="14%">￥{{orderData.order_price}}</td>
             <td width="14%">{{orderData.order_status}}</td>
           </tr>
           </tbody>
@@ -53,11 +51,12 @@
                 <div class="trade-detail-prompt">
                   <div class="dotted-node"><span>&nbsp;</span><span>物流：</span></div>
                   <div class="trade-detail-main">
-                    <span class="package-detail">韵达快递</span>
-                    <span class="package-detail">运单号:</span><span>3932154546635</span>
+                    <span class="package-detail">xxxx</span>
+                    <span class="package-detail">运单号:</span><span>xxxxxxxxxxx</span>
                     <div class="logistic-detail">
-                      <span class="package-detail package-time-detail">2018-11-17 22:47:21</span>
-                      <span class="package-detail package-explain-detail"> 快件已被签收,如有问题请电联业务员：文彦烟【18666******】。相逢是缘,如果您对我的服务感到满意,给个五星好不好?【请在评价小件员处给予五星好评】如有疑问请联系快递员</span>
+                      <span class="package-detail package-time-detail">xxxx-xx-xx xx:xx:xx</span>
+                      <span class="package-detail package-explain-detail"> 快件已被签收,如有问题请联系<span
+                        class="span-a">商家客服</span>。相逢是缘,如果您对我的服务感到满意,给个五星好不好?</span>
                     </div>
                   </div>
                 </div>
@@ -86,7 +85,7 @@
                   <div class="trade-imfor-dd" style="width: 214px;">
                     <span class="ui-trade-label null">{{orderData.client_nick}},{{orderData.client_phone}},{{orderData.order_addr}} ,xxxxxx</span>
                   </div>
-                  <span class="trade-imfor-aa" style="margin-left: 10px;" @click="dialogFormVisible = true">修改</span>
+                  <span class="trade-imfor-aa" style="margin-left: 10px;" @click="getAddress">修改</span>
                   <!-- 修改地址对话框 -->
                   <el-dialog title="修改收货地址" :visible.sync="dialogFormVisible">
                     <el-form :model="form">
@@ -100,12 +99,11 @@
                       <br/>
                       <el-form-item label="收货人地址" :label-width="formLabelWidth">
                         <el-input v-model="form.address" autocomplete="off" placeholder="请输入收货人地址"></el-input>
-                        <!--<v-distpicker @selected="onSelected" style=""></v-distpicker>-->
                       </el-form-item>
                     </el-form>
                     <div slot="footer" class="dialog-footer">
                       <el-button @click="dialogFormVisible = false">取 消</el-button>
-                      <el-button type="primary" @click="dialogFormVisible = false">确认</el-button>
+                      <el-button type="primary" @click="resetAddress">确认</el-button>
                     </div>
                   </el-dialog>
                 </li>
@@ -138,20 +136,20 @@
                   <div class="trade-imfor-dd"><span class="ui-trade-label middleText">{{orderData.order_num}}</span></div>
                 </li>
                 <li class="table-list">
-                  <div class="trade-imfor-dt"><span>付款方式</span><span>：</span></div>
-                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{orderData.pay_method}}</span>/<span class="ui-trade-label">xxxxxxxxxx</span></div>
+                  <div class="trade-imfor-dt"><span>订单时间</span><span>：</span></div>
+                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{orderData.createdAt}}</span></div>
                 </li>
                 <li class="table-list">
-                  <div class="trade-imfor-dt"><span>成交时间</span><span>：</span></div>
-                  <div class="trade-imfor-dd"><span class="ui-trade-label">2018-11-12 21:46:44</span></div>
+                  <div class="trade-imfor-dt"><span>付款方式</span><span>：</span></div>
+                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{orderData.pay_method}}</span>/<span class="ui-trade-label">xxxxxxxxxx</span></div>
                 </li>
                 <li class="table-list">
                   <div class="trade-imfor-dt"><span>付款时间</span><span>：</span></div>
                   <div class="trade-imfor-dd"><span class="ui-trade-label">{{orderData.payedAt}}</span></div>
                 </li>
                 <li class="table-list">
-                  <div class="trade-imfor-dt"><span>发货时间</span><span>：</span></div>
-                  <div class="trade-imfor-dd"><span class="ui-trade-label">2018-11-13 09:55:21</span></div>
+                  <div class="trade-imfor-dt"><span>更新时间</span><span>：</span></div>
+                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{orderData.updatedAt}}</span></div>
                 </li>
                 <li class="table-list">
                   <div class="trade-imfor-dt"><span>完结时间</span><span>：</span></div>
@@ -183,12 +181,45 @@
             }
         },
       methods: {
-        //地址
-        onSelected(e){
-          this.form.address = e.province.value + e.city.value + e.area.value;
+        //窗口显示地址
+        getAddress(){
+          this.dialogFormVisible = true;
+          this.form.name = this.orderData.client_nick;
+          this.form.phone = this.orderData.client_phone;
+          this.form.address = this.orderData.order_addr;
+        },
+        //修改地址
+        resetAddress(){
+          console.log('this.orderData.id='+this.orderData.id);
+          if(this.form.name==''&&this.form.phone==''&&this.form.address==''){
+            this.$message.error('信息输入不完整！');
+            return false;
+          }else{
+            this.axios.put('/v1/merchant/orders/'+this.orderData.id,
+              {'client_nick':this.form.name,'client_phone':this.form.phone,'order_addr':this.form.address},{
+              headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+              }
+            }).then((res)=>{
+              let result = res.data;
+              if(result.message=='OK'){
+                this.$message({
+                  message:'修改地址成功！',
+                  type:'success'
+                });
+                setTimeout(function () {
+                  window.location.reload();
+                },1500)
+              }else{
+                this.$message.error("修改地址失败！")
+              }
+            }).catch((err)=>{
+              console.log(err);
+            })
+          }
         },
         //时间显示格式
-       formatTime(item){
+        formatTime(item){
           let time = item.createdAt;
           var date = new Date(time).toJSON();
           item.createdAt = new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
@@ -223,7 +254,7 @@
         },
         //根据id获取商品信息
         findGoods(item){
-          this.axios.get('/v1/merchant/goods/'+item.id,{
+          this.axios.get('/v1/merchant/goods/'+item.goods_id,{
             headers:{
               "Authorization":"Bearer "+ getCookie("token")
             }
@@ -346,4 +377,6 @@
     width: 127px;
     text-align: center;
   }
+  .span-a{text-decoration: underline;color: #20a0ff;cursor: pointer;}
+  .span-a:hover{text-decoration: underline;color: #ff4200;cursor: pointer;}
 </style>

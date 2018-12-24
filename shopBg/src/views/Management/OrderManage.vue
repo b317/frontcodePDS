@@ -56,14 +56,13 @@
         <table>
           <thead>
           <tr>
-            <th class="">订单号/时间</th>
-            <th class="">商品信息</th>
-            <!--<th class="">单价</th>-->
-            <th>团购价</th>
-            <th>数量</th>
+            <th class="">订单号</th>
+            <th class="">时间</th>
             <th>实付款</th>
+            <th>地址</th>
+            <th>买家留言</th>
             <th>交易状态</th>
-            <!--<th>操作</th>-->
+            <th>操作</th>
           </tr>
           </thead>
           <tbody>
@@ -71,7 +70,7 @@
           </tbody>
           <tfoot>
           <tr>
-            <td colspan="24" v-if="orderList.length==0">
+            <td colspan="7" v-if="orderList.length==0">
               <el-alert
                 style="width: 100%"
                 title="当前没有数据"
@@ -81,8 +80,7 @@
                 show-icon>
               </el-alert>
             </td>
-            <td colspan="3"></td>
-            <td colspan="6" style="position: relative">
+            <td colspan="7" v-if="orderList.length!=0" style="position: relative">
               <el-pagination
                 background
                 layout="prev, pager, next"
@@ -125,7 +123,6 @@
           }
         },
       mounted(){
-//        this.orderList=this.dataList;
         this.getAllOrder({'offset':this.page,'limit':this.limit});
       },
       methods:{
@@ -148,12 +145,21 @@
         //页3个事件
         pageChange(val){
 //        console.log(`当前页: ${val}`);
+          this.page=parseInt(val);
+          sessionStorage.setItem("order_page",this.page);
+          this.getAllOrder({'offset':this.page,'limit':this.limit});
         },
         preClick(val){
 //        console.log(`上一页: ${val}`);
+          this.page=parseInt(val);
+          sessionStorage.setItem("order_page",this.page);
+          this.getAllOrder({'offset':this.page,'limit':this.limit});
         },
         nextClick(val){
 //        console.log(`下一页: ${val}`);
+          this.page=parseInt(val);
+          sessionStorage.setItem("order_page",this.page);
+          this.getAllOrder({'offset':this.page,'limit':this.limit});
         },
         //获取数据
         getAllOrder(params){
@@ -172,6 +178,9 @@
               let time=item.createdAt;
               var date = new Date(time).toJSON();
               item.createdAt= new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+              let time1=item.payedAt;
+              var date1 = new Date(time1).toJSON();
+              item.payedAt= new Date(+new Date(date1)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
             });
             this.findGoods(this.orderList);
             this.totalOrder = data.totalCount;//保存总条数
