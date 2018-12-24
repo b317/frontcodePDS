@@ -1,5 +1,8 @@
 <template>
   <tr>
+    <td width="2%">
+      <p>{{orderList.id}}</p>
+    </td>
     <td width="18%">
       <p>{{orderList.order_num}}</p>
     </td>

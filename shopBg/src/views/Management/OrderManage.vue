@@ -43,7 +43,7 @@
         <div class="order-search" style="margin: 30px 0">
           <el-row>
             <el-col :span="24">
-              <el-input v-model="orderId" placeholder="请输入订单号" class="input-with-select" size="mini">
+              <el-input v-model="orderId" placeholder="请输入订单ID" class="input-with-select" size="mini">
                 <el-button slot="append" icon="el-icon-search"  size="mini" style="" @click="findOrderItem(orderId)"></el-button>
               </el-input>
             </el-col>
@@ -56,6 +56,7 @@
         <table>
           <thead>
           <tr>
+            <th class="">ID</th>
             <th class="">订单号</th>
             <th class="">时间</th>
             <th>实付款</th>
@@ -182,7 +183,6 @@
               var date1 = new Date(time1).toJSON();
               item.payedAt= new Date(+new Date(date1)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
             });
-            this.findGoods(this.orderList);
             this.totalOrder = data.totalCount;//保存总条数
             if(data.totalCount<=this.limit){//分页栏是否显示
               this.showPading=false;
@@ -195,31 +195,35 @@
         },
         //搜索
         findOrderItem(order_Id){
-//          if(!this.orderId){//输入框为空提示
-//            this.getAllOrder({'offset':this.page,'limit':this.limit});
-//            this.isBack = false;
-//            return false;
-//          }else {
-//            this.axios.get('/v1/merchant/orders/'+order_Id,{
-//              headers:{
-//                "Authorization":"Bearer "+ getCookie('token')
-//              }
-//            }).then((res)=>{
-//              if(res.data.code==20501){
-//                this.showPading =false;
-//                this.totalOrder=0;
-//                this.orderList=[];
-//              }else{
-//                this.productList=[];
-//                this.totalOrder=1;
-//                this.showPading =false;
-//                this.orderList.push(list);
-//              }
-//            }).catch((err)=>{
-//              console.log(err)
-//            });
-//            this.isBack = true;
-//          }
+          if(!this.orderId){//输入框为空提示
+            this.getAllOrder({'offset':this.page,'limit':this.limit});
+            this.isBack = false;
+            return false;
+          }else {
+            console.log('order_Id='+order_Id);
+            this.axios.get('/v1/merchant/orders/'+order_Id,{
+              headers:{
+                "Authorization":"Bearer "+ getCookie('token')
+              }
+            }).then((res)=>{
+              let list = res.data.data;
+              console.log(res.data.message);
+              console.log(res.data);
+              if(res.data.code==20501){
+                this.showPading =false;
+                this.totalOrder=0;
+                this.orderList=[];
+              }else{
+                this.orderList=[];
+                this.totalOrder=1;
+                this.showPading =false;
+                this.orderList.push(list);
+              }
+            }).catch((err)=>{
+              console.log(err)
+            });
+            this.isBack = true;
+          }
         },
         //返回列表
         backCoupon(){
