@@ -63,7 +63,7 @@
             </li>
           </ul>
           <ul>
-            <li v-for="(item,index) of sortdata" :key="index">
+            <li v-for="(item,index) of sortdata" :key="index" @click="findSubSort(item)">
               <a href="javascript:void(0)">{{item.main_category.sort}}
                 <em>({{item.sub_count}})</em></a>
             </li>
@@ -137,7 +137,7 @@
     mounted(){
       this.findShopMes();
       this.findMainSort();
-      this.findShopOwner();
+//      this.findShopOwner();
 //      this.userId=getCookie('name')
     },
     methods:{
@@ -168,27 +168,24 @@
           }
           let data = response.data.data;
           this.shopdata=data;
-          let time=this.shopdata.createdAt;
+          let time=this.shopdata.createdAt;//格式化时间
           var date = new Date(time).toJSON();
           this.shopdata.createdAt= new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
-          console.log(data+getCookie('id'))
+          console.log(data+getCookie('id'));
+
+          sessionStorage.setItem('shopId',this.shopdata.id);//保存店铺ID
         }).catch((err)=>{
           console.log(err+"heihei");
         })
       },
-      findShopOwner(){
-//        this.axios.get('/v1/user/detail/'+getCookie('id'),
-//          {
-//            headers:{
-//              "Authorization":"Bearer "+ getCookie("token")
-//            }
-//          }).then((response)=>{
-//          let data = response.data.data;
-//          this.shopowner=data;
-//          this.$emit("shopowner",this.shopowner)
-//        }).catch((err)=>{
-//          console.log(err);
-//        })
+      findSubSort(item){
+        let sortId= item.main_category.id;
+        sessionStorage.removeItem("main_sort_id");
+        sessionStorage.setItem("main_sort_id",sortId);
+        this.$store.dispatch("checkIndexAction",'2');
+        this.$store.dispatch("checkIndex2Action",'2-2');
+        this.$router.push("/ProductSort?check_next="+sortId);
+        window.location.reload()
       }
     }
   }

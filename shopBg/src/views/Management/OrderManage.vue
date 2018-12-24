@@ -42,7 +42,7 @@
           <el-row>
             <el-col :span="24">
               <el-input placeholder="请输入订单号" class="input-with-select" size="mini">
-                <el-button slot="append" icon="el-icon-search"  size="mini" style="color: #fff;background-color: #409eff"></el-button>
+                <el-button slot="append" icon="el-icon-search"  size="mini" style=""></el-button>
               </el-input>
             </el-col>
           </el-row>
@@ -85,39 +85,6 @@
       </div>
     </div>
 </template>
-<style>
-  .order_list{padding-right: 40px;margin-bottom: 50px}
-  .order_list .bg-purple {
-    position: relative;
-  }
-
-  .order_list .order-search {
-    position: absolute;
-    top: 25px;
-    z-index: 1;
-  }
-  .order_list .el-input .el-button{
-    color: #fff !important;
-    border-radius: 0 3px 3px 0;
-    background-color: #409eff !important;
-    border:1px solid #409eff !important;
-  }
-  .order_list .lists table{border:1px solid #DDD;width: 100%;border-collapse: collapse;margin-top: 25px}
-  .order_list .lists table thead{
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;font-size: 13px;line-height: 40px;
-    background: #e5e5e5; font-weight: bold;;opacity: 0.7;
-  }
-  .order_list .lists table thead th:last-child{border-right: 1px solid #ddd !important;}
-  .order_list .lists table tbody{
-    font-size:13px ;color:gray;text-align: center;
-  }
-  .order_list .lists table tfoot tr td{padding: 10px 0 !important;height: 22px}
-  .order_list .lists table tfoot .el-pagination{
-    position: absolute;right: 0;
-    top: 5px;
-  }
-</style>
 <script>
   import ElRow from "element-ui/packages/row/src/row";
   import ElCol from "element-ui/packages/col/src/col";
@@ -282,7 +249,8 @@
         this.orderList=this.dataList;
       },
       methods:{
-        handleClick(tab, event,) { // 点击选项卡
+        //点击选项卡
+        handleClick(tab, event,) {
 //          console.log('点击' + tab.name);
           let urlStr = '/OrderManage?orderType=' + tab.name;
           this.$router.push(urlStr);
@@ -298,6 +266,7 @@
             })
           }
         },
+        //页3个事件
         pageChange(val){
 //        console.log(`当前页: ${val}`);
         },
@@ -307,6 +276,46 @@
         nextClick(val){
 //        console.log(`下一页: ${val}`);
         },
+        //获取数据
+
       }
     }
 </script>
+<style>
+  .order_list{padding-right: 40px;margin-bottom: 50px}
+  .order_list .bg-purple {
+    position: relative;
+  }
+
+  .order_list .order-search {
+    position: absolute;
+    top: 25px;
+    z-index: 1;
+  }
+  .order-search .el-input .el-button:hover{
+    color: #fff !important;
+    background-color: #409eff !important;
+    border-top:2px solid #409eff !important;
+  }
+  .order_list .el-input .el-button{
+    border-radius: 0 3px 3px 0;
+    /*color: #fff !important;*/
+    /*background-color: #409eff !important;*/
+    /*border-top:2px solid #409eff !important;*/
+  }
+  .order_list .lists table{border:1px solid #DDD;width: 100%;border-collapse: collapse;margin-top: 25px}
+  .order_list .lists table thead{
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;font-size: 13px;line-height: 40px;
+    background: #e5e5e5; font-weight: bold;;opacity: 0.7;
+  }
+  .order_list .lists table thead th:last-child{border-right: 1px solid #ddd !important;}
+  .order_list .lists table tbody{
+    font-size:13px ;color:gray;text-align: center;
+  }
+  .order_list .lists table tfoot tr td{padding: 10px 0 !important;height: 22px}
+  .order_list .lists table tfoot .el-pagination{
+    position: absolute;right: 0;
+    top: 5px;
+  }
+</style>

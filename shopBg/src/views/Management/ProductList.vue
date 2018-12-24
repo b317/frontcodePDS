@@ -4,8 +4,8 @@
       <span>商品管理&nbsp;<i class="present">--&nbsp;商品列表</i></span>
     </div>
     <div class="add_new">
-      <el-input v-model="input_productId" style="width:30%" placeholder="商品ID/商品关键字" class="input-with-select" size="mini">
-        <el-button slot="append" icon="el-icon-search"  size="mini" @click="checkProductItem(input_productId)"></el-button>
+      <el-input v-model="input_Id" style="width:25%" placeholder="商品ID" class="input-with-select" size="mini">
+        <el-button slot="append" icon="el-icon-search"  size="mini" @click="checkProductItem(input_Id)"></el-button>
       </el-input>
       <el-button size="small" @click="addNewProduct"><i class="el-icon-plus"></i>添加新商品</el-button>
     </div>
@@ -27,7 +27,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(item,index) of productList" :key="index">
+            <tr v-for="(item,index) of filterProductList" :key="index">
               <td class="" width="8%">
                 <p>{{item.id}}</p>
               </td>
@@ -36,28 +36,35 @@
                 <span class="product_img"><img :src="item.goods_photo"/></span>
                 <span class="title"><i>{{item.goods_name}}：{{item.goods_desc}}</i></span>
               </td>
-              <td class=""  width="14%">{{item.levelOneLabel}}&nbsp;>&nbsp;{{item.levelTwoLabel}}</td>
-              <td  width="6%">{{item.goods_price}}￥</td>
+              <td class=""  width="14%">
+                {{item.levelOneLabel}}
+                <i v-for="(item1,index1) of allMainSort">
+                  <i v-if="item1.id==item.mainsort_id">{{item1.sort}}</i>
+                </i>
+                &nbsp;>&nbsp;
+                {{item.levelTwoLabel}}
+              </td>
+              <td  width="6%">￥{{item.goods_price}}</td>
               <td  width="6%">{{item.goods_stock}}</td>
               <td  width="6%">
-                <el-switch v-model="item.isPutaway" :width="value" >
+                <el-switch v-model="item.is_shelf" :width="value" >
                 </el-switch>
               </td>
               <td  width="8%">{{item.goods_people}}</td>
               <td  width="6%">{{item.group_aging}}小时</td>
               <td >
                 <div style="margin-bottom: 8px">
-                  <el-button type="success" size="mini">修改<i class="el-icon-edit"></i></el-button>
+                  <el-button type="success" size="mini" @click="checkGoodsItem(item)">查看<i class="el-icon-search"></i></el-button>
                 </div>
                 <div>
-                  <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
+                  <el-button size="mini" @click="deleteProduct(item)">删除<i class="el-icon-delete"></i></el-button>
                 </div>
               </td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
-              <td colspan="24" v-if="totalProduct==0 || noneProduct">
+              <td colspan="24" v-if="totalProduct==0">
                 <el-alert
                   style="width: 100%"
                   title="当前没有数据"
@@ -74,6 +81,7 @@
                   layout="prev, pager, next"
                   :total="totalProduct"
                   :page-size="limit"
+                  :current-page="page"
                   @current-change="pageChange"
                   @prev-click="preClick"
                   @next-click="nextClick"
@@ -87,6 +95,63 @@
         </div>
       </div>
     </div>
+
+    <!--查看和修改商品信息弹出框-->
+    <el-dialog :title="disabled==true ?'查看店铺信息':'修改店铺信息'"
+               :visible.sync="dialogFormVisible" class="changeFlame"
+               @close="disabled=true">
+      <el-button  size="mini" @click="disabled=!disabled" v-if="disabled">修改</el-button>
+      <el-button type="success" plain size="mini" @click="disabled=!disabled" v-if="!disabled">关闭修改</el-button>
+      <el-form v-model="goods_data">
+        <el-form-item label="更改商品图片" :label-width="formLabelWidth">
+          <el-upload class="avatar-uploader" action=""
+                     :disabled="disabled"
+                     :before-upload="beforeAvatarUpload"
+                     :show-file-list="false">
+            <img v-if="goods_data.goods_photo" :src="goods_data.goods_photo" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="商品名称" :label-width="formLabelWidth">
+          <el-input v-model="goods_data.goods_name" autocomplete="off" :disabled="disabled"></el-input>
+        </el-form-item>
+        <el-form-item label="商品原价" :label-width="formLabelWidth">
+          <el-input v-model="goods_data.goods_cost" autocomplete="off" :disabled="disabled"></el-input>
+        </el-form-item>
+        <el-form-item label="商品售价" :label-width="formLabelWidth">
+          <el-input v-model="goods_data.goods_price" autocomplete="off" :disabled="disabled"></el-input>
+        </el-form-item>
+        <el-form-item label="商品描述" :label-width="formLabelWidth">
+          <el-input type="textarea" :rows="3" v-model="goods_data.goods_desc"
+                    autocomplete="off" :disabled="disabled" ></el-input>
+        </el-form-item>
+        <el-form-item label="商品库存" :label-width="formLabelWidth">
+          <el-input v-model="goods_data.goods_stock" autocomplete="off" :disabled="disabled"></el-input>
+        </el-form-item>
+        <el-form-item label="库存警告值" :label-width="formLabelWidth">
+          <el-input v-model="goods_data.stock_warn" autocomplete="off" :disabled="disabled"></el-input>
+        </el-form-item>
+        <el-form-item label="拼团人数" :label-width="formLabelWidth">
+          <el-input v-model="goods_data.goods_people" autocomplete="off" :disabled="disabled"></el-input>
+        </el-form-item>
+        <el-form-item label="拼团优惠金额" :label-width="formLabelWidth">
+          <el-input v-model="goods_data.goods_discount" autocomplete="off" :disabled="disabled"></el-input>
+        </el-form-item>
+        <el-form-item label="拼团时效" :label-width="formLabelWidth">
+          <el-input v-model="goods_data.group_aging" autocomplete="off" :disabled="disabled"></el-input>
+        </el-form-item>
+        <el-form-item label="是否免运费" :label-width="formLabelWidth">
+          <el-switch v-model="goods_data.is_fare" :disabled="disabled"></el-switch>
+        </el-form-item>
+        <el-form-item label="商品运费" :label-width="formLabelWidth">
+          <el-input placeholder="请输入商品运费" :disabled="goods_data.is_fare" v-model="goods_data.goods_fare"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false;disabled=true">取 消</el-button>
+        <el-button type="primary"  :disabled="disabled" @click="changeGoods">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <style>
@@ -103,90 +168,62 @@
     data() {
       return {
         msg: '商品列表',
+        dialogFormVisible:false,
+        formLabelWidth:'120px',
         value:35,
         productList:[],
-        input_productId:'',
-        dataList:[
-          {
-            productId:10086,
-            publishTime:'2017-03-22 17:54:41',
-            productImg:'goods.jpg',
-            productTitle:'食为先香辣鸡脖子湖南特产炸酱辣脖麻辣休闲肉类辣味零食小包装',
-            levelOneLabel:'电子产品',
-            levelTwoLabel:'电脑',
-            price:'20',
-            inventory:200,
-            couponId:'',
-            isPutaway:true,
-            groupEffectTime:2
-          },
-          {
-            productId:10087,
-            publishTime:'2017-03-22 17:54:41',
-            productImg:'Duckneck.jpg',
-            productTitle:'食为先香辣鸡脖子湖南特产炸酱辣脖麻辣休闲肉类辣味零食小包装',
-            levelOneLabel:'零食',
-            levelTwoLabel:'鸭脖',
-            price:'20',
-            inventory:2300,
-            couponId:'',
-            isPutaway:true,
-            groupEffectTime:2
-          },
-          {
-            productId:10088,
-            publishTime:'2017-03-22 17:54:41',
-            productImg:'shopImage2.png',
-            productTitle:'食为先香辣鸡脖子湖南特产炸酱辣脖麻辣休闲肉类辣味零食小包装',
-            levelOneLabel:'零食',
-            levelTwoLabel:'鸭脖',
-            price:'20',
-            inventory:340,
-            couponId:'',
-            isPutaway:true,
-            groupEffectTime:2
-          },
-          {
-            productId:10089,
-            publishTime:'2017-03-22 17:54:41',
-            productImg:'touxiang.jpg',
-            productTitle:'食为先香辣鸡脖子湖南特产炸酱辣脖麻辣休闲肉类辣味零食小包装',
-            levelOneLabel:'零食',
-            levelTwoLabel:'鸭脖',
-            price:'20',
-            inventory:1100,
-            couponId:'',
-            isPutaway:true,
-            groupEffectTime:2
-          },
-          {
-            productId:10090,
-            publishTime:'2017-03-22 17:54:41',
-            productImg:'shopImage1.jpg',
-            productTitle:'食为先香辣鸡脖子湖南特产炸酱辣脖麻辣休闲肉类辣味零食小包装',
-            levelOneLabel:'零食',
-            levelTwoLabel:'鸭脖',
-            price:'20',
-            inventory:500,
-            couponId:'',
-            isPutaway:true,
-            groupEffectTime:2
-          }
-        ],
+        input_Id:'',
         page:1,
         limit:6,
-        totalProduct:null,
+        totalProduct:0,
         showPading:false,
-        noneProduct:false
+        goods_data:'',
+        disabled:true,
+        allMainSort:[],
+        updateFormData:''
+      }
+    },
+    computed:{
+      filterProductList(){
+        return this.productList;
       }
     },
     mounted(){
-      this.findProductList({'offset':this.page,'limit':this.limit})
+      if(this.$route.query.findGoods){
+        this.findProductList({'offset':this.page,'limit':this.limit},0)
+      }else{
+        if(sessionStorage.getItem("goods_page")){
+          this.page=parseInt(sessionStorage.getItem("goods_page"));
+          this.findProductList({'offset':this.page,'limit':this.limit},1)
+        }else{
+//        this.page=1;
+          this.findProductList({'offset':this.page,'limit':this.limit},1)
+        }
+      }
+
+      this.updateFormData = new FormData(); //修改商品信息时初始化一个FormData来存修改后的数据
+
+//      查询所有以及标签
+      this.axios.get('/v1/merchant/mainsortall',{
+        headers:{
+          "Authorization":"Bearer "+ getCookie('token')
+        }
+      }).then((res)=>{
+        let data = res.data.data;
+        this.allMainSort = data.categoryList;
+      })
+//      查询所有二级标签
     },
     methods:{
-      findProductList(params){
-        this.axios.get('/v1/merchant/goods/?offset='+params.offset+'&limit='+params.limit,{
-          params:params,
+      findProductList(params,status){
+        if(status==0){
+          var url='/v1/merchant/goodsbysub/?offset='+params.offset+'&limit='+params.limit+'&mid='
+            +sessionStorage.getItem("shopId")+'&sid='+sessionStorage.getItem("sub_sort_id");
+        }else{
+          var url='/v1/merchant/goods/?offset='+params.offset+'&limit='+params.limit+'&mid='
+            +sessionStorage.getItem("shopId");
+        }
+        this.axios.get(url,{
           headers:{
             "Authorization":"Bearer "+ getCookie('token')
           }
@@ -212,17 +249,20 @@
       },
       pageChange(val){
 //        console.log(`当前页: ${val}`);
-        this.page=val;
+        this.page=parseInt(val);
+        sessionStorage.setItem("goods_page",this.page);
         this.findProductList({'offset':this.page,'limit':this.limit});
       },
       preClick(val){
 //        console.log(`上一页: ${val}`);
-        this.page=val;
+        this.page=parseInt(val);
+        sessionStorage.setItem("goods_page",this.page);
         this.findProductList({'offset':this.page,'limit':this.limit});
       },
       nextClick(val){
 //        console.log(`下一页: ${val}`);
-        this.page=val;
+        this.page=parseInt(val);
+        sessionStorage.setItem("goods_page",this.page);
         this.findProductList({'offset':this.page,'limit':this.limit});
       },
       addNewProduct(){
@@ -230,7 +270,11 @@
         this.$router.push('/ProductUpdate')
       },
       checkProductItem(productId){
-        this.axios.get('/v1/merchant/goods/'+productId,{
+        if(!this.input_Id){//输入框为空提示
+          this.findProductList({'offset':this.page,'limit':this.limit});
+          return false;
+        }
+          this.axios.get('/v1/merchant/goods/'+productId,{
           headers:{
             "Authorization":"Bearer "+ getCookie('token')
           }
@@ -238,19 +282,126 @@
           let list = res.data.data;
           console.log(res.data.message);
           console.log(res.data);
-          if(!this.input_productId){
-            this.productList=list.goodsList;
-          }else if(res.data.code==20501){
-            this.noneProduct=true;
+         if(res.data.code==20501){
+            this.showPading =false;
+            this.totalProduct=0;
             this.productList=[];
           }else{
             this.productList=[];
+            this.totalProduct=1;
+           this.showPading =false;
             this.productList.push(list);
           }
         }).catch((err)=>{
-          let errorMes=err.data;
-          console.log(err.data.message)
+          console.log(err)
         })
+      },
+      findProductBySubSort(){
+        let mainSortId=sessionStorage.getItem("main_sort_id");
+        let subSortId=sessionStorage.getItem("sub_sort_id");
+        this.axios.get('/v1/merchant/goods/?offset=1&limit=2&mid='+mainSortId+'&sid='+subSortId,{
+          headers:{
+            "Authorization":"Bearer "+ getCookie('token')
+          }
+        }).then((res)=>{
+          let data = res.data.data;
+        }).catch((err)=>{
+          console.log(err);
+        })
+      },
+      beforeAvatarUpload(file) {//图片上传的处理
+        let windowURL = window.URL || window.webkitURL;
+        console.log(windowURL.createObjectURL(file));
+        this.goods_data.goods_photo= windowURL.createObjectURL(file);
+//        this.productFormData.append('goods_photo');
+        this.updateFormData.append('goods_photo',file);
+        return false;
+      },
+      checkGoodsItem(item){//查看商品
+        this.dialogFormVisible=true;
+        this.goods_data=item;
+
+      },
+      changeGoods(){ //修改商品
+        if(!this.updateFormData.get('goods_photo')){//判断图片是否修改
+          this.updateFormData.append('goods_photo',this.goods_data.goods_photo);
+        }
+
+        if(!this.goods_data.is_fare && this.goods_data.goods_fare==''){  //判断运费是否免费滑块的选择状态
+          this.$message.error("请填写运费！");
+          return false;
+        }else if(!this.goods_data.is_fare && !this.goods_data.goods_fare==''){
+          this.updateFormData.append("goods_fare",this.goods_data.goods_fare.toString());
+        }else if(this.is_fare){
+          this.updateFormData.append("goods_fare",this.goods_data.goods_fare.toString());
+        }
+        this.updateFormData.append("goods_name",this.goods_data.goods_name.toString());
+        this.updateFormData.append("goods_desc",this.goods_data.goods_desc.toString());
+        this.updateFormData.append("goods_cost",this.goods_data.goods_cost.toString());
+        this.updateFormData.append("goods_price",this.goods_data.goods_price.toString());
+        this.updateFormData.append("goods_discount",this.goods_data.goods_discount.toString());
+        this.updateFormData.append("goods_stock",this.goods_data.goods_stock.toString());
+        this.updateFormData.append("stock_warn",this.goods_data.stock_warn.toString());
+        this.updateFormData.append("goods_people",this.goods_data.goods_people.toString());
+        this.updateFormData.append("group_aging",this.goods_data.group_aging.toString());
+        this.updateFormData.append("shop_id",sessionStorage.getItem("shopId").toString());
+        this.updateFormData.append("mainsort_id",this.goods_data.mainsort_id.toString());
+        this.updateFormData.append("subsort_id",this.goods_data.subsort_id.toString());
+        this.updateFormData.append("is_fare",this.goods_data.is_fare.toString());
+
+        this.axios.put('/v1/merchant/goods/'+this.goods_data.id,this.updateFormData,{
+          headers:{
+            'Content-Type': 'multipart/form-data',
+            "Authorization":"Bearer "+ getCookie('token')
+          }
+        }).then((res)=>{
+          if(res.data.message=="OK"){
+            this.$message({
+              message:'修改成功',
+              type:'success'
+            });
+            setTimeout(function () {
+              window.location.reload()
+            },1500);
+
+          }
+        }).catch((err)=>{
+          console.log(err);
+        })
+      },
+      deleteProduct(item){
+        this.$confirm('此操作将删除该商品, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.axios.delete('/v1/merchant/goods/'+item.id,{
+            headers:{
+              "Authorization":"Bearer "+ getCookie('token')
+            }
+          }).then((res)=>{
+            if(res.data.message=='OK'){
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+            }else{
+              this.$message({
+                type: 'error',
+                message: '删除失败!'
+              });
+            }
+          }).catch((err)=>{
+            console.log(err);
+          });
+
+
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       }
     }
   }

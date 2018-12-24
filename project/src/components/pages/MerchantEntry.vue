@@ -20,7 +20,7 @@
       </div>
       <!--内容-->
       <div class="authenticate-main" style="">
-        <el-form ref="form" :model="form" label-width="80px">
+        <el-form ref="form" :model="form" :rules="addFormRules"  label-width="80px">
           <el-form-item label="商铺图标">
             <el-upload
               class="avatar-uploader"
@@ -28,122 +28,156 @@
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload">
-              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
-          <el-form-item label="商铺名称">
+          <el-form-item label="商铺名称" prop="shopName">
             <el-input v-model="form.shopName" style="width: 380px;"></el-input>
-            <div class="span-alert" style="display: inline">
-              <div class="fr-alert" :class="isClass" index="0">
-                <i :class="iconAlert"></i><span style="padding-left: 8px;">{{errorTXT.errrorName}}</span>
-              </div>
-            </div>
           </el-form-item>
-          <el-form-item label="负责人">
-            <el-input v-model="form.realName" :disabled="true" style="width: 380px;"></el-input>
-          </el-form-item>
-          <el-form-item label="身份证码">
+          <el-form-item label="身份证码" prop="shopperID">
             <el-input v-model="form.shopperID" style="width: 380px;"></el-input>
-            <div class="span-alert" style="display: inline">
-              <div class="fr-alert" :class="isClass" index="1">
-                <i :class="iconAlert"></i><span style="padding-left: 8px;">{{errorTXT.errrorSID}}</span>
-              </div>
-            </div>
           </el-form-item>
-          <el-form-item label="营业执照">
+          <el-form-item label="营业执照" prop="licenseID">
             <el-input v-model="form.licenseID" style="width: 380px;"></el-input>
-            <div class="span-alert" style="display: inline">
-              <div class="fr-alert" :class="isClass" index="2">
-                <i :class="iconAlert"></i><span style="padding-left: 8px;">{{errorTXT.errrorLID}}</span>
-              </div>
-            </div>
           </el-form-item>
-          <el-form-item label="商铺QQ">
+          <el-form-item label="商铺QQ" prop="numberQQ">
             <el-input v-model="form.numberQQ" style="width: 380px;"></el-input>
-            <div class="span-alert" style="display: inline">
-              <div class="fr-alert" :class="isClass" index="3">
-                <i :class="iconAlert"></i><span style="padding-left: 8px;">{{errorTXT.errrorQQ}}</span>
-              </div>
-            </div>
           </el-form-item>
-          <el-form-item label="商铺电话">
+          <el-form-item label="商铺电话" prop="shopPhone">
             <el-input v-model="form.shopPhone" style="width: 380px;"></el-input>
-            <div class="span-alert" style="display: inline">
-              <div class="fr-alert" :class="isClass" index="4">
-                <i :class="iconAlert"></i><span style="padding-left: 8px;">{{errorTXT.errrorPhone}}</span>
-              </div>
-            </div>
           </el-form-item>
-          <el-form-item label="商铺地址">
+          <el-form-item label="商铺地址" prop="address">
             <v-distpicker @selected="selected" style="width: 380px;display: inline-block;"></v-distpicker>
           </el-form-item>
           <el-form-item label="商铺简介">
-            <el-input type="textarea" v-model="form.textarea" style="width: 380px;" :rows="3" placeholder="请输入内容"></el-input>
+            <el-input type="textarea" v-model="form.shopIntro" style="width: 380px;" :rows="3" placeholder="请输入内容"></el-input>
           </el-form-item>
           <el-form-item label="申请时间">
             <span style="margin-left: 5px">{{NOWTIME}}</span>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">申请认证</el-button>
+            <!--<el-button type="primary" @click="onSubmit" v-if="isSubmit==true">申请认证</el-button>-->
+            <!--<el-button type="primary" :loading="true" v-if="isSubmit==false">在审核中...</el-button>-->
           </el-form-item>
         </el-form>
       </div>
     </div>
 </template>
 <script>
+  import {getCookie} from '@/util/auth';
+  import {renshop} from '../../api/http';
+  import {isPhone, isIdNo} from '../../store/validate'; //导入验证规则
+
     export default {
       data() {
         return {
           msg: 'hello world',
-          imageUrl: '',
           form:{
+            imageUrl: '',
             shopName: '',
-            realName: '',
             shopperID: '',
             licenseID: '',
             numberQQ: '',
             shopPhone: '',
-            textarea: '',
+            address: '',
+            shopIntro: '',
           },
           authTime: '',
           NOWTIME: '',
-          iconAlert: '',
-          isClass: '',
-          indexAlert:'',
-          isAlert: false,
-          errorTXT:{
-            errorName: '',
-            errorSID: '',
-            errorLID: '',
-            errorQQ: '',
-            errorPhone: '',
-          },
+          formData: '', //提交数据暂存
+          addFormRules: {
+            shopName: [
+              {required: true, message: '请输入商家名称', trigger: 'blur'}
+            ],
+            shopperID: [
+              { required: true, message: '请输入身份证号', trigger: 'blur'},
+              {validator: isIdNo, trigger: 'blur'}
+            ],
+            licenseID: [
+              {required: true, message: '请输入营业执照号', trigger: 'blur'}
+            ],
+            numberQQ: [
+              {required: true, message: '请输入商铺QQ', trigger: 'blur'}
+            ],
+            shopPhone: [
+              {required: true, message: '请输入商铺客服电话', trigger: 'blur'},
+              {validator: isPhone, trigger: 'blur' }
+            ],
+            address: [
+              {required: true, message: '请选择商铺地址', trigger: 'blur'},
+            ],
+          }, //验证
+          isSubmit: true,
         }
       },
       methods: {
-        onSubmit() {
-          console.log('submit!');
-          this.leaveInput();
+        //初始化form
+        init(){
+          this.form.imageUrl = '';
+          this.form.shopName = '';
+          this.form.shopperID = '';
+          this.form.licenseID = '';
+          this.form.numberQQ = '';
+          this.form.shopPhone = '';
+          this.form.address = '';
+          this.form.shopIntro = '';
         },
+        //提交认证
+        onSubmit() {
+          if(this.imageUrl!=''&&this.form.shopName!=''&&this.form.shopperID!=''&&this.form.licenseID!=''
+            &&this.form.numberQQ!=''&&this.form.shopPhone!=''&&this.form.address!=''){
+            this.$confirm('确定提交申请吗？', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              //数据接口
+              renshop(this.form,this.formData.get("shop_logo")).then((res)=>{
+                if(res.data.message=='OK'){
+                  this.$message({
+                    type: 'success',
+                    message: '申请提交成功，请等待管理员审核...'
+                  });
+                  this.init();
+                }else {
+                  this.$message({
+                    type: 'error',
+                    message: '申请提交失败!'
+                  });
+                }
+              });
+              console.log(this.form);
+              console.log(this.formData.get("shop_logo"))
+
+            }).catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消申请'
+              });
+            });
+//            this.isSubmit = false;
+          }else{
+            this.$message.error('错了哦，信息输入有误哦，请重新检查！');
+//            this.isSubmit = true;
+          }
+        },
+        //商标
         handleAvatarSuccess(res, file) {
-          this.imageUrl = URL.createObjectURL(file.raw);
+          this.form.imageUrl = URL.createObjectURL(file.raw);
         },
         beforeAvatarUpload(file) {
-          const isJPG = file.type === 'image/jpeg' || 'image/png';
-          const isLt2M = file.size / 1024 / 1024 < 2;
-
-          if (!isJPG) {
-            this.$message.error('上传头像图片只能是 JPG/PNG 格式!');
-          }
-          if (!isLt2M) {
-            this.$message.error('上传头像图片大小不能超过 2MB!');
-          }
-          return isJPG && isLt2M;
+          let windowURL = window.URL || window.webkitURL;
+          console.log(windowURL.createObjectURL(file));
+          this.form.imageUrl= windowURL.createObjectURL(file);
+          this.formData.append('shop_logo',file);
+          return false;
         },
+        //地址
         selected(e) {
-          this.address = `${e.province.value}/${e.city.value}/${e.area.value}`
-          console.log(this.address)
+          this.form.address = `${e.province.value}${e.city.value}${e.area.value}`;
+          console.log(this.form.address);
         },
         // 获取当前时间函数
         timeFormate(timeStamp) {
@@ -161,43 +195,6 @@
           this.timeFormate(new Date());
           setInterval(this.nowTimes, 1000);
         },
-        booleanAlert(boolean){
-          if(boolean==true){
-            this.isAlert= true;
-            this.isClass='success';
-            this.iconAlert='el-icon-success';
-          }
-          if(boolean==false){
-            this.isAlert= false;
-            this.isClass='error';
-            this.iconAlert='el-icon-error';
-          }
-        },
-        leaveInput(){
-          if (!this.form.shopName){
-            this.booleanAlert(false);
-            this.errorTXT.errrorName="请输入商铺名称(必填)"
-          }
-          if (!this.form.shopperID){
-            this.booleanAlert(false);
-            this.errorTXT.errrorSID="请输入身份证码(必填)"
-          }
-          if (!this.form.licenseID){
-            this.booleanAlert(false);
-            this.errorTXT.errrorLID="请输入营业执照号(必填)"
-          }
-          if (!this.form.numberQQ){
-            this.booleanAlert(false);
-            this.errorTXT.errrorQQ="请输入商铺QQ(必填)"
-          }
-          if (!this.form.shopPhone){
-            this.booleanAlert(false);
-            this.errorTXT.errrorPhone="请输入商铺客服电话(必填)"
-          }else{
-            this.booleanAlert(true);
-            this.errorTXT.errrorPhone="商铺客服电话输入正确"
-          }
-        },
       },
       // 创建完成时
       created() {
@@ -206,6 +203,7 @@
       // 挂载完成时
       mounted() {
         this.nowTimes();
+        this.formData = new FormData();
       }
     }
 </script>
@@ -242,42 +240,4 @@
     display: block;
   }
   /* 内容 */
-
-  /* 提示 */
-  .fr-alert{
-    width: 100%;
-    padding: 8px 16px;
-    margin: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 4px;
-    position: relative;
-    background-color: #fff;
-    overflow: hidden;
-    opacity: 1;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-transition: opacity .2s;
-    transition: opacity .2s;
-  }
-
-  .fr-alert{
-    background-color: #fef0f0;
-    color: #f56c6c;
-    display: none;
-  }
-  .fr-alert.error{
-    background-color: #fef0f0;
-    color: #f56c6c;
-    display: inline;
-  }
-  .fr-alert.success{
-    background-color: #f0f9eb;
-    color: #67c23a;
-    display: inline;
-  }
 </style>

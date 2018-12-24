@@ -2,10 +2,10 @@
     <div>
       <!--位置-->
       <div class="appTop" style="min-width: 1079px;">
-        <span>您的位置：</span><span class="">
-        <a class="" title="首页" href="#" target="_blank">首页</a>&gt;</span><span class="">
-        <router-link class="" title="我的订单" href="javascript:void(0);" to="/goods">我的订单</router-link>&gt;</span><span class="last">
-        <a class="" title="订单详情" href="#" style="color: #f65d29;font-weight: bolder;">订单详情</a></span>
+        <span>您的位置：</span>
+        <span class=""><router-link title="首页" href="javascript:void(0);" target="_blank" to="/home" >首页</router-link>&gt;</span>
+        <span class=""><router-link title="我的订单" href="javascript:void(0);" to="/goods">我的订单</router-link>&gt;</span>
+        <span class="last"><span title="订单详情">订单详情</span></span>
         <div class="trade-detail-hotline" style="float: right;">
           <span>服务热线：</span><em><span class="ui-trade-label ">0000 000 000</span></em>
         </div>
@@ -24,7 +24,7 @@
       <div class="appDetailPanel">
         <table class="bought-form-table" style="min-width: 1079px;">
           <tbody>
-          <tr class="tr-center" style="height: 35px;">
+          <tr class="tr-center tb-hd">
             <td style="width: 437px;">商品</td>
             <td style="width: 127px;">单价</td>
             <td style="width: 107px;">数量</td>
@@ -225,11 +225,14 @@
   .appTop,.appTop a,.appDetailPanel{font-size: 14px;color: #666;}
   .appTop a:hover{color: #f65d29;}
   .appTop{margin-bottom: 15px;padding-top: 10px;border-top: 1px solid #ccc;}
+  .appTop span.last{color: #f65d29;font-weight: bolder;}
+
   table{border: 1px solid #e8e8e8;margin-bottom: 15px;}
   table tr.tr-center td{
     line-height: 1;
     text-align: center;
   }
+  table tr.tr-center.tb-hd{height: 35px}
   .tr-center .g-cont-p{color: #666}
   .bought-form-table tr,.trade-status-table tr td{
     border-width: 1px 1px 0 0;

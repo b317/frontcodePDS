@@ -14,22 +14,22 @@
         <thead>
         <tr>
           <th class="">所属级别</th>
+          <th class="">标签ID</th>
           <th class="">分类标签名称</th>
           <th class="">下级标签数量</th>
-          <th class="">商品总数量</th>
           <th>设置</th>
           <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(item,index) of sortlist">
-          <td><i v-show="item.isLevelOne">Level one</i></td>
-          <td>{{item.levelOneLabel}}</td>
-          <td>{{item.LevelTwoLabel.length}}</td>
-          <td>{{allProductNumArray[index]}}</td>
+        <tr v-for="(item,index) of sortpage">
+          <td><i>Level one</i></td>
+          <td>{{item.main_category.id}}</td>
+          <td>{{item.main_category.sort}}</td>
+          <td>{{item.sub_count}}</td>
           <td>
             <div style="margin-bottom: 8px">
-              <el-button type="primary" size="mini" @click="checkNextLevel(item,index)">查看下一级</el-button>
+              <el-button type="primary" size="mini" @click="checkNextLevel(item,1,index)">查看下一级</el-button>
             </div>
             <div><el-button type="info" size="mini" @click="addNextLevel(item,index)">添加下一级</el-button></div>
           </td>
@@ -64,6 +64,7 @@
         layout="prev, pager, next"
         :total="totalProduct"
         :page-size="limit"
+        :current-page="presentPage1"
         @current-change="pageChange"
         @prev-click="preClick"
         @next-click="nextClick"
@@ -113,7 +114,7 @@
     </div>
     <div class="levelTwo" v-if="$route.query.check_next>=0">
       <div>
-        <el-button size="small" @click="$router.push('/ProductSort')"><img src="/static/back.png"/>返回上一级</el-button>
+        <el-button size="small" @click="backLastLevel"><img src="/static/back.png"/>返回上一级</el-button>
         <el-button size="small" @click="addLabel"><i class="el-icon-plus"></i>添加分类标签</el-button>
       </div>
       <table>
@@ -129,14 +130,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr v-for="(item,index) of sortlist2" :key="index">
           <td>Level two</td>
-          <td>电饭煲</td>
+          <td>{{item.sort}}</td>
           <td>家具电器</td>
           <td>5</td>
           <td>250</td>
           <td>
-            <el-button type="primary" size="mini">查看</el-button>
+            <el-button type="primary" size="mini" @click="checkGoods(item)">查看</el-button>
           </td>
           <td>
             <div style="margin-bottom: 8px">
@@ -150,7 +151,7 @@
         </tbody>
         <tfoot>
         <tr>
-          <td colspan="24" v-if="totalProduct==0 || noneProduct">
+          <td colspan="24" v-if="totalProduct2==0 || noneProduct" style="padding:20px 0 !important; ">
             <el-alert
               style="width: 100%"
               title="当前没有数据"
@@ -161,17 +162,17 @@
             </el-alert>
           </td>
           <td colspan="3"></td>
-          <td colspan="9" style="position: relative">
+          <td colspan="9" style="padding:20px 0 !important;text-align: right ">
             <el-pagination
               background
               layout="prev, pager, next"
-              :total="totalProduct"
-              :pager-count="7"
+              :total="totalProduct2"
               :page-size="limit"
-              @current-change="pageChange"
-              @prev-click="preClick"
-              @next-click="nextClick"
-              v-if="showPading"
+              :current-page="presentPage2"
+              @current-change="pageChange2"
+              @prev-click="preClick2"
+              @next-click="nextClick2"
+              v-if="showPading2"
             >
             </el-pagination>
           </td>
@@ -180,8 +181,6 @@
       </table>
     </div>
   </div>
-
-
 </template>
 <style>
   .add_btn:hover{
@@ -197,180 +196,86 @@
         msg: '商品分类',
         add_label:null,
         allProductNumArray:[],
-        totalProduct:100,
+        totalProduct:0,
+        totalProduct2:0,
         page:1,
+        presentPage1:1,
+        presentPage2:1,
         limit:6,
-        showPading:true,
+        showPading:false,
+        showPading2:false,
         noneProduct:false,
         sortlist:[],
-        datalist:[
-          {
-            isLevelOne:1,
-            levelOneLabel:"电子产品",
-            isLevelTwo:1,
-            LevelTwoLabel:[
-              {
-                LevelTwoLabelId:'1000',
-                LevelTwoLabelName:'电脑',
-                productNum:100
-              },
-              {
-                LevelTwoLabelId:'1001',
-                LevelTwoLabelName:'手机',
-                productNum:100
-              },
-              {
-                LevelTwoLabelId:'1002',
-                LevelTwoLabelName:'平板',
-                productNum:100
-              },
-            ]
-          },
-          {
-            isLevelOne:1,
-            levelOneLabel:"家具电器",
-            isLevelTwo:1,
-            LevelTwoLabel:[
-              {
-                LevelTwoLabelId:'2000',
-                LevelTwoLabelName:'电磁炉',
-                productNum:100
-              },
-              {
-                LevelTwoLabelId:'2001',
-                LevelTwoLabelName:'电饭煲',
-                productNum:50
-              },
-              {
-                LevelTwoLabelId:'2002',
-                LevelTwoLabelName:'平底锅',
-                productNum:200
-              },
-              {
-                LevelTwoLabelId:'2003',
-                LevelTwoLabelName:'冰箱',
-                productNum:100
-              },
-              {
-                LevelTwoLabelId:'2004',
-                LevelTwoLabelName:'烤箱',
-                productNum:100
-              }
-            ]
-          },
-          {
-            isLevelOne:1,
-            levelOneLabel:"零食",
-            isLevelTwo:1,
-            LevelTwoLabel:[
-              {
-                LevelTwoLabelId:'3000',
-                LevelTwoLabelName:'鸭脖',
-                productNum:500
-              },
-              {
-                LevelTwoLabelId:'3001',
-                LevelTwoLabelName:'辣条',
-                productNum:400
-              }
-            ]
-          },
-          {
-            isLevelOne:1,
-            levelOneLabel:"服装衣服",
-            isLevelTwo:1,
-            LevelTwoLabel:[
-              {
-                LevelTwoLabelId:'4000',
-                LevelTwoLabelName:'裙子',
-                productNum:100
-              },
-              {
-                LevelTwoLabelId:'4001',
-                LevelTwoLabelName:'风衣',
-                productNum:200
-              },
-              {
-                LevelTwoLabelId:'4002',
-                LevelTwoLabelName:'夹克',
-                productNum:100
-              },
-              {
-                LevelTwoLabelId:'4003',
-                LevelTwoLabelName:'牛仔裤',
-                productNum:300
-              }
-            ]
-          },
-          {
-            isLevelOne:1,
-            levelOneLabel:"学习提升",
-            isLevelTwo:1,
-            LevelTwoLabel:[
-              {
-                LevelTwoLabelId:'5001',
-                LevelTwoLabelName:'四六级英语',
-                productNum:100
-              },
-              {
-                LevelTwoLabelId:'5002',
-                LevelTwoLabelName:'计算机语言',
-                productNum:50
-              }
-              ,
-              {
-                LevelTwoLabelId:'5002',
-                LevelTwoLabelName:'考研专题',
-                productNum:80
-              }
-            ]
-          },
-        ],
+        sortlist2:[],
+        sortpage:[],
         ruleForm: {
           LevelOneLabel: '',
           LevelTwoLabel: '',
           addLevelTwo: '',
           sortDesc: ''
-        }
+        },
+        mainSortId:null
       }
     },
     mounted() {
-      this.datalist.forEach((item)=>{
-        var allProductNum=0;
-        item.LevelTwoLabel.forEach((item1)=>{
-          allProductNum+=item1.productNum;
-        });
-        this.allProductNumArray.push(allProductNum);
-      });
-      this.findAllMainSort({'offset':this.page,'limit':this.limit});
+      this.findAllMainSort();
+      if(sessionStorage.getItem("present_page1")){
+        this.presentPage1=parseInt(sessionStorage.getItem("present_page1"));
+      }else{
+        this.presentPage1=1;
+      }
+
+      if(this.$route.query.check_next){
+        if(sessionStorage.getItem("present_page2")){
+          this.presentPage2=parseInt(sessionStorage.getItem("present_page2"));
+          this.checkNextLevel({'main_category':{id:sessionStorage.getItem("main_sort_id")}},sessionStorage.getItem("present_page2"),0);
+        }else{
+          this.checkNextLevel({'main_category':{id:sessionStorage.getItem("main_sort_id")}},1,0);
+        }
+      }
+
     },
     methods:{
-      findAllMainSort(params){
-        this.axios.get('/v1/merchant/mainsort/?offset='+params.offset+'&limit='+params.limit,{
+      findAllMainSort(){
+        this.axios.get('v1/merchant/mainsort/subcount',{
           headers:{
             "Authorization":"Bearer "+ getCookie('token')
           }
         }).then((res)=>{
           let data =res.data.data;
+          this.sortlist=[];
           this.sortlist =data.categoryList;
+          this.sortpage=[];
+          this.sortpage=this.sortlist.slice(0,this.limit);
+          this.sortpage=this.sortlist.slice(this.limit*(this.presentPage1-1),this.limit*this.presentPage1);
+          this.totalProduct=data.totalCount;
+          if(this.totalProduct<=this.limit){//当数据总数超过一页限制条数的时候显示分页栏
+            this.showPading=false;
+          }else{
+            this.showPading=true;
+          }
+          console.log(this.totalProduct);
         }).catch((err)=>{
           console.log(err)
         })
       },
       pageChange(val){
 //        console.log(`当前页: ${val}`);
-        this.page=val;
-        this.findAllMainSort({'offset':this.page,'limit':this.limit});
+        this.presentPage1=parseInt(val);
+        sessionStorage.setItem("present_page1",this.presentPage1);
+        this.sortpage=this.sortlist.slice(this.limit*(val-1),this.limit*val);
       },
       preClick(val){
 //        console.log(`上一页: ${val}`);
-        this.page=val;
-        this.findAllMainSort({'offset':this.page,'limit':this.limit});
+        this.presentPage1=parseInt(val);
+        sessionStorage.setItem("present_page1",this.presentPage1);
+        this.sortpage=this.sortlist.slice(this.limit*(val-1),this.limit*val);
       },
       nextClick(val){
 //        console.log(`下一页: ${val}`);
-        this.page=val;
-        this.findAllMainSort({'offset':this.page,'limit':this.limit});
+        this.presentPage1=parseInt(val);
+        sessionStorage.setItem("present_page1",this.presentPage1);
+        this.sortpage=this.sortlist.slice(this.limit*(val-1),this.limit*val);
       },
       addLabel(){
         this.add_label=0;
@@ -396,13 +301,67 @@
         });
         this.ruleForm.LevelOneLabel=item.levelOneLabel;
       },
-      checkNextLevel(item,index){
+      checkNextLevel(item,key,index){
+        this.mainSortId=item.main_category.id;
+        sessionStorage.setItem("main_sort_id",this.mainSortId);
+        this.axios.get('/v1/merchant/subsort/?offset='+key+'&limit='+this.limit+'&pid='+this.mainSortId,{
+          headers:{
+            "Authorization":"Bearer "+ getCookie('token')
+          }
+        }).then((res)=>{
+          let data = res.data.data;
+          this.sortlist2 = [];
+          this.sortlist2=data.categoryList;
+          this.totalProduct2=data.totalCount;
+          if(this.totalProduct2<=this.limit){//当数据总数超过一页限制条数的时候显示分页栏
+            this.showPading2=false;
+          }else{
+            this.showPading2=true;
+          }
+        }).catch((err)=>{
+          console.log(err);
+        });
         this.$router.push({
           path:'/ProductSort',
           query:{
-            check_next:index+1
+            check_next:item.main_category.id
           }
         })
+      },
+      pageChange2(val){
+        console.log(`当前页: ${val}`);
+        this.presentPage2=parseInt(val);
+        sessionStorage.setItem("present_page2",this.presentPage2);
+        this.checkNextLevel({'main_category':{id:this.mainSortId}},this.presentPage2,0);
+      },
+      preClick2(val){
+        console.log(`上一页: ${val}`);
+        this.presentPage2=parseInt(val);
+        sessionStorage.setItem("present_page2",this.presentPage2);
+        this.checkNextLevel({'main_category':{id:this.mainSortId}},this.presentPage2,0);
+      },
+      nextClick2(val){
+        console.log(`下一页: ${val}`);
+        this.presentPage2=parseInt(val);
+        sessionStorage.setItem("present_page2",this.presentPage2);
+        this.checkNextLevel({'main_category':{id:this.mainSortId}},this.presentPage2,0);
+      },
+      backLastLevel(){
+        this.$router.push('/ProductSort');
+        sessionStorage.removeItem("present_page2");
+        sessionStorage.setItem("present_page2",1);
+        this.presentPage2=parseInt(sessionStorage.getItem("present_page2"));
+      },
+      checkGoods(item){//根据2级标签查看标签下的所有商品
+        sessionStorage.setItem("sub_sort_id",item.id);
+        sessionStorage.setItem("goods_page",1);
+        this.$store.dispatch("checkIndex2Action",'2-1');
+        this.$router.push({
+          path:'/ProductList',
+          query:{
+            findGoods:'true'
+          }
+        });
       }
     }
   }

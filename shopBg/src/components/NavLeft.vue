@@ -1,6 +1,6 @@
 <template>
   <div class="nav_left">
-    <el-menu v-if="selectIndex==1 || selectIndex==null"
+    <el-menu v-if="active_index==1 || active_index==null"
              :default-active="active_index2"
              class="el-menu-vertical-demo"
              @select="handleSelect"
@@ -13,7 +13,7 @@
       </el-menu-item>
     </el-menu>
 
-    <el-menu v-if="selectIndex==2"
+    <el-menu v-if="active_index==2"
              :default-active="active_index2"
              class="el-menu-vertical-demo"
              @select="handleSelect"
@@ -52,7 +52,7 @@
       </el-menu-item>
     </el-menu>
 
-    <el-menu v-if="selectIndex==3"
+    <el-menu v-if="active_index==3"
              :default-active="active_index2"
              class="el-menu-vertical-demo"
              @select="handleSelect"
@@ -77,37 +77,51 @@
 </style>
 <script>
   export default {
-    props:["selectIndex"],
+//    props:["selectIndex"],
     data() {
       return {
         msg: 'hello world',
+//        selectIndex:'1'
       }
     },
     computed:{
+      selectIndex(){
+        return this.active_index
+      },
+      active_index(){
+        return this.$store.state.headerTag.active_index;
+      },
       active_index2(){
+        console.log(this.$store.state.LeftTag.activeIndex2+"ntsyn");
         return this.$store.state.LeftTag.activeIndex2;
       }
     },
-    mounted(){
+    created(){
+
       if(sessionStorage.getItem("active_index2")){
         let index = sessionStorage.getItem("active_index2");
+        console.log(index+"fuhua");
         this.$store.dispatch("checkIndex2Action",index);
       }else{
-        this.$store.dispatch("checkIndex2Action",'1');
+        this.$store.dispatch("checkIndex2Action",index);
       }
     },
     methods: {
       handleSelect(key, keyPath) {
-        if(this.selectIndex=='1'){
-          this.$store.dispatch("checkIndex2Action",key)
+        if(this.active_index=='1'){
+          this.$store.dispatch("checkIndex2Action",key);
           this.$router.push('/')
-        }else if(this.selectIndex=='2'){
+        }else if(this.active_index=='2'){
           switch (key){
             case '1':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/OrderManage');
               break;
-            case '2-1':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ProductList');
+            case '2-1':
+              if(this.$store.state.LeftTag.activeIndex2=='2-1'){
+                window.location.reload();
+              }
+              this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ProductList');sessionStorage.removeItem("goods_page");
               break;
-            case '2-2':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ProductSort');
+            case '2-2':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ProductSort');sessionStorage.removeItem("present_page1");
               break;
             case '2-3':this.$store.dispatch("checkIndex2Action",key);this.$router.push('/ProductUpdate');
               break;
