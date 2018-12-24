@@ -6,32 +6,32 @@
       <div class="grid-content bg-purple">
         <template>
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="全部订单" name="0">
+            <el-tab-pane label="全部订单" name="全部订单">
               <template slot-scope="scope">
                 <div>全部订单</div>
               </template>
             </el-tab-pane>
-            <el-tab-pane label="待发货" name="1">
+            <el-tab-pane label="待发货" name="待发货">
               <template slot-scope="scope">
                 <div>待发货</div>
               </template>
             </el-tab-pane>
-            <el-tab-pane label="已发货" name="2">
+            <el-tab-pane label="已发货" name="已发货">
               <template slot-scope="scope">
                 <div>已发货</div>
               </template>
             </el-tab-pane>
-            <el-tab-pane label="已完成" name="3">
+            <el-tab-pane label="已完成" name="已完成">
               <template slot-scope="scope">
                 <div>已完成</div>
               </template>
             </el-tab-pane>
-            <el-tab-pane label="审核退款" name="4">
+            <el-tab-pane label="审核退款" name="正退款">
               <template slot-scope="scope">
                 <div>正退款</div>
               </template>
             </el-tab-pane>
-            <el-tab-pane label="已退款" name="5">
+            <el-tab-pane label="已退款" name="已退款">
               <template slot-scope="scope">
                 <div>已退款</div>
               </template>
@@ -54,7 +54,7 @@
           <tr>
             <th class="">订单号/时间</th>
             <th class="">商品信息</th>
-            <th class="">单价</th>
+            <!--<th class="">单价</th>-->
             <th>团购价</th>
             <th>数量</th>
             <th>实付款</th>
@@ -67,12 +67,24 @@
           </tbody>
           <tfoot>
           <tr>
+            <td colspan="24" v-if="orderList.length==0">
+              <el-alert
+                style="width: 100%"
+                title="当前没有数据"
+                type="info"
+                center
+                :closable="false"
+                show-icon>
+              </el-alert>
+            </td>
             <td colspan="3"></td>
             <td colspan="6" style="position: relative">
               <el-pagination
                 background
                 layout="prev, pager, next"
-                :total="1000"
+                :total="totalOrder"
+                :page-size="limit"
+                :current-page="page"
                 @current-change="pageChange"
                 @prev-click="preClick"
                 @next-click="nextClick"
@@ -89,7 +101,7 @@
   import ElRow from "element-ui/packages/row/src/row";
   import ElCol from "element-ui/packages/col/src/col";
   import OrderItem from "@/views/Management/OrderItem";
-
+  import {getCookie} from "@/common/auth";
     export default {
       components: {ElCol,ElRow,OrderItem},
         data() {
@@ -98,170 +110,31 @@
             value: 35,
             activeName: "0",  // 默认选卡
             orderList: [],
-            dataList: [
-              {
-                orderID: 266477474728649150,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'goods.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '20.00',
-                groupPrice: '18.00',
-                goodsNumber: '1',
-                payMoney: '20.00',
-                freight: '0.00',
-                tradingStatus: 0
-              },
-              {
-                orderID: 266477474728649170,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'Duckneck.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '17.00',
-                groupPrice: '14.00',
-                goodsNumber: '2',
-                payMoney: '34.00',
-                freight: '0.00',
-                tradingStatus: 1
-              },
-              {
-                orderID: 266477474728649171,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'shopImage1.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '22.00',
-                groupPrice: '19.00',
-                goodsNumber: '1',
-                payMoney: '19.00',
-                freight: '0.00',
-                tradingStatus: 2
-              },
-              {
-                orderID: 266477474728649173,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'touxiang.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '19.00',
-                groupPrice: '15.00',
-                goodsNumber: '2',
-                payMoney: '30.00',
-                freight: '0.00',
-                tradingStatus: 1
-              },
-              {
-                orderID: 266477474728649177,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'shopImage1.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '19.00',
-                groupPrice: '17.00',
-                goodsNumber: '1',
-                payMoney: '17.00',
-                freight: '0.00',
-                tradingStatus: 0
-              },
-              {
-                orderID: 266477474728649177,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'shopImage1.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '19.00',
-                groupPrice: '17.00',
-                goodsNumber: '1',
-                payMoney: '17.00',
-                freight: '0.00',
-                tradingStatus: 0
-              },
-              {
-                orderID: 266477474728649177,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'shopImage1.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '19.00',
-                groupPrice: '17.00',
-                goodsNumber: '1',
-                payMoney: '17.00',
-                freight: '0.00',
-                tradingStatus: 1
-              },
-              {
-                orderID: 266477474728649177,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'shopImage1.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '19.00',
-                groupPrice: '17.00',
-                goodsNumber: '1',
-                payMoney: '17.00',
-                freight: '0.00',
-                tradingStatus: 2
-              },
-              {
-                orderID: 266477474728649177,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'shopImage1.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '19.00',
-                groupPrice: '17.00',
-                goodsNumber: '1',
-                payMoney: '17.00',
-                freight: '0.00',
-                tradingStatus: 3
-              },
-              {
-                orderID: 266477474728649177,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'shopImage1.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '19.00',
-                groupPrice: '17.00',
-                goodsNumber: '1',
-                payMoney: '17.00',
-                freight: '0.00',
-                tradingStatus: 4
-              },
-              {
-                orderID: 266477474728649177,
-                orderTime: '2018-11-22 17:54:41',
-                goodsImg: 'shopImage1.jpg',
-                goodsTitle: '羽博充电宝女迷你小巧10000毫安可爱大容量少女款卡通生型1万冲超萌移动电源',
-                goodsClass: '灰白TY-45型号',
-                price: '19.00',
-                groupPrice: '17.00',
-                goodsNumber: '1',
-                payMoney: '17.00',
-                freight: '0.00',
-                tradingStatus: 1
-              }
-            ]
+            dataList: [],
+
+            page:1,
+            limit:6,
+            totalOrder:0,
+            showPading:false,
           }
         },
       mounted(){
-        this.orderList=this.dataList;
+//        this.orderList=this.dataList;
+        this.getAllOrder({'offset':this.page,'limit':this.limit});
       },
       methods:{
         //点击选项卡
         handleClick(tab, event,) {
-//          console.log('点击' + tab.name);
+          console.log('点击' + tab.name);
           let urlStr = '/OrderManage?orderType=' + tab.name;
           this.$router.push(urlStr);
-          if(tab.name==0){
-            this.orderList=this.dataList;
+          if(tab.name=='全部订单'){
+            this.orderList = this.dataList;
           }else {
             this.orderList = [];
             this.dataList.forEach((item) => {
-              if (item.tradingStatus == (tab.name-1)) {
+              if (item.order_status == (tab.name)) {
                 this.orderList.push(item);
-//                console.log('状态' + item.tradingStatus);
               }
             })
           }
@@ -277,7 +150,34 @@
 //        console.log(`下一页: ${val}`);
         },
         //获取数据
-
+        getAllOrder(params){
+          var urlStr='/v1/merchant/orderlistbymerchant/?offset='+params.offset+'&limit='+params.limit+'&mid='
+              +sessionStorage.getItem("shopId");
+          this.axios.get(urlStr,{
+            headers:{
+              "Authorization":"Bearer "+ getCookie('token')
+            }
+          }).then((res)=>{
+            let data = res.data.data;
+            this.orderList=data.ordersList;
+            this.dataList=data.ordersList;
+            //格式化时间
+            this.orderList.forEach(function (item) {
+              let time=item.createdAt;
+              var date = new Date(time).toJSON();
+              item.createdAt= new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+            });
+            this.findGoods(this.orderList);
+            this.totalOrder = data.totalCount;//保存总条数
+            if(data.totalCount<=this.limit){//分页栏是否显示
+              this.showPading=false;
+            }else{
+              this.showPading=true;
+            }
+          }).catch((err)=>{
+            console.log(err);
+          })
+        },
       }
     }
 </script>
@@ -292,16 +192,11 @@
     top: 25px;
     z-index: 1;
   }
-  .order-search .el-input .el-button:hover{
+  .order_list .el-input .el-button{
+    border-radius: 0 3px 3px 0;
     color: #fff !important;
     background-color: #409eff !important;
     border-top:2px solid #409eff !important;
-  }
-  .order_list .el-input .el-button{
-    border-radius: 0 3px 3px 0;
-    /*color: #fff !important;*/
-    /*background-color: #409eff !important;*/
-    /*border-top:2px solid #409eff !important;*/
   }
   .order_list .lists table{border:1px solid #DDD;width: 100%;border-collapse: collapse;margin-top: 25px}
   .order_list .lists table thead{

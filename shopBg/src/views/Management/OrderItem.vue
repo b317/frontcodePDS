@@ -1,39 +1,35 @@
 <template>
   <tr>
     <td class="" width="14%">
-      <p><span class="order_number">{{orderList.orderID}}</span></p>
-      <p><span class="order_time">{{orderList.orderTime}}</span></p>
+      <p><span class="order_number">{{orderList.order_num}}</span></p>
+      <p><span class="order_time">{{orderList.createdAt}}</span></p>
     </td>
     <td class="" width="34%">
-      <span class="goods_img"><img :src="'../../../static/'+ orderList.goodsImg" style=""/></span>
+      <span class="goods_img"><img :src="goodsData.goods_photo" style=""/></span>
       <div class="goods_title">
-        <span><i>{{orderList.goodsTitle}}</i></span>
-        <div><span class="goods_class" style="color: #999"><i>颜色分类：{{orderList.goodsClass}}</i></span></div>
+        <span><i>{{goodsData.goods_desc}}</i></span>
+        <div><span class="goods_class" style="color: #999"><i>颜色分类：{{goodsData.goods_name}}</i></span></div>
       </div>
     </td>
-    <td class="" width="6%">￥{{orderList.price}}</td>
-    <td width="6%">￥{{orderList.groupPrice}}</td>
-    <td width="6%">{{orderList.goodsNumber}}</td>
+    <!--<td class="" width="6%">￥{{orderList.price}}</td>-->
+    <td width="6%">￥{{goodsData.goods_price}}</td>
+    <td width="6%">1</td>
     <td width="14%">
-      <p>￥{{orderList.payMoney}}</p>
-      <p>(含运费)：￥{{orderList.freight}}</p>
+      <p>￥{{orderList.order_price}}</p>
+      <p>(含运费)：￥0.00</p>
     </td>
     <td width="10%">
       <p>
-        <span v-if="orderList.tradingStatus==0">等待发货</span>
-        <span v-if="orderList.tradingStatus==1">已经发货</span>
-        <span v-if="orderList.tradingStatus==2">交易成功</span>
-        <span v-if="orderList.tradingStatus==3">正退款中</span>
-        <span v-if="orderList.tradingStatus==4">交易失败</span>
+        <span>{{orderList.order_status}}</span>
       </p>
       <p>
-        <router-link href="javascript:void(0)" to="/OrderDetail">订单详情</router-link>
+        <span class="span-a" @click="showDetail">订单详情</span>
       </p>
-      <!--<p v-if="orderList.tradingStatus==1||orderList.tradingStatus==2"><a href="#">物流跟踪</a></p>-->
+      <!--<p><span class="span-a">物流跟踪</span></p>-->
     </td>
     <td>
       <div style="margin-bottom: 8px">
-        <span v-if="orderList.tradingStatus==0">
+        <span v-if="orderList.order_status=='待发货'">
           <el-button type="success" size="mini" @click="dialogFormVisible = true">发货<i
             class="el-icon-location-outline"></i>
           </el-button>
@@ -66,31 +62,34 @@
             </div>
           </el-dialog>
         </span>
-        <span v-if="orderList.tradingStatus==3">
+        <span v-if="orderList.order_status=='待发货'">
           <el-button type="success" size="mini">退款<i class="el-icon-remove-outline"></i>
           </el-button>
         </span>
       </div>
       <div style="margin-bottom: 8px">
-        <span v-if="orderList.tradingStatus==0||orderList.tradingStatus==3">
+        <span v-if="orderList.order_status=='待发货'||orderList.order_status=='待退款'">
           <el-button size="mini">取消<i class="el-icon-remove-outline"></i></el-button>
         </span>
-        <span v-if="orderList.tradingStatus==2||orderList.tradingStatus==4">
-          <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
+        <span>
+          <el-button size="mini" @click="isDelete">删除<i class="el-icon-delete"></i></el-button>
         </span>
-        <span v-if="orderList.tradingStatus==1">已发货</span>
+        <!--<span v-if="orderList.order_status=='已发货'">已发货</span>-->
       </div>
     </td>
   </tr>
 </template>
 <script>
+  import {getCookie} from "@/common/auth";
     export default {
       props:['orderList','index'],
         data() {
             return {
               sg: 'hello world',
               dialogFormVisible: false,
-              options5: [{
+              totalOrder: 0,
+              options5: [
+                {
                 value: '顺丰快递',
                 label: '顺丰快递'
               }, {
@@ -105,16 +104,49 @@
               }, {
                 value: '中通快递',
                 label: '中通快递'
-              }],
+              }
+              ], //快递
               select: [],
+              goodsData:'',
               form: {
                 trackingName: '',
                 trackingNumber: '',
               },
-              formLabelWidth: '120px'
+              formLabelWidth: '120px',
             }
         },
       methods: {
+        showDetail(){
+          this.$router.push({
+            path:'/OrderDetail',
+            query:{
+              id:this.orderList.id,
+              order_num:this.orderList.order_num,
+            }
+          })
+        },
+        //根据id获取商品信息
+        findGoods(item){
+          this.axios.get('/v1/merchant/goods/'+item.id,{
+            headers:{
+              "Authorization":"Bearer "+ getCookie("token")
+            }
+          }).then((res)=>{
+            let data = res.data.data;
+            this.goodsData = '';
+            this.goodsData=data;
+            console.log(this.goodsData.goods_name);
+          }).catch((err)=>{
+            console.log(err);
+          })
+        },
+        //删除
+        isDelete(){
+          
+        }
+      },
+      mounted(){
+        this.findGoods(this.orderList);
       }
     }
 </script>
@@ -141,6 +173,9 @@
   }
   table tbody td p a{color: gray;text-decoration: none}
   table tbody td p a:hover{color: #67c23a;text-decoration: underline}
-  /* 快递 */
-
+  .span-a:hover{
+    text-decoration: underline;
+    color: #ff4200;
+    cursor: pointer;
+  }
 </style>
