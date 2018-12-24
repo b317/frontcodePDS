@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         <tr v-for="(item,index) of sortpage">
-          <td><i>Level one</i></td>
+          <td><i>1级</i></td>
           <td>{{item.main_category.id}}</td>
           <td>{{item.main_category.sort}}</td>
           <td>{{item.sub_count}}</td>
@@ -38,7 +38,7 @@
               <el-button type="success" size="mini">修改<i class="el-icon-edit"></i></el-button>
             </div>
             <div>
-              <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
+              <el-button size="mini" @click="deleteMainSort(item)">删除<i class="el-icon-delete"></i></el-button>
             </div>
           </td>
         </tr>
@@ -131,9 +131,11 @@
         </thead>
         <tbody>
         <tr v-for="(item,index) of sortlist2" :key="index">
-          <td>Level two</td>
+          <td>2级</td>
           <td>{{item.sort}}</td>
-          <td>家具电器</td>
+          <td>
+            {{mainSortName}}
+          </td>
           <td>5</td>
           <td>250</td>
           <td>
@@ -144,7 +146,7 @@
               <el-button type="success" size="mini">修改<i class="el-icon-edit"></i></el-button>
             </div>
             <div>
-              <el-button size="mini">删除<i class="el-icon-delete"></i></el-button>
+              <el-button size="mini" @click="deleteSubSort(item)">删除<i class="el-icon-delete"></i></el-button>
             </div>
           </td>
         </tr>
@@ -214,7 +216,8 @@
           addLevelTwo: '',
           sortDesc: ''
         },
-        mainSortId:null
+        mainSortId:null,
+        mainSortName:''
       }
     },
     mounted() {
@@ -246,7 +249,7 @@
           this.sortlist=[];
           this.sortlist =data.categoryList;
           this.sortpage=[];
-          this.sortpage=this.sortlist.slice(0,this.limit);
+//          this.sortpage=this.sortlist.slice(0,this.limit);
           this.sortpage=this.sortlist.slice(this.limit*(this.presentPage1-1),this.limit*this.presentPage1);
           this.totalProduct=data.totalCount;
           if(this.totalProduct<=this.limit){//当数据总数超过一页限制条数的时候显示分页栏
@@ -303,6 +306,7 @@
       },
       checkNextLevel(item,key,index){
         this.mainSortId=item.main_category.id;
+        this.mainSortName=item.main_category.sort;
         sessionStorage.setItem("main_sort_id",this.mainSortId);
         this.axios.get('/v1/merchant/subsort/?offset='+key+'&limit='+this.limit+'&pid='+this.mainSortId,{
           headers:{
@@ -361,6 +365,76 @@
           query:{
             findGoods:'true'
           }
+        });
+      },
+      deleteMainSort(item){//删除主类别下所有商品
+        this.$confirm('此操作将删除该类别下的所有商品, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.axios.delete('/v1/merchant/goodsbymain/?merid='+sessionStorage.getItem("shopId")+'&mid='+item.main_category.id,{
+            headers:{
+              "Authorization":"Bearer "+ getCookie('token')
+            }
+          }).then((res)=>{
+            if(res.data.message=='OK'){
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              setTimeout(function () {
+                window.location.reload();
+              },1500);
+            }else{
+              this.$message({
+                type: 'error',
+                message: '删除失败!'
+              });
+            }
+          }).catch((err)=>{
+            console.log(err);
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      },
+      deleteSubSort(item){//删除子类别下所有商品
+        this.$confirm('此操作将删除该类别下的所有商品, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.axios.delete('/v1/merchant/goodsbymain/?merid='+sessionStorage.getItem("shopId")+'&mid='+item.id,{
+            headers:{
+              "Authorization":"Bearer "+ getCookie('token')
+            }
+          }).then((res)=>{
+            if(res.data.message=='OK'){
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              setTimeout(function () {
+                window.location.reload();
+              },1500);
+            }else{
+              this.$message({
+                type: 'error',
+                message: '删除失败!'
+              });
+            }
+          }).catch((err)=>{
+            console.log(err);
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
         });
       }
     }
