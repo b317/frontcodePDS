@@ -116,7 +116,6 @@
             orderList: [],
             dataList: [],
             isBack: false,
-
             page:1,
             limit:6,
             totalOrder:0,
