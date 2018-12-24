@@ -99,22 +99,23 @@ export function getstatus(id){//获取状态
         }
     )
 }
-export function renshop(params){//商家认证
+export function renshop(params,file){//商家认证
     let data = new FormData()
-    data.append("shop_name",params.shop_name)
-    data.append("shop_phone",params.shop_phone)
-    data.append("shop_cert",params.shop_cert)
-    data.append("shop_qq",params.shop_qq)
-    data.append("shop_intro",params.shop_intro)
-    data.append("shop_addr",params.shop_addr)
-    data.append("owner_cert",params.owner_cert)
-    data.append("owner_id",params.owner_id)
-    data.append("shop_logo",params.shop_logo)
+    data.append("shop_name",params.shopName)
+    data.append("shop_phone",params.shopPhone)
+    data.append("shop_cert",params.licenseID)
+    data.append("shop_qq",params.numberQQ)
+    data.append("shop_intro",params.shopIntro)
+    data.append("shop_addr",params.address)
+    data.append("owner_cert",params.shopperID)
+    data.append("owner_id",getCookie('id'));
+    data.append("shop_logo",file)
     return axios.post("/v1/user/merchant/",
         data,
         {
             headers:{
-                'Authorization': 'Bearer '+getCookie("token")
+              'Content-Type': 'multipart/form-data',
+              'Authorization': 'Bearer '+getCookie("token")
             }
         }
     )

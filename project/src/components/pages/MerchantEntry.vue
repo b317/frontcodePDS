@@ -57,8 +57,9 @@
             <span style="margin-left: 5px">{{NOWTIME}}</span>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit" v-if="isSubmit==true">申请认证</el-button>
-            <el-button type="primary" :loading="true" v-if="isSubmit==false">在审核中...</el-button>
+            <el-button type="primary" @click="onSubmit">申请认证</el-button>
+            <!--<el-button type="primary" @click="onSubmit" v-if="isSubmit==true">申请认证</el-button>-->
+            <!--<el-button type="primary" :loading="true" v-if="isSubmit==false">在审核中...</el-button>-->
           </el-form-item>
         </el-form>
       </div>
@@ -66,7 +67,9 @@
 </template>
 <script>
   import {getCookie} from '@/util/auth';
+  import {renshop} from '../../api/http';
   import {isPhone, isIdNo} from '../../store/validate'; //导入验证规则
+
     export default {
       data() {
         return {
@@ -74,7 +77,6 @@
           form:{
             imageUrl: '',
             shopName: '',
-            realName: '',
             shopperID: '',
             licenseID: '',
             numberQQ: '',
@@ -111,42 +113,54 @@
         }
       },
       methods: {
+        //初始化form
+        init(){
+          this.form.imageUrl = '';
+          this.form.shopName = '';
+          this.form.shopperID = '';
+          this.form.licenseID = '';
+          this.form.numberQQ = '';
+          this.form.shopPhone = '';
+          this.form.address = '';
+          this.form.shopIntro = '';
+        },
         //提交认证
         onSubmit() {
           if(this.imageUrl!=''&&this.form.shopName!=''&&this.form.shopperID!=''&&this.form.licenseID!=''
             &&this.form.numberQQ!=''&&this.form.shopPhone!=''&&this.form.address!=''){
-            this.formData.append("shop_name",this.form.shopName);
-            this.formData.append("shop_phone",this.form.shopPhone);
-            this.formData.append("shop_cert",this.form.licenseID);
-            this.formData.append("shop_qq",this.form.numberQQ);
-            this.formData.append("shop_intro",this.form.shopIntro);
-            this.formData.append("shop_addr",this.form.address);
-            this.formData.append("owner_cert",this.form.shopperID);
             this.$confirm('确定提交申请吗？', '提示', {
               confirmButtonText: '确定',
               cancelButtonText: '取消',
               type: 'warning'
             }).then(() => {
-              this.$http.post('/v1/user/merchant/',this.formData,{
-                headers:{
-                  "Authorization":"Bearer "+ getCookie("token"),
-                  'Content-Type': 'multipart/form-data'
+              //数据接口
+              renshop(this.form,this.formData.get("shop_logo")).then((res)=>{
+                if(res.data.message=='OK'){
+                  this.$message({
+                    type: 'success',
+                    message: '申请提交成功，请等待管理员审核...'
+                  });
+                  this.init();
+                }else {
+                  this.$message({
+                    type: 'error',
+                    message: '申请提交失败!'
+                  });
                 }
               });
-              this.$message({
-                type: 'success',
-                message: '申请提交成功!'
-              });
+              console.log(this.form);
+              console.log(this.formData.get("shop_logo"))
+
             }).catch(() => {
               this.$message({
                 type: 'info',
                 message: '已取消申请'
               });
             });
-            this.isSubmit = false;
+//            this.isSubmit = false;
           }else{
             this.$message.error('错了哦，信息输入有误哦，请重新检查！');
-            this.isSubmit = true;
+//            this.isSubmit = true;
           }
         },
         //商标
