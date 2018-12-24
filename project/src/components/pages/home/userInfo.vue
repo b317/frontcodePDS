@@ -1,7 +1,7 @@
 <template>
   <div class="content">
       <div class="header">
-            <img :src=src  @click="showLogin" style="cursor: pointer;">
+            <img :src=src1  @click="showLogin" style="cursor: pointer;">
             <div class="name">{{showname}}</div>
             <div class="wrap">
                 <div class="tip" @click="shownews">消息</div>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {setName,getName} from "@/util/auth";
+import {setName,getName,getId} from "@/util/auth";
 import {banner2} from "@/api/http.js"
 import {mapGetters} from "vuex"
 export default {
@@ -52,7 +52,11 @@ export default {
       }),
       showname() {
         return this.username != "" ?  this.username : "请登录" 
+      },
+      src1() {
+        return getId() == null ?  "../../../../static/s.jpg" : this.src11
       }
+
     },
   methods: {
     showLogin(){

@@ -139,6 +139,7 @@ export default {
           username:this.phone,
           vcode:this.idencode
         }).then((res) => {
+          console.log(res)
           this.cb(res)
         })
         .catch(function (error) {//出错

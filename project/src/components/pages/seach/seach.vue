@@ -43,6 +43,7 @@ export default {
         this.showi = true
         this.cal = []
           querygood({offset:index,q:msg}).then(res => {
+              console.log(res)
             this.showi = false
             this.total = res.data.data.totalCount
             this.cal = res.data.data.goodsList

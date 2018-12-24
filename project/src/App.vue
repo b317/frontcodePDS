@@ -75,16 +75,16 @@ export default {
       return this.role_id == 2 ? "我的商铺":"商家认证"
     },
     title(){
-      if(this.activeIndex == 2){
+      if(this.$route.path == "/login"){
         return "登录"
-      }else if(this.activeIndex == 3){
+      }else if(this.$route.path == "/register"){
         return "注册"
       }
     },
     titleShowOrNot(){
-      if(this.activeIndex == 2||this.activeIndex == 3){
+      if(this.$route.path == "/login"||this.$route.path == "/register"){
         return true
-      }else if(this.activeIndex == 3){
+      }else{
         return false
       }
     }
@@ -143,10 +143,10 @@ export default {
           this.$router.push("/goods")
         }else if(key == "4-5"){
           console.log(this.role_id)
-          if(this.role_id == 1){
-            this.$router.push("/MerchantEntry")
-          }else{
+          if(this.role_id == 2){
             window.open("")
+          }else{
+            this.$router.push("/MerchantEntry")
           }
         }
         else if(key == "4-6"){

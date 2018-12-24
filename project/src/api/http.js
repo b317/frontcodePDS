@@ -160,7 +160,7 @@ export function goodsforhome(){//获取状态
 }
 
 export function querygood(params){
-    return axios.get(`/v1/global/goodsforquery/?offset=${params.offset}&limit=20&q=${params.q}`,
+    return axios.get(`/v1/global/goodsforquery/?offset=${params.offset}&limit=20&query=${params.q}`,
         {
             headers:{
                 'Authorization': 'Bearer '+getCookie("token")
