@@ -88,7 +88,7 @@ export default {
         });
       let clock = window.setInterval(() => {
         this.totalTime--
-        this.getIdenBtnText = this.totalTime + 's后重新发送'
+        this.getIdenBtnText = this.totalTime + 's'
         if(this.totalTime == 0){
           clearInterval(clock)
           this.getIdenBtnText = "获得验证码"

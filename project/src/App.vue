@@ -9,6 +9,7 @@
           <el-menu-item index="4-4">我的订单</el-menu-item>
           <el-menu-item index="4-2">我的红包</el-menu-item>
           <el-menu-item index="4-5">{{shopclick}}</el-menu-item>
+          <el-menu-item index="4-6" v-if="islo">退出登录</el-menu-item>
         </el-submenu>
         <el-menu-item index="3" style="color:#f65d29;">免费注册</el-menu-item>
         <el-menu-item index="2" class="app-username">你好,{{showName}}
@@ -40,7 +41,7 @@
 
 <script>
 import { mapState,mapGetters,mapMutations } from 'vuex'
-import {getId,getName,setName} from "@/util/auth";
+import {getId,getName,setName,delCookie} from "@/util/auth";
 import {getUserInfo} from "@/api/http";
 import NavFooter from '@/components/module/NavFooter'
 import LoginFooter from '@/components/module/LoginFooter'
@@ -55,7 +56,8 @@ export default {
       isShow:false,
       LoadingTime:3,
       haveMes:true,
-      sval:""
+      sval:"",
+      islo:false
     }
   },
   components:{
@@ -89,7 +91,8 @@ export default {
   },
   mounted(){
     this.$bus.$on("seach2",this.heih)
-    if(getId()){
+    if(getId() != null){
+      this.islo = true
       getUserInfo({id:getId()}).then(res => {
         let data = res.data.data
         let a = data.nick_name==""?data.username:data.nick_name
@@ -146,6 +149,15 @@ export default {
             window.open("")
           }
         }
+        else if(key == "4-6"){
+          delCookie("role_id")
+          delCookie("password")
+          delCookie("data")
+          delCookie("username")
+          delCookie("token")
+          delCookie("id")
+          window.location.reload()
+        }
         this.checkShowFooter(); //检查不同的页面显示不同的页脚
       },
       checkShowFooter(){
@@ -167,6 +179,9 @@ export default {
   @import './css/header.scss';
   @import "./css/footer.css";
   @import "./css/newsCenter.css";
+  #icon-back{
+    color: #f65d29;
+  }
   .top-btn{
     position: fixed;
     right: 0px;

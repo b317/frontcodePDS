@@ -38,19 +38,10 @@ export default {
       isRemberPhone:false,
       warntext:"",
       getIdenBtnText:"获得验证码",
-      totalTime: 3,
+      totalTime: 61,
       password2:"",
       src:""
     }
-  },
-  beforeMount() {
-    // axios.post("/v1/user/",{
-    //   username:"13420120750",
-    //   password:"648135",
-    //   vcode:"164835"
-    // }).then(res => {
-    //   console.log(res)
-    // })
   },
   computed:{
     checkPhone(){
@@ -85,11 +76,11 @@ export default {
         });
       let ccc = window.setInterval(() => {
         this.totalTime--
-        this.getIdenBtnText = this.totalTime + 's后重新发送'
+        this.getIdenBtnText = this.totalTime + 's'
         if(this.totalTime == 0){
           clearInterval(ccc)
           this.getIdenBtnText = "获得验证码"
-          this.totalTime = 3
+          this.totalTime = 61
         }
       },1000)
     },
