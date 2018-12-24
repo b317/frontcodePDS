@@ -4,6 +4,7 @@
         <span>订单管理&nbsp;--&nbsp;<i class="present">订单列表</i></span>
       </div>
       <div class="grid-content bg-purple">
+        <!--选卡-->
         <template>
           <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="全部订单" name="全部订单">
@@ -38,16 +39,19 @@
             </el-tab-pane>
           </el-tabs>
         </template>
+        <!--工具条-->
         <div class="order-search" style="margin: 30px 0">
           <el-row>
             <el-col :span="24">
-              <el-input placeholder="请输入订单号" class="input-with-select" size="mini">
-                <el-button slot="append" icon="el-icon-search"  size="mini" style=""></el-button>
+              <el-input v-model="orderId" placeholder="请输入订单号" class="input-with-select" size="mini">
+                <el-button slot="append" icon="el-icon-search"  size="mini" style="" @click="findOrderItem(orderId)"></el-button>
               </el-input>
             </el-col>
           </el-row>
+          <el-button size="mini" class="add_coupon" @click="backCoupon" v-if="isBack==true"><img src="/static/back.png"/>订单列表</el-button>
         </div>
       </div>
+      <!--列表-->
       <div class="lists">
         <table>
           <thead>
@@ -59,7 +63,7 @@
             <th>数量</th>
             <th>实付款</th>
             <th>交易状态</th>
-            <th>操作</th>
+            <!--<th>操作</th>-->
           </tr>
           </thead>
           <tbody>
@@ -108,9 +112,11 @@
           return {
             msg: '订单管理',
             value: 35,
+            orderId: '',
             activeName: "0",  // 默认选卡
             orderList: [],
             dataList: [],
+            isBack: false,
 
             page:1,
             limit:6,
@@ -178,10 +184,56 @@
             console.log(err);
           })
         },
+        //搜索
+        findOrderItem(order_Id){
+//          if(!this.orderId){//输入框为空提示
+//            this.getAllOrder({'offset':this.page,'limit':this.limit});
+//            this.isBack = false;
+//            return false;
+//          }else {
+//            this.axios.get('/v1/merchant/orders/'+order_Id,{
+//              headers:{
+//                "Authorization":"Bearer "+ getCookie('token')
+//              }
+//            }).then((res)=>{
+//              if(res.data.code==20501){
+//                this.showPading =false;
+//                this.totalOrder=0;
+//                this.orderList=[];
+//              }else{
+//                this.productList=[];
+//                this.totalOrder=1;
+//                this.showPading =false;
+//                this.orderList.push(list);
+//              }
+//            }).catch((err)=>{
+//              console.log(err)
+//            });
+//            this.isBack = true;
+//          }
+        },
+        //返回列表
+        backCoupon(){
+          this.$router.push('/OrderManage');
+          this.getAllOrder({'offset':this.page,'limit':this.limit});
+          this.isBack = false;
+        },
       }
     }
 </script>
 <style>
+  /* 工具条 */
+  .order-search .add_coupon{
+    border-radius: 5px;
+    border:1px solid #409EFF;
+    color: #409EFF;
+    position: absolute;
+    top: 0px;
+    right: -370%;
+    z-index: 1;
+    height: 28px;
+  }
+  .order-search .add_coupon img{vertical-align: middle;  margin-right: 3px;padding-top: -15px}
   .order_list{padding-right: 40px;margin-bottom: 50px}
   .order_list .bg-purple {
     position: relative;
@@ -189,14 +241,14 @@
 
   .order_list .order-search {
     position: absolute;
-    top: 25px;
+    top: 15px;
     z-index: 1;
   }
   .order_list .el-input .el-button{
     border-radius: 0 3px 3px 0;
     color: #fff !important;
     background-color: #409eff !important;
-    border-top:2px solid #409eff !important;
+    border:1px solid #409eff !important;
   }
   .order_list .lists table{border:1px solid #DDD;width: 100%;border-collapse: collapse;margin-top: 25px}
   .order_list .lists table thead{
