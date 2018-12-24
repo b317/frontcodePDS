@@ -3,12 +3,12 @@
     <div class="con">
         <div class="tiny"></div>
         <div @mouseover="showTip({id:item.id})" @mouseleave="hidde()" @click.stop="click(item.route)" class="header" v-for="(item,key) in data" :key=key>
-            <span class="name">{{item.name}}</span>
+            <span class="name" @click="btnclick(item.name)">{{item.name}}</span>
         </div>
         <div class="tiny"></div>
     </div>
     <div class="tip" @mouseover="showTip({keep:true})" @mouseleave="hidde()" v-show="show">
-        <div class="tip-group" @click.stop="click(item)" v-for="(item,key) in itemData" :key="key">
+        <div class="tip-group" @click.stop="btnclick(item.sort)" v-for="(item,key) in itemData" :key="key">
             {{item.sort}}
         </div>
     </div>
@@ -33,26 +33,27 @@ export default {
       console.log(ddd.data)
   },
   methods:{
-      click(msg){
-          console.log(msg)
-      },
-      showTip({id = this.id,keep = false}){
-          if(keep){
-            this.show = true
-            return;
-          }
-          if(id != this.id){
-              this.id = id
-              getsubsort(id).then(res => {
-                  console.log(res)
-                this.itemData = res.data.data.categoryList
-              })
-          }
-          this.show = true
-      },
-      hidde(){
+    showTip({id = this.id,keep = false}){
+        if(keep){
+        this.show = true
+        return;
+        }
+        if(id != this.id){
+            this.id = id
+            getsubsort(id).then(res => {
+                console.log(res)
+            this.itemData = res.data.data.categoryList
+            })
+        }
+        this.show = true
+    },
+    hidde(){
         this.show = false
-      }
+    },
+    btnclick(a){
+      this.$bus.$emit("seach2",a)
+     this.$router.push({ name: 'seach', params: { sval: a }})
+    },
   }
 }
 </script>

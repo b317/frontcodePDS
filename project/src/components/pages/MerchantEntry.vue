@@ -9,14 +9,8 @@
           <span>服务热线：</span><em><span class="ui-trade-label ">0000 000 000</span></em>
         </div>
       </div>
-      <!--步骤-->
-      <div class="authenticate-step">
-        <!--<el-steps :active="1" finish-status="success" simple style="margin-top: 20px">-->
-          <!--<el-step title="完善商家信息" ></el-step>-->
-          <!--<el-step title="填写商铺信息" ></el-step>-->
-          <!--<el-step title="完成商家认证" ></el-step>-->
-          <!--<el-step title="进入商家后台" ></el-step>-->
-        <!--</el-steps>-->
+      <div class="warn">
+        {{msg}}
       </div>
       <!--内容-->
       <div class="authenticate-main" style="">
@@ -66,14 +60,14 @@
     </div>
 </template>
 <script>
-  import {getCookie} from '@/util/auth';
-  import {renshop} from '../../api/http';
+  import {getCookie,getId} from '@/util/auth';
+  import {renshop,getstatus} from '../../api/http';
   import {isPhone, isIdNo} from '../../store/validate'; //导入验证规则
 
     export default {
       data() {
         return {
-          msg: 'hello world',
+          msg: '',
           form:{
             imageUrl: '',
             shopName: '',
@@ -193,7 +187,6 @@
         // 定时器函数
         nowTimes() {
           this.timeFormate(new Date());
-          setInterval(this.nowTimes, 1000);
         },
       },
       // 创建完成时
@@ -204,10 +197,17 @@
       mounted() {
         this.nowTimes();
         this.formData = new FormData();
+        getstatus(getId()).then(res => {
+          this.msg = res.data.data.is_review
+        })
       }
     }
 </script>
 <style scoped>
+.warn{
+  color: red;
+  margin: 10px;
+}
   .authenticate-top,.authenticate-top a{font-size: 14px;color: #666;}
   .authenticate-top a:hover{color: #f65d29;}
   .authenticate-top{margin-bottom: 15px;padding-top: 10px;border-top: 1px solid #ccc;}

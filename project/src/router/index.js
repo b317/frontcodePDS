@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloWorld from '@/components/pages/HelloWorld';
 import home from '@/components/pages/home/home';
 import news from '@/components/pages/news';
 import login from '@/components/pages/login';
@@ -23,11 +22,9 @@ import NewsThree from '@/components/pages/NewsThree';
 import ProductDetail from '@/components/pages/ProductDetail';
 import GoodsDetail from '@/components/pages/GoodsDetail';
 
-import {getName} from "@/util/auth";
-
-import smallcard from "@/components/pages/home/smallcard";
-
+import {getId} from "@/util/auth";
 import MerchantEntry from  "@/components/pages/MerchantEntry";
+import seach from '@/components/pages/seach/seach';
 
 Vue.use(Router)
 
@@ -68,6 +65,11 @@ const route = new Router({
       path: '/home',
       name: 'home',
       component: home
+    },
+    {
+      path: '/seach/:sval',
+      name: 'seach',
+      component: seach
     },
     {
       path: '/news',
@@ -151,7 +153,7 @@ const route = new Router({
   ]
 })
 let test = true;
-const whiteList = ['/login', '/regist'];
+const whiteList = ['/login', '/register','/home'];
 route.beforeEach((to, from, next) => {
   if (whiteList.indexOf(to.path) !== -1) {
     next();
@@ -159,7 +161,7 @@ route.beforeEach((to, from, next) => {
     if(test){
       next();
     }else{
-      if(getName() === ""){
+      if(getId() == null){
         next({path: '/login'});
       }else{
         next();
