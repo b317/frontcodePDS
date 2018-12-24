@@ -1,7 +1,7 @@
 <template>
   <div class="content">
       <div class="header">
-            <img :src=src  @click="showLogin" style="cursor: pointer;">
+            <img :src=src1  @click="showLogin" style="cursor: pointer;">
             <div class="name">{{showname}}</div>
             <div class="wrap">
                 <div class="tip" @click="shownews">消息</div>
@@ -10,30 +10,39 @@
             </div>
       </div>
     <el-card :body-style="{ padding: '10px' }">
-    <img @mouseover="show = true" :class={hover:show} class="image" @mouseout="show = false" src="@/assets//hamburger.png">
+    <img @mouseover="show = true" :class={hover:show} class="image" @mouseout="show = false" :src="src11">
     <div style="padding: 0px;margin:5px;">
-        <span>好吃的汉堡</span>
+        <span>{{msg}}</span>
         <div class="bottom clearfix">
-        <time class="time">{{ currentDate }}</time>
-        <el-button type="text" class="button">操作按钮</el-button>
+        <a type="text" class="button" :href="'https://'+url">{{url}}</a>
         </div>
     </div>
-    <div class="warn" v-show="show" @mouseover="show = true">点击前往拼团</div>
     </el-card>
   </div>
 </template>
 
 <script>
-import {setName,getName} from "@/util/auth";
+import {setName,getName,getId} from "@/util/auth";
+import {banner2} from "@/api/http.js"
 import {mapGetters} from "vuex"
 export default {
-    mounted() {
-    },
+      mounted() {
+    banner2().then(res => {
+        let l = res.data.data.bannerList[0]
+        console.log(l)
+        this.msg = l.title
+        this.url = l.url  
+        this.src11 = "http://134.175.113.58/"+l.image
+    })
+  },
     data () {
         return {
             currentDate: "2018-11-11",
             news:[4,2,1],
-            show:false
+            show:false,
+            msg:"",
+            src11:"",
+            url:""
         }
     },
     computed: {
@@ -43,7 +52,11 @@ export default {
       }),
       showname() {
         return this.username != "" ?  this.username : "请登录" 
+      },
+      src1() {
+        return getId() == null ?  "../../../../static/s.jpg" : this.src11
       }
+
     },
   methods: {
     showLogin(){
@@ -105,6 +118,7 @@ export default {
     }
     .image{
         margin-left: 8px;
+        width: 100%;
     }
     .time {
         font-size: 13px;
@@ -116,7 +130,6 @@ export default {
         box-shadow:0px 0px 0px #fff !important;
         .hover{
             cursor: pointer;
-            filter: blur(2px);
         }
         .warn{
             float: left;

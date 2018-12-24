@@ -525,7 +525,7 @@ width: 5%;display: inline-block;height: 240px;
   border-bottom: 1px solid #ddd;color: grey;font-size: 13px;padding: 10px 0;
 }
 .product_delete .single_product tbody td:nth-of-type(3){
-  width: 50%;
+  /*width: 50%;*/
 }
 .product_delete .single_product tbody td a{
   color:#139ff0;text-decoration: none;

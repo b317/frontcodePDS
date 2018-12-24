@@ -1,22 +1,31 @@
 <template>
   <div>
     <ul ref="ul" @click.stop.prevent="handlerClick($event)" class="my-list fontsize12">
-      <li ref="hot" data-title='hot'>热卖</li>
-      <li ref="food" data-title='food'>美食</li>
-      <li ref="play" data-title='play'>娱乐</li>
-      <li ref="movie" data-title='movie'>电影</li>
-      <li ref="test" data-title='test'>测试</li>
+      <li ref="hot" data-title="hot">{{arr2[0]}}</li>
+      <li ref="food" data-title="food">{{arr2[1]}}</li>
+      <li ref="play" data-title="play">{{arr2[2]}}</li>
+      <li ref="movie" data-title="movie">{{arr2[3]}}</li>
     </ul>
   </div>
 </template>
 
 <script>
+import ddd from "@/components/pages/home/homeContent.js"
   export default {
+    data() {
+      return {
+        arr:["hot","food","play","movie"],
+        arr2:[]
+      }
+    },
     props: {
       title: {
         type: String,
         default: "1"
       }
+    },
+    mounted() {
+      this.arr2 = ddd.arr2
     },
     methods: {
       handlerClick(e) {
@@ -36,7 +45,6 @@
       title: {
         immediate: true,
         handler: function (newval) {
-          console.log(newval)
           this.$nextTick(() => {
             this.doSomething(this.$refs.ul.children, this.$refs[newval]);
           })
