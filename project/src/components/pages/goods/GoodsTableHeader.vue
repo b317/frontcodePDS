@@ -3,7 +3,7 @@
     <thead>
     <tr>
       <th width="39%">宝贝</th>
-      <th width="8%">单价</th>
+      <th width="8%">售价</th>
       <th width="8%">数量</th>
       <th width="14%">商品操作</th>
       <th width="8%">实付款</th>

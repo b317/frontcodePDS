@@ -92,6 +92,8 @@
   import VDistpicker from 'v-distpicker'
   import {getCookie} from "@/util/auth";
   import axios from 'axios'
+  import Vue from 'vue'
+  var vm =new Vue();
   export default {
     components: {
       ElCol,ElRow,VDistpicker
@@ -113,7 +115,7 @@
     },
     computed:{
       totalPrice(){//计算总价格
-        return this.num1*(parseFloat(this.goods_mes.goods_price)-parseFloat(this.goods_mes.goods_discount)).toFixed(2);
+        return parseFloat(this.num1).toFixed(2)*(this.goods_mes.goods_price-this.goods_mes.goods_discount);
       },
       getNowFormatDate() {//获取当前时间
         var date = new Date();
@@ -165,6 +167,8 @@
         }).then((res)=>{
           let result = res.data.data;
           this.goods_mes = result;
+          this.goods_mes.goods_price=parseFloat(this.goods_mes.goods_price).toFixed(2)
+          this.goods_mes.goods_discount=parseFloat(this.goods_mes.goods_discount).toFixed(2)
         }).catch((err)=>{
           console.log(err);
         })
@@ -224,8 +228,13 @@
             if(result.message=='OK'){
               this.$message({
                 message:'支付成功',
-                type:'success'
-              })
+                type:'success',
+                duration:1500
+              });
+              setTimeout( () =>{
+                this.$router.back(-1);
+                window.location.reload()
+              },2500);
             }else{
               this.$message({
                 message:'支付失败',

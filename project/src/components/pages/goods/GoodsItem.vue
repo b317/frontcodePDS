@@ -3,17 +3,17 @@
     <table class="goods-item-table">
       <tbody>
       <tr class="tr-detail-hd">
-        <td style="width: 330px;">
+        <td style="width: 330px;" colspan="3">
           <div class="order-time-num">
-            <span class="order-time"><label>{{goods.orderTime}}</label></span>
-            <span class="order-num">订单号：<span>{{goods.orderNumber}}</span></span>
+            <span class="order-time"><label>{{goods.createdAt}}</label></span>
+            <span class="order-num">订单号：<span>{{goods.order_num}}</span></span>
           </div>
         </td>
         <td style="width: 141px;" colspan="3" >
           <div class="shop-img-name">
             <span>
-              <img class="g-shop-img" :src="goods.shopIcon" alt="" />
-              <a class="g-shop-name" href="#" :title="goods.shopName">{{goods.shopName}}</a>
+              <img class="g-shop-img" :src="'http://134.175.113.58/'+merchant_mes.shop_logo" alt="" />
+              <a class="g-shop-name" href="#" :title="goods.shopName">{{merchant_mes.shop_name}}</a>
             </span>
           </div>
         </td>
@@ -21,26 +21,28 @@
         <td></td>
         <td></td>
       </tr>
-      <tr class="tr-center">
+      <tr class="tr-center" >
         <td style="width: 330px;">
           <div class="g-shop-img">
-            <div><a href="#"><img :src="goods.img" alt=""/></a></div>
+            <div>
+              <a href="#"><img :src="'http://134.175.113.58/'+product_list.goods_photo" alt=""/></a>
+            </div>
           </div>
           <div class="g-shop-cont">
-            <p><a href="#"><span style="line-height:16px;">{{goods.content}}</span></a></p>
+            <p><a href="#"><span style="line-height:16px;">{{product_list.goods_name}}:{{product_list.goods_desc}}</span></a></p>
             <p class="p-clr"><span>颜色分类：{{goods.color}}</span></p>
           </div>
         </td>
         <td style="width: 87px;">
           <div>
             <!--<p class="p-sell-price" style="color: #9c9c9c;"><del><span>￥00.00</span></del></p>-->
-            <p class="p-group-price" style="color: red;font-weight: bolder"><span>￥{{goods.price}}</span></p>
-            <p class="p-clr"><span>(团购价)</span></p>
+            <p class="p-group-price" style="color: red;font-weight: bolder"><span>￥{{product_list.goods_price}}</span></p>
+            <!--<p class="p-clr"><span>(团购价)</span></p>-->
           </div>
         </td>
         <td style="width: 44px;">
           <div>
-            <p><span>{{goods.number}}</span></p>
+            <p><span>{{goods.order_price/(product_list.goods_price-product_list.goods_discount)}}</span></p>
           </div>
         </td>
         <td style="width: 106px;">
@@ -55,8 +57,8 @@
         </td>
         <td style="width: 104px;" rowspan="2">
           <div>
-            <p style="font-weight: bolder;"><span>￥{{goods.price}}</span></p>
-            <p class="p-clr"><span>(含运费￥{{goods.freight}})</span></p>
+            <p style="font-weight: bolder;"><span>￥{{goods.order_price}}</span></p>
+            <p class="p-clr"><span>(含运费￥{{product_list.goods_fare}})</span></p>
           </div>
         </td>
         <td style="width: 94px;" rowspan="2">
@@ -91,7 +93,7 @@
         </td>
         <td>
           <div>
-            <span>￥</span><span>0.00</span>
+            <span>￥</span><span>{{product_list.goods_discount}}</span>
           </div>
         </td>
         <td></td>
@@ -103,32 +105,58 @@
 </template>
 <script>
   import ElButton from "../../../../node_modules/element-ui/packages/button/src/button.vue";
+  import {getCookie} from "@/util/auth";
+  import axios from 'axios'
 
   export default {
     components: {ElButton},
-    props: ['goods','index'],
+    props: ['goods','index','goods_id'],
     data() {
       return {
-        msg: 'hello world'
+        msg: 'hello world',
+        goods_item:'',
+        product_list:'',
+        merchant_mes:''
       }
+    },
+    computed: {
+      actualPrice() {//计算总价格
+        return (parseFloat(this.product_list.goods_price) - parseFloat(this.product_list.goods_discount)).toFixed(2);
+      }
+    },
+    created(){
+      console.log(this.goods.merchant_id+"hssrh");
+      axios.get('/v1/merchant/detailbyself/'+this.goods.merchant_id,{ //根据店铺id查询商品信息
+        headers:{
+          'Authorization': 'Bearer '+getCookie("token")
+        }
+      }).then((res)=>{
+        let result = res.data.data;
+        this.merchant_mes=result;
+      }).catch((err)=>{
+        console.log(err);
+      });
+
+      axios.get('/v1/merchant/goods/'+this.goods_id,{ //根据商品id查询商品信息
+        headers:{
+          'Authorization': 'Bearer '+getCookie("token")
+        }
+      }).then((res)=>{
+        let result = res.data.data;
+        this.product_list=result;
+        console.log("hahaha");
+      }).catch((err)=>{
+        console.log(err);
+      })
     },
     methods: {
       showGoodsDetail (){
-        console.log("店名："+this.goods.shopName)
+        console.log("店名："+this.goods.shopName);
         this.$router.push({
-          name: "GoodsDetail",
-          params: {
-            orderTime: this.goods.orderTime,
-            orderNumber: this.goods.orderNumber,
-            shopIcon: this.goods.shopIcon,
-            shopName: this.goods.shopName,
-            goodsImg: this.goods.img,
-            goodsContent: this.goods.content,
-            originalPrice: this.goods.originalPrice,
-            price: this.goods.price,
-            number: this.goods.number,
-            freight :this.goods.freight,
-            orderStatus: this.goods.orderStatus
+          path: "/GoodsDetail",
+          query: {
+            goods_id:this.product_list.id,
+            order_id:this.goods.id
           }
         })
       },

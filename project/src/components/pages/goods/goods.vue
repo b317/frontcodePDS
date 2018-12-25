@@ -51,7 +51,7 @@
             <goods-table-header></goods-table-header>
             <div class="goods-item-list">
               <goods-item v-for="(item,index) of goodslist" :key="index" :goods="item"
-                          :index="index" ref="goods" @delete="handleDelete"></goods-item>
+                          :index="index" ref="goods" @delete="handleDelete" :goods_id="item.goods_id"></goods-item>
               <div class="goods-nodate" v-if="goodslist.length==0">
                 <div class="g-nodate">没有数据</div>
               </div>
@@ -67,6 +67,7 @@
                 @current-change="pageChange"
                 @prev-click="preClick"
                 @next-click="nextClick"
+                v-if="showPading"
               >
               </el-pagination>
             </div>
@@ -82,6 +83,7 @@
   import GoodsItem from "./GoodsItem.vue"
   import GoodsTableHeader from "./GoodsTableHeader.vue"
   import {getCookie} from "@/util/auth";
+  import axios from 'axios'
 
   export default {
     components: {ElTabPane, leftTab, GoodsItem, GoodsTableHeader},
@@ -230,6 +232,8 @@
         limit:6,
         totalOrder:0,
         showPading:false,
+        goods_id:'',
+        product_list:[],
       }
     },
     methods: {
@@ -253,54 +257,52 @@
       //页3个事件
       pageChange(val){
 //        console.log(`当前页: ${val}`);
+        this.page=parseInt(val);
+        this.getMyAllOrder({'offset':this.page,'limit':this.limit})
       },
       preClick(val){
 //        console.log(`上一页: ${val}`);
+        this.page=parseInt(val);
+        this.getMyAllOrder({'offset':this.page,'limit':this.limit})
       },
       nextClick(val){
 //        console.log(`下一页: ${val}`);
+        this.page=parseInt(val);
+        this.getMyAllOrder({'offset':this.page,'limit':this.limit})
       },
       //删除订单
       handleDelete (index) {
         this.goodslist.splice(index, 1)
       },
       //获取数据
-      getMyAllOrder(params){
+      getMyAllOrder(params){////查询订单列表
         var urlStr='/v1/user/orderlistbyuser/?offset='+params.offset+'&limit='+params.limit+'&uid='
-          +sessionStorage.getItem("clientId");
-        console.log(urlStr);
-        this.axios.get(urlStr,{
+          +getCookie('id');
+        axios.get(urlStr,{
           headers:{
             "Authorization":"Bearer "+ getCookie('token')
           }
         }).then((res)=>{
           let data = res.data.data;
-          console.log(data.client_nick);
-//          this.goodslist=data.ordersList;
-//          this.dataList=data.ordersList;
-//          //格式化时间
-//          this.goodslist.forEach(function (item) {
-//            let time=item.createdAt;
-//            var date = new Date(time).toJSON();
-//            item.createdAt= new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
-//            let time1=item.payedAt;
-//            var date1 = new Date(time1).toJSON();
-//            item.payedAt= new Date(+new Date(date1)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
-//          });
-//          this.totalOrder = data.totalCount;//保存总条数
-//          if(data.totalCount<=this.limit){//分页栏是否显示
-//            this.showPading=false;
-//          }else{
-//            this.showPading=true;
-//          }
+          this.totalOrder = data.totalCount;
+          if(this.totalOrder>this.limit){
+            this.showPading = true;
+          }
+          this.goodslist = data.ordersList;
+          //      时间格式化
+          this.goodslist.forEach((item)=>{
+            var dateee = new Date(item.createdAt).toJSON();
+            item.createdAt = new Date(+new Date(dateee)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+          });
+
         }).catch((err)=>{
           console.log(err);
         })
       },
     },
     mounted(){
-      this.goodslist = this.datelist;
-//      this.getMyAllOrder({'offset':this.page,'limit':this.limit});
+//      this.goodslist = this.datelist;
+      this.getMyAllOrder({'offset':this.page,'limit':this.limit});//查询订单列表
     }
   }
 </script>
