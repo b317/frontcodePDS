@@ -1,3 +1,4 @@
+/*ProductDetail*/
 ul li {
   list-style: none;
 }
@@ -60,7 +61,7 @@ ul li {
 .shop-content #hd{
   width: 100%;
   height: 150px;
-  background-image: url(../../../static/yt_01.jpg);
+  background-image: url(../../static/yt_01.jpg);
   background-repeat: no-repeat;
   background-position: 0 0;
   margin-bottom: 0;
@@ -96,7 +97,7 @@ ul li {
   width: 67px;
   height: 20px;
   text-decoration: none !important;
-  background-image: url("../../../static/cs-130-60.gif");
+  background-image: url("../../static/cs-130-60.gif");
 }
 .shopExtra .other-info .cs-rank-icon span{
   line-height: 20px;

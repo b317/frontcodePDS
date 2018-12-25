@@ -28,7 +28,7 @@
     </td>
     <td width="14%">
       <div style="margin-bottom: 8px">
-        <span v-if="orderList.order_status=='已支付'">
+        <span v-if="orderList.order_status=='已支付'|| orderList.order_status=='待发货'">
           <el-button type="success" size="mini" @click="dialogFormVisible = true;">卖家发货</el-button>
           <!-- 快递对话框 -->
           <el-dialog title="物流快递" :visible.sync="dialogFormVisible">
@@ -66,7 +66,7 @@
         </span>
       </div>
       <div>
-        <span v-if="orderList.order_status=='已支付'">
+        <span v-if="orderList.order_status=='已支付'|| orderList.order_status=='待发货'">
           <el-button size="mini">取消订单</el-button>
         </span>
       </div>

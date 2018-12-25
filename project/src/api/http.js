@@ -168,3 +168,22 @@ export function querygood(params){
         }
     )
 }
+export function getshop(id){//获取状态
+    return axios.get("/v1/global/merchant/"+id,
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}
+export function shopgood(params){
+    console.log(params)
+    return axios.get(`/v1/global/shopgoods/?offset=${params.offset}&limit=20&mid=${params.q}`,
+        {
+            headers:{
+                'Authorization': 'Bearer '+getCookie("token")
+            }
+        }
+    )
+}

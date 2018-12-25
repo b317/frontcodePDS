@@ -30,7 +30,6 @@ export default {
   },
   mounted() {
       this.data = ddd.data
-      console.log(ddd.data)
   },
   methods:{
     showTip({id = this.id,keep = false}){
@@ -41,7 +40,6 @@ export default {
         if(id != this.id){
             this.id = id
             getsubsort(id).then(res => {
-                console.log(res)
             this.itemData = res.data.data.categoryList
             })
         }

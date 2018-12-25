@@ -71,7 +71,7 @@
           </tbody>
           <tfoot>
           <tr>
-            <td colspan="7" v-if="orderList.length==0">
+            <td colspan="8" v-if="orderList.length==0">
               <el-alert
                 style="width: 100%"
                 title="当前没有数据"
@@ -81,7 +81,7 @@
                 show-icon>
               </el-alert>
             </td>
-            <td colspan="7" v-if="orderList.length!=0" style="position: relative">
+            <td colspan="8" v-if="orderList.length!=0" style="position: relative">
               <el-pagination
                 background
                 layout="prev, pager, next"
@@ -137,6 +137,9 @@
             this.orderList = [];
             this.dataList.forEach((item) => {
               if (item.order_status == (tab.name)) {
+                this.orderList.push(item);
+              }
+              if(item.order_status == '已支付'&&tab.name == '待发货'){
                 this.orderList.push(item);
               }
             })
