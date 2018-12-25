@@ -24,7 +24,7 @@
 				</el-table-column>
 				<el-table-column type="index" width="60">
 				</el-table-column>
-				<el-table-column prop="sort" label="名称"  sortable>
+				<el-table-column prop="sort" label="名称" width="120" sortable>
 				</el-table-column>
 				<el-table-column label="操作">
 					<template scope="scope">
@@ -40,9 +40,9 @@
 				</el-table-column>
 				<el-table-column type="index" width="60">
 				</el-table-column>
-				<el-table-column prop="sort" width="170" label="名称" sortable>
+				<el-table-column prop="sort" width="160" label="名称" sortable>
 				</el-table-column>
-				<el-table-column prop="pid" label="父类编号" sortable>
+				<el-table-column prop="pid" label="父类编号" width="160" sortable>
 				</el-table-column>
 				<el-table-column label="操作" width="260">
 					<template scope="scope">

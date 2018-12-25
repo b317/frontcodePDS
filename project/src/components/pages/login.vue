@@ -107,6 +107,7 @@ export default {
       this.isLogin = a
     },
     cb(res){
+      console.log(res)
       if(res.data.code == 0){
         this.$alert('将自动登录并跳转至首页', '登录成功', {
           confirmButtonText: '确定',

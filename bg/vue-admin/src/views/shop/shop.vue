@@ -21,9 +21,9 @@
 			</el-table-column>
 			<el-table-column prop="shop_cert" label="营业执照编号" width="180" sortable>
 			</el-table-column>
-			<el-table-column prop="shop_qq" label="商铺号qq" width="140" sortable>
+			<el-table-column prop="shop_qq" label="商铺号qq" width="120" sortable>
 			</el-table-column>
-			<el-table-column prop="is_review" label="审核状态" min-width="100" sortable>
+			<el-table-column prop="is_review" label="审核状态" min-width="140" sortable>
 			</el-table-column>
 			<el-table-column label="商铺头像" width="100">
 				<template scope="scope">
