@@ -40,7 +40,7 @@
             </el-col>
             <el-col :span="14">
               <ul>
-                <li>
+                <li @click="LinkHome">
                   <span><img src="/static/home.png"/>拼多少首页</span>
                 </li>
                 <li><span><img src="/static/exit.png"/>退出</span></li>
@@ -120,6 +120,9 @@
       this.shopMesParams= new FormData();
     },
     methods: {
+      LinkHome(){//首页跳转
+        window.open('http://134.175.113.58/pds/');
+      },
       handleSelect(key, keyPath) {
         this.$emit("selectTag",key);
         if(key==1){

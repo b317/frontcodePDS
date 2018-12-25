@@ -59,7 +59,7 @@
 			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="10" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
-		<el-col :span="24" class="toolbar tobar1" style="width: 54%;margin-left:12px;">
+		<el-col :span="24" class="toolbar" style="width: 54%;margin-left:6px;">
 			<el-pagination layout="prev, pager, next" @current-change="handlesubCurrentChange" :page-size="10" :total="subtotal" style="float:right;">
 			</el-pagination>
 		</el-col>
@@ -384,6 +384,6 @@
 	top: 77px;
 }
 .con{
-	height: 75vh;
+
 }
 </style>

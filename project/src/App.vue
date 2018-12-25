@@ -144,7 +144,9 @@ export default {
         }else if(key == "4-5"){
           console.log(this.role_id)
           if(this.role_id == 2){
-            window.open("http://localhost:8082")
+            if(getId() != null){
+              window.open("http://134.175.113.58/pds/merchantbgs")
+            }
           }else{
             this.$router.push("/MerchantEntry")
           }
