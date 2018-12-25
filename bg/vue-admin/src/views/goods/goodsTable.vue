@@ -59,7 +59,11 @@
 			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="10" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
+<<<<<<< HEAD
 		<el-col :span="24" class="toolbar" style="width: 54%;margin-left:6px;">
+=======
+		<el-col :span="24" class="toolbar tobar1" style="width: 54%;margin-left:1%;">
+>>>>>>> 85de91dd46ff7438d58d6570ce92acc8e3db5c06
 			<el-pagination layout="prev, pager, next" @current-change="handlesubCurrentChange" :page-size="10" :total="subtotal" style="float:right;">
 			</el-pagination>
 		</el-col>
@@ -384,6 +388,10 @@
 	top: 77px;
 }
 .con{
+<<<<<<< HEAD
 
+=======
+	height: 600px;
+>>>>>>> 85de91dd46ff7438d58d6570ce92acc8e3db5c06
 }
 </style>

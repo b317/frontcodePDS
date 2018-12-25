@@ -63,11 +63,11 @@
             </div>
             <div class="tm-delivery-panel">
               <span class="tb-metatit">运费</span>
-              <div class="tb-postAge" style="display: inline-block;" v-if="!goods_mes.is_shelf=='true'">
-                <span class="tb-deliveryAdd" id="J_deliveryAdd">¥{{goods_mes.goods_sales}}</span>
+              <div class="tb-postAge" style="display: inline-block;" v-if="!(goods_mes.goods_fare==0)">
+                <span class="tb-deliveryAdd" id="J_deliveryAdd">¥{{goods_mes.goods_fare}}</span>
                 <!--<span>快递：<span>0.00</span></span>-->
               </div>
-              <div class="tb-postAge" style="display: inline-block;" v-if="goods_mes.is_shelf=='true'">
+              <div class="tb-postAge" style="display: inline-block;" v-if="goods_mes.goods_fare==0">
                 <span class="tb-deliveryAdd">免费</span>
                 <!--<span>快递：<span>0.00</span></span>-->
               </div>
@@ -314,6 +314,7 @@
           }).then((res)=>{
             let result = res.data.data;
             this.goods_mes = result;
+//            if(this.goods_mes.is)
           }).catch((err)=>{
             console.log(err);
           })

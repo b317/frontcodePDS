@@ -317,46 +317,6 @@
   }
 </script>
 <style scoped>
-  .my-content{min-height: 600px;}
-  .bg-purple {position: relative;}
-  .search-div {
-    width: 275px;
-    height: 35px;
-    position: absolute;
-    top: 5px;
-    right: -37px;
-    z-index: 1;
-  }
-  .search-div button {
-    width: 51px;
-    height: 28px;
-    color: #666;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .search-div button:hover {
-    background-color: #f65c29;
-    color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  .goods-nodate{height: 148px;background-color: #f7f7f7;margin-top: 25px;}
-  .goods-nodate .g-nodate{
-    text-align: center;height: 25px;line-height: 25px;
-    color: #ff4b33;font-size: 12px;background-color: #fcedec;
-  }
-  /*分页*/
-  .goods-page{
-    position: relative;
-    margin-top: 10px;
-    height: 22px;
-    border:1px solid #e8e8e8;
-    padding: 10px 0 !important;
-  }
-  .goods-page .el-pagination{
-    position: absolute;right: 0;
-    top: 5px;
-  }
+  @import "../../../css/goods.css";
 </style>
 
