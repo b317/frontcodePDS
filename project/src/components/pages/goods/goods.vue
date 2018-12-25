@@ -16,31 +16,27 @@
           <!--选卡-->
           <template>
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="全部订单" name="0">
+            <el-tab-pane label="全部订单" name="全部订单">
               <template slot-scope="scope">
               </template>
             </el-tab-pane>
-            <el-tab-pane label="已付款" name="1">
+            <el-tab-pane label="待发货" name="待发货">
               <template slot-scope="scope">
               </template>
             </el-tab-pane>
-            <el-tab-pane label="待发货" name="2">
+            <el-tab-pane label="已发货" name="已发货">
               <template slot-scope="scope">
               </template>
             </el-tab-pane>
-            <el-tab-pane label="已发货" name="3">
+            <el-tab-pane label="已完成" name="已完成">
               <template slot-scope="scope">
               </template>
             </el-tab-pane>
-            <el-tab-pane label="已完成" name="4">
+            <el-tab-pane label="待退款" name="待退款">
               <template slot-scope="scope">
               </template>
             </el-tab-pane>
-            <el-tab-pane label="正退款" name="5">
-              <template slot-scope="scope">
-              </template>
-            </el-tab-pane>
-            <el-tab-pane label="已退款" name="6">
+            <el-tab-pane label="已退款" name="已退款">
               <template slot-scope="scope">
               </template>
             </el-tab-pane>
@@ -89,8 +85,7 @@
     components: {ElTabPane, leftTab, GoodsItem, GoodsTableHeader},
     data() {
       return {
-        activeName: "0",  // 默认选卡
-        msg: "goods",
+        activeName: "全部订单",  // 默认选卡
         routeArr: {
           userInfo: "我的主页",
           coupon: "我的红包",
@@ -99,135 +94,6 @@
         },
         goodslist:[], // 数据缓存
         dataList:[],
-        datelist: [
-          {
-            orderTime: "2018-12-31",
-            orderNumber: "266477474728649150",
-            shopIcon: "../../../static/goods/item_pic.jpg",
-            shopName: "百花仙居",
-            img: "../../../static/goods/item_pic.jpg",
-            content: "带盆盆栽浓香小型种根铃兰花苗盆栽阳台室内芳香花卉当年开花铃",
-            color: "白色铃兰20株+盆",
-            originalPrice: "18.42",
-            price: "16.42",
-            groupPrice:'14.42',
-            number: "1",
-            freight: "0.00",
-            orderStatus: 0,
-          },
-          {
-            orderTime: "2018-12-3",
-            orderNumber: "266477474728649150",
-            shopIcon: "../../../static/goods/g1s.png",
-            shopName: "好来红东方商店",
-            img: "../../../static/goods/g1.jpg",
-            content: "Yoobao羽博充电宝女迷你便携小巧10000毫安可爱大容量少女女款" +
-            "通用手机飞机可带上卡通生型1万冲超萌移动电源",
-            color: "【幸运】定制版薄荷绿",
-            originalPrice: "79.00",
-            price: "39.00",
-            groupPrice:'28.00',
-            number: "1",
-            freight: "6.00",
-            orderStatus: 1,
-          },
-          {
-            orderTime: "2018-12-3",
-            orderNumber: "266477474728649150",
-            shopIcon: "../../../static/goods/g1s.png",
-            shopName: "好来红东方商店",
-            img: "../../../static/goods/g1.jpg",
-            content: "Yoobao羽博充电宝女迷你便携小巧10000毫安可爱大容量少女女款" +
-            "通用手机飞机可带上卡通生型1万冲超萌移动电源",
-            color: "【幸运】定制版薄荷绿",
-            originalPrice: "79.00",
-            price: "39.00",
-            groupPrice:'28.00',
-            number: "1",
-            freight: "6.00",
-            orderStatus: 2,
-          },
-          {
-            orderTime: "2018-12-3",
-            orderNumber: "266477474728649150",
-            shopIcon: "../../../static/goods/g1s.png",
-            shopName: "好来红东方商店",
-            img: "../../../static/goods/g1.jpg",
-            content: "Yoobao羽博充电宝女迷你便携小巧10000毫安可爱大容量少女女款" +
-            "通用手机飞机可带上卡通生型1万冲超萌移动电源",
-            color: "【幸运】定制版薄荷绿",
-            originalPrice: "79.00",
-            price: "39.00",
-            groupPrice:'28.00',
-            number: "1",
-            freight: "6.00",
-            orderStatus: 3,
-          },
-          {
-            orderTime: "2018-12-3",
-            orderNumber: "266477474728649150",
-            shopIcon: "../../../static/goods/g1s.png",
-            shopName: "好来红东方商店",
-            img: "../../../static/goods/g1.jpg",
-            content: "Yoobao羽博充电宝女迷你便携小巧10000毫安可爱大容量少女女款" +
-            "通用手机飞机可带上卡通生型1万冲超萌移动电源",
-            color: "【幸运】定制版薄荷绿",
-            originalPrice: "79.00",
-            price: "39.00",
-            groupPrice:'28.00',
-            number: "1",
-            freight: "6.00",
-            orderStatus: 4,
-          },
-          {
-            orderTime: "2018-12-3",
-            orderNumber: "266477474728649150",
-            shopIcon: "../../../static/goods/g1s.png",
-            shopName: "好来红东方商店",
-            img: "../../../static/goods/g1.jpg",
-            content: "Yoobao羽博充电宝女迷你便携小巧10000毫安可爱大容量少女女款" +
-            "通用手机飞机可带上卡通生型1万冲超萌移动电源",
-            color: "【幸运】定制版薄荷绿",
-            originalPrice: "79.00",
-            price: "39.00",
-            groupPrice:'28.00',
-            number: "1",
-            freight: "6.00",
-            orderStatus: 5,
-          },
-          {
-            orderTime: "2018-12-3",
-            orderNumber: "266477474728649150",
-            shopIcon: "../../../static/goods/g1s.png",
-            shopName: "好来红东方商店",
-            img: "../../../static/goods/g1.jpg",
-            content: "Yoobao羽博充电宝女迷你便携小巧10000毫安可爱大容量少女女款" +
-            "通用手机飞机可带上卡通生型1万冲超萌移动电源",
-            color: "【幸运】定制版薄荷绿",
-            originalPrice: "79.00",
-            price: "39.00",
-            groupPrice:'28.00',
-            number: "1",
-            freight: "6.00",
-            orderStatus: 4,
-          },
-          {
-            orderTime: "2018-12-3",
-            orderNumber: "266477474728649150",
-            shopIcon: "../../../static/goods/g1s.png",
-            shopName: "好来红东方商店",
-            img: "../../../static/goods/g1.jpg",
-            content: "Yoobao羽博充电宝女迷你便携小巧10000毫安可爱大容量少女女款" +
-            "通用手机飞机可带上卡通生型1万冲超萌移动电源",
-            color: "【幸运】定制版薄荷绿",
-            originalPrice: "79.00",
-            price: "39.00",
-            groupPrice:'28.00',
-            number: "1",
-            freight: "6.00",
-            orderStatus: 3,
-          },
-        ],  // 数据集
         page:1,
         limit:6,
         totalOrder:0,
@@ -242,13 +108,16 @@
         console.log('点击' + tab.name);
         let urlStr = '/goods?goodsType=' + tab.name;
         this.$router.push(urlStr);
-        if(tab.name==0){
-          this.goodslist=this.datelist;
+        if(tab.name=='全部订单'){
+          this.goodslist=this.dataList;
         }
         else {
           this.goodslist = [];
-          this.datelist.forEach((item) => {
-            if (item.orderStatus == (tab.name-1)) {
+          this.dataList.forEach((item) => {
+            if (item.order_status == (tab.name)) {
+              this.goodslist.push(item);
+            }
+            if(item.order_status == '已支付'&&tab.name == '待发货'){
               this.goodslist.push(item);
             }
           })
@@ -274,8 +143,8 @@
       handleDelete (index) {
         this.goodslist.splice(index, 1)
       },
-      //获取数据
-      getMyAllOrder(params){////查询订单列表
+      //获取订单列表
+      getMyAllOrder(params){
         var urlStr='/v1/user/orderlistbyuser/?offset='+params.offset+'&limit='+params.limit+'&uid='
           +getCookie('id');
         axios.get(urlStr,{
@@ -289,6 +158,7 @@
             this.showPading = true;
           }
           this.goodslist = data.ordersList;
+          this.dataList = data.ordersList;
 
           //格式化时间
           this.goodslist.forEach(function (item) {
@@ -311,7 +181,6 @@
       },
     },
     mounted(){
-//      this.goodslist = this.datelist;
       this.getMyAllOrder({'offset':this.page,'limit':this.limit});//查询订单列表
     }
   }

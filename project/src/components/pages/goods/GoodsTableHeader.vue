@@ -2,16 +2,11 @@
   <table>
     <thead>
     <tr>
-      <th width="39%">宝贝</th>
-      <th width="8%">售价</th>
+      <th width="34%">宝贝</th>
+      <th width="10%">团购价</th>
       <th width="8%">数量</th>
-      <th width="14%">商品操作</th>
-      <th width="8%">实付款</th>
-      <th width="14%">
-              <span class="field-select-mod">
-              <span class="transaction-status">交易状态<i class="icon-arrow el-icon-caret-bottom"></i></span>
-              </span>
-      </th>
+      <th width="14%">实付款</th>
+      <th width="8%">交易状态</th>
       <th width="10%">交易操作</th>
     </tr>
     </thead>
