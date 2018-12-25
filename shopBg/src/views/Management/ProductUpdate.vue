@@ -310,7 +310,7 @@
             'Authorization': 'Bearer '+getCookie("token")
           }
         }).then((res)=>{
-          let result =res.data;
+          let result = res.data;
           if(result.message=='OK'){
             this.$message({
               message:'商品上新成功',
