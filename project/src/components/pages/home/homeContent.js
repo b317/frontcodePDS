@@ -11,6 +11,8 @@ goodsforhome().then(res => {
         })
         let arr2 = item.goodslist.map(item =>{
             return {
+                goods_id:item.id,
+                shop_id:item.shop_id,
                 goods_name:item.goods_name,
                 goods_price:item.goods_price,
                 goods_discount:item.goods_discount,

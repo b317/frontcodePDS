@@ -25,8 +25,9 @@ import GoodsDetail from '@/components/pages/GoodsDetail';
 import {getId} from "@/util/auth";
 import MerchantEntry from  "@/components/pages/MerchantEntry";
 import seach from '@/components/pages/seach/seach';
+import BuyNow from '@/components/pages/BuyNow';
 
-Vue.use(Router)
+Vue.use(Router);
 
 const route = new Router({
   // mode:"history",
@@ -60,6 +61,11 @@ const route = new Router({
       path: '/GoodsDetail',
       name : 'GoodsDetail',
       component: GoodsDetail
+    },
+    {
+      path: '/BuyNow',
+      name : 'BuyNow',
+      component: BuyNow
     },
     {
       path: '/home',

@@ -39,7 +39,7 @@
         <div class="leftView">
           <div class="imgView">
             <div class="goods-img">
-              <img class="small" :src="this.$route.query.src">
+              <img class="small" :src="'http://134.175.113.58/'+goods_mes.goods_photo">
             </div>
             <p class="tm-action">
               <span id="J_EditItem" style="float: right;padding-right: 40px;"><a href="#/ProductDetail"><i class="el-icon-phone-outline"></i>举报</a></span>
@@ -49,25 +49,26 @@
           </div>
           <div class="contentView">
             <div class="tb-detail-hd">
-              <h1>{{this.$route.query.title}}</h1>
+              <h1><span style="color:#F56C6C">{{goods_mes.goods_name}}</span>{{goods_mes.goods_desc}}</h1>
             </div>
             <div class="tm-fcs-panel">
-              <!--<p><span class="tb-metatit">价格</span>-->
-                <!--<span class="tb-tm-price"><em class="tm-yen">¥ </em>-->
-                  <!--<del><span class="tm-price">00.00</span></del></span>-->
-              <!--</p>-->
-              <p><span class="tb-metatit">团购价</span>
-                <span class="tb-tm-group-price"><em class="tm-yen">¥ </em>
-                  <span class="tm-group-price">{{this.$route.query.price}}</span></span>
+              <p><span class="tb-metatit">原价</span>
+                <span class="tb-tm-price"><em class="tm-yen">¥ </em>
+                  <del><span class="tm-price">{{goods_mes.goods_cost}}</span></del></span>
               </p>
+              <div><span class="tb-metatit">售价</span>
+                <span class="tb-tm-group-price"><em class="tm-yen">¥ </em>
+                  <span class="tm-group-price">{{goods_mes.goods_price}}</span></span>
+              </div>
             </div>
             <div class="tm-delivery-panel">
-              <span class="tb-metatit">配送</span>
-              <div class="tb-postAge" style="display: inline-block;">
-                <span class="tb-deliveryAdd" id="J_deliveryAdd">江苏宿迁</span> 至 <span>
-                <span role="button" class="sel-address" style="cursor: pointer;">{{address}}</span>
-                <!--<i class="el-icon-arrow-down"></i>-->
-              </span>
+              <span class="tb-metatit">运费</span>
+              <div class="tb-postAge" style="display: inline-block;" v-if="!goods_mes.is_shelf=='true'">
+                <span class="tb-deliveryAdd" id="J_deliveryAdd">¥{{goods_mes.goods_sales}}</span>
+                <!--<span>快递：<span>0.00</span></span>-->
+              </div>
+              <div class="tb-postAge" style="display: inline-block;" v-if="goods_mes.is_shelf=='true'">
+                <span class="tb-deliveryAdd">免费</span>
                 <!--<span>快递：<span>0.00</span></span>-->
               </div>
             </div>
@@ -99,7 +100,7 @@
             </div>
             <div></div>
             <div class="tb-action-btn">
-              <button class="buy-btn">立即购买</button>
+              <button class="buy-btn" @click="buyNow">立即购买</button>
               <button class="group-btn">加入拼团</button>
             </div>
             <div class="tm-ser">
@@ -136,6 +137,8 @@
     import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
     import RecommendItem from "./RecommendItem.vue";
     import GoodsRecommendItem from "./GoodsRecommendItem.vue";
+    import {getCookie} from "@/util/auth";
+    import axios from 'axios'
     export default {
       components: {ElButton, RecommendItem,GoodsRecommendItem},
       data() {
@@ -266,7 +269,9 @@
             },
           ],//分类
           active: false,
-
+          goods_id:'',
+          shop_id:'',
+          goods_mes:'',
           recList: [
             {
               icon: "../../../static/goods/rd1.jpg",
@@ -292,7 +297,37 @@
           ], //看了又看
         }
       },
+      mounted(){
+        this.ifShow(this.datelist);
+        this.goods_id = this.$route.query.id;  //商品id
+        this.shop_id = this.$route.query.shop_id;  //店铺id
+        this.findGoodById();
+      },
       methods:{
+//        根据商品id查询商品信息
+        findGoodById(){
+          console.log("jeaofjie");
+          axios.get('/v1/merchant/goods/'+this.goods_id,{
+            headers:{
+              'Authorization': 'Bearer '+getCookie("token")
+          }
+          }).then((res)=>{
+            let result = res.data.data;
+            this.goods_mes = result;
+          }).catch((err)=>{
+            console.log(err);
+          })
+        },
+        buyNow(){//立即购买操作
+          this.$router.push({
+            path:'/BuyNow',
+            query:{
+              src:'http://110.120.119.112/',
+              id:this.goods_id,
+              shop_id:this.shop_id,
+            }
+          })
+        },
         //增加购买数量
         incr(){
           if(this.number==100){
@@ -332,9 +367,6 @@
             Vue.set(item,'active',true);
           });
         },
-      },
-      mounted(){
-        this.ifShow(this.datelist);
       }
     }
 </script>

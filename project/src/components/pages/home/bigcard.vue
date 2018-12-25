@@ -9,6 +9,8 @@
         <smallcard :goods_photo="item.goods_photo"
         :goods_name="item.goods_name"
         :goods_price="item.goods_price"
+        :goods_id="item.goods_id"
+        :shop_id="item.shop_id"
         :goods_discount="item.goods_discount"
         ></smallcard>
     </div>

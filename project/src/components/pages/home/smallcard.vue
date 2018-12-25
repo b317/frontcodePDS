@@ -22,7 +22,7 @@
 
 <script>
   export default {
-    props: ["goods_photo", "goods_name", "goods_price", "goods_discount"],
+    props: ["goods_photo", "goods_name", "goods_price", "goods_discount","goods_id","shop_id"],
     data() {
       return {
         show: false,
@@ -41,8 +41,8 @@
           path:'/ProductDetail',
           query:{
             src:this.src,
-            title:this.goods_name,
-            price:this.goods_price
+            id:this.goods_id,
+            shop_id:this.shop_id,
           }
         })
       }
