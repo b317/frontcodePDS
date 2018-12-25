@@ -131,7 +131,6 @@ export default {
                     flex-direction: row;
                     div{
                         font-size: 14px;
-                        width: 70px;
                         display: flex;
                         justify-content: center;
                         border: 1px solid #f65d29;
