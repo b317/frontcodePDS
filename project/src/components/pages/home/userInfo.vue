@@ -29,7 +29,6 @@ export default {
       mounted() {
     banner2().then(res => {
         let l = res.data.data.bannerList[0]
-        console.log(l)
         this.msg = l.title
         this.url = l.url  
         this.src11 = "http://134.175.113.58/"+l.image

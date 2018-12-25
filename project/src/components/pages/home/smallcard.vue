@@ -15,6 +15,7 @@
                 拼团优惠
             </div>
             {{goods_discount}}
+        <div class="shop" @click="btnclick()">进入店铺</div>
         </div>
     </div>
   </div>
@@ -22,7 +23,7 @@
 
 <script>
   export default {
-    props: ["goods_photo", "goods_name", "goods_price", "goods_discount"],
+    props: ["goods_photo", "goods_name", "goods_price", "goods_discount","shop_id"],
     data() {
       return {
         show: false,
@@ -45,6 +46,9 @@
             price:this.goods_price
           }
         })
+      },
+      btnclick(){
+          this.$router.push({ name: 'shop', params: { sid: this.shop_id }})
       }
     }
   }
@@ -58,6 +62,7 @@
     .wrap{
         width: 100%;
         margin-left: 10px;
+        position: relative;
         .msg{
             font-size: 14px;
             height: 30px;
@@ -87,6 +92,20 @@
             display: table-row;
             vertical-align: center;
             height: 24px;
+            .shop{
+                cursor: pointer;
+                vertical-align: top;
+                padding: 0px 4px;
+                height: 20px;
+                line-height: 20px;
+                border: 1px solid #f65d29;
+                font-size: 10px;
+                border-radius: 3px;
+                color: #f65d29;
+                position: absolute;
+                right: 10px;
+                top: 30px;
+            }
             div{
                 display: inline-block;
             }

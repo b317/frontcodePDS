@@ -13,6 +13,7 @@
                 <div class="cal-font"><div>立刻购买</div>{{item.goods_price}}￥</div>
                 <div class="cal-font"><div>拼团优惠</div>{{item.goods_discount}}￥</div>
             </div>
+            <div class="tip" @click="btnclick1(item.shop_id)">进入店铺</div>
         </div>
       </div>
       <div v-if="cal.length != 0" class="s-footer">
@@ -39,10 +40,13 @@ export default {
     this.getdata(this.$route.params.sval,1)
   },
   methods: {
+      btnclick1(a){
+          console.log(a)
+          this.$router.push({ name: 'shop', params: { sid: a }})
+      },
       getdata(msg,index){
         this.showi = true
         this.cal = []
-        console.log(msg)
           querygood({offset:index,q:msg}).then(res => {
             this.showi = false
             this.total = res.data.data.totalCount
@@ -95,9 +99,26 @@ export default {
             width: 22%;
             height: 300px;
             border: 1px solid #ddd;
-            margin: 1%;   
+            margin: 1%; 
+            position: relative;  
+            .tip{
+                cursor: pointer;
+                width: 42px;
+                vertical-align: top;
+                position: absolute;  
+                padding: 0px 4px;
+                height: 20px;
+                line-height: 20px;
+                border: 1px solid #f65d29;
+                font-size: 10px;
+                right: 10px;
+                bottom: 10px;
+                border-radius: 3px;
+                color: #f65d29;
+            }
             .img{
                 width: 100%;
+                cursor: pointer;
                 height: 200px;
             }
             .cal-con{
@@ -122,7 +143,6 @@ export default {
         }
         .cal:hover{
             border: 1px solid #f65d29;
-            cursor: pointer;
         }
     }
     

@@ -10,6 +10,7 @@
         :goods_name="item.goods_name"
         :goods_price="item.goods_price"
         :goods_discount="item.goods_discount"
+        :shop_id="item.shop_id"
         ></smallcard>
     </div>
   </div>

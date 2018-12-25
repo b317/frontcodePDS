@@ -2,6 +2,7 @@ import {goodsforhome} from "@/api/http";
 let arr = []
 let ddd = []
 goodsforhome().then(res => {
+    console.log(res)
     res.data.data.goodsList.map((item,key) => {
         if(key >= 4){
             return;
@@ -14,7 +15,8 @@ goodsforhome().then(res => {
                 goods_name:item.goods_name,
                 goods_price:item.goods_price,
                 goods_discount:item.goods_discount,
-                goods_photo:item.goods_photo
+                goods_photo:item.goods_photo,
+                shop_id:item.shop_id
             }
         })
         let arritem = {

@@ -25,6 +25,7 @@ import GoodsDetail from '@/components/pages/GoodsDetail';
 import {getId} from "@/util/auth";
 import MerchantEntry from  "@/components/pages/MerchantEntry";
 import seach from '@/components/pages/seach/seach';
+import shop from '@/components/pages/shop/shop';
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ const route = new Router({
       path: '/seach/:sval',
       name: 'seach',
       component: seach
+    },
+    {
+      path: '/shop/:sid',
+      name: 'shop',
+      component: shop
     },
     {
       path: '/news',
@@ -152,7 +158,7 @@ const route = new Router({
     }
   ]
 })
-let test = false;
+let test = true;
 const whiteList = ['/login', '/register','/home'];
 route.beforeEach((to, from, next) => {
   if (whiteList.indexOf(to.path) !== -1) {
