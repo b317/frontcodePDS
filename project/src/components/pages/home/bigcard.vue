@@ -12,7 +12,6 @@
         :goods_id="item.goods_id"
         :shop_id="item.shop_id"
         :goods_discount="item.goods_discount"
-        :shop_id="item.shop_id"
         ></smallcard>
     </div>
   </div>
