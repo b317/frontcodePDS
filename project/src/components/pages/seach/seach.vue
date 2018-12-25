@@ -41,8 +41,8 @@ export default {
   },
   methods: {
       btnclick1(a){
-          console.log(a)
           this.$router.push({ name: 'shop', params: { sid: a }})
+        scrollTo(0,0);
       },
       getdata(msg,index){
         this.showi = true
@@ -103,7 +103,6 @@ export default {
             position: relative;  
             .tip{
                 cursor: pointer;
-                width: 42px;
                 vertical-align: top;
                 position: absolute;  
                 padding: 0px 4px;

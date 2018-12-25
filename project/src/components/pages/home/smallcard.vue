@@ -48,6 +48,7 @@
         })
       },
       btnclick(){
+          scrollTo(0,0)
           this.$router.push({ name: 'shop', params: { sid: this.shop_id }})
       }
     }
