@@ -384,6 +384,6 @@
 	top: 77px;
 }
 .con{
-	height: 75vh;
+	height: 600px;
 }
 </style>
