@@ -52,15 +52,9 @@
               <h1><span style="color:#F56C6C">{{goods_mes.goods_name}}</span>{{goods_mes.goods_desc}}</h1>
             </div>
             <div class="tm-fcs-panel">
-<<<<<<< HEAD
               <p><span class="tb-metatit">原价</span>
                 <span class="tb-tm-price"><em class="tm-yen">¥ </em>
                   <del><span class="tm-price">{{goods_mes.goods_cost}}</span></del></span>
-=======
-              <p><span class="tb-metatit">团购价</span>
-                <span class="tb-tm-group-price"><em class="tm-yen">¥ </em>
-                  <span class="tm-group-price">{{this.$route.query.price}}</span></span>
->>>>>>> 89d6d41f32831862eae4b79dfd26107e3e4141e7
               </p>
               <div><span class="tb-metatit">售价</span>
                 <span class="tb-tm-group-price"><em class="tm-yen">¥ </em>
