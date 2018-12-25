@@ -145,7 +145,7 @@ export default {
           console.log(this.role_id)
           if(this.role_id == 2){
             if(getId() != null){
-              window.open("http://134.175.113.58/pds/merchantbgs")
+              window.open("http://134.175.113.58/pds/merchantbg")
             }
           }else{
             this.$router.push("/MerchantEntry")
