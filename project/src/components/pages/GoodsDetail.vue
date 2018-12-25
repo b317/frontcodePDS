@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="goodsdetail">
       <!--位置-->
       <div class="appTop" style="min-width: 1079px;">
         <span>您的位置：</span>

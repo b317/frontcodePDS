@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="goodsitem">
     <table class="goods-item-table">
       <tbody>
       <tr class="tr-detail-hd">
