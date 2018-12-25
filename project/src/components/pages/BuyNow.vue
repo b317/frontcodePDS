@@ -167,7 +167,7 @@
         }).then((res)=>{
           let result = res.data.data;
           this.goods_mes = result;
-          this.goods_mes.goods_price=parseFloat(this.goods_mes.goods_price).toFixed(2)
+          this.goods_mes.goods_price=parseFloat(this.goods_mes.goods_price).toFixed(2);
           this.goods_mes.goods_discount=parseFloat(this.goods_mes.goods_discount).toFixed(2)
         }).catch((err)=>{
           console.log(err);
