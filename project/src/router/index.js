@@ -167,7 +167,7 @@ const route = new Router({
 let test = false;
 const whiteList = ['/login', '/register','/home'];
 route.beforeEach((to, from, next) => {
-  scrollTo(0,0)
+  scrollTo(0,0);
   if (whiteList.indexOf(to.path) !== -1) {
     next();
   }else{

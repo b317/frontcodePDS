@@ -34,12 +34,10 @@ export default {
   methods: {
     btnclick(){
       this.$bus.$emit("seach2",this.title.title)
-      scrollTo(0,0);
       this.$router.push({ name: 'seach', params: { sval: this.title.title }})
     },
     btnclick2(a){
       this.$bus.$emit("seach2",a)
-      scrollTo(0,0);
       this.$router.push({ name: 'seach', params: { sval: a }})
     },
   },

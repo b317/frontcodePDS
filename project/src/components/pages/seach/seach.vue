@@ -41,7 +41,6 @@ export default {
   },
   methods: {
       btnclick1(a){
-          console.log(a)
           this.$router.push({ name: 'shop', params: { sid: a }})
       },
       getdata(msg,index){
