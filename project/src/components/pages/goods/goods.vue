@@ -278,7 +278,7 @@
       getMyAllOrder(params){////查询订单列表
         var urlStr='/v1/user/orderlistbyuser/?offset='+params.offset+'&limit='+params.limit+'&uid='
           +getCookie('id');
-        this.axios.get(urlStr,{
+        axios.get(urlStr,{
           headers:{
             "Authorization":"Bearer "+ getCookie('token')
           }

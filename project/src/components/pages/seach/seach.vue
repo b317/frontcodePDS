@@ -99,13 +99,12 @@ export default {
             width: 22%;
             height: 300px;
             border: 1px solid #ddd;
-            margin: 1%; 
-            position: relative;  
+            margin: 1%;
+            position: relative;
             .tip{
                 cursor: pointer;
-                width: 42px;
                 vertical-align: top;
-                position: absolute;  
+                position: absolute;
                 padding: 0px 4px;
                 height: 20px;
                 line-height: 20px;
@@ -144,6 +143,6 @@ export default {
             border: 1px solid #f65d29;
         }
     }
-    
+
 }
 </style>
