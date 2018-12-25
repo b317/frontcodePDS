@@ -267,7 +267,7 @@
       //获取数据
       getMyAllOrder(params){
         var urlStr='/v1/user/orderlistbyuser/?offset='+params.offset+'&limit='+params.limit+'&uid='
-          +sessionStorage.getItem("clientId");
+          + getCookie('id');
         console.log(urlStr);
         this.axios.get(urlStr,{
           headers:{
@@ -275,24 +275,23 @@
           }
         }).then((res)=>{
           let data = res.data.data;
-          console.log(data.client_nick);
-//          this.goodslist=data.ordersList;
-//          this.dataList=data.ordersList;
-//          //格式化时间
-//          this.goodslist.forEach(function (item) {
-//            let time=item.createdAt;
-//            var date = new Date(time).toJSON();
-//            item.createdAt= new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
-//            let time1=item.payedAt;
-//            var date1 = new Date(time1).toJSON();
-//            item.payedAt= new Date(+new Date(date1)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
-//          });
-//          this.totalOrder = data.totalCount;//保存总条数
-//          if(data.totalCount<=this.limit){//分页栏是否显示
-//            this.showPading=false;
-//          }else{
-//            this.showPading=true;
-//          }
+          this.goodslist=data.ordersList;
+          this.dataList=data.ordersList;
+          //格式化时间
+          this.goodslist.forEach(function (item) {
+            let time=item.createdAt;
+            var date = new Date(time).toJSON();
+            item.createdAt= new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+            let time1=item.payedAt;
+            var date1 = new Date(time1).toJSON();
+            item.payedAt= new Date(+new Date(date1)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+          });
+          this.totalOrder = data.totalCount;//保存总条数
+          if(data.totalCount<=this.limit){//分页栏是否显示
+            this.showPading=false;
+          }else{
+            this.showPading=true;
+          }
         }).catch((err)=>{
           console.log(err);
         })

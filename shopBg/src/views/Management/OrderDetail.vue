@@ -63,11 +63,11 @@
                 <div class="trade-detail-operate">
                   <dl>
                     <dt>商品总价：</dt>
-                    <dd>￥<span>{{orderData.order_price}}</span></dd>
+                    <dd>￥<span>{{orderData.order_price-goodsData.goods_fare}}</span></dd>
                   </dl>
                   <dl>
                     <dt>运费(快递)：</dt>
-                    <dd>￥<span>0.00</span></dd>
+                    <dd>￥<span>{{goodsData.goods_fare}}</span></dd>
                   </dl>
                   <dl>
                     <dt>实付款：</dt>
