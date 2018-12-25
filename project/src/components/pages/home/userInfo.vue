@@ -54,7 +54,7 @@ export default {
         return this.username != "" ?  this.username : "请登录" 
       },
       src1() {
-        return getId() == null ?  "../../../../static/s.jpg" : this.src11
+        return getId() == null ?  "../../../../static/s.jpg" : this.src
       }
 
     },
