@@ -18,6 +18,7 @@
 				</el-form-item>
 			</el-form>
 		</el-col>
+		<div class="con">
 			<!--列表-->
 			<el-table :data="shop" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 45%;">
 				<el-table-column type="selection">
@@ -51,12 +52,14 @@
 					</template>
 				</el-table-column>
 			</el-table>
+		</div>
+			
 		<!--工具条-->
 		<el-col :span="24" class="toolbar" style="width: 45%;">
 			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="10" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
-		<el-col :span="24" class="toolbar" style="width: 54%;margin-left:12px;">
+		<el-col :span="24" class="toolbar tobar1" style="width: 54%;margin-left:12px;">
 			<el-pagination layout="prev, pager, next" @current-change="handlesubCurrentChange" :page-size="10" :total="subtotal" style="float:right;">
 			</el-pagination>
 		</el-col>
@@ -379,5 +382,8 @@
 	position: absolute;
 	right: 0px;
 	top: 77px;
+}
+.con{
+	height: 75vh;
 }
 </style>
