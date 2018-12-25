@@ -152,7 +152,7 @@ const route = new Router({
     }
   ]
 })
-let test = true;
+let test = false;
 const whiteList = ['/login', '/register','/home'];
 route.beforeEach((to, from, next) => {
   if (whiteList.indexOf(to.path) !== -1) {
