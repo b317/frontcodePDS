@@ -42,7 +42,6 @@ export default {
   methods: {
       btnclick1(a){
           this.$router.push({ name: 'shop', params: { sid: a }})
-        scrollTo(0,0);
       },
       getdata(msg,index){
         this.showi = true
