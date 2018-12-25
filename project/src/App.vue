@@ -144,7 +144,7 @@ export default {
         }else if(key == "4-5"){
           console.log(this.role_id)
           if(this.role_id == 2){
-            window.open("")
+            window.open("http://localhost:8082")
           }else{
             this.$router.push("/MerchantEntry")
           }
@@ -170,8 +170,8 @@ export default {
         })
       }
     }
-  
-  
+
+
   }
 </script>
 
