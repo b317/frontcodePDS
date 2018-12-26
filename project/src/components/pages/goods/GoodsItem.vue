@@ -1,15 +1,15 @@
 <template>
   <div class="goodsitem">
-    <table class="goods-item-table">
+    <table>
       <tbody>
-      <tr class="tr-detail-hd">
-        <td style="width: 330px;" colspan="3">
+      <tr class="tb-thead">
+        <td width="52%" colspan="2">
           <div class="order-time-num">
             <span class="order-time"><label>{{goods.createdAt}}</label></span>
             <span class="order-num">订单号：<span>{{goods.order_num}}</span></span>
           </div>
         </td>
-        <td style="width: 141px;" colspan="3" >
+        <td width="27%" colspan="2" >
           <div class="shop-img-name">
             <span>
               <img class="g-shop-img" :src="'http://134.175.113.58/'+merchant_mes.shop_logo" alt="" />
@@ -19,71 +19,54 @@
         </td>
         <td></td>
         <td></td>
-        <td></td>
       </tr>
       <tr class="tr-center" >
-        <td style="width: 330px;">
+        <td width="41%">
           <div class="g-shop-img">
             <div>
               <a href="#"><img :src="'http://134.175.113.58/'+product_list.goods_photo" alt=""/></a>
             </div>
           </div>
           <div class="g-shop-cont">
-            <p><a href="#"><span style="line-height:16px;">{{product_list.goods_name}}:{{product_list.goods_desc}}</span></a></p>
-            <p class="p-clr"><span>颜色分类：{{goods.color}}</span></p>
+            <p><a href="#"><span style="line-height:16px;">{{product_list.goods_desc}}</span></a></p>
+            <p class="p-clr"><span>颜色分类：{{product_list.goods_name}}</span></p>
           </div>
         </td>
-        <td style="width: 87px;">
+        <td width="11%">
           <div>
-            <!--<p class="p-sell-price" style="color: #9c9c9c;"><del><span>￥00.00</span></del></p>-->
             <p class="p-group-price" style="color: red;font-weight: bolder"><span>￥{{product_list.goods_price}}</span></p>
-            <!--<p class="p-clr"><span>(团购价)</span></p>-->
           </div>
         </td>
-        <td style="width: 44px;">
+        <td width="8%">
           <div>
             <p><span>{{goods.order_price/(product_list.goods_price-product_list.goods_discount)}}</span></p>
           </div>
         </td>
-        <td style="width: 106px;">
-          <div>
-            <p>
-              <span v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3">
-                <span class="span-a" @click="isRefund">申请退款</span>
-              </span>
-            </p>
-            <p><span><span class="span-a">投诉商家</span></span></p>
-          </div>
-        </td>
-        <td style="width: 104px;" rowspan="2">
+        <td width="19%" rowspan="2">
           <div>
             <p style="font-weight: bolder;"><span>￥{{goods.order_price}}</span></p>
             <p class="p-clr"><span>(含运费￥{{product_list.goods_fare}})</span></p>
           </div>
         </td>
-        <td style="width: 94px;" rowspan="2">
+        <td width="11%"rowspan="2">
           <div>
+            <p style="color: rgb(64, 158, 255);"><span>{{goods.order_status}}</span></p>
             <p>
-              <span v-if="goods.orderStatus==0">等待付款</span>
-              <span v-if="goods.orderStatus==1">等待发货</span>
-              <span v-if="goods.orderStatus==2">已经发货</span>
-              <span v-if="goods.orderStatus==3">交易成功</span>
-              <span v-if="goods.orderStatus==4">正退款中</span>
-              <span v-if="goods.orderStatus==5">交易失败</span>
-            </p>
-            <p><span class="span-a" @click="showGoodsDetail">订单详情</span></p>
-            <p>
-              <span v-if="goods.orderStatus==2 || goods.orderStatus==3">
-                <span class="span-a">物流跟踪</span>
+              <span v-if="goods.order_status=='已支付'||goods.order_status=='待发货'">
+                <span class="span-a" @click="handleRefund">申请退款</span>
               </span>
             </p>
+            <p><span class="span-a" @click="showGoodsDetail">订单详情</span></p>
           </div>
         </td>
-        <td style="width: 75px;vertical-align: middle;" rowspan="2">
-          <div style="padding-right: 10px">
-            <p v-if="goods.orderStatus==1 || goods.orderStatus==2 || goods.orderStatus==3"><el-button
-              size="mini" type="success" @click="isCancel">取消订单</el-button></p>
-            <p><el-button size="mini" type="info" @click="isDelete">删除订单</el-button></p>
+        <td width="12%"rowspan="2">
+          <div style="padding:0 2px">
+            <p v-if="goods.order_status=='已支付'||goods.order_status=='待发货'">
+              <el-button size="mini" type="warning" @click="handleCancel">取消订单</el-button>
+            </p>
+            <p v-if="goods.order_status=='已完成'">
+              <el-button size="mini" type="info" @click="handleDelete">删除订单</el-button>
+            </p>
           </div>
         </td>
       </tr>
@@ -96,7 +79,6 @@
             <span>￥</span><span>{{product_list.goods_discount}}</span>
           </div>
         </td>
-        <td></td>
         <td></td>
       </tr>
       </tbody>
@@ -161,7 +143,7 @@
         })
       },
       //删除
-      isDelete () {
+      handleDelete () {
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -180,7 +162,7 @@
         });
       },
       //退款
-      isRefund () {
+      handleRefund () {
         this.$confirm('此操作将进行退款，是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -199,7 +181,7 @@
         });
       },
       //取消
-      isCancel (){
+      handleCancel (){
         this.$confirm('此操作将进行取消订单，是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',

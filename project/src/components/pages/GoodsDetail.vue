@@ -13,11 +13,11 @@
       <!--步骤-->
       <div class="appStep">
         <el-steps :space="200" :active="active" finish-status="success">
-          <el-step title="拍下商品" description="2018-12-10 21:46:44"></el-step>
-          <el-step title="进行付款" description="2018-12-10 21:46:57"></el-step>
-          <el-step title="卖家发货" description="2018-12-11 09:55:21"></el-step>
-          <el-step title="确认收货" description="2018-12-13 16:06:32"></el-step>
-          <el-step title="交易成功" description="2018-12-13 16:06:52"></el-step>
+          <el-step title="拍下商品" :description="order_mes.createdAt"></el-step>
+          <el-step title="进行付款" :description="order_mes.payedAt"></el-step>
+          <el-step title="卖家发货" :description="order_mes.payedAt"></el-step>
+          <el-step title="确认收货" :description="order_mes.payedAt"></el-step>
+          <el-step title="交易成功" :description="order_mes.finishedAt"></el-step>
         </el-steps>
       </div>
       <!--内容-->
@@ -34,14 +34,14 @@
           <tr>
             <td style="height: 45px;">
               <div class="bought-form-hd">
-                <!--<span class="bg-span" style="padding-left: 15px;padding-right: 10px;">包裹</span>-->
-                <!--<span class="bg-span bought-express">韵达快递</span>-->
-                <span class="bg-span bought-num">运单号：<span>{{order_mes.order_num}}</span></span>
-                <span class="bg-span bought-time" style="padding-left: 10px;">{{order_mes.createdAt}}</span>
+                <span class="bg-span" style="padding-left: 15px;padding-right: 10px;">包裹</span>
+                <span class="bg-span bought-express">xxxx</span>
+                <span class="bg-span bought-num">运单号：<span>xxxxxxxxxxx</span></span>
               </div>
             </td>
             <td colspan="3">
-              <span class="bg-span bought-sign">快件已被签收,如有问题请电联业务员：文彦烟【18666******】。相逢是缘,如果您对我的服务感到满意,给个五星好不好?【请在评价小件员处给予五星好评】如有疑问请联系快递员</span>
+              <span class="bg-span bought-sign"> 快件已被签收,如有问题请联系<span
+                class="span-a">商家客服</span>。相逢是缘,如果您对我的服务感到满意,给个五星好不好?</span>
               <span style="padding-left: 5px;">更多<i class="el-icon-arrow-down" style="font-size: 10px;"></i></span>
             </td>
             <td></td>
@@ -56,17 +56,10 @@
                 <p style="color: #9e9e9e"><span><span>颜色分类</span><span>：</span><span>【幸运】翡翠青叶</span></span></p>
               </div>
             </td>
-            <td><span>{{order_mes.order_price}}</span></td>
+            <td><span>￥{{order_mes.order_price}}</span></td>
             <td><span>1</span></td>
-            <td><span>{{product_mes.goods_discount}}</span></td>
-            <td class="border-result">
-              <span v-if="this.$route.params.orderStatus==0">等待付款</span>
-              <span v-if="this.$route.params.orderStatus==1">等待发货</span>
-              <span v-if="this.$route.params.orderStatus==2">已经发货</span>
-              <span v-if="this.$route.params.orderStatus==3">交易完成</span>
-              <span v-if="this.$route.params.orderStatus==4">正退款中</span>
-              <span v-if="this.$route.params.orderStatus==5">交易失败</span>
-            </td>
+            <td><span>￥{{product_mes.goods_discount}}</span></td>
+            <td class="border-result"><span>{{order_mes.order_status}}</span></td>
           </tr>
           </tbody>
         </table>
@@ -80,26 +73,20 @@
                   <span class="imfor-icon"><img src="../../../static/T1e.aoXuXdXXa94Hfd-32-32.png"></span>
                   <span class="imfor-title">
                     <span class="">
-                      <h3>订单状态:
-                        <span v-if="this.$route.params.orderStatus==0">等待付款</span>
-                        <span v-if="this.$route.params.orderStatus==1">等待发货</span>
-                        <span v-if="this.$route.params.orderStatus==2">已经发货</span>
-                        <span v-if="this.$route.params.orderStatus==3">交易成功</span>
-                        <span v-if="this.$route.params.orderStatus==4">正退款中</span>
-                        <span v-if="this.$route.params.orderStatus==5">交易失败</span>
-                      </h3>
+                      <h3>订单状态：{{order_mes.order_status}}</h3>
                     </span>
                   </span>
                 </div>
                 <div class="trade-detail-prompt">
-                  <div class="dotted-node"><span>&nbsp;</span><span>物流：</span></div>
+                  <div class="dotted-node">
+                    <span>物流：</span>
+                    <span class="package-detail">xxxx</span>
+                    <span class="package-detail">运单号:</span><span>xxxxxxxx</span>
+                  </div>
                   <div class="trade-detail-main">
-                    <span class="package-detail">韵达快递</span>
-                    <span class="package-detail">运单号:</span><span>{{order_mes.order_num}}</span>
-                    <div class="logistic-detail">
-                      <span class="package-detail package-time-detail">2018-11-17 22:47:21</span>
-                      <span class="package-detail package-explain-detail"> 快件已被签收,如有问题请电联业务员：文彦烟【18666******】。相逢是缘,如果您对我的服务感到满意,给个五星好不好?【请在评价小件员处给予五星好评】如有疑问请联系快递员</span>
-                    </div>
+                    <span class="package-detail package-time-detail">xxxx-xx-xx xx:xx:xx</span>
+                    <span class="package-detail package-explain-detail"> 快件已被签收,如有问题请联系<span
+                      class="span-a">商家客服</span>。相逢是缘,如果您对我的服务感到满意,给个五星好不好?</span>
                   </div>
                 </div>
                 <div class="trade-detail-operate">
@@ -129,7 +116,7 @@
                 <li class="table-list" style="padding-top: 15px;">
                   <div class="trade-imfor-dt" style="vertical-align: top;"><span>收货地址</span><span>：</span></div>
                   <div class="trade-imfor-dd" style="width: 214px;">
-                    <span class="ui-trade-label null">{{order_mes.order_addr}}</span>
+                    <span class="ui-trade-label null">{{order_mes.client_nick}},{{order_mes.client_phone}},{{order_mes.order_addr}} ,xxxxxx</span>
                   </div>
                 </li>
                 <li class="table-list">
@@ -141,30 +128,30 @@
                   <div class="trade-imfor-dd"><span class="ui-trade-label middleText">{{order_mes.order_num}}</span></div>
                 </li>
                 <li class="table-list">
-                  <div class="trade-imfor-dt"><span>付款方式</span><span>：</span></div>
-                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{order_mes.pay_method}}</span></div>
+                  <div class="trade-imfor-dt"><span>订单时间</span><span>：</span></div>
+                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{order_mes.createdAt}}</span></div>
                 </li>
                 <li class="table-list">
-                  <div class="trade-imfor-dt"><span>成交时间</span><span>：</span></div>
-                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{order_mes.createdAt}}</span></div>
+                  <div class="trade-imfor-dt"><span>付款方式</span><span>：</span></div>
+                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{order_mes.pay_method}}</span>/<span class="ui-trade-label">xxxxxxxxxx</span></div>
                 </li>
                 <li class="table-list">
                   <div class="trade-imfor-dt"><span>付款时间</span><span>：</span></div>
-                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{order_mes.createdAt}}</span></div>
+                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{order_mes.payedAt}}</span></div>
                 </li>
                 <li class="table-list">
-                  <div class="trade-imfor-dt"><span>发货时间</span><span>：</span></div>
-                  <div class="trade-imfor-dd"><span class="ui-trade-label">2018-11-13 09:55:21</span></div>
+                  <div class="trade-imfor-dt"><span>更新时间</span><span>：</span></div>
+                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{order_mes.updatedAt}}</span></div>
                 </li>
                 <li class="table-list">
                   <div class="trade-imfor-dt"><span>完结时间</span><span>：</span></div>
-                  <div class="trade-imfor-dd"><span class="ui-trade-label">2018-11-17 16:06:32</span></div>
+                  <div class="trade-imfor-dd"><span class="ui-trade-label">{{order_mes.finishedAt}}</span></div>
                 </li>
                 <li class="table-list">
                   <div class="trade-imfor-dt"><span>商家店名</span><span>：</span></div>
                   <div class="trade-imfor-dd">
                       <span><span class="middleText">
-                        <span class="short-dd-nick" title="馨语富尚专卖店">{{this.$route.params.shopName}}-馨语富尚专卖店
+                        <span class="short-dd-nick" :title="shop_mes.shop_name">{{shop_mes.shop_name}}
                           <span class="ww-light ww-small">
                             <a href="#" class="ww-inline ww-online" title="点此可以直接和卖家交流选好的宝贝，或相互交流网购体验，还支持语音视频噢。">
                               <span>客服在线</span>
@@ -175,21 +162,15 @@
                   </div>
                 </li>
                 <li class="table-list">
-                  <div class="trade-imfor-dt"><span>商家公司</span><span>：</span></div>
-                  <div class="trade-imfor-dd">
-                    <span class="ui-trade-label">上海伯众数码科技有限公司</span>
-                  </div>
-                </li>
-                <li class="table-list">
                   <div class="trade-imfor-dt"><span>商家城市</span><span>：</span></div>
                   <div class="trade-imfor-dd">
-                    <span class="ui-trade-label">上海市</span>
+                    <span class="ui-trade-label">{{shop_mes.shop_addr}}</span>
                   </div>
                 </li>
                 <li class="table-list">
                   <div class="trade-imfor-dt"><span>联系商家</span><span>：</span></div>
                   <div class="trade-imfor-dd">
-                    <span class="ui-trade-label">15001782890</span>
+                    <span class="ui-trade-label">{{shop_mes.shop_phone}} / QQ{{shop_mes.shop_qq}}</span>
                   </div>
                 </li>
               </ul>
@@ -203,6 +184,7 @@
 <script>
   import {getCookie} from "@/util/auth";
   import axios from 'axios'
+
   export default {
     props: [],
     data() {
@@ -210,11 +192,31 @@
         msg: 'hello world',
         active: 0,
         product_mes:'',
-        order_mes:''
+        order_mes:'',
+        shop_mes:''
       }
     },
     methods: {
-     findGoodsById(){
+      //时间显示格式
+      formatTime(item){
+        let time = item.createdAt;
+        var date = new Date(time).toJSON();
+        item.createdAt = new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+
+        let time1 = item.payedAt;
+        var date1 = new Date(time1).toJSON();
+        item.payedAt = new Date(+new Date(date1)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+
+        let time2 = item.finishedAt;
+        var date2 = new Date(time2).toJSON();
+        item.finishedAt = new Date(+new Date(date2)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+
+        let time3 = item.updatedAt;
+        var date3 = new Date(time3).toJSON();
+        item.updatedAt = new Date(+new Date(date3)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+      },
+      //根据id获取商品信息
+      findGoodsById(){
        axios.get('/v1/merchant/goods/'+this.$route.query.goods_id,{
          headers:{
            'Authorization': 'Bearer '+getCookie("token")
@@ -222,11 +224,13 @@
        }).then((res)=>{
          let result = res.data.data;
          this.product_mes=result;
+         this.findShopById(this.product_mes);
          console.log("hahaha");
        }).catch((err)=>{
          console.log(err);
        })
      },
+      //根据id获取订单信息
       findOrderById(){
         axios.get(' /v1/user/orders/'+this.$route.query.order_id,{
           headers:{
@@ -235,13 +239,34 @@
         }).then((res)=>{
           let result = res.data.data;
           this.order_mes=result;
-          //      时间格式化
-          var dateee = new Date(this.order_mes.createdAt).toJSON();
-          this.order_mes.createdAt = new Date(+new Date(dateee)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
-          console.log("hahaha");
+          //时间格式化
+          this.formatTime(this.order_mes);
+          this.formatStep(this.order_mes);
         }).catch((err)=>{
           console.log(err);
         })
+      },
+      //根据id获取商铺信息
+      findShopById(item){
+        axios.get('/v1/merchant/detailbyself/'+item.shop_id,{
+          headers:{
+            "Authorization":"Bearer "+ getCookie("token")
+          }
+        }).then((res)=>{
+          let result = res.data.data;
+          this.shop_mes = '';
+          this.shop_mes=result;
+          console.log(this.shop_mes.shop_name);
+        }).catch((err)=>{
+          console.log(err);
+        })
+      },
+      //步骤显示
+      formatStep(item){
+        if(item.order_status=='待支付'){this.active =1}
+        if(item.order_status=='已支付'||item.order_status=='待发货'){this.active =2}
+        if(item.order_status=='已发货'){this.active =3}
+        if(item.order_status=='已完成'){this.active =5}
       }
     },
     mounted(){
@@ -256,4 +281,6 @@
 </script>
 <style scoped>
   @import "../../css/goods.css";
+  .span-a{text-decoration: underline;color: #20a0ff;cursor: pointer;}
+  .span-a:hover{text-decoration: underline;color: #ff4200;cursor: pointer;}
 </style>
