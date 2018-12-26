@@ -30,7 +30,7 @@
                   :class="{'active':sort_index==item.id}">{{item.sort}}</li>
             </ul>
           </div>
-          <span class="right_icon"><img src="/static/right.png"></span>
+          <span class="right_icon"><img src="http://www.jianlinker.cn/static/right.png"></span>
           <div class="step_one_right">
             <header>请选择二级商品标签</header>
             <ul v-if="subSortList.length">
@@ -194,7 +194,7 @@
         subSortName:'',
         sort_index2:'',
         step_present:0,
-        imageUrl: '/static/update_images.jpg',
+        imageUrl: 'http://www.jianlinker.cn/static/update_images.jpg',
         dialogImageUrl: '',
         dialogVisible: false,
         is_fare:true,

@@ -33,7 +33,7 @@
               </td>
               <td class=""  width="30%">
                 <div class="publish_time">发布时间：{{item.createdAt}}</div>
-                <span class="product_img"><img :src="'http://134.175.113.58/'+item.goods_photo"/></span>
+                <span class="product_img"><img :src="'http://www.jianlinker.cn/'+item.goods_photo"/></span>
                 <span class="title"><i>{{item.goods_name}}：{{item.goods_desc}}</i></span>
               </td>
               <td class=""  width="14%">
@@ -48,7 +48,7 @@
               <td  width="6%">￥{{item.goods_price}}</td>
               <td  width="6%">{{item.goods_stock}}</td>
               <td  width="6%">
-                <el-switch v-model="item.is_shelf" :width="value" >
+                <el-switch v-model="item.is_shelf" :width="value" @change="putAway(item)">
                 </el-switch>
               </td>
               <td  width="8%">{{item.goods_people}}</td>
@@ -109,7 +109,7 @@
                      :disabled="disabled"
                      :before-upload="beforeAvatarUpload"
                      :show-file-list="false">
-            <img v-if="goods_data.goods_photo" :src="goods_data.goods_photo" class="avatar">
+            <img v-if="goods_data.goods_photo" :src="'http://www.jianlinker.cn/'+goods_data.goods_photo" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
@@ -416,6 +416,27 @@
             message: '已取消删除'
           });
         });
+      },
+      putAway(item){//改变商品上架状态
+        let isShelf = new FormData();
+        isShelf.append('is_shelf',item.is_shelf);
+        this.axios.put(' /v1/merchant/goodsforshelf/'+item.id,isShelf,{
+          headers:{
+            'Content-Type': 'multipart/form-data',
+            "Authorization":"Bearer "+ getCookie('token')
+          }
+        }).then((res)=>{
+          let result = res.data.message;
+          if(result=='OK'){
+            this.$message({
+              message:"修改状态成功！！！",
+              type:'success',
+              duration:2000
+            })
+          }
+        }).catch((err)=>{
+          console.log(err);
+        })
       }
     }
   }

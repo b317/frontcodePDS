@@ -221,7 +221,7 @@ position: absolute;width: 110%;height: auto;border:1px solid #e5e5e5;
 .product_tag .shop_deal_data div i{
   position: absolute;width:80px;height:80px;
   bottom:-110px;left:35px;
-  background: url("./../../../static/computer.png") no-repeat;
+  background: url("http://www.jianlinker.cn/static/computer.png") no-repeat;
   background-size: 160px ;
   background-position: -80px 0;
 }

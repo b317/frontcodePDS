@@ -67,7 +67,7 @@
               <span class="client-id">{{item.clientID}}</span>
             </td>
             <td class="" width="19%" style="text-align: left">
-              <span class="client-img"><img :src="item.clientImg"></span>
+              <span class="client-img"><img :src="'http://www.jianlinker.cn/'+item.clientImg"></span>
               <span class="client-account">{{item.clientAccount}}</span>
             </td>
             <td class="" width="16%">
@@ -327,7 +327,7 @@
             phone: '',
           };
         },
-        //性别显示转换 
+        //性别显示转换
         formatSex(sex) {
           let s = sex == '男' ? 1 : sex == '女' ? 0 : -1;
           return s;

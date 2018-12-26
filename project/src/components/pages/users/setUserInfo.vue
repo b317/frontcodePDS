@@ -86,7 +86,7 @@ export default {
       }
     },
     beforeAvatarUpload(file) {
-      let commit = new FormData() 
+      let commit = new FormData()
       commit.append("file",file.file)
       console.log(file.file)
       upuserpic(getId(),commit).then(res=>{
@@ -101,7 +101,7 @@ export default {
       }else{
         this.msg1 = ""
       }
-      let commit = new FormData() 
+      let commit = new FormData()
       commit.append("nick_name",this.nickname)
       commit.append("name",this.name)
       updateUser(

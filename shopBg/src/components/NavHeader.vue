@@ -27,9 +27,9 @@
         <div class="grid-content bg-purple header_right" >
           <el-row>
             <el-col :span="10" style="position: relative;z-index: 1000;">
-              <img src="/static/touxiang.jpg">
+              <img src="http://www.jianlinker.cn/static/touxiang.jpg">
               <div style="" class="admin">
-                {{shopowner.username}}
+                {{shopowner.nick_name}}
                 <i class="el-icon-caret-bottom"></i>
                 <div style="position: absolute;top:40px;left:46px;width: 45%;height:20px;"></div>
                 <div class="admin_pull_down">
@@ -41,9 +41,9 @@
             <el-col :span="14">
               <ul>
                 <li @click="LinkHome">
-                  <span><img src="/static/home.png"/>拼多少首页</span>
+                  <span><img src="http://www.jianlinker.cn/static/home.png"/>拼多少首页</span>
                 </li>
-                <li><span><img src="/static/exit.png"/>退出</span></li>
+                <li><span><img src="http://www.jianlinker.cn/static/exit.png"/>退出</span></li>
               </ul>
             </el-col>
           </el-row>
@@ -121,7 +121,7 @@
     },
     methods: {
       LinkHome(){//首页跳转
-        window.open('http://134.175.113.58/pds/');
+        window.open('http://www.jianlinker.cn/pds/');
       },
       handleSelect(key, keyPath) {
         this.$emit("selectTag",key);
@@ -157,7 +157,7 @@
           }
           let data = response.data.data;
           this.shopdata=data;
-          this.shopLogo=this.shopdata.shop_logo;
+          this.shopLogo='http://www.jianlinker.cn/'+this.shopdata.shop_logo;
           let time=this.shopdata.createdAt;
           var date = new Date(time).toJSON();
           this.shopdata.createdAt= new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');

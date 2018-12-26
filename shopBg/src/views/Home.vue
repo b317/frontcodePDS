@@ -168,7 +168,7 @@
           }
           let data = response.data.data;
           this.shopdata=data;
-          this.shopdata.shop_logo = "http://134.175.113.58/"+this.shopdata.shop_logo
+          this.shopdata.shop_logo = "http://www.jianlinker.cn/"+this.shopdata.shop_logo;
           let time=this.shopdata.createdAt;//格式化时间
           var date = new Date(time).toJSON();
           this.shopdata.createdAt= new Date(+new Date(date)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');

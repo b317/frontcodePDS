@@ -21,7 +21,7 @@
                 <span class="bg-span bought-time">{{orderData.createdAt}}</span>
                 <span class="bg-span bought-num" style="padding-left: 10px;">订单号：<span>{{orderData.order_num}}</span></span>
               </div>
-              <span class="goods_img"><img :src="goodsData.goods_photo"/></span>
+              <span class="goods_img"><img :src="'http://www.jianlinker.cn/'+goodsData.goods_photo"/></span>
               <div class="goods_title">
                 <span><i>{{goodsData.goods_desc}}</i></span>
                 <div><span class="goods_class" style="color: #999"><i>颜色分类：{{goodsData.goods_name}}</i></span></div>
@@ -41,7 +41,7 @@
             <td rowspan="2" style="width: 577px;">
               <div class="detailBlock">
                 <div class="trade-detail-imfor">
-                  <span class="imfor-icon"><img src="../../../static/T1e.aoXuXdXXa94Hfd-32-32.png" style="width: 32px;height: 32px;"></span>
+                  <span class="imfor-icon"><img src="http://www.jianlinker.cn/../../../static/T1e.aoXuXdXXa94Hfd-32-32.png" style="width: 32px;height: 32px;"></span>
                   <span class="imfor-title">
                     <span class="">
                       <h3>订单状态：<span>{{orderData.order_status}}</span></h3>
@@ -262,7 +262,7 @@
             let data = res.data.data;
             this.goodsData = '';
             this.goodsData=data;
-            console.log(this.goodsData.goods_name);
+//            this.goodsData.goods_photo= this.goodsData.goods_photo.toString();
           }).catch((err)=>{
             console.log(err);
           })
