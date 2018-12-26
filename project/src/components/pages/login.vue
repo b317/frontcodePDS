@@ -129,7 +129,7 @@ export default {
           confirmButtonText: '确定',
           callback: action => {
             this.$router.push("/home")
-
+            window.location.reload()
           }
         });
       }else{
