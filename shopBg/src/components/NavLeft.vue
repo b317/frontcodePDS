@@ -99,7 +99,7 @@
     created(){
 
       if(sessionStorage.getItem("active_index2")){
-        let index = sessionStorage.getItem("active_index2");
+        var index = sessionStorage.getItem("active_index2");
         console.log(index+"fuhua");
         this.$store.dispatch("checkIndex2Action",index);
       }else{

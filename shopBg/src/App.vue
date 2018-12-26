@@ -32,12 +32,14 @@
     },
     data(){
       return{
-        selectIndex:'',
+        selectIndex:1,
         shopowner:[]
       }
     },
     mounted(){
-      this.selectIndex=sessionStorage.getItem("selectIndex");
+      if(sessionStorage.getItem("selectIndex")){
+        this.selectIndex=sessionStorage.getItem("selectIndex");
+      }
       this.axios.get('/v1/user/detail/'+getCookie('id'),
         {
           headers:{
