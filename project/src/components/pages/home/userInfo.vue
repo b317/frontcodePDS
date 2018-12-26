@@ -27,6 +27,7 @@ import {banner2} from "@/api/http.js"
 import {mapGetters} from "vuex"
 export default {
       mounted() {
+          console.log(this.src)
     banner2().then(res => {
         let l = res.data.data.bannerList[0]
         this.msg = l.title
@@ -53,7 +54,10 @@ export default {
         return this.username != "" ?  this.username : "请登录" 
       },
       src1() {
-        return getId() == null ?  "../../../../static/s.jpg" : this.src
+          if(this.src == ""){
+              return require("../../../../static/s.jpg")
+          }
+        return this.src == "http://134.175.113.58/" ?  require("../../../../static/s.jpg") : this.src
       }
 
     },

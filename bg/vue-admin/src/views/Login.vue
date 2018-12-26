@@ -24,8 +24,8 @@
       return {
         logining: false,
         ruleForm2: {
-          username: 'wertsafc',
-          password: '123456'
+          username: '',
+          password: ''
         },
         rules2: {
           account: [
@@ -39,8 +39,8 @@
       };
     },
     mounted() {
-      // this.ruleForm2.username = getCookie("username")
-      // this.ruleForm2.password = getCookie("password")
+       this.ruleForm2.username = getCookie("username1")
+       this.ruleForm2.password = getCookie("password1")
     },
     methods: {
       handleReset2() {
@@ -57,10 +57,10 @@
               if(res.data.code == 0){
                 console.log(res)
                 sessionStorage.setItem('user', JSON.stringify(res.data.data));
-                setCookie("token",res.data.data.token)
+                setCookie("mytoken",res.data.data.token)
                 if(this.checked){
-                  // setCookie("username1",this.ruleForm2.username)
-                  // setCookie("password1",this.ruleForm2.password)
+                   setCookie("username1",this.ruleForm2.username)
+                   setCookie("password1",this.ruleForm2.password)
                 }
                 this.$router.push({ path: '/goodsTable' });
               }else{

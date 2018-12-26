@@ -33,7 +33,7 @@
               </td>
               <td class=""  width="30%">
                 <div class="publish_time">发布时间：{{item.createdAt}}</div>
-                <span class="product_img"><img :src="item.goods_photo"/></span>
+                <span class="product_img"><img :src="'http://134.175.113.58/'+item.goods_photo"/></span>
                 <span class="title"><i>{{item.goods_name}}：{{item.goods_desc}}</i></span>
               </td>
               <td class=""  width="14%">

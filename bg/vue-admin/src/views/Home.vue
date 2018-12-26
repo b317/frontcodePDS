@@ -105,7 +105,7 @@
 				console.log(user)
 				this.sysUserName = user.username || '';
 				this.sysUserAvatar = user.avatar || '';
-				sessionStorage.setItem("token",user.token)
+				sessionStorage.setItem("mytoken",user.token)
 			}
 		}
 	}
