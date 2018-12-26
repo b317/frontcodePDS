@@ -420,7 +420,7 @@
       putAway(item){//改变商品上架状态
         let isShelf = new FormData();
         isShelf.append('is_shelf',item.is_shelf);
-        this.axios.put(' /v1/merchant/goodsforshelf/'+item.id,isShelf,{
+        this.axios.put('/v1/merchant/goodsforshelf/'+item.id,isShelf,{
           headers:{
             'Content-Type': 'multipart/form-data',
             "Authorization":"Bearer "+ getCookie('token')

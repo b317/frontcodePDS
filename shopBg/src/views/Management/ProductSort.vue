@@ -240,7 +240,7 @@
     },
     methods:{
       findAllMainSort(){
-        this.axios.get('v1/merchant/mainsort/subcount',{
+        this.axios.get('/v1/merchant/mainsort/subcount',{
           headers:{
             "Authorization":"Bearer "+ getCookie('token')
           }
