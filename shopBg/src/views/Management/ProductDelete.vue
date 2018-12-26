@@ -33,7 +33,7 @@
             <tfoot>
             <tr>
               <td colspan="6" style="text-align: right">
-                <el-pagination
+                <el-pagination class="divide_page"
                   background
                   layout="prev, pager, next"
                   :total="totalMainSort"
@@ -78,7 +78,7 @@
             <tfoot>
             <tr>
               <td colspan="7" style="text-align: right">
-                <el-pagination
+                <el-pagination class="divide_page"
                   background
                   layout="prev, pager, next"
                   :total="totalSubsSort"
@@ -126,8 +126,8 @@
             </tbody>
             <tfoot>
             <tr>
-              <td colspan="6" style="text-align: right">
-                <el-pagination
+              <td colspan="6" style="text-align: right;">
+                <el-pagination class="divide_page"
                   background
                   layout="prev, pager, next"
                   :total="totalProduct"

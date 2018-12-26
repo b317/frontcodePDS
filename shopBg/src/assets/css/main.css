@@ -540,6 +540,15 @@ width: 5%;display: inline-block;height: 240px;
   background-color: #409eff ;
   border:1px solid #409eff ;
 }
+.product_delete .single_product .tfoot{
+  margin-bottom:100px ;
+}
+.product_delete table  tfoot .divide_page{
+  position: relative !important;
+  /*right: 0;*/
+  /*top: 5px;*/
+}
+
 .product_delete .input-with-select{width: 25%;margin-bottom: 30px}
 .product_delete .input-with-select .el-button:hover{opacity: 0.8}
 /*ProductDelete结束*/
