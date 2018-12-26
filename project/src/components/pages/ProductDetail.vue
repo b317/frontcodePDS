@@ -149,7 +149,7 @@
           isShow:true,  // 是否有数据
           datelist: [
             {
-              icon: "../../../static/goods/430x430q90.jpg",
+              icon: require("../../../static/goods/430x430q90.jpg"),
               name: "茉莉花盆栽",
               rate: 1.7,
               delprice: "24.00",
@@ -157,7 +157,7 @@
               tipshow:[1,0,1]
             },
             {
-              icon: "../../../static/goods/400x400q90.jpg",
+              icon: require("../../../static/goods/400x400q90.jpg"),
               name: "金娃娃萱草",
               rate: 2.7,
               delprice: "27.00",
@@ -165,7 +165,7 @@
               tipshow:[1,0,0]
             },
             {
-              icon: "../../../static/goods/400x400q91.jpg",
+              icon: require("../../../static/goods/400x400q91.jpg"),
               name: "转子莲艾丽塔",
               rate: 3.7,
               delprice: "26.00",
@@ -173,7 +173,7 @@
               tipshow:[1,1,1]
             },
             {
-              icon: "../../../static/goods/400x400q92.jpg",
+              icon: require("../../../static/goods/400x400q92.jpg"),
               name: "紫丁香花---花语代表初恋",
               rate: 4.3,
               delprice: "23.00",
@@ -181,7 +181,7 @@
               tipshow:[0,0,1]
             },
             {
-              icon: "../../../static/goods/400x400q93.jpg",
+              icon: require("../../../static/goods/400x400q93.jpg"),
               name: "古典玫瑰紫袍",
               rate: 4.7,
               delprice: "22.00",
@@ -189,7 +189,7 @@
               tipshow:[1,1,0]
             },
             {
-              icon: "../../../static/goods/400x400q90.jpg",
+              icon: require("../../../static/goods/400x400q90.jpg"),
               name: "金娃娃萱草",
               rate: 4.3,
               delprice: "27.00",
@@ -197,7 +197,7 @@
               tipshow:[0,1,1]
             },
             {
-              icon: "../../../static/goods/400x400q91.jpg",
+              icon: require("../../../static/goods/400x400q91.jpg"),
               name: "转子莲艾丽塔",
               rate: 4.3,
               delprice: "24.00",
@@ -205,7 +205,7 @@
               tipshow:[1,0,1]
             },
             {
-              icon: "../../../static/goods/400x400q92.jpg",
+              icon: require("../../../static/goods/400x400q92.jpg"),
               name: "初恋紫丁香花",
               rate: 4.3,
               delprice: "24.00",
@@ -213,7 +213,7 @@
               tipshow:[1,0,1]
             },
             {
-              icon: "../../../static/goods/400x400q93.jpg",
+              icon: require("../../../static/goods/400x400q93.jpg"),
               name: "古典玫瑰紫袍",
               rate: 4.3,
               delprice: "29.00",
@@ -221,7 +221,7 @@
               tipshow:[1,0,1]
             },
             {
-              icon: "../../../static/goods/400x400q90.jpg",
+              icon: require("../../../static/goods/400x400q90.jpg"),
               name: "金娃娃萱草",
               rate: 4.3,
               delprice: "28.00",
@@ -229,7 +229,7 @@
               tipshow:[1,0,1]
             },
             {
-              icon: "../../../static/goods/400x400q91.jpg",
+              icon: require("../../../static/goods/400x400q91.jpg"),
               name: "转子莲艾丽塔",
               rate: 4.3,
               delprice: "34.00",
@@ -274,21 +274,21 @@
           goods_mes:'',
           recList: [
             {
-              icon: "../../../static/goods/rd1.jpg",
+              icon: require("../../../static/goods/rd1.jpg"),
               title:'免费领包活藤本皇后铁线莲皇家丝绒多颜色可选买2送一',
               name: "紫丁香花",
               tell: '花语初恋',
               price: "23.00"
             },
             {
-              icon: "../../../static/goods/pdm1.jpg",
+              icon: require("../../../static/goods/pdm1.jpg"),
               title:'免费领包茉莉花盆栽莲皇家丝绒多颜色可选买4送一',
               name: "茉莉花",
               tell: '茉莉花',
               price: "27.00"
             },
             {
-              icon: "../../../static/goods/pdm2.jpg",
+              icon: require("../../../static/goods/pdm2.jpg"),
               title:'免费领包金娃娃萱草莲皇家丝绒多颜色可选买1送一',
               name: "金娃娃萱草",
               tell: '金娃娃',

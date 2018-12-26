@@ -3,7 +3,7 @@
   <div class="user">
     <beaty-date></beaty-date>
     <div class="userInfo">
-      <div class="touxiang"><img :src="src"></div>
+      <div class="touxiang"><img :src="src1"></div>
       <div class="username">{{username}}</div>
       <div class="set">
         <div @click="setClick(1)">个人中心</div>
@@ -40,12 +40,6 @@ export default {
         }
     }
   },
-  computed:{
-    ...mapGetters({
-      src:'user/headpic',
-      username:'user/username',
-    }),
-  },
   mounted() {
     getUserInfo({id:getId()}).then(res => {
       let data = res.data.data
@@ -54,6 +48,15 @@ export default {
       this.setpic("http://134.175.113.58/"+data.head_image)
     })
   },
+   computed: {
+      ...mapGetters({
+        username: 'user/username',
+        src:"user/headpic"
+      }),
+      src1() {
+        return this.src == "http://134.175.113.58/" ?  require("../../../../static/s.jpg") : this.src
+      }
+    },
   methods:{
     ...mapMutations({
       setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`

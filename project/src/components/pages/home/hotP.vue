@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="header"><img :src=src>{{msg}}</div>
+    <div class="header"><img :src="src">{{msg}}</div>
     <div class="center">
         <div class="font" v-for="(item,key) in data" :key  = key>
             {{item}}
@@ -15,10 +15,10 @@ export default {
     mounted() {
         if(this.type == 1){
             this.msg = "热门分类"
-            this.src = "../../../static/hot.png"
+            this.src = require("../../../assets/hot.png")
         }else{
             this.msg = "热门商家"
-            this.src = "../../../static/hotP.png" 
+            this.src = require("../../../assets/hotP.png")
         }
     },
     data () {

@@ -66,6 +66,7 @@ export default {
     ...mapMutations({
       setuserName:'user/setUserName', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
       setId:'user/setId',
+      setpic:'user/setpic',
       setRoleId:'user/setRoleId'
     }),
     idenCodeclick(){
@@ -108,11 +109,27 @@ export default {
     },
     cb(res){
       console.log(res)
+      
+      const data = res.data.data;
+      setId(data.id)
+      setRoleId(data.role_id)
+      setCookie("token",data.token)
+      if(this.isLoginAuto){
+        setCookie("phone",data.username)
+      }
+      getUserInfo({id:data.id}).then(res => {
+        const data = res.data.data;
+        console.log(data)
+        this.setpic("http://134.175.113.58/"+data.head_image)
+        let a = data.nick_name==""?data.username:data.nick_name
+        this.setuserName(a)//cookie
+      })
       if(res.data.code == 0){
         this.$alert('将自动登录并跳转至首页', '登录成功', {
           confirmButtonText: '确定',
           callback: action => {
             this.$router.push("/home")
+
           }
         });
       }else{
@@ -120,19 +137,6 @@ export default {
           confirmButtonText: '确定',
         });
       }
-      const data = res.data.data;
-      setId(data.id)
-      setRoleId(data.role_id)
-      setCookie("token",data.token)
-      if(isLoginAuto){
-        setCookie("phone",data.username)
-      }
-      getUserInfo({id:data.id}).then(res => {
-        const data = res.data.data;
-        console.log(data)
-        let a = data.nick_name==""?data.username:data.nick_name
-        this.setuserName(a)//cookie
-      })
     },
     loginclick(){
       if(this.isLogin){//如果是验证码登录
