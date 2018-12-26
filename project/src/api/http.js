@@ -1,5 +1,23 @@
+import {Message} from 'element-ui';
 import axios from 'axios'
 import {getCookie} from "../util/auth"
+axios.interceptors.response.use(
+    res => {  //成功请求到数据
+        console.log(res)
+        if(res.data.code != 0){
+            Message({
+                type: 'error',
+                message: res.data.message
+            });
+        }else{
+            return res
+        }
+    },
+    error => {  //响应错误处理
+        console.log(error)
+    }
+);
+
 export function login(userInfo){
     return axios.post("/v1/global/userlogin",{
             username: userInfo.username,

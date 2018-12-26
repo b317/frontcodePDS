@@ -113,23 +113,23 @@
             </div>
           </div>
         </div>
-        <div class="rightView">
+        <!-- <div class="rightView">
           <div class="recommend-label "><s></s><span>看了又看</span></div>
           <div class="recommend-bd">
             <ul>
               <recommend-item v-for="(item,index) in recList" :key="index" :recList="item" :index="index"></recommend-item>
             </ul>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- 没有数据 -->
-      <div class="goods-recommend-panel">
+      <!-- <div class="goods-recommend-panel">
         <goods-recommend-item class="g-item" v-for="(item,index) of datelist" :key="index"
         :pickgoods="item" :index="index" v-if="isShow"></goods-recommend-item>
         <div class="goods-nodate" v-if="!isShow">
           <span class="g-nodate">没有数据</span>
         </div>
-      </div>
+      </div> -->
     </div>
 </template>
 <script>
